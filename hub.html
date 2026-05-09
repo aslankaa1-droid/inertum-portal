@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Link Hub · Все материалы проекта</title>
+<meta name="description" content="Все материалы проекта INERTUM в одном месте — pitch deck, FAQ, NDA, КД, финмодель, портал.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style-v2.css">
+<script src="assets/topbar.js" defer></script>
+<style>
+  .hub-hero { padding: 64px 0 32px; text-align: center; }
+  .hub-hero h1 { font-size: 56px; margin-bottom: 16px; }
+  .hub-hero .lede { max-width: 720px; margin: 0 auto; text-align: center; }
+
+  .links-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px; padding: 32px 0;
+  }
+  .link-card {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: var(--radius-lg); padding: 20px; display: flex; gap: 16px;
+    transition: all .2s; text-decoration: none;
+    align-items: flex-start;
+  }
+  .link-card:hover { border-color: var(--accent-argon); transform: translateY(-2px); }
+  .link-card .ic {
+    width: 44px; height: 44px; border-radius: var(--radius);
+    background: var(--bg-elev-2); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent-argon);
+  }
+  .link-card .ic svg { width: 22px; height: 22px; }
+  .link-card h4 {
+    font: 600 16px/1.3 var(--sans); color: var(--ink-primary); margin: 0 0 6px;
+  }
+  .link-card p {
+    font-size: 13px; color: var(--ink-secondary); margin: 0; line-height: 1.5;
+  }
+  .link-card .pill {
+    display: inline-block; padding: 2px 8px; border-radius: 100px;
+    font: 500 9px var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--stroke); color: var(--ink-muted); margin-top: 8px;
+  }
+  .link-card .pill.public { color: var(--success); border-color: rgba(63,185,132,0.4); }
+  .link-card .pill.nda { color: var(--accent-warn); border-color: rgba(232,163,61,0.4); }
+  .link-card .pill.private { color: var(--accent-danger); border-color: rgba(229,104,90,0.4); }
+
+  .nav-icons-bar { display: flex; gap: 6px; align-items: center; padding: 16px 0; }
+  .nav-icons-bar a, .nav-icons-bar button {
+    background: transparent; border: 1px solid var(--stroke); color: var(--ink-muted);
+    width: 36px; height: 36px; padding: 0; border-radius: 4px; cursor: pointer;
+    transition: all .15s; display: inline-flex; align-items: center; justify-content: center;
+    text-decoration: none;
+  }
+  .nav-icons-bar a:hover, .nav-icons-bar button:hover { border-color: var(--accent-argon); color: var(--accent-argon); }
+  .nav-icons-bar svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+  .section-divider {
+    margin: 48px 0 24px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--stroke);
+  }
+  .section-divider .num {
+    font: 500 11px var(--mono); color: var(--accent-argon);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .section-divider h2 {
+    font: 600 24px var(--sans); margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo"><span class="dot"></span>INERTUM</a>
+    <nav class="menu">
+      <a href="index.html">Главная</a>
+      <a href="hub.html">Hub</a>
+      <a href="public/INERTUM-pitch-v2.html">Pitch</a>
+      <a href="public/INERTUM-FAQ-investors.html">FAQ</a>
+    </nav>
+    <div class="lang"><strong style="color: var(--accent-argon);">RU</strong> · <a href="en/index.html" class="muted">EN</a></div>
+  </div>
+</header>
+
+<section class="hub-hero">
+  <div class="container">
+    <div class="eyebrow"><span class="dot"></span>LINK HUB · ВСЕ МАТЕРИАЛЫ В ОДНОМ МЕСТЕ</div>
+    <h1>INERTUM Hub</h1>
+    <p class="lede">Все артефакты проекта в одном месте: portal, pitch, FAQ, NDA, КД, финмодель, документы. Делись этой ссылкой с контактом — он сам выберет что нужно.</p>
+    <div class="nav-icons-bar" style="justify-content: center;">
+      <a href="index.html" title="Главная"><svg><use href="assets/icons.svg#home"/></svg></a>
+      <button onclick="history.back()" title="Назад"><svg><use href="assets/icons.svg#arrow-left"/></svg></button>
+      <button onclick="history.forward()" title="Вперёд"><svg><use href="assets/icons.svg#arrow-right"/></svg></button>
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" title="В начало"><svg><use href="assets/icons.svg#top"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 96px;">
+  <div class="container">
+
+    <!-- ============ ПУБЛИЧНОЕ ============ -->
+    <div class="section-divider">
+      <div class="num">§01 · ОТКРЫТЫЕ МАТЕРИАЛЫ</div>
+      <h2>Можно делиться без NDA</h2>
+    </div>
+
+    <div class="links-grid">
+      <a class="link-card" href="index.html">
+        <div class="ic"><svg><use href="assets/icons.svg#globe"/></svg></div>
+        <div>
+          <h4>Главная страница (RU)</h4>
+          <p>Hero с 3D-капсулой, проблема, технология, 5 ниш, статус, команда, контакт.</p>
+          <span class="pill public">PUBLIC</span>
+        </div>
+      </a>
+      <a class="link-card" href="en/index.html">
+        <div class="ic"><svg><use href="assets/icons.svg#globe"/></svg></div>
+        <div>
+          <h4>Main page (EN)</h4>
+          <p>English version for MENA, KSA, EU, US contacts.</p>
+          <span class="pill public">PUBLIC</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-pitch-v2.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <div>
+          <h4>Pitch deck v2 (14 слайдов)</h4>
+          <p>Full-screen презентация в premium-стиле. Стрелки навигации, F — полноэкран, P — печать в PDF.</p>
+          <span class="pill public">PUBLIC</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-FAQ-investors.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <div>
+          <h4>FAQ для инвесторов (32 вопроса)</h4>
+          <p>Готовые ответы в 8 категориях: технология, патент, рынок, команда, финансы, раунд, производство, риски. Поиск + фильтры.</p>
+          <span class="pill public">PUBLIC</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-financials.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#finance"/></svg></div>
+        <div>
+          <h4>Финансовая модель</h4>
+          <p>P&L 2026–2030, юнит-экономика 6 моделей, sensitivity. CSV-экспорт для Excel/Sheets.</p>
+          <span class="pill public">PUBLIC</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-onepager.pdf" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#download"/></svg></div>
+        <div>
+          <h4>One-pager (PDF, 1 страница)</h4>
+          <p>Короткое summary для прикрепления к холодному email инвестору.</p>
+          <span class="pill public">PUBLIC</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-collector-brochure.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#archive"/></svg></div>
+        <div>
+          <h4>Брошюра для коллекционеров крупного формата</h4>
+          <p>Авто · часы · ювелирка · искусство · мото · оружие. Premium Sotheby's-эстетика. Цены $200-15k. Founders Series 2027 со скидкой 20%.</p>
+          <span class="pill public">PUBLIC · B2C</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-small-format-collectors.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#archive"/></svg></div>
+        <div>
+          <h4>Брошюра малоформатных коллекций</h4>
+          <p>Нумизматика · фалеристика · филателия · бонистика · памятные знаки · семейные реликвии. 6 категорий малой формы. Капсулы $200-500, витрины от $8k.</p>
+          <span class="pill public">PUBLIC · B2C</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-gov-tenders.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#shield"/></svg></div>
+        <div>
+          <h4>B2G предложение — Росрезерв · Минздрав · МО · МЧС</h4>
+          <p>4 отдельных пакета для государственных тендеров. Соответствие ГОСТ 9.014, ГОСТ 9293-74, ГОСТ В. Цены от $5/шт при объёмах от 1М/год. Каналы входа в каждое ведомство.</p>
+          <span class="pill private">B2G · TENDERS</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-glossary.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <div>
+          <h4>Glossary · 30+ терминов</h4>
+          <p>Словарь технических, патентных и бизнес-терминов проекта. Для нетехнических инвесторов и подрядчиков.</p>
+          <span class="pill public">PUBLIC</span>
+        </div>
+      </a>
+      <a class="link-card" href="assets/roadmap.svg" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#prototype"/></svg></div>
+        <div>
+          <h4>Roadmap 2026–2030</h4>
+          <p>Визуальная инфографика 5-летнего плана: Patent / Production / Sales / Fundraise / Revenue от $0 к $25M.</p>
+          <span class="pill public">PUBLIC</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- ============ NDA-REQUIRED ============ -->
+    <div class="section-divider">
+      <div class="num">§02 · ПОД NDA</div>
+      <h2>Только для подписавших NDA</h2>
+    </div>
+
+    <div class="links-grid">
+      <a class="link-card" href="public/INERTUM-NDA.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <div>
+          <h4>NDA-шаблон (RU + EN)</h4>
+          <p>Стандартный 3-страничный NDA с инструкцией. Печать → подпись → сканы → выдача ключа.</p>
+          <span class="pill nda">SIGN BEFORE</span>
+        </div>
+      </a>
+      <a class="link-card" href="private-7f3a9b2c8e/" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#lock"/></svg></div>
+        <div>
+          <h4>Закрытый Data Room</h4>
+          <p>Полный пакет для DD: патент v2.1, тех.справка, КД v2, питч-дек, финмодель. Доступ — по одноразовому ключу под NDA.</p>
+          <span class="pill nda">NDA-REQUIRED</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/cad-v2/index.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#prototype"/></svg></div>
+        <div>
+          <h4>Конструкторская документация v2 PREMIUM</h4>
+          <p>14-страничный premium-альбом A3 с 5 SVG: hero-изометрия, exploded view, 5 layers, blueprint мото и вело.</p>
+          <span class="pill nda">NDA-REQUIRED</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/cad-v1/index.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <div>
+          <h4>Конструкторская документация v1 (для производителя)</h4>
+          <p>Нейтральный альбом A3 + 4 SVG чертежа. Передаётся NomexRus / Pack-Systems для RFQ.</p>
+          <span class="pill nda">NDA-REQUIRED</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/cad-compare.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#prototype"/></svg></div>
+        <div>
+          <h4>Сравнение КД v1 vs v2</h4>
+          <p>Превью обоих альбомов рядом + постатейная таблица различий + рекомендации куда какой использовать.</p>
+          <span class="pill nda">NDA-REQUIRED</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=patent-v2.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#patent"/></svg></div>
+        <div>
+          <h4>Патентная заявка v2.1</h4>
+          <p>Драфт для патентного поверенного. 3 indep + 20 dep claims. Подача в Роспатент → ЕАПО → PCT.</p>
+          <span class="pill nda">NDA-REQUIRED</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=tech-reference.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <div>
+          <h4>Техническая справка ~50 страниц</h4>
+          <p>На реальных стандартах: MIL-STD-2073, ГОСТ 9.014, MIL-PRF-131K, Mitsubishi Gas Chemical, Getty Conservation Institute.</p>
+          <span class="pill nda">NDA-REQUIRED</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=prototype-spec.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#prototype"/></svg></div>
+        <div>
+          <h4>ТЗ прототипа № 1 + BOM</h4>
+          <p>Мотоциклетная капсула, полная BOM, смета ₽250k, 6-месячная программа испытаний.</p>
+          <span class="pill nda">NDA-REQUIRED</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=financial-model.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#finance"/></svg></div>
+        <div>
+          <h4>Финансовая модель (полный текст)</h4>
+          <p>Текстовая версия с детальной юнит-экономикой по 6 моделям, расчётами и предположениями.</p>
+          <span class="pill nda">NDA-REQUIRED</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- ============ ВНУТРЕННЕЕ ============ -->
+    <div class="section-divider">
+      <div class="num">§03 · ВНУТРЕННИЕ ИНСТРУМЕНТЫ</div>
+      <h2>Только для Аслана</h2>
+    </div>
+
+    <div class="links-grid">
+      <a class="link-card" href="admin-3e8a7b1c2d/" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#key"/></svg></div>
+        <div>
+          <h4>Админка-генератор ключей</h4>
+          <p>Master-key: ASLAN-INERTUM-MASTER-2026. Выдача индивидуальных ключей в data room по категориям, экспорт keys.js.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+      <a class="link-card" href="admin-3e8a7b1c2d/crm.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#investors"/></svg></div>
+        <div>
+          <h4>CRM-трекер инвесторов</h4>
+          <p>30+ контактов из целевого списка. Отметки «отправлено / ответ / в data room / отказ». LocalStorage для сохранения.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=email-templates.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#email"/></svg></div>
+        <div>
+          <h4>6 email-шаблонов рассылки</h4>
+          <p>A — РФ VC, B — ангелы, C — MENA EN, D — Казахстан, E — follow-up RU+EN, F — NDA-приглашение RU+EN.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-sales-scripts.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#email"/></svg></div>
+        <div>
+          <h4>Sales Scripts — скрипты звонков</h4>
+          <p>Готовые сценарии: pitch 30 сек / 2 мин / 10 мин · холодный заход коллекционеру · разговор с поставщиком · поверенным · 12 типовых возражений с ответами.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+      <a class="link-card" href="public/INERTUM-term-sheet.html" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <div>
+          <h4>Term Sheet + Cap Table</h4>
+          <p>Шаблон условий pre-seed раунда $750k / 8% / 1× preference / 4-year vesting / 10% ESOP. Cap table до и после раунда, сценарий Series A. Печать в PDF.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=investors-list.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#investors"/></svg></div>
+        <div>
+          <h4>Целевой список 30+ инвесторов</h4>
+          <p>Фонды и ангелы с прямыми каналами входа. РФ + Казахстан + MENA + HK. Топ-15 ASAP-канал.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=suppliers-rfq.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#supplier"/></svg></div>
+        <div>
+          <h4>Поставщики и RFQ-шаблоны</h4>
+          <p>Топ-3 ламинат: NomexRus + Pack-Systems + Hangzhou Keneng. Топ-3 сенсоры: PreSens + PyroScience + SST. Готовые RFQ.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=name-check.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#globe"/></svg></div>
+        <div>
+          <h4>Проверка имени INERTUM</h4>
+          <p>16 TLD проверены через RDAP/DNS. Свободны .net и .info, .com занят, .ae занят. Рекомендации по доменам и ТМ.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=nda-template.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <div>
+          <h4>NDA-шаблон (полный текст RU+EN)</h4>
+          <p>Полный MD-исходник NDA с инструкцией: когда отправлять, что менять, как использовать. Печать → подпись → обмен сканами.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+      <a class="link-card" href="docs/md-viewer.html?file=project-readme.md" target="_blank">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <div>
+          <h4>README · Master-индекс проекта</h4>
+          <p>Карта всех документов: что где лежит, для кого, в каком статусе. Полная навигация по 40+ файлам.</p>
+          <span class="pill private">ADMIN ONLY</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:12px;"><span class="dot"></span>INERTUM</div>
+        <div class="muted" style="font-size: 13px; max-width: 320px;">
+          Long-term preservation systems<br>in inert gas atmosphere.<br>Pre-Seed · Patent Pending · 2026.
+        </div>
+      </div>
+      <div>
+        <h5>Material</h5>
+        <a href="public/INERTUM-pitch-v2.html">Pitch deck</a>
+        <a href="public/INERTUM-FAQ-investors.html">FAQ</a>
+        <a href="public/INERTUM-financials.html">Financials</a>
+      </div>
+      <div>
+        <h5>Confidential</h5>
+        <a href="public/INERTUM-NDA.html">NDA</a>
+        <a href="private-7f3a9b2c8e/">Data Room</a>
+      </div>
+      <div>
+        <h5>Контакт</h5>
+        <a href="mailto:idriskaaa@gmail.com">idriskaaa@gmail.com</a>
+        <a href="https://aslankaa.com">aslankaa.com</a>
+      </div>
+    </div>
+    <div class="copyright">
+      <div>© 2026 INERTUM · ALL RIGHTS RESERVED</div>
+      <div>v2.0 · 2026-05-09 · Hub</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

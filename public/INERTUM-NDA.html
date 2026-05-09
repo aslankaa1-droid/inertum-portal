@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Соглашение о неразглашении (NDA) v1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="../assets/topbar.js" defer></script>
+<style>
+  @page { size: A4; margin: 18mm 20mm; }
+  * { box-sizing: border-box; }
+  body {
+    font: 11pt/1.5 'Times New Roman', Georgia, serif;
+    color: #000; background: #f5f5f5; max-width: 800px; margin: 0 auto;
+    padding: 24px;
+  }
+  .doc {
+    background: #fff; padding: 40px 50px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    page-break-after: always;
+  }
+  h1 {
+    font-size: 18pt; text-align: center; margin: 0 0 8px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .subtitle {
+    text-align: center; color: #555; font-size: 10pt;
+    margin-bottom: 24px; font-style: italic;
+  }
+  h2 {
+    font-size: 13pt; margin: 24px 0 10px; padding-bottom: 4px;
+    border-bottom: 1px solid #888;
+  }
+  h3 { font-size: 11pt; margin: 16px 0 8px; font-weight: bold; }
+  p { margin: 0 0 10px; text-align: justify; text-indent: 14pt; }
+  p.no-indent { text-indent: 0; }
+  ol, ul { margin: 8px 0; padding-left: 24pt; }
+  li { margin-bottom: 6px; text-align: justify; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 10pt;
+  }
+  table th, table td {
+    padding: 6px 8px; border: 1px solid #888; vertical-align: top;
+  }
+  table th { background: #f0f0f0; font-weight: 600; text-align: left; }
+  .party-block {
+    border: 1px solid #888; padding: 12px 16px; margin: 8px 0;
+    font-size: 10pt; line-height: 1.4;
+  }
+  .signatures {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    margin-top: 32px; page-break-inside: avoid;
+  }
+  .sig-cell {
+    border: 1px solid #888; padding: 16px; min-height: 160px; font-size: 10pt;
+  }
+  .sig-cell .label { font-weight: 600; margin-bottom: 8px; }
+  .sig-cell .field { margin: 8px 0; border-bottom: 1px solid #888; padding-bottom: 2px; }
+  .legal-notice {
+    background: #fff8e1; border: 1px solid #b07000; padding: 12px 16px;
+    margin: 16px 0; font-size: 9pt; color: #5b4500;
+  }
+  .center { text-align: center; }
+  .small { font-size: 9pt; color: #555; }
+
+  .toolbar {
+    background: #0a0b0d; color: #f2f4f7; padding: 16px 24px;
+    margin-bottom: 24px; border-radius: 8px;
+    display: flex; gap: 12px; align-items: center; justify-content: space-between;
+    font-family: 'Inter', sans-serif; flex-wrap: wrap;
+  }
+  .toolbar .title-tb { font-size: 14pt; font-weight: 600; }
+  .toolbar .nav-icons { display: flex; gap: 6px; align-items: center; }
+  .toolbar .nav-icons a, .toolbar .nav-icons button {
+    background: transparent; border: 1px solid #2A2F3A; color: #8A93A6;
+    width: 34px; height: 34px; padding: 0; border-radius: 4px; cursor: pointer;
+    transition: all .15s; display: inline-flex; align-items: center; justify-content: center;
+    text-decoration: none;
+  }
+  .toolbar .nav-icons a:hover, .toolbar .nav-icons button:hover { border-color: #5BC0EB; color: #5BC0EB; box-shadow: none; }
+  .toolbar .nav-icons svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .toolbar .actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .toolbar button.btn-action, .toolbar a.ghost {
+    background: #5BC0EB; color: #0a0b0d; border: 0;
+    padding: 8px 16px; border-radius: 4px; cursor: pointer;
+    font: 500 11pt 'Inter', sans-serif; text-decoration: none;
+    display: inline-block;
+  }
+  .toolbar a.ghost { background: transparent; color: #f2f4f7; border: 1px solid #5BC0EB; }
+  .toolbar button.btn-action:hover, .toolbar a.ghost:hover { box-shadow: 0 0 12px rgba(91,192,235,0.4); }
+
+  @media print {
+    body { background: #fff; padding: 0; max-width: 100%; }
+    .doc { box-shadow: none; padding: 0; }
+    .toolbar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+    <div class="nav-icons">
+      <a href="../hub.html" title="Hub"><svg><use href="../assets/icons.svg#home"/></svg></a>
+      <button onclick="history.back()" title="Назад"><svg><use href="../assets/icons.svg#arrow-left"/></svg></button>
+      <button onclick="history.forward()" title="Вперёд"><svg><use href="../assets/icons.svg#arrow-right"/></svg></button>
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" title="В начало"><svg><use href="../assets/icons.svg#top"/></svg></button>
+    </div>
+    <div class="title-tb">INERTUM · NDA v1.0 · 2026-05-09</div>
+  </div>
+  <div class="actions">
+    <button class="btn-action" onclick="window.print()">Печать / PDF</button>
+  </div>
+</div>
+
+<!-- ============ RU VERSION ============ -->
+<div class="doc">
+
+<h1>Соглашение о неразглашении</h1>
+<div class="subtitle">Non-Disclosure Agreement · Russian version · v1.0</div>
+
+<h2>Стороны соглашения</h2>
+
+<div class="party-block">
+<strong>Раскрывающая сторона:</strong><br>
+Аслан КАА (ИП, ОГРНИП ____________________, ИНН ____________________)<br>
+Email: idriskaaa@gmail.com<br>
+Сайт: aslankaa.com<br>
+Тел.: ____________________<br>
+Адрес: ____________________________________
+</div>
+
+<div class="party-block">
+<strong>Принимающая сторона:</strong><br>
+ФИО / Наименование: __________________________________________<br>
+Должность: __________________________________________<br>
+ИНН / ОГРН / VAT: __________________________________________<br>
+Email: __________________________________________<br>
+Тел.: __________________________________________<br>
+Юр. адрес: __________________________________________
+</div>
+
+<p>Совместно — «Стороны».</p>
+
+<h2>1. Предмет соглашения</h2>
+<p>1.1. Раскрывающая сторона заинтересована в предоставлении Принимающей стороне Конфиденциальной информации (определена в п. 2) для целей оценки возможного коммерческого, инвестиционного, юридического или технического сотрудничества по проекту <strong>INERTUM</strong> (системы долговременного хранения промышленных и коллекционных изделий в инертной газовой среде).</p>
+<p>1.2. Принимающая сторона обязуется обращаться с Конфиденциальной информацией в соответствии с условиями настоящего Соглашения и не разглашать её без предварительного письменного согласия Раскрывающей стороны.</p>
+
+<h2>2. Конфиденциальная информация</h2>
+<p>2.1. Под Конфиденциальной информацией понимаются любые сведения, передаваемые Раскрывающей стороной в любой форме (письменной, устной, электронной, графической) в связи с проектом INERTUM, включая, но не ограничиваясь:</p>
+<ul>
+  <li><strong>Техническая информация:</strong> конструктивные решения, архитектура капсул, спецификации материалов, чертежи и схемы, технологические карты, BOM, результаты испытаний, данные мониторинга, формулы, расчёты, прототипы.</li>
+  <li><strong>Патентная информация:</strong> драфты патентных заявок (включая v2.1 и последующие), результаты патентного поиска, формулы изобретения. <strong>До даты приоритета патента информация имеет статус коммерческой тайны и/или ноу-хау.</strong></li>
+  <li><strong>Коммерческая информация:</strong> питч-деки, финансовые модели, P&L прогнозы, юнит-экономика, целевая база поставщиков и инвесторов, RFQ-шаблоны, NDA, договоры.</li>
+  <li><strong>Производственная информация:</strong> контакты поставщиков (NomexRus, Pack-Systems, PreSens, PyroScience, Mitsubishi Gas Chemical), технологические параметры, ноу-хау по сборке, методики контроля качества.</li>
+  <li><strong>Финансовая информация:</strong> прогнозы выручки, маржинальность, размер раунда финансирования, оценка компании, условия SPV.</li>
+  <li><strong>Иные сведения</strong>, прямо обозначенные Раскрывающей стороной как конфиденциальные.</li>
+</ul>
+
+<p>2.2. <strong>Не является Конфиденциальной информацией</strong> информация, которая:</p>
+<ul>
+  <li>а) на момент раскрытия уже была общедоступна или стала общедоступной не по вине Принимающей стороны;</li>
+  <li>б) была законно получена Принимающей стороной от третьих лиц без обязательства о неразглашении;</li>
+  <li>в) была независимо разработана Принимающей стороной без использования Конфиденциальной информации (бремя доказывания — на Принимающей стороне);</li>
+  <li>г) подлежит раскрытию по требованию суда или госоргана при условии незамедлительного письменного уведомления Раскрывающей стороны.</li>
+</ul>
+
+<h2>3. Обязательства Принимающей стороны</h2>
+<p>3.1. Принимающая сторона обязуется:</p>
+<ol>
+  <li><strong>Сохранять Конфиденциальную информацию в тайне</strong> с применением мер защиты не ниже тех, которые применяет к собственной конфиденциальной информации, но в любом случае не ниже разумно необходимых.</li>
+  <li><strong>Не разглашать</strong> Конфиденциальную информацию третьим лицам без предварительного письменного согласия Раскрывающей стороны, кроме сотрудников и консультантов, связанных эквивалентными обязательствами.</li>
+  <li><strong>Использовать информацию исключительно</strong> для целей, указанных в п. 1.1. Любое иное использование (коммерческое, конкурентное, для патентования собственных решений) <strong>прямо запрещено</strong>.</li>
+  <li><strong>Не копировать, не публиковать, не воспроизводить</strong> Конфиденциальную информацию в открытых источниках, не размещать в социальных сетях, не передавать в новостные издания.</li>
+  <li><strong>Не реверс-инжинирить</strong> изделия, прототипы, образцы.</li>
+  <li><strong>По требованию Раскрывающей стороны</strong> — вернуть или уничтожить все материалы и копии (в т. ч. электронные) в течение 10 рабочих дней.</li>
+</ol>
+<p>3.2. Принимающая сторона признаёт, что <strong>до даты приоритета патента INERTUM</strong> публикация технических деталей в открытых источниках <strong>уничтожает новизну</strong> и наносит Раскрывающей стороне непоправимый ущерб.</p>
+
+<h2>4. Срок действия</h2>
+<p>4.1. Соглашение вступает в силу с момента подписания обеими Сторонами и действует <strong>5 (пять) лет</strong>.</p>
+<p>4.2. Обязательства по неразглашению информации, переданной в течение срока действия, продолжаются ещё <strong>5 (пять) лет после окончания</strong> срока.</p>
+<p>4.3. Для информации патентной заявки v2.1 — обязательства действуют до публикации заявки Роспатентом или ЕАПО (но не более 10 лет с момента подписания).</p>
+
+<h2>5. Последствия нарушения</h2>
+<p>5.1. В случае нарушения Раскрывающая сторона вправе:</p>
+<ol>
+  <li>Потребовать <strong>немедленного прекращения</strong> действий, нарушающих Соглашение.</li>
+  <li>Потребовать <strong>возмещения убытков</strong>. Стороны признают, что нарушение конфиденциальности до даты приоритета патента уничтожает патентоспособность, и убытки оцениваются <strong>не менее чем в ₽ 50 000 000</strong>.</li>
+  <li>Потребовать выплаты <strong>штрафной неустойки в размере ₽ 5 000 000</strong> за каждый отдельный факт нарушения.</li>
+  <li>Обратиться в суд с требованием о <strong>запрете дальнейших действий</strong>, нарушающих Соглашение.</li>
+</ol>
+<p>5.2. Уплата неустойки не освобождает Принимающую сторону от обязанности возмещения убытков и прекращения нарушения.</p>
+
+<h2>6. Применимое право и юрисдикция</h2>
+<p>6.1. Соглашение регулируется законодательством Российской Федерации.</p>
+<p>6.2. Все споры передаются в Арбитражный суд г. Москвы (или МКАС при ТПП РФ — для споров с международными контрагентами).</p>
+
+<h2>7. Прочие условия</h2>
+<ul>
+  <li>7.1. <strong>Правовая форма передачи.</strong> Соглашение не предоставляет Принимающей стороне никаких лицензионных или имущественных прав на Конфиденциальную информацию. Все права остаются за Раскрывающей стороной.</li>
+  <li>7.2. <strong>Изменения</strong> действительны только в письменной форме при подписании обеими Сторонами.</li>
+  <li>7.3. <strong>Уведомления</strong> направляются по электронной почте (с подтверждением получения) и/или на юридический адрес.</li>
+  <li>7.4. <strong>Делимость:</strong> недействительность одного положения не влияет на остальные.</li>
+  <li>7.5. <strong>Полнота:</strong> Соглашение содержит полный объём договорённостей и заменяет все предыдущие.</li>
+  <li>7.6. <strong>Электронная подпись.</strong> Стороны признают юридическую силу электронной подписи (включая сканы с собственноручными подписями по e-mail).</li>
+</ul>
+
+<h2>8. Подписи</h2>
+<div class="signatures">
+  <div class="sig-cell">
+    <div class="label">Раскрывающая сторона</div>
+    <div class="field">Аслан КАА</div>
+    <div class="small">ИП · idriskaaa@gmail.com</div>
+    <br>
+    <div class="field">Подпись: ___________________</div>
+    <div class="field">Дата: 2026-__-__</div>
+  </div>
+  <div class="sig-cell">
+    <div class="label">Принимающая сторона</div>
+    <div class="field">Имя: ___________________</div>
+    <div class="field">Должность: ___________________</div>
+    <br>
+    <div class="field">Подпись: ___________________</div>
+    <div class="field">Дата: 2026-__-__</div>
+  </div>
+</div>
+
+<p class="small center" style="margin-top: 32px;">— Конец русской версии · Документ продолжается английской версией —</p>
+
+</div>
+
+<!-- ============ EN VERSION ============ -->
+<div class="doc">
+
+<h1>Non-Disclosure Agreement</h1>
+<div class="subtitle">Соглашение о неразглашении · English version · v1.0</div>
+
+<h2>Parties</h2>
+
+<div class="party-block">
+<strong>Disclosing Party:</strong><br>
+Aslan KAA — Founder, INERTUM<br>
+Email: idriskaaa@gmail.com<br>
+Website: aslankaa.com<br>
+Phone: ____________________<br>
+Legal address: ____________________<br>
+SPV / Legal entity: [Dubai FZ-LLC / Almaty TOO / RF IP]
+</div>
+
+<div class="party-block">
+<strong>Receiving Party:</strong><br>
+Name / Legal entity: __________________________________________<br>
+Title: __________________________________________<br>
+Tax ID / VAT / Reg. No.: __________________________________________<br>
+Email: __________________________________________<br>
+Phone: __________________________________________<br>
+Legal address: __________________________________________
+</div>
+
+<p>Together — "Parties".</p>
+
+<h2>1. Subject</h2>
+<p>1.1. The Disclosing Party intends to share Confidential Information (defined in Section 2) with the Receiving Party for the purpose of evaluating a potential commercial, investment, legal, or technical relationship regarding the <strong>INERTUM</strong> project (long-term preservation systems for industrial and collectible items in inert gas atmosphere).</p>
+<p>1.2. The Receiving Party agrees to handle the Confidential Information in accordance with this Agreement and not to disclose it without the prior written consent of the Disclosing Party.</p>
+
+<h2>2. Confidential Information</h2>
+<p>2.1. Confidential Information means any information shared in any form in connection with the INERTUM project, including but not limited to:</p>
+<ul>
+  <li><strong>Technical information:</strong> capsule architecture, material specifications, drawings, manufacturing process maps, BOM, test results, monitoring data, formulas, calculations, prototypes.</li>
+  <li><strong>Patent information:</strong> patent application drafts (including v2.1 and subsequent), prior art search results, claims. <strong>Until the patent priority date, this information has the status of trade secret and/or know-how.</strong></li>
+  <li><strong>Commercial information:</strong> pitch decks, financial models, P&L forecasts, unit economics, target supplier and investor lists, RFQ templates, NDAs, contracts.</li>
+  <li><strong>Manufacturing information:</strong> supplier contacts, process parameters, assembly know-how, QC methods, test programs.</li>
+  <li><strong>Financial information:</strong> revenue forecasts, margins, round size, valuation, SPV terms.</li>
+  <li><strong>Any other information</strong> explicitly marked as confidential by the Disclosing Party.</li>
+</ul>
+
+<p>2.2. Confidential Information does NOT include information that:</p>
+<ul>
+  <li>a) was already publicly available at the time of disclosure;</li>
+  <li>b) was lawfully obtained from third parties without confidentiality obligations;</li>
+  <li>c) was independently developed by the Receiving Party (burden of proof on the Receiving Party);</li>
+  <li>d) is required to be disclosed by court order or governmental authority with prompt written notice to the Disclosing Party.</li>
+</ul>
+
+<h2>3. Receiving Party's Obligations</h2>
+<ol>
+  <li><strong>Maintain confidentiality</strong> with at least the same level of protection applied to its own confidential information.</li>
+  <li><strong>Not disclose</strong> to third parties without prior written consent, except to employees and consultants bound by equivalent obligations.</li>
+  <li><strong>Use solely</strong> for purposes set out in Section 1.1. Other use — commercial, competitive, for patenting own solutions — <strong>is expressly prohibited</strong>.</li>
+  <li><strong>Not copy, publish, or reproduce</strong> in public sources, social media, or own marketing materials.</li>
+  <li><strong>Not reverse-engineer</strong> any products, prototypes, or samples.</li>
+  <li><strong>Upon request</strong> — return or destroy all materials within 10 business days.</li>
+</ol>
+<p>The Receiving Party acknowledges that prior to the patent priority date, publication of technical details destroys the novelty and causes irreparable harm.</p>
+
+<h2>4. Term</h2>
+<p>4.1. This Agreement enters into force upon signature and remains in force for <strong>5 (five) years</strong>.</p>
+<p>4.2. Confidentiality obligations continue for an additional <strong>5 (five) years after termination</strong>.</p>
+<p>4.3. For patent application information — obligations remain in effect until publication by Rospatent or EAPO, but no longer than 10 years from signing.</p>
+
+<h2>5. Consequences of Breach</h2>
+<ol>
+  <li>Demand <strong>immediate cessation</strong> of breaching actions.</li>
+  <li>Demand <strong>full compensation of damages</strong>. The Parties acknowledge damages of no less than <strong>USD 500,000</strong> for breach prior to the patent priority date.</li>
+  <li>Demand <strong>liquidated damages of USD 50,000</strong> per separate instance of breach.</li>
+  <li>Seek <strong>injunctive relief</strong> to prohibit further breaching actions.</li>
+</ol>
+
+<h2>6. Governing Law and Jurisdiction</h2>
+<p>6.1. This Agreement is governed by the laws of <strong>the United Arab Emirates (DIFC Common Law)</strong> for the English version.</p>
+<p>6.2. Disputes shall be referred to the <strong>DIFC Courts (Dubai)</strong>.</p>
+
+<h2>7. Other Provisions</h2>
+<ul>
+  <li>7.1. This Agreement does not grant license rights or ownership rights in the Confidential Information.</li>
+  <li>7.2. Amendments are valid only in written form signed by both Parties.</li>
+  <li>7.3. Notices shall be sent by email (with delivery confirmation) and/or to legal address.</li>
+  <li>7.4. Severability: invalidity of one provision does not affect others.</li>
+  <li>7.5. Entire agreement: supersedes all prior oral and written agreements.</li>
+  <li>7.6. Electronic signatures (including scanned originals via email) have legal force.</li>
+</ul>
+
+<h2>8. Signatures</h2>
+<div class="signatures">
+  <div class="sig-cell">
+    <div class="label">Disclosing Party</div>
+    <div class="field">Aslan KAA</div>
+    <div class="small">Founder, INERTUM · idriskaaa@gmail.com</div>
+    <br>
+    <div class="field">Signature: ___________________</div>
+    <div class="field">Date: 2026-__-__</div>
+  </div>
+  <div class="sig-cell">
+    <div class="label">Receiving Party</div>
+    <div class="field">Name: ___________________</div>
+    <div class="field">Title: ___________________</div>
+    <br>
+    <div class="field">Signature: ___________________</div>
+    <div class="field">Date: 2026-__-__</div>
+  </div>
+</div>
+
+<div class="legal-notice" style="margin-top: 32px;">
+  <strong>Legal disclaimer:</strong> this template does not replace legal counsel. Before final use, recommend review by an IP attorney. The Russian and English versions above are intended to be legally equivalent. Sign one based on your jurisdiction.
+</div>
+
+</div>
+
+</body>
+</html>

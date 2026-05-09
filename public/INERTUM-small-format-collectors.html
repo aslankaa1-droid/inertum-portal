@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Малоформатные коллекции · нумизматика, фалеристика, филателия</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:       #FDFBF7;
+    --paper-dark:  #F5EFE3;
+    --ink:         #1A1F2E;
+    --ink-soft:    #2A3245;
+    --ink-muted:   #6B7383;
+    --gold:        #B08B47;
+    --gold-soft:   #D4B477;
+    --line:        #C9BFA8;
+    --line-soft:   #E5DFD0;
+    --serif: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+    --sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--paper); color: var(--ink);
+    font: 17px/1.7 var(--sans); -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility; min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  .top-strip {
+    border-bottom: 1px solid var(--line);
+    padding: 20px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--paper);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .top-strip .brand { font: 600 18px var(--sans); letter-spacing: 0.18em; color: var(--ink); }
+  .top-strip .brand-mark { color: var(--gold); }
+  .top-strip nav { display: flex; gap: 12px; align-items: center; }
+  .top-strip nav a, .top-strip nav button {
+    background: transparent; border: 1px solid var(--line); color: var(--ink-soft);
+    width: 34px; height: 34px; padding: 0;
+    cursor: pointer; transition: all .15s; display: inline-flex; align-items: center; justify-content: center;
+    text-decoration: none;
+  }
+  .top-strip nav a:hover, .top-strip nav button:hover { border-color: var(--gold); color: var(--gold); }
+  .top-strip nav svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  .hero {
+    padding: 96px 32px 80px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(176, 139, 71, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 30% 30%, rgba(212, 180, 119, 0.04) 0%, transparent 60%);
+  }
+  .hero > * { position: relative; }
+  .hero .eyebrow {
+    font: 500 11px var(--sans); color: var(--gold);
+    letter-spacing: 0.32em; text-transform: uppercase; margin-bottom: 32px;
+  }
+  .hero h1 {
+    font: 400 76px/1.05 var(--serif);
+    color: var(--ink); letter-spacing: -0.01em;
+    margin: 0 auto 28px; max-width: 900px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); font-weight: 500; }
+  .hero .lede {
+    font: 300 22px/1.55 var(--sans);
+    color: var(--ink-soft); max-width: 700px; margin: 0 auto;
+  }
+  .hero .ornament { width: 48px; height: 1px; background: var(--gold); margin: 48px auto 0; }
+
+  section { padding: 96px 32px; border-bottom: 1px solid var(--line-soft); }
+  section.alt-bg { background: var(--paper-dark); }
+  .section-num {
+    font: 500 11px var(--sans); color: var(--gold);
+    letter-spacing: 0.28em; text-transform: uppercase;
+    margin-bottom: 24px; text-align: center;
+  }
+  h2 {
+    font: 400 56px/1.1 var(--serif);
+    color: var(--ink); letter-spacing: -0.01em;
+    text-align: center; margin: 0 auto 24px; max-width: 900px;
+  }
+  h2 em { font-style: italic; color: var(--gold); font-weight: 500; }
+  h3 { font: 400 28px/1.2 var(--serif); color: var(--ink); margin: 16px 0 12px; }
+  h4 {
+    font: 600 12px var(--sans); color: var(--gold);
+    letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .lede-section {
+    font: 300 19px/1.6 var(--sans);
+    color: var(--ink-soft); max-width: 720px;
+    margin: 0 auto 56px; text-align: center;
+  }
+  .pull {
+    font: italic 400 32px/1.4 var(--serif);
+    color: var(--ink); text-align: center;
+    max-width: 800px; margin: 0 auto; padding: 24px 0;
+  }
+  .pull::before, .pull::after {
+    content: ''; display: block; width: 40px; height: 1px;
+    background: var(--gold); margin: 24px auto;
+  }
+
+  /* COLLECTOR TYPES */
+  .types-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .type-card {
+    background: var(--paper); border: 1px solid var(--line);
+    padding: 36px 28px; transition: all .3s; text-align: left;
+  }
+  .type-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 8px 32px rgba(176, 139, 71, 0.08);
+    transform: translateY(-2px);
+  }
+  .type-card .icon { width: 48px; height: 48px; margin-bottom: 24px; color: var(--gold); }
+  .type-card .icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+  .type-card h3 { font-size: 24px; margin: 0 0 4px; }
+  .type-card .lat {
+    font: italic 500 13px var(--serif);
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .type-card p {
+    font: 400 14px/1.65 var(--sans);
+    color: var(--ink-muted); margin: 0 0 20px;
+  }
+  .type-card .examples {
+    font: 400 13px/1.6 var(--sans);
+    color: var(--ink-soft); margin-bottom: 16px;
+    padding-top: 16px; border-top: 1px solid var(--line-soft);
+  }
+  .type-card .examples strong {
+    display: block; color: var(--ink);
+    font: 500 11px var(--sans); letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .type-card .price {
+    font: 500 14px var(--sans); color: var(--gold);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding-top: 12px; border-top: 1px solid var(--line-soft);
+  }
+
+  /* WHY */
+  .why-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+    max-width: 900px; margin: 0 auto;
+  }
+  .why-item {
+    background: var(--paper); border: 1px solid var(--line);
+    padding: 32px;
+  }
+  .why-item h4 { color: var(--ink); font-size: 13px; }
+  .why-item p {
+    font: 400 15px/1.65 var(--sans);
+    color: var(--ink-muted); margin-top: 12px;
+  }
+  .why-item p strong { color: var(--ink); }
+
+  /* PACKAGES */
+  .packages {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .package {
+    background: var(--paper); border: 1px solid var(--line);
+    padding: 40px 32px; text-align: center;
+    position: relative;
+  }
+  .package.feature { border: 2px solid var(--gold); }
+  .package.feature::before {
+    content: 'Recommended'; position: absolute;
+    top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--paper); padding: 0 12px;
+    font: 500 10px var(--sans); color: var(--gold);
+    letter-spacing: 0.24em; text-transform: uppercase;
+  }
+  .package h3 { font-size: 26px; margin-bottom: 8px; }
+  .package .subtitle {
+    font: 400 12px var(--sans); color: var(--ink-muted);
+    letter-spacing: 0.16em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .package .price {
+    font: 400 56px var(--serif); color: var(--ink);
+    line-height: 1; margin-bottom: 12px;
+  }
+  .package .price em { font-style: normal; color: var(--gold); font-weight: 500; }
+  .package .price-note {
+    font: 400 12px var(--sans); color: var(--ink-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .package ul {
+    list-style: none; padding: 0; margin: 24px 0 0;
+    text-align: left;
+  }
+  .package ul li {
+    font: 400 14px/1.7 var(--sans);
+    color: var(--ink-soft);
+    padding: 8px 0 8px 24px; position: relative;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .package ul li::before {
+    content: '·'; position: absolute; left: 8px;
+    color: var(--gold); font-size: 24px; line-height: 1;
+  }
+  .package ul li:last-child { border-bottom: 0; }
+
+  /* OFFER */
+  .offer {
+    background: var(--paper); border: 2px solid var(--gold);
+    padding: 64px 48px; text-align: center;
+    max-width: 800px; margin: 0 auto; position: relative;
+  }
+  .offer::before {
+    content: 'Founders Series'; position: absolute;
+    top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--paper); padding: 0 16px;
+    font: 500 11px var(--sans); color: var(--gold);
+    letter-spacing: 0.32em; text-transform: uppercase;
+  }
+  .offer h3 { font-size: 36px; margin-bottom: 16px; }
+  .offer p {
+    font: 300 17px/1.65 var(--sans); color: var(--ink-soft);
+    max-width: 560px; margin: 0 auto 24px;
+  }
+  .offer .price-strike { text-decoration: line-through; color: var(--ink-muted); }
+  .offer .price-now { color: var(--gold); font-weight: 600; }
+
+  .contact { text-align: center; padding: 80px 32px; }
+  .contact h2 { margin-bottom: 32px; }
+  .contact-card {
+    display: inline-block; background: var(--paper); border: 1px solid var(--line);
+    padding: 48px 64px; text-align: left;
+  }
+  .contact-card .name {
+    font: 500 24px var(--serif); color: var(--ink); margin-bottom: 4px;
+  }
+  .contact-card .role {
+    font: 400 12px var(--sans); color: var(--gold);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .contact-card .row {
+    font: 400 15px var(--sans);
+    color: var(--ink-soft); margin-bottom: 8px;
+  }
+  .contact-card .row strong {
+    color: var(--gold); font-weight: 500; margin-right: 12px;
+  }
+  .contact-card a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .contact-card a:hover { border-color: var(--gold); }
+
+  footer.foot {
+    background: var(--ink); color: var(--paper);
+    padding: 64px 32px 32px; text-align: center;
+  }
+  footer.foot .brand { font: 600 22px var(--sans); letter-spacing: 0.24em; margin-bottom: 16px; }
+  footer.foot .brand .mark { color: var(--gold-soft); }
+  footer.foot p {
+    font: 300 14px var(--sans);
+    color: rgba(253, 251, 247, 0.6);
+    max-width: 560px; margin: 0 auto;
+  }
+  footer.foot .legal {
+    margin-top: 32px;
+    font: 400 11px var(--sans);
+    color: rgba(253, 251, 247, 0.4);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  @media print {
+    @page { size: A4; margin: 14mm; }
+    .top-strip { display: none; }
+    section { padding: 48px 0; page-break-inside: avoid; }
+    .hero { padding: 24px 0 48px; }
+    .hero h1 { font-size: 44px; }
+    h2 { font-size: 32px; }
+    .types-grid, .packages { grid-template-columns: 1fr 1fr; gap: 12px; }
+    footer.foot { background: var(--paper); color: var(--ink); border-top: 1px solid var(--line); }
+    footer.foot p, footer.foot .legal { color: var(--ink-muted); }
+  }
+  @media (max-width: 760px) {
+    .hero h1 { font-size: 44px; }
+    h2 { font-size: 36px; }
+    .types-grid, .packages, .why-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP STRIP -->
+<div class="top-strip">
+  <div class="brand">INERT<span class="brand-mark">·</span>UM</div>
+  <nav>
+    <a href="../hub.html" title="Hub"><svg viewBox="0 0 24 24"><path d="M3 11 L12 3 L21 11 V20 C21 20.5 20.5 21 20 21 H15 V14 H9 V21 H4 C3.5 21 3 20.5 3 20 Z"/></svg></a>
+    <button onclick="history.back()" title="Назад"><svg viewBox="0 0 24 24"><path d="M19 12 H5 M11 6 L5 12 L11 18"/></svg></button>
+    <button onclick="history.forward()" title="Вперёд"><svg viewBox="0 0 24 24"><path d="M5 12 H19 M13 6 L19 12 L13 18"/></svg></button>
+    <button onclick="window.print()" title="Печать / PDF"><svg viewBox="0 0 24 24"><rect x="6" y="14" width="12" height="8"/><path d="M6 14 V8 H18 V14 M8 8 V4 H16 V8"/></svg></button>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">Small Format · Long Memory</div>
+  <h1>Малая форма.<br><em>Бесконечная</em> память.</h1>
+  <p class="lede">Витрины и капсулы с инертной средой<br>для малоформатных коллекций.<br>Монеты. Значки. Марки. Медали. Реликвии.</p>
+  <div class="ornament"></div>
+</section>
+
+<!-- §01 PHILOSOPHY -->
+<section>
+  <div class="container">
+    <div class="section-num">§01 — Philosophy</div>
+    <h2>Каждый малый предмет —<br><em>память,</em> запечатанная во времени</h2>
+    <p class="lede-section">Серебряный рубль 1898 года. Орден за оборону Севастополя. Марка с первого почтового штемпеля СССР. Каждый из этих предметов — это не металл и не бумага. Это история. И каждая молекула кислорода, окисляющая металл, желтящая бумагу, разъедающая лак — крадёт у вашей коллекции часть этой истории.</p>
+    <div class="pull">«Большая коллекция требует не больших капсул, а правильной защиты для каждого малого предмета».</div>
+  </div>
+</section>
+
+<!-- §02 TYPES -->
+<section class="alt-bg">
+  <div class="container">
+    <div class="section-num">§02 — Categories</div>
+    <h2>Шесть категорий <em>малой формы</em></h2>
+    <p class="lede-section">Универсальная конструкция витрины адаптируется под любой малый предмет. Газовая среда, оптическое окно для постоянного экспонирования, размеры от 50×50×20 мм до 300×400×60 мм.</p>
+
+    <div class="types-grid">
+
+      <div class="type-card">
+        <div class="icon">
+          <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="22"/>
+            <circle cx="32" cy="32" r="16"/>
+            <text x="32" y="38" text-anchor="middle" font-family="Cormorant Garamond" font-size="18" fill="currentColor" stroke="none">N</text>
+          </svg>
+        </div>
+        <h3>Нумизматика</h3>
+        <div class="lat">Numismatica</div>
+        <p>Коллекционирование монет. Серебро и золото окисляются веками; редкие медные монеты теряют патину или приобретают зелёный оксид. Капсула останавливает окисление навсегда.</p>
+        <div class="examples">
+          <strong>Примеры</strong>
+          Серебряные рубли царского периода · золотые червонцы · юбилейные памятные монеты · античные находки · инвестиционные монеты (Леопард, Maple Leaf, Krugerrand)
+        </div>
+        <div class="price">$ 200 — 400 за капсулу</div>
+      </div>
+
+      <div class="type-card">
+        <div class="icon">
+          <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="22" r="14"/>
+            <path d="M22 32 L18 56 L24 50 L32 54 L40 50 L46 56 L42 32"/>
+            <circle cx="32" cy="22" r="6"/>
+          </svg>
+        </div>
+        <h3>Фалеристика</h3>
+        <div class="lat">Phaleristica</div>
+        <p>Ордена, медали, знаки отличия, наградные знаки. Эмаль трескается, бронза патинируется, серебро темнеет — без инертной среды награда теряет первозданный вид за 30–50 лет.</p>
+        <div class="examples">
+          <strong>Примеры</strong>
+          Орден Святого Георгия · Орден Ленина · Медали СССР · Знаки отличия Российской Империи · Наградные знаки воинских частей · Ведомственные значки
+        </div>
+        <div class="price">$ 250 — 500 за капсулу</div>
+      </div>
+
+      <div class="type-card">
+        <div class="icon">
+          <svg viewBox="0 0 64 64">
+            <rect x="14" y="18" width="36" height="28"/>
+            <path d="M14 24 L24 22 L34 24 L44 22 L50 24 M14 30 L24 28 L34 30 L44 28 L50 30 M14 36 L24 34 L34 36 L44 34 L50 36 M14 42 L24 40 L34 42 L44 40 L50 42"/>
+            <circle cx="42" cy="26" r="3"/>
+          </svg>
+        </div>
+        <h3>Филателия</h3>
+        <div class="lat">Philatelia</div>
+        <p>Почтовые марки, конверты первого дня, гашёные блоки, цельные вещи. Главные враги бумаги — кислород, ультрафиолет и влажность. Капсула снимает первое и третье полностью.</p>
+        <div class="examples">
+          <strong>Примеры</strong>
+          Марки Российской Империи · Земство · советская филателия · «Чёрный Пенни» · перевёртки · конверты первого дня · цельные вещи
+        </div>
+        <div class="price">$ 200 — 400 за капсулу</div>
+      </div>
+
+      <div class="type-card">
+        <div class="icon">
+          <svg viewBox="0 0 64 64">
+            <rect x="10" y="20" width="44" height="24"/>
+            <path d="M16 26 H30 M16 32 H38 M16 38 H32 M44 26 V42"/>
+            <circle cx="44" cy="32" r="3"/>
+          </svg>
+        </div>
+        <h3>Бонистика</h3>
+        <div class="lat">Bonistica</div>
+        <p>Коллекционные банкноты, ассигнации, облигации, ценные бумаги исторического периода. Бумага старше 100 лет крайне чувствительна к окислению — края крошатся, чернила выцветают.</p>
+        <div class="examples">
+          <strong>Примеры</strong>
+          Ассигнации Екатерины · Кредитные билеты Российской Империи · Совзнаки 1920-х · Облигации Государственного займа · Иностранные банкноты исторического периода
+        </div>
+        <div class="price">$ 250 — 500 за капсулу</div>
+      </div>
+
+      <div class="type-card">
+        <div class="icon">
+          <svg viewBox="0 0 64 64">
+            <path d="M32 8 L40 24 L56 26 L44 38 L48 54 L32 46 L16 54 L20 38 L8 26 L24 24 Z"/>
+          </svg>
+        </div>
+        <h3>Памятные знаки</h3>
+        <div class="lat">Insignia</div>
+        <p>Памятные знаки, юбилейные значки, корпоративные награды, спортивные медали, любительские коллекции. Крупные коллекции охотничьих/рыболовных значков, путешественников, военных частей.</p>
+        <div class="examples">
+          <strong>Примеры</strong>
+          Олимпийские медали · знаки участников исторических событий · корпоративные подарочные знаки · ведомственные знаки · нагрудные знаки спортсменов
+        </div>
+        <div class="price">$ 200 — 400 за капсулу</div>
+      </div>
+
+      <div class="type-card">
+        <div class="icon">
+          <svg viewBox="0 0 64 64">
+            <path d="M14 22 V52 H50 V22 L32 12 Z"/>
+            <path d="M22 36 H42 M22 42 H38"/>
+            <path d="M28 22 V12 M36 22 V12"/>
+          </svg>
+        </div>
+        <h3>Семейные реликвии</h3>
+        <div class="lat">Hereditary</div>
+        <p>Семейные документы, фотокарточки, амулеты, миниатюры, локоны, печатки. Личное и эмоциональное наследие, передаваемое поколениями. Часто — невосстановимое.</p>
+        <div class="examples">
+          <strong>Примеры</strong>
+          Старинные фотопортреты · письма с фронта · свидетельства о рождении предков · родовые драгоценности · детские локоны · миниатюрные иконки
+        </div>
+        <div class="price">$ 200 — 350 за капсулу</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- §03 WHY -->
+<section>
+  <div class="container">
+    <div class="section-num">§03 — Why INERTUM</div>
+    <h2>Что отличает наши витрины<br>от <em>обычных</em></h2>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <h4>5 СЛОЁВ ЗАЩИТЫ</h4>
+        <p><strong>Барьерный ламинат</strong> + инертный газ + кислород-абсорбер + пассивный оптический сенсор + алгоритм самодиагностики. Если откажет один слой — четыре других продолжают работать.</p>
+      </div>
+
+      <div class="why-item">
+        <h4>50 ЛЕТ БЕЗ ОБСЛУЖИВАНИЯ</h4>
+        <p>Без замены батарей, без подключения к сети, без ежегодного сервиса. Поставили один раз — и забыли. Внутренний кислород-абсорбер Mitsubishi Ageless рассчитан с запасом ×6.</p>
+      </div>
+
+      <div class="why-item">
+        <h4>ОПТИЧЕСКОЕ ЭКСПОНИРОВАНИЕ</h4>
+        <p>Прозрачное окно из <strong>оптического стекла</strong> для постоянной экспозиции. Объект виден, но изолирован от воздуха, ультрафиолета и влажности.</p>
+      </div>
+
+      <div class="why-item">
+        <h4>ИНДИКАЦИЯ СОХРАННОСТИ</h4>
+        <p>Цвет-индикатор кислорода читается визуально без оборудования. Опционально — оптический ридер для точного измерения через прозрачное окно.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §04 PACKAGES -->
+<section class="alt-bg">
+  <div class="container">
+    <div class="section-num">§04 — Packages</div>
+    <h2>Три формата <em>защиты</em></h2>
+    <p class="lede-section">От одной капсулы до коллекционной витрины с десятками отделений. Каждый формат сохраняет 5 слоёв защиты.</p>
+
+    <div class="packages">
+
+      <div class="package">
+        <h3>Single</h3>
+        <div class="subtitle">одна капсула</div>
+        <div class="price">от <em>$200</em></div>
+        <div class="price-note">за единицу</div>
+        <ul>
+          <li>Одна индивидуальная капсула под предмет</li>
+          <li>Прозрачное оптическое окно</li>
+          <li>Цвет-индикатор сохранности</li>
+          <li>Аргон или азот по выбору</li>
+          <li>Срок защиты 50 лет</li>
+        </ul>
+      </div>
+
+      <div class="package feature">
+        <h3>Collection</h3>
+        <div class="subtitle">10–50 капсул</div>
+        <div class="price">от <em>$1 800</em></div>
+        <div class="price-note">за партию · −15% к розничной</div>
+        <ul>
+          <li>Партия капсул под номинал коллекции</li>
+          <li>Единый дизайн и маркировка</li>
+          <li>Один общий ридер кислорода</li>
+          <li>Каталог-сертификат каждой капсулы</li>
+          <li>Установка специалистом на месте</li>
+        </ul>
+      </div>
+
+      <div class="package">
+        <h3>Cabinet</h3>
+        <div class="subtitle">шкаф-витрина</div>
+        <div class="price">от <em>$8 000</em></div>
+        <div class="price-note">витрина с инертной средой</div>
+        <ul>
+          <li>Стационарная витрина 600×900×400 мм</li>
+          <li>До 100 предметов в одном объёме</li>
+          <li>Прозрачные витражные стенки</li>
+          <li>Подсветка LED с UV-фильтром</li>
+          <li>Замок · опционально RFID-учёт</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- §05 OFFER -->
+<section>
+  <div class="container">
+    <div class="section-num">§05 — Founders Series</div>
+    <h2>Первые <em>пятьдесят</em> · 2027</h2>
+    <p class="lede-section">Founders Series — первая партия 2027 года. Производство по индивидуальному заказу, персональная гравировка, скидка 20% от розничной цены и пожизненный приоритет на сервисное обслуживание.</p>
+
+    <div class="offer">
+      <h3>Founders Series · Numismatica Edition</h3>
+      <p>Первые 50 нумизматических капсул серии. Персональная гравировка. Founder-сертификат с подписью основателя. Пожизненный приоритет в сервисе.</p>
+      <p style="margin-top: 24px;">
+        <span style="font: 400 14px var(--sans); color: var(--ink-muted); letter-spacing: 0.08em;">INERTUM Numismatica · одна капсула</span><br>
+        <span class="price-strike" style="font: 400 18px var(--sans);">от $ 300</span>&nbsp;&nbsp;
+        <span class="price-now" style="font: 600 24px var(--serif);">$ 240</span><br>
+        <span style="font: 400 12px var(--sans); color: var(--ink-muted); letter-spacing: 0.08em;">скидка 20% · резерв до 2026-12-31</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §06 CONTACT -->
+<section class="alt-bg contact">
+  <div class="container">
+    <div class="section-num">§06 — Contact</div>
+    <h2>Сделать <em>запрос</em></h2>
+
+    <div class="contact-card">
+      <div class="name">Аслан КАА</div>
+      <div class="role">Founder · INERTUM</div>
+      <div class="row"><strong>Email</strong><a href="mailto:idriskaaa@gmail.com?subject=INERTUM%20Small%20Format%20-%20запрос">idriskaaa@gmail.com</a></div>
+      <div class="row"><strong>Web</strong><a href="https://aslankaa.com">aslankaa.com</a></div>
+      <div class="row"><strong>Portal</strong><a href="../index.html">aslankaa.com / inertum</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="brand">INERT<span class="mark">·</span>UM</div>
+  <p>Long-term preservation systems in inert gas atmosphere.<br>Small Format Edition · Patent Pending · Founders Series 2027.</p>
+  <div class="legal">© 2026 INERTUM · ALL RIGHTS RESERVED</div>
+</footer>
+
+</body>
+</html>

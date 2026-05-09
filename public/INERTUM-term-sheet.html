@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Term Sheet + Cap Table · Pre-Seed</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="../assets/topbar.js" defer></script>
+<style>
+  :root[data-theme="dark"] {
+    --bg-base: #0A0B0D; --bg-elev: #13151A; --bg-elev-2: #1C1F26;
+    --ink: #F2F4F7; --ink-muted: #8A93A6; --ink-secondary: #C7CCD6;
+    --argon: #5BC0EB; --argon-bright: #82d3f3;
+    --warn: #E8A33D; --success: #3FB984; --danger: #E5685A;
+    --stroke: #2A2F3A;
+  }
+  :root[data-theme="light"] {
+    --bg-base: #FAFBFC; --bg-elev: #FFFFFF; --bg-elev-2: #F0F2F5;
+    --ink: #0A0B0D; --ink-muted: #5A6270; --ink-secondary: #2A2F3A;
+    --argon: #1565C0; --argon-bright: #1976D2;
+    --warn: #C77400; --success: #2E7D32; --danger: #C62828;
+    --stroke: #DDE2E8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg-base); color: var(--ink);
+    font: 15px/1.65 'Inter', sans-serif; -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(91,192,235,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,192,235,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 96px; position: relative; z-index: 1; }
+  header.intro { border-bottom: 1px solid var(--stroke); padding-bottom: 24px; margin-bottom: 32px; }
+  .eyebrow { font: 500 11px 'JetBrains Mono'; color: var(--argon); letter-spacing: 3px; text-transform: uppercase; }
+  h1 { font: 600 44px/1.05 'Inter'; letter-spacing: -0.02em; margin: 12px 0 16px; color: var(--ink); }
+  .lede { font-size: 16px; color: var(--ink-secondary); max-width: 800px; }
+  h2 {
+    font: 500 11px 'JetBrains Mono'; color: var(--argon);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--stroke);
+  }
+  h3 { font: 600 22px 'Inter'; color: var(--ink); margin: 28px 0 12px; }
+  h4 { font: 600 16px 'Inter'; color: var(--ink); margin: 20px 0 8px; }
+
+  .legal-notice {
+    background: rgba(232,163,61,0.08); border: 1px solid rgba(232,163,61,0.4);
+    border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+    font-size: 13px; color: var(--warn);
+  }
+
+  table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: 8px; overflow: hidden; margin: 16px 0;
+  }
+  th, td {
+    padding: 12px 14px; text-align: left;
+    border-bottom: 1px solid var(--stroke); vertical-align: top;
+  }
+  th {
+    font: 500 10px 'JetBrains Mono'; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-muted);
+    background: var(--bg-elev-2);
+  }
+  td { color: var(--ink-secondary); }
+  td.argon { color: var(--argon); font-family: 'JetBrains Mono'; font-variant-numeric: tabular-nums; }
+  td.term-name { width: 30%; color: var(--ink); font-weight: 500; }
+  td.term-val { font-family: 'JetBrains Mono'; }
+  tr.highlight { background: rgba(91,192,235,0.06); }
+  tr.totals td { background: var(--bg-elev-2); color: var(--ink); font-weight: 600; }
+
+  .field-fill {
+    color: var(--warn); font-style: italic; font-family: 'Inter';
+    background: rgba(232,163,61,0.08); padding: 1px 6px; border-radius: 3px;
+  }
+
+  .signatures {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;
+    page-break-inside: avoid;
+  }
+  .sig-cell {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: 8px; padding: 24px;
+  }
+  .sig-cell .label {
+    font: 500 11px 'JetBrains Mono'; color: var(--argon);
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .sig-cell .field {
+    margin: 12px 0; padding-bottom: 4px; border-bottom: 1px solid var(--stroke);
+    font-size: 13px; color: var(--ink-secondary);
+  }
+  .sig-cell strong { color: var(--ink); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: 8px; padding: 20px;
+  }
+  .card.argon { border-color: var(--argon); }
+  .card.success { border-color: var(--success); background: rgba(63,185,132,0.04); }
+
+  .pill {
+    display: inline-block; padding: 3px 10px; border-radius: 100px;
+    font: 500 10px 'JetBrains Mono'; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--stroke); color: var(--ink-muted);
+  }
+  .pill.argon { color: var(--argon); border-color: var(--argon); }
+  .pill.warn { color: var(--warn); border-color: var(--warn); }
+  .pill.success { color: var(--success); border-color: var(--success); }
+
+  ul.bullets { list-style: none; padding: 0; }
+  ul.bullets li {
+    position: relative; padding: 8px 0 8px 24px;
+    border-bottom: 1px solid var(--stroke);
+    font-size: 14px; color: var(--ink-secondary);
+  }
+  ul.bullets li::before {
+    content: ''; position: absolute; left: 0; top: 17px;
+    width: 12px; height: 1px; background: var(--argon);
+  }
+  ul.bullets li strong { color: var(--ink); }
+
+  .download-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0 32px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-radius: 6px;
+    font: 500 13px 'Inter'; cursor: pointer; border: 1px solid; text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-primary { background: var(--argon); color: var(--bg-base); border-color: var(--argon); }
+  .btn-primary:hover { box-shadow: 0 0 16px rgba(91,192,235,0.4); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--stroke); }
+  .btn-ghost:hover { border-color: var(--argon); color: var(--argon); }
+
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--stroke); font: 11px 'JetBrains Mono'; color: var(--ink-muted); letter-spacing: 0.1em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    body::before, .download-row, .legal-notice { display: none; }
+    .container { max-width: 100%; padding: 12mm; }
+    table, .card, .sig-cell { background: #fff; border-color: #888; page-break-inside: avoid; }
+    h1, h3, h4 { color: #000; }
+    .pill { border-color: #888; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header class="intro">
+  <div class="eyebrow"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--argon);box-shadow:0 0 8px var(--argon);margin-right:8px;"></span>TERM SHEET + CAP TABLE · PRE-SEED · NDA-REQUIRED</div>
+  <h1>Условия раунда $750k / 8% equity</h1>
+  <p class="lede">Стандартный pre-seed term sheet и cap table до/после раунда. Документ носит индикативный характер — финальные условия согласуются с lead investor и юристом обеих сторон. Подготовлен 2026-05-09.</p>
+</header>
+
+<div class="download-row">
+  <button class="btn btn-primary" onclick="window.print()">⎙ Печать / PDF</button>
+  <a class="btn btn-ghost" href="../hub.html">← Hub</a>
+  <a class="btn btn-ghost" href="INERTUM-pitch-v2.html">Pitch deck</a>
+  <a class="btn btn-ghost" href="INERTUM-financials.html">Финмодель</a>
+</div>
+
+<div class="legal-notice">
+  <strong>Юридический disclaimer:</strong> настоящий документ является шаблоном-предложением и не заменяет юридического сопровождения сделки. Перед подписанием — обязательная проверка корпоративным юристом обеих сторон. Условия могут быть скорректированы по результатам due diligence и переговоров с lead investor.
+</div>
+
+<!-- ============ §1 PARTIES ============ -->
+<h2>§01 · Стороны сделки</h2>
+
+<div class="grid-2">
+  <div class="card argon">
+    <span class="pill argon">COMPANY</span>
+    <h4 style="margin-top: 12px;">INERTUM (рабочее имя)</h4>
+    <p style="font-size: 13px; color: var(--ink-secondary);">
+      Юр. лицо к моменту подписания — <span class="field-fill">[ИП Аслан КАА / ООО / Dubai FZ-LLC / Almaty TOO]</span><br>
+      ИНН/ОГРН/Reg. No.: <span class="field-fill">[заполнить]</span><br>
+      Юр. адрес: <span class="field-fill">[заполнить]</span><br>
+      Founder &amp; CEO: <strong>Аслан КАА</strong><br>
+      Email: idriskaaa@gmail.com · aslankaa.com
+    </p>
+  </div>
+  <div class="card">
+    <span class="pill warn">INVESTOR</span>
+    <h4 style="margin-top: 12px;">Инвестор</h4>
+    <p style="font-size: 13px; color: var(--ink-secondary);">
+      Имя / Фонд: <span class="field-fill">[заполнить]</span><br>
+      Юрисдикция: <span class="field-fill">[РФ / KZ / UAE / EU / др.]</span><br>
+      ИНН/Reg. No.: <span class="field-fill">[заполнить]</span><br>
+      Контактное лицо: <span class="field-fill">[заполнить]</span><br>
+      Email: <span class="field-fill">[заполнить]</span>
+    </p>
+  </div>
+</div>
+
+<!-- ============ §2 TERM SHEET ============ -->
+<h2>§02 · Условия инвестиции</h2>
+
+<table>
+  <thead><tr><th style="width:30%">Параметр</th><th>Значение</th></tr></thead>
+  <tbody>
+    <tr class="highlight"><td class="term-name">Round size (общий объём раунда)</td><td class="term-val argon">USD 750 000</td></tr>
+    <tr><td class="term-name">Минимальный чек</td><td class="term-val argon">USD 50 000</td></tr>
+    <tr><td class="term-name">Максимальный чек одного инвестора</td><td class="term-val argon">USD 350 000 (47% раунда)</td></tr>
+    <tr class="highlight"><td class="term-name">Pre-money valuation</td><td class="term-val argon">USD 8 625 000</td></tr>
+    <tr class="highlight"><td class="term-name">Post-money valuation</td><td class="term-val argon">USD 9 375 000</td></tr>
+    <tr><td class="term-name">Equity offered (за весь раунд)</td><td class="term-val argon">8.0 %</td></tr>
+    <tr><td class="term-name">Тип ценных бумаг</td><td class="term-val">Series Seed Preferred Shares</td></tr>
+    <tr><td class="term-name">Цена за акцию (на момент закрытия)</td><td class="term-val argon">USD <span class="field-fill">[рассчитывается на закрытии]</span></td></tr>
+    <tr><td class="term-name">Closing date (target)</td><td class="term-val"><span class="field-fill">Q3 2026 / [дата]</span></td></tr>
+    <tr><td class="term-name">Use of funds</td><td class="term-val">См. §03 ниже</td></tr>
+  </tbody>
+</table>
+
+<!-- ============ §3 USE OF FUNDS ============ -->
+<h2>§03 · Use of Funds — структура расходов раунда</h2>
+
+<table>
+  <thead><tr><th>Статья</th><th>USD</th><th>%</th><th>Период</th></tr></thead>
+  <tbody>
+    <tr><td>Подача патентов · РФ + ЕАПО + PCT</td><td class="argon">60 000</td><td>8.0%</td><td>0–18 мес</td></tr>
+    <tr><td>3 прототипа (мото + вело + авто) + испытания</td><td class="argon">80 000</td><td>10.7%</td><td>0–9 мес</td></tr>
+    <tr><td>Сертификация ГОСТ Р + ГОСТ В</td><td class="argon">50 000</td><td>6.7%</td><td>3–18 мес</td></tr>
+    <tr><td>Capex (PreSens ридеры × 5, оборудование)</td><td class="argon">60 000</td><td>8.0%</td><td>0–6 мес</td></tr>
+    <tr><td><strong>OpEx 12 мес — CEO + 3 инженера + офис</strong></td><td class="argon">350 000</td><td>46.7%</td><td>0–12 мес</td></tr>
+    <tr><td>Маркетинг + первые продажи</td><td class="argon">80 000</td><td>10.7%</td><td>6–18 мес</td></tr>
+    <tr><td>Юр. поддержка + регистрация SPV (РФ/Каз/ОАЭ)</td><td class="argon">30 000</td><td>4.0%</td><td>0–3 мес</td></tr>
+    <tr><td>Резерв / непредвиденные</td><td class="argon">40 000</td><td>5.3%</td><td>—</td></tr>
+    <tr class="totals"><td><strong>ИТОГО</strong></td><td class="argon"><strong>750 000</strong></td><td><strong>100%</strong></td><td><strong>18 мес runway</strong></td></tr>
+  </tbody>
+</table>
+
+<!-- ============ §4 ECONOMIC TERMS ============ -->
+<h2>§04 · Экономические условия</h2>
+
+<table>
+  <tbody>
+    <tr><td class="term-name">Liquidation preference</td><td>1× non-participating preference (стандарт pre-seed). При exit инвестор получает либо 1× вклада, либо долю pro-rata — что больше.</td></tr>
+    <tr><td class="term-name">Anti-dilution</td><td>Broad-based weighted average. Защита от размытия при последующих раундах с понижением цены.</td></tr>
+    <tr><td class="term-name">Conversion</td><td>Преференциальные акции конвертируются 1:1 в обыкновенные при IPO или по решению инвестора.</td></tr>
+    <tr><td class="term-name">Pro-rata rights</td><td>Да. Pre-seed инвесторы получают право участвовать в Series A пропорционально текущей доле.</td></tr>
+    <tr><td class="term-name">Right of first refusal (ROFR)</td><td>Да. При продаже акций founder'ом — у инвесторов первое право выкупа.</td></tr>
+    <tr><td class="term-name">Co-sale rights</td><td>Да. При продаже акций founder'ом — инвесторы могут присоединиться к продаже на тех же условиях.</td></tr>
+    <tr><td class="term-name">Drag-along rights</td><td>При одобрении 75% капитала — оставшиеся акционеры обязаны участвовать в выходе на тех же условиях.</td></tr>
+    <tr><td class="term-name">Tag-along rights</td><td>Стандартное защитное право миноритариев при продаже мажоритарной доли.</td></tr>
+    <tr><td class="term-name">Dividend</td><td>Без обязательных дивидендов до Series A. После — по решению совета.</td></tr>
+  </tbody>
+</table>
+
+<!-- ============ §5 GOVERNANCE ============ -->
+<h2>§05 · Корпоративное управление</h2>
+
+<table>
+  <tbody>
+    <tr><td class="term-name">Board composition</td><td>До Series A — без обязательных board seats. Founder сохраняет полное операционное управление. Advisory board — приветствуется.</td></tr>
+    <tr><td class="term-name">Investor advisory rights</td><td>Право назначать одного advisor (не member of board) с правом совещательного голоса по стратегии.</td></tr>
+    <tr><td class="term-name">Information rights</td><td>Quarterly P&amp;L + KPI dashboard + annual auditied accounts (если применимо). Срок — в течение 45 дней после окончания квартала.</td></tr>
+    <tr><td class="term-name">Reserved matters (одобрение инвесторов 75%)</td><td>
+      • Изменение устава / уставного капитала<br>
+      • Продажа основных активов компании > USD 100k<br>
+      • Слияние / поглощение<br>
+      • Привлечение долгового финансирования > USD 200k<br>
+      • Изменение ESOP-плана<br>
+      • Назначение CEO / CTO / CFO
+    </td></tr>
+  </tbody>
+</table>
+
+<!-- ============ §6 FOUNDER / VESTING ============ -->
+<h2>§06 · Founder vesting и ESOP</h2>
+
+<table>
+  <tbody>
+    <tr><td class="term-name">Founder vesting</td><td>4 года, ежемесячное vesting. <strong>1-year cliff</strong> — в первый год ничего не vested. После года — 25%, далее 1/48 ежемесячно.</td></tr>
+    <tr><td class="term-name">Acceleration on termination</td><td>Без причины (without cause) — 12-month single-trigger acceleration. С причиной (with cause) — без acceleration, unvested возвращается компании.</td></tr>
+    <tr><td class="term-name">Acceleration on change of control</td><td>Double-trigger: 100% acceleration при exit + termination founder'а в течение 12 мес после exit.</td></tr>
+    <tr><td class="term-name">ESOP (option pool)</td><td><strong>10% от post-money</strong>, создаётся на момент закрытия раунда. Размывает founder'а пропорционально (т.е. founder получает 82% × 90% = 73.8% после ESOP).</td></tr>
+    <tr><td class="term-name">ESOP vesting</td><td>Стандартно 4 года + 1-year cliff для всех получателей опционов.</td></tr>
+    <tr><td class="term-name">Founder employment</td><td>Full-time на проекте до завершения vesting. Сохранение текущего источника дохода (Усть-Кут-Нефтегаз) — допустимо до закрытия раунда, после — full-time INERTUM.</td></tr>
+    <tr><td class="term-name">Founder salary</td><td>USD 42 000 / год (РФ-эквивалент ~₽300k/мес) на 12 мес, далее по решению совета. Ниже рыночной — выровняется в Series A.</td></tr>
+    <tr><td class="term-name">Non-compete</td><td>2 года после прекращения для founder'а в смежных областях защитной упаковки и систем хранения.</td></tr>
+  </tbody>
+</table>
+
+<!-- ============ §7 IP ============ -->
+<h2>§07 · Интеллектуальная собственность</h2>
+
+<table>
+  <tbody>
+    <tr><td class="term-name">IP assignment</td><td>Все IP, созданные founder'ом до закрытия раунда (включая патентную заявку v2.1, технические наработки, портал, ноу-хау), <strong>передаются компании</strong> (assigned) на момент закрытия. Founder получает за это 92% акций (82% + ESOP-разводка).</td></tr>
+    <tr><td class="term-name">Future IP</td><td>Все IP, созданные сотрудниками и подрядчиками в рамках работы — собственность компании.</td></tr>
+    <tr><td class="term-name">Patent filing strategy</td><td>Подача патентной заявки в Роспатент → ЕАПО (12 мес) → PCT (12 мес дополнительно). Бюджет USD 60k предусмотрен в use of funds.</td></tr>
+    <tr><td class="term-name">Trademark</td><td>Подача на товарный знак <strong>INERTUM</strong> в классы Nice 17, 20, 22, 9, 35 в Роспатенте + WIPO Madrid. После проверки занятости поверенным.</td></tr>
+  </tbody>
+</table>
+
+<!-- ============ §8 OTHER ============ -->
+<h2>§08 · Прочие условия</h2>
+
+<table>
+  <tbody>
+    <tr><td class="term-name">Closing conditions</td><td>
+      • Подписание Investment Agreement и Shareholders' Agreement<br>
+      • Завершение due diligence удовлетворительно<br>
+      • Создание SPV (если нужно для приёма международных средств)<br>
+      • Подача патентной заявки в Роспатент (фиксация даты приоритета) — желательно до закрытия<br>
+      • Founder vesting agreement подписан<br>
+      • IP assignment подписан
+    </td></tr>
+    <tr><td class="term-name">Use of investors' name</td><td>Компания вправе указывать имя инвестора в маркетинговых материалах (с разрешения).</td></tr>
+    <tr><td class="term-name">Confidentiality</td><td>До закрытия — стороны связаны NDA. После закрытия — конфиденциальность сохраняется на весь период инвестиции.</td></tr>
+    <tr><td class="term-name">Exclusivity period</td><td>30 дней после подписания term sheet — компания не ведёт переговоры с другими инвесторами. После 30 дней — exclusivity снимается, если не подписан Investment Agreement.</td></tr>
+    <tr><td class="term-name">Expenses</td><td>Каждая сторона несёт свои юридические расходы. Для lead investor — компания компенсирует до USD 10 000 юридических расходов при закрытии.</td></tr>
+  </tbody>
+</table>
+
+<!-- ============ §9 LAW ============ -->
+<h2>§09 · Применимое право и юрисдикция</h2>
+
+<table>
+  <tbody>
+    <tr><td class="term-name">Governing law</td><td>В зависимости от юрисдикции SPV: <span class="field-fill">[РФ — Гражданский кодекс / DIFC Common Law / Cayman / Delaware / Astana International Financial Centre Law]</span></td></tr>
+    <tr><td class="term-name">Disputes</td><td>В зависимости от юрисдикции: <span class="field-fill">[МКАС при ТПП РФ / DIFC Courts / AIFC Court / LCIA / SIAC]</span></td></tr>
+    <tr><td class="term-name">Language</td><td>Английский (binding) + русский (informational translation).</td></tr>
+  </tbody>
+</table>
+
+<!-- ============ CAP TABLE ============ -->
+<h2>§10 · Cap Table — до и после раунда</h2>
+
+<h3>До раунда (на момент 2026-05)</h3>
+<table>
+  <thead><tr><th>Holder</th><th>Тип</th><th>Кол-во акций</th><th>%</th><th>Заметки</th></tr></thead>
+  <tbody>
+    <tr class="highlight"><td><strong>Аслан КАА (Founder)</strong></td><td>Common</td><td class="argon">10 000 000</td><td class="argon">100%</td><td>Single founder. Все IP принадлежат founder'у до assignment.</td></tr>
+    <tr class="totals"><td colspan="2"><strong>Total fully diluted</strong></td><td class="argon"><strong>10 000 000</strong></td><td class="argon"><strong>100%</strong></td><td></td></tr>
+  </tbody>
+</table>
+
+<h3>После закрытия раунда $750k @ 8%</h3>
+<table>
+  <thead><tr><th>Holder</th><th>Тип</th><th>Кол-во акций</th><th>%</th><th>Капитал, USD</th></tr></thead>
+  <tbody>
+    <tr class="highlight"><td><strong>Аслан КАА (Founder)</strong></td><td>Common</td><td class="argon">10 000 000</td><td class="argon">82.0%</td><td>—</td></tr>
+    <tr><td>Pre-seed Investor 1</td><td>Series Seed Preferred</td><td class="argon">487 805 (пример)</td><td class="argon">4.0%</td><td>375 000</td></tr>
+    <tr><td>Pre-seed Investor 2</td><td>Series Seed Preferred</td><td class="argon">243 902 (пример)</td><td class="argon">2.0%</td><td>187 500</td></tr>
+    <tr><td>Pre-seed Investor 3</td><td>Series Seed Preferred</td><td class="argon">121 951 (пример)</td><td class="argon">1.0%</td><td>93 750</td></tr>
+    <tr><td>Pre-seed Investor 4</td><td>Series Seed Preferred</td><td class="argon">121 951 (пример)</td><td class="argon">1.0%</td><td>93 750</td></tr>
+    <tr><td>ESOP (option pool unallocated)</td><td>Common (зарезервировано)</td><td class="argon">1 219 512</td><td class="argon">10.0%</td><td>—</td></tr>
+    <tr class="totals"><td colspan="2"><strong>Total fully diluted</strong></td><td class="argon"><strong>12 195 121</strong></td><td class="argon"><strong>100%</strong></td><td class="argon"><strong>750 000</strong></td></tr>
+  </tbody>
+</table>
+
+<p style="font-size: 13px; color: var(--ink-muted); margin-top: 12px;"><em>Распределение между инвесторами зависит от фактического состава раунда. Цена за акцию: USD 9 375 000 / 12 195 121 ≈ USD 0.768.</em></p>
+
+<h3>Сценарий после Series A (через 18 мес)</h3>
+<table>
+  <thead><tr><th>Holder</th><th>%</th><th>Доля капитала, USD при post-money $25M</th></tr></thead>
+  <tbody>
+    <tr><td>Founder (после vesting + dilution)</td><td class="argon">62.0%</td><td class="argon">15 500 000</td></tr>
+    <tr><td>Pre-seed investors (с pro-rata участием)</td><td class="argon">7.5%</td><td class="argon">1 875 000</td></tr>
+    <tr><td>Series A investors</td><td class="argon">15.0%</td><td class="argon">3 750 000</td></tr>
+    <tr><td>ESOP (allocated + unallocated)</td><td class="argon">15.5%</td><td class="argon">3 875 000</td></tr>
+    <tr class="totals"><td><strong>Итого</strong></td><td class="argon"><strong>100%</strong></td><td class="argon"><strong>25 000 000</strong></td></tr>
+  </tbody>
+</table>
+
+<p style="font-size: 13px; color: var(--ink-muted); margin-top: 12px;">
+  <strong>Multiple для pre-seed инвесторов</strong>: ($1 875 000 / $750 000) = <strong>2.5×</strong> uplift на бумаге к Series A через 18 мес. Финальная кратность зависит от exit-сценария: M&amp;A $80–150M даст 8–15× от pre-seed входа.
+</p>
+
+<!-- ============ ESOP PLAN ============ -->
+<h2>§11 · ESOP Plan — план распределения опционов 10%</h2>
+
+<table>
+  <thead><tr><th>Роль</th><th>% от ESOP</th><th>Когда выдаём</th><th>Vesting</th></tr></thead>
+  <tbody>
+    <tr><td><strong>CTO</strong> · Embedded / IoT</td><td class="argon">3.5%</td><td>Q4 2026 (после раунда)</td><td>4 года + 1-yr cliff</td></tr>
+    <tr><td><strong>Head of R&amp;D</strong> · Materials / Packaging</td><td class="argon">2.0%</td><td>Q1 2027</td><td>4 года + 1-yr cliff</td></tr>
+    <tr><td><strong>Head of Sales</strong> · Premium B2C</td><td class="argon">1.5%</td><td>Q2 2027</td><td>4 года + 1-yr cliff</td></tr>
+    <tr><td>Senior engineer 1</td><td class="argon">0.7%</td><td>Q4 2026</td><td>4 года + 1-yr cliff</td></tr>
+    <tr><td>Senior engineer 2</td><td class="argon">0.7%</td><td>Q1 2027</td><td>4 года + 1-yr cliff</td></tr>
+    <tr><td>Senior engineer 3</td><td class="argon">0.7%</td><td>Q2 2027</td><td>4 года + 1-yr cliff</td></tr>
+    <tr><td>Резерв на advisors</td><td class="argon">0.5%</td><td>По мере найма</td><td>2 года + 6 мес cliff</td></tr>
+    <tr><td>Резерв (junior + future hires)</td><td class="argon">0.4%</td><td>2027–2028</td><td>4 года + 1-yr cliff</td></tr>
+    <tr class="totals"><td><strong>Итого ESOP</strong></td><td class="argon"><strong>10.0%</strong></td><td>—</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<!-- ============ §12 SIGNATURES ============ -->
+<h2>§12 · Подписи</h2>
+
+<p style="color: var(--ink-secondary); margin-bottom: 16px;">
+  Настоящий term sheet является <strong>необязывающим</strong> предварительным соглашением о намерениях, за исключением положений §03 (Use of Funds), §08 (Confidentiality, Exclusivity) и §09 (Governing Law, Disputes), которые обязательны до подписания Investment Agreement или истечения exclusivity period.
+</p>
+
+<div class="signatures">
+  <div class="sig-cell">
+    <div class="label">Company / Founder</div>
+    <div class="field"><strong>Аслан КАА</strong> · CEO &amp; Founder</div>
+    <div class="field">Email: idriskaaa@gmail.com</div>
+    <div style="margin: 24px 0 8px;"><strong>Подпись:</strong></div>
+    <div class="field">_________________________________</div>
+    <div class="field">Дата: 2026-__-__</div>
+  </div>
+  <div class="sig-cell">
+    <div class="label">Investor / Lead</div>
+    <div class="field"><strong><span class="field-fill">[Имя]</span></strong> · <span class="field-fill">[Должность]</span></div>
+    <div class="field">Email: <span class="field-fill">[заполнить]</span></div>
+    <div style="margin: 24px 0 8px;"><strong>Подпись:</strong></div>
+    <div class="field">_________________________________</div>
+    <div class="field">Дата: 2026-__-__</div>
+  </div>
+</div>
+
+<!-- ============ NEXT STEPS ============ -->
+<h2>§13 · Дальнейшие шаги после подписания term sheet</h2>
+
+<div class="card">
+  <ul class="bullets">
+    <li><strong>Day 0:</strong> Term sheet подписан обеими сторонами · exclusivity 30 дней начинается</li>
+    <li><strong>Day 1–7:</strong> Compay предоставляет полный DD-пакет (data room): патент v2.1, тех. справка, КД, финмодель, контракты с поставщиками, корпоративные документы</li>
+    <li><strong>Day 7–14:</strong> Investor проводит DD: технический анализ, юридический анализ, финансовый анализ. Может запросить call с экспертами компании.</li>
+    <li><strong>Day 14–21:</strong> Подготовка Investment Agreement и Shareholders' Agreement юристами обеих сторон</li>
+    <li><strong>Day 21–25:</strong> Финальные правки документов, согласование condition precedent</li>
+    <li><strong>Day 25–30:</strong> Подписание финальных документов · перевод средств · выпуск акций · обновление cap table</li>
+    <li><strong>Day 30+:</strong> Закрытие раунда. Объявление сделки (с разрешения сторон). Начало 18-мес runway.</li>
+  </ul>
+</div>
+
+<footer>
+  <span>INERTUM Term Sheet + Cap Table v1.0</span>
+  <span>2026-05-09 · Аслан КАА · idriskaaa@gmail.com · NDA-required</span>
+</footer>
+
+</div>
+</body>
+</html>

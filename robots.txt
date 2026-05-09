@@ -1,0 +1,23 @@
+# INERTUM portal · robots.txt · 2026-05-09
+
+User-agent: *
+Allow: /
+Allow: /en/
+Allow: /hub.html
+Allow: /public/INERTUM-pitch-v2.html
+Allow: /public/INERTUM-FAQ-investors.html
+Allow: /public/INERTUM-financials.html
+Allow: /public/INERTUM-NDA.html
+Allow: /public/INERTUM-onepager.pdf
+Allow: /public/INERTUM-glossary.html
+Allow: /assets/
+
+# Закрытая часть — не индексировать
+Disallow: /private-7f3a9b2c8e/
+Disallow: /admin-3e8a7b1c2d/
+Disallow: /design-mockups/
+
+# Запрещаем индексацию CSV-данных
+Disallow: /public/financials/
+
+Sitemap: https://aslankaa.com/inertum/sitemap.xml

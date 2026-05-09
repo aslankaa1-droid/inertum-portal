@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>INERTUM · КД v2 Premium · Прототипы Мото и Вело</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: A3 landscape; margin: 0; }
+  :root {
+    --bg-base: #0A0B0D; --bg-elev: #13151A; --bg-elev-2: #1C1F26;
+    --ink: #F2F4F7; --ink-muted: #8A93A6; --ink-secondary: #C7CCD6;
+    --argon: #5BC0EB; --argon-bright: #82d3f3;
+    --warn: #E8A33D; --success: #3FB984;
+    --stroke: #2A2F3A;
+    --sans: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg-base); color: var(--ink);
+    font: 15px/1.6 var(--sans); -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(91,192,235,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,192,235,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+  }
+  .page {
+    position: relative; z-index: 1;
+    width: 1190px; min-height: 842px;
+    margin: 16px auto; padding: 60px 80px;
+    background: var(--bg-base);
+    border: 1px solid var(--stroke);
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page.no-pad { padding: 0; }
+  .page.cover {
+    background: linear-gradient(135deg, #0a0b0d 0%, #1a3447 100%);
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .page-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--stroke); padding-bottom: 12px; margin-bottom: 24px;
+  }
+  .eyebrow {
+    font: 500 11px var(--mono); color: var(--argon);
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .page-num {
+    font: 500 11px var(--mono); color: var(--ink-muted); letter-spacing: 2px;
+  }
+  h1 {
+    font: 600 64px/1.05 var(--sans); margin: 0 0 24px;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, #ffffff 0%, #b8c0cc 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  h1.huge { font-size: 88px; }
+  h2 {
+    font: 600 38px/1.2 var(--sans); margin: 0 0 20px;
+    letter-spacing: -0.01em; color: var(--ink);
+  }
+  h3 { font: 600 22px/1.3 var(--sans); margin: 24px 0 12px; color: var(--ink); }
+  h4 { font: 600 16px/1.3 var(--sans); margin: 16px 0 8px; color: var(--ink); }
+  p { margin: 0 0 14px; color: var(--ink-secondary); }
+  .lede {
+    font-size: 19px; color: var(--ink-secondary); max-width: 720px; line-height: 1.5;
+  }
+  .quote {
+    font: italic 500 26px/1.4 var(--sans); color: var(--ink);
+    border-left: 3px solid var(--argon); padding-left: 24px; margin: 32px 0;
+    max-width: 800px;
+  }
+  .num-bold {
+    font: 500 28px/1 var(--mono); color: var(--argon);
+    font-variant-numeric: tabular-nums;
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 100px;
+    font: 500 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--argon); color: var(--argon);
+  }
+  .pill.warn { color: var(--warn); border-color: var(--warn); }
+  .pill.success { color: var(--success); border-color: var(--success); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .card {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: 8px; padding: 24px;
+  }
+  .card-mono {
+    font-family: var(--mono); font-size: 13px; color: var(--ink-muted);
+  }
+  .metric {
+    text-align: left;
+  }
+  .metric .v {
+    font: 500 36px/1 var(--mono); color: var(--argon);
+    font-variant-numeric: tabular-nums; margin-bottom: 6px;
+  }
+  .metric .l {
+    font: 400 11px/1.3 var(--mono); letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-muted);
+  }
+  .stat-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke);
+    padding: 24px 0; margin: 32px 0;
+  }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--bg-elev); border-radius: 8px; overflow: hidden;
+  }
+  table th, table td {
+    padding: 10px 14px; text-align: left;
+    border-bottom: 1px solid var(--stroke); vertical-align: top;
+  }
+  table th {
+    font: 500 10px var(--mono); letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-muted);
+    background: var(--bg-elev-2);
+  }
+  table td { color: var(--ink-secondary); }
+  table td.argon { color: var(--argon); font-family: var(--mono); }
+  ul.bullets {
+    list-style: none; padding: 0;
+  }
+  ul.bullets li {
+    position: relative; padding: 10px 0 10px 32px;
+    border-bottom: 1px solid var(--stroke); font-size: 14px; color: var(--ink-secondary);
+  }
+  ul.bullets li::before {
+    content: ''; position: absolute; left: 0; top: 19px;
+    width: 16px; height: 1px; background: var(--argon);
+  }
+  ul.bullets li strong { color: var(--ink); font-weight: 600; }
+  ol.numbered {
+    list-style: none; padding: 0; counter-reset: ol-counter;
+  }
+  ol.numbered li {
+    counter-increment: ol-counter; position: relative;
+    padding: 12px 0 12px 48px; border-bottom: 1px solid var(--stroke);
+    font-size: 14px; color: var(--ink-secondary);
+  }
+  ol.numbered li::before {
+    content: counter(ol-counter, decimal-leading-zero);
+    position: absolute; left: 0; top: 12px;
+    font: 500 13px var(--mono); color: var(--argon); letter-spacing: 0.06em;
+  }
+  ol.numbered li strong { color: var(--ink); font-weight: 600; }
+
+  .drawing-frame {
+    background: var(--bg-base); margin: 0 -80px;
+  }
+  .drawing-frame img, .drawing-frame object {
+    width: 100%; height: auto; display: block;
+  }
+
+  /* Cover specifics */
+  .cover-content { padding: 80px; }
+  .cover h1 {
+    font-size: 96px;
+    background: linear-gradient(180deg, #ffffff 0%, #5BC0EB 100%);
+    -webkit-background-clip: text; background-clip: text;
+  }
+  .cover-meta {
+    font: 11px/1.8 var(--mono); color: var(--ink-muted);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    border-top: 1px solid var(--stroke); padding-top: 24px; margin-top: auto;
+  }
+  .cover-meta strong { color: var(--ink); }
+  .lblbig {
+    font: 500 14px var(--mono); color: var(--argon);
+    letter-spacing: 4px; text-transform: uppercase; margin-bottom: 32px;
+  }
+
+  /* Storytelling page elements */
+  .big-stat {
+    text-align: center; padding: 64px 0;
+  }
+  .big-stat .v {
+    font: 500 144px/1 var(--mono); color: var(--argon);
+    font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+  }
+  .big-stat .l {
+    font: 500 14px/1.6 var(--mono); color: var(--ink-muted);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-top: 16px;
+  }
+
+  .step-num {
+    display: inline-block; padding: 8px 14px;
+    background: var(--argon); color: var(--bg-base);
+    font: 600 14px var(--mono); letter-spacing: 0.1em;
+    border-radius: 4px; margin-bottom: 12px;
+  }
+
+  .check-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 32px;
+    margin: 16px 0;
+  }
+  .check-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 8px 0; border-bottom: 1px solid var(--stroke); font-size: 13px;
+  }
+  .check-item .box {
+    width: 18px; height: 18px; border: 1.5px solid var(--argon);
+    border-radius: 3px; flex-shrink: 0; margin-top: 2px;
+  }
+  .check-item .text { color: var(--ink-secondary); }
+
+  .footer-mini {
+    display: flex; justify-content: space-between;
+    margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--stroke);
+    font: 10px var(--mono); color: var(--ink-muted); letter-spacing: 0.1em;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ COVER ============================ -->
+<div class="page cover no-pad">
+  <div class="cover-content" style="height: 842px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <div class="lblbig">КД-INERTUM · v2.0 PREMIUM · 2026-05-09</div>
+      <h1>Конструкторская<br>документация</h1>
+      <div class="lede" style="font-size: 24px; color: var(--ink); margin-top: 24px;">
+        Капсулы долговременного хранения<br>
+        в инертной газовой среде<br>
+        <span style="color: var(--argon);">Прототип №1 · мото &nbsp;·&nbsp; Прототип №2 · вело</span>
+      </div>
+    </div>
+
+    <div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 48px;">
+        <div class="metric"><div class="v">50</div><div class="l">лет защиты</div></div>
+        <div class="metric"><div class="v">≤0.5%</div><div class="l">остаточный O₂</div></div>
+        <div class="metric"><div class="v">21/0</div><div class="l">аналог / блокер</div></div>
+        <div class="metric"><div class="v">8 нед</div><div class="l">от RFQ до старта</div></div>
+      </div>
+      <div class="cover-meta">
+        <strong>Заказчик</strong> Аслан КАА · idriskaaa@gmail.com<br>
+        <strong>Версия</strong> v2.0 PREMIUM · 2026-05-09<br>
+        <strong>Состав</strong> 5 листов чертежей + пояснительная записка<br>
+        <strong>Назначение</strong> производственный заказ + рассылка инвесторам<br>
+        <strong>Конфиденциальность</strong> NDA-required · до даты приоритета патента
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ DRAWING 01 ============================ -->
+<div class="page no-pad">
+  <object data="чертежи_v2/01_hero_isometric.svg" type="image/svg+xml" style="width:100%; height:842px;"></object>
+</div>
+
+<!-- ============================ STORY 02 — БОЛЬШАЯ ИДЕЯ ============================ -->
+<div class="page">
+  <div class="page-header">
+    <span class="eyebrow">§01 · BIG IDEA</span>
+    <span class="page-num">003 / 014</span>
+  </div>
+
+  <h2>Что мы строим</h2>
+  <p class="lede">Промышленные капсулы и музейные камеры с инертной газовой средой и пассивным оптическим контролем кислорода. Без батарей, без радиосигнала, без обслуживания. Срок защиты — 50 лет.</p>
+
+  <div class="big-stat">
+    <div class="v">50</div>
+    <div class="l">ЛЕТ ЗАЩИТЫ ОТ ОКИСЛЕНИЯ И КОРРОЗИИ</div>
+  </div>
+
+  <div class="quote">«Гибридная архитектура из пяти независимых слоёв защиты, где отказ любого одного слоя не приводит к деградации содержимого в течение 50 лет.»</div>
+
+  <div class="grid-3">
+    <div class="card">
+      <span class="pill">PRIMARY</span>
+      <h4 style="margin-top: 12px;">Барьерный ламинат</h4>
+      <p class="card-mono">PET 12 / Al-foil 9 / LLDPE 70 мкм. OTR ≤ 0.05 cm³/m²·day. MIL-PRF-131K, ГОСТ 9.014.</p>
+    </div>
+    <div class="card">
+      <span class="pill">PRIMARY</span>
+      <h4 style="margin-top: 12px;">Инертная среда</h4>
+      <p class="card-mono">N₂ или Ar чистоты 99.99%. O₂ ≤ 0.5%. Точка росы ≤ −45 °C. ГОСТ 9293-74.</p>
+    </div>
+    <div class="card">
+      <span class="pill warn">REDUNDANT</span>
+      <h4 style="margin-top: 12px;">Кислород-абсорбер</h4>
+      <p class="card-mono">Mitsubishi Ageless Z-2000. 6 саше для мото, 2 для вело. Дублирует газовый продув химически.</p>
+    </div>
+    <div class="card">
+      <span class="pill">SENSING</span>
+      <h4 style="margin-top: 12px;">Пассивные оптические патчи</h4>
+      <p class="card-mono">PreSens SP-PSt6-NAU. ⌀5 мм, 5–7 лет автономно. Ноль батарей, ноль радио.</p>
+    </div>
+    <div class="card">
+      <span class="pill success">DIAGNOSTIC</span>
+      <h4 style="margin-top: 12px;">Самодиагностика</h4>
+      <p class="card-mono">Корреляция ΔP ↔ Δ[O₂] ↔ ΔT. Auto-alert до видимой деградации содержимого.</p>
+    </div>
+    <div class="card">
+      <span class="pill warn">SCALABLE</span>
+      <h4 style="margin-top: 12px;">5 продуктовых ниш</h4>
+      <p class="card-mono">Auto · Moto · Vault · Archive · Strategic. Плюс Bespoke под уникальные ТЗ.</p>
+    </div>
+  </div>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v2 PREMIUM</span>
+    <span>BIG IDEA</span>
+    <span>2026-05-09</span>
+  </div>
+</div>
+
+<!-- ============================ DRAWING 02 — EXPLODED ============================ -->
+<div class="page no-pad">
+  <object data="чертежи_v2/02_exploded_view.svg" type="image/svg+xml" style="width:100%; height:842px;"></object>
+</div>
+
+<!-- ============================ DRAWING 03 — LAYERS ============================ -->
+<div class="page no-pad">
+  <object data="чертежи_v2/03_layers_5.svg" type="image/svg+xml" style="width:100%; height:842px;"></object>
+</div>
+
+<!-- ============================ TWO PROTOTYPES SUMMARY ============================ -->
+<div class="page">
+  <div class="page-header">
+    <span class="eyebrow">§02 · DUAL PILOT</span>
+    <span class="page-num">006 / 014</span>
+  </div>
+
+  <h2>Два прототипа · одна архитектура</h2>
+  <p class="lede">Запуск с двух пилотов: вело-капсула первой (быстрее, дешевле, валидация лекал), мото-капсула параллельно. Архитектура одинаковая, различаются только габариты и спецификация компонентов.</p>
+
+  <table style="margin-top: 32px;">
+    <thead>
+      <tr><th style="width:30%">Параметр</th><th style="width:35%">INERTUM-MOTO-01</th><th style="width:35%">INERTUM-VELO-04</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Внутренние габариты</td><td class="argon">2500 × 1000 × 1500 мм</td><td class="argon">1800 × 600 × 1100 мм</td></tr>
+      <tr><td>Внутренний объём</td><td class="argon">3.75 м³</td><td class="argon">1.19 м³</td></tr>
+      <tr><td>Площадь оболочки чист.</td><td class="argon">14.0 м²</td><td class="argon">7.44 м²</td></tr>
+      <tr><td>Расход ламината с отходами</td><td class="argon">19.2 м²</td><td class="argon">9.5 м²</td></tr>
+      <tr><td>Молния YKK Aquaseal</td><td class="argon">№ 8 · L = 3000 мм</td><td class="argon">№ 5 · L = 2300 мм</td></tr>
+      <tr><td>Газ N₂ (3V продув)</td><td class="argon">11.3 м³ → 2 баллона</td><td class="argon">3.6 м³ → 1 баллон</td></tr>
+      <tr><td>Mitsubishi Ageless Z-2000</td><td class="argon">6 саше</td><td class="argon">2 саше</td></tr>
+      <tr><td>Оптические патчи PreSens</td><td class="argon">3 шт</td><td class="argon">2 шт</td></tr>
+      <tr><td><strong>Бюджет прототипа</strong></td><td class="argon"><strong>₽ 122 000 — 252 000</strong></td><td class="argon"><strong>₽ 60 000 — 120 000</strong></td></tr>
+      <tr><td><strong>Срок изготовления</strong></td><td class="argon"><strong>8–10 нед</strong></td><td class="argon"><strong>6–8 нед</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 40px;">Стратегия запуска</h3>
+  <ol class="numbered">
+    <li><strong>Вело-капсула первой.</strong> Меньше площадь и компоненты — отрабатываем технологию сварки и опрессовки на дешёвом образце.</li>
+    <li><strong>Мото-капсула параллельно.</strong> Заказ ламината и компонентов в общей партии — экономия 15–20% на logistics.</li>
+    <li><strong>Общий внешний ридер.</strong> PreSens OXY-1 ST mini — ₽280 000 разово на оба прототипа и ещё на 100 будущих капсул.</li>
+    <li><strong>6-месячный тест параллельно.</strong> Контрольные точки: 0 ч / 24 ч / 7 / 30 / 90 / 180 сут. Критерий приёмки одинаков.</li>
+  </ol>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v2 PREMIUM</span>
+    <span>DUAL PILOT</span>
+    <span>2026-05-09</span>
+  </div>
+</div>
+
+<!-- ============================ DRAWING 04 — MOTO ============================ -->
+<div class="page no-pad">
+  <object data="чертежи_v2/04_moto_blueprint.svg" type="image/svg+xml" style="width:100%; height:842px;"></object>
+</div>
+
+<!-- ============================ DRAWING 05 — VELO ============================ -->
+<div class="page no-pad">
+  <object data="чертежи_v2/05_velo_blueprint.svg" type="image/svg+xml" style="width:100%; height:842px;"></object>
+</div>
+
+<!-- ============================ ASSEMBLY JOURNEY ============================ -->
+<div class="page">
+  <div class="page-header">
+    <span class="eyebrow">§03 · ASSEMBLY JOURNEY</span>
+    <span class="page-num">009 / 014</span>
+  </div>
+
+  <h2>Путь капсулы · 9 шагов</h2>
+  <p class="lede">От рулона ламината до старта 6-месячных испытаний. Каждый шаг — отдельная технологическая операция с допусками и контролем качества.</p>
+
+  <div class="grid-3" style="margin-top: 32px;">
+    <div class="card">
+      <span class="step-num">STEP 01</span>
+      <h4>Раскрой ламината</h4>
+      <p>6 панелей по шаблонам с припуском 30 мм. Маркировка артикулов. Допуск ± 5 мм. Ножницы (не нож!) — Al-foil рвётся.</p>
+    </div>
+    <div class="card">
+      <span class="step-num">STEP 02</span>
+      <h4>Подготовка проёмов</h4>
+      <p>Отверстия под молнию, порт, окно, гермоввод. Удаление Al-foil из зоны окна 100×80 мм (фабрично, термопрессом).</p>
+    </div>
+    <div class="card">
+      <span class="step-num">STEP 03</span>
+      <h4>Термосварка</h4>
+      <p>T = 140 ± 5 °C, t = 3 ± 0.3 с, давление 2 кгс/см². Ширина шва 10 ± 1 мм, перекрытие 300 мм. Тест 3M tape на образце.</p>
+    </div>
+    <div class="card">
+      <span class="step-num">STEP 04</span>
+      <h4>Установка молнии</h4>
+      <p>YKK Aquaseal через LLDPE-tape подложку. 5 циклов открыть-закрыть. После опрессовки — дублировать VHB-лентой.</p>
+    </div>
+    <div class="card">
+      <span class="step-num">STEP 05</span>
+      <h4>Порт + гермоввод</h4>
+      <p>Schrader-клапан затяжка 3 Н·м. Cable gland M6 — 1.2 Н·м. Контроль герметичности — мыло при +5 кПа.</p>
+    </div>
+    <div class="card">
+      <span class="step-num">STEP 06</span>
+      <h4>Опрессовка пустой</h4>
+      <p>Надувной макет внутрь. Воздух +5 кПа на 30 мин. Утечка ≤ 0.3 кПа. Все швы под мылом — без пузырей.</p>
+    </div>
+    <div class="card">
+      <span class="step-num">STEP 07</span>
+      <h4>Закладка изделия</h4>
+      <p>Мото/вело на штатной стойке (не касается стенок!). Ageless ×6 / ×2 в перфокоробке. Силикагель 200/100 г. Патчи на окнах.</p>
+    </div>
+    <div class="card">
+      <span class="step-num">STEP 08</span>
+      <h4>Продув N₂</h4>
+      <p>3V газа через порт (12 м³ мото / 3.6 м³ вело). Редуктор на 0.5 атм. Контроль через ридер — O₂ ≤ 0.3%.</p>
+    </div>
+    <div class="card" style="border-color: var(--success);">
+      <span class="step-num" style="background: var(--success);">STEP 09</span>
+      <h4>Активация и старт</h4>
+      <p>T₀ зафиксирован. Журнал: O₂, T, RH, P-наружное. Запуск 6-месячной программы с контрольными точками.</p>
+    </div>
+  </div>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v2 PREMIUM</span>
+    <span>ASSEMBLY JOURNEY · 9 STEPS</span>
+    <span>2026-05-09</span>
+  </div>
+</div>
+
+<!-- ============================ QC CHECKLIST ============================ -->
+<div class="page">
+  <div class="page-header">
+    <span class="eyebrow">§04 · QUALITY CONTROL</span>
+    <span class="page-num">010 / 014</span>
+  </div>
+
+  <h2>24 точки контроля качества</h2>
+  <p class="lede">Чек-лист CQC-INERTUM-001. Капсула принимается к испытаниям при выполнении всех 24 пунктов. Один невыполненный пункт — стоп-флаг до устранения.</p>
+
+  <div class="check-grid" style="margin-top: 32px;">
+    <div class="check-item"><div class="box"></div><div class="text"><strong>01</strong> Толщина ламината 91 ± 5 мкм · микрометр</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>02</strong> OTR-сертификат ≤ 0.05 · документ</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>03</strong> Кромка рулона цела · осмотр</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>04</strong> Размер каждой панели ± 5 мм · рулетка ×2</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>05</strong> Маркировка артикулов · сверка по списку</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>06</strong> Положение проёма под молнию ± 10 мм</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>07</strong> ⌀ окна 30 ± 1 мм · штангенциркуль</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>08</strong> Зона без Al-foil 100×80 мм · просвет</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>09</strong> T кромки сварки 140 ± 5 °C · термопара</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>10</strong> Время выдержки 3 ± 0.3 с · таймер</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>11</strong> Ширина шва 10 ± 1 мм</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>12</strong> Тест отрыва скотчем 3M · без расслоения</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>13</strong> Молния — 5 циклов без заеданий</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>14</strong> Сшивка молнии без зазоров</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>15</strong> Порт — затяжка 3 Н·м · моментный ключ</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>16</strong> Порт — герметичность при +5 кПа · мыло</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>17</strong> Гермоввод — 1.2 Н·м (если есть)</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>18</strong> Опрессовка: падение ≤ 0.3 кПа за 30 мин</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>19</strong> Все швы под мылом · без пузырей</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>20</strong> Целость пакетов абсорбера</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>21</strong> Все патчи на оптических окнах</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>22</strong> Объём продува N₂ ≥ 3 V · расходомер</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>23</strong> O₂ внутри ≤ 0.3% · оптический ридер</div></div>
+    <div class="check-item"><div class="box"></div><div class="text"><strong>24</strong> T₀ задокументировано · журнал</div></div>
+  </div>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v2 PREMIUM</span>
+    <span>QC · 24 POINTS</span>
+    <span>2026-05-09</span>
+  </div>
+</div>
+
+<!-- ============================ TEST PROGRAM ============================ -->
+<div class="page">
+  <div class="page-header">
+    <span class="eyebrow">§05 · TEST PROGRAM</span>
+    <span class="page-num">011 / 014</span>
+  </div>
+
+  <h2>Программа испытаний · 180 суток</h2>
+  <p class="lede">6 контрольных точек + 3 дополнительных теста. Критерии приёмки — детерминистические, привязаны к формуле патента v2.1.</p>
+
+  <table style="margin-top: 32px;">
+    <thead>
+      <tr><th>Точка</th><th>Что замеряем</th><th>Критерий успеха</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="argon">0 ч</td><td>O₂, RH, P, T внутри (после продува)</td><td>O₂ ≤ 0.3 %</td></tr>
+      <tr><td class="argon">24 ч</td><td>+ контрольный газоанализатор через септу</td><td>расхождение датчика ≤ 0.2 %</td></tr>
+      <tr><td class="argon">7 сут</td><td>повтор измерений</td><td>O₂ ≤ 0.5 %</td></tr>
+      <tr><td class="argon">30 сут</td><td>+ визуальный осмотр швов</td><td>O₂ ≤ 0.5 %; швы целы</td></tr>
+      <tr><td class="argon">90 сут</td><td>+ контрольный газоанализатор</td><td>расхождение ≤ 0.3 %; O₂ ≤ 0.7 %</td></tr>
+      <tr><td class="argon">180 сут</td><td>+ вскрытие, осмотр изделия</td><td>O₂ ≤ 1.0 %; без следов окисления</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 40px;">Дополнительные тесты</h3>
+  <ul class="bullets">
+    <li><strong>Утечка через прокол 0.1 мм.</strong> Намеренный микропрокол → проверка алгоритма самодиагностики. Целевой алерт за ≤ 7 суток.</li>
+    <li><strong>Дозаправка через порт.</strong> После прокола восстановить O₂ ≤ 0.5 % без вскрытия капсулы.</li>
+    <li><strong>Климатические циклы.</strong> Помещение −10 °C и +30 °C. Проверка устойчивости датчика и швов.</li>
+  </ul>
+
+  <h3 style="margin-top: 32px;">Критерии приёмки прототипа</h3>
+  <ol class="numbered">
+    <li><strong>O₂ ≤ 1.0 %</strong> после 180 суток непрерывной выдержки.</li>
+    <li><strong>Алгоритм самодиагностики</strong> обнаружил утечку 0.1 мм за ≤ 7 суток.</li>
+    <li><strong>Передача данных</strong> без пропусков &gt; 5 % за 6 месяцев.</li>
+    <li><strong>Швы и молния герметичны</strong> при +5 кПа после 6 месяцев.</li>
+    <li><strong>Дозаправка через порт</strong> восстановила O₂ ≤ 0.5 %.</li>
+  </ol>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v2 PREMIUM</span>
+    <span>TEST PROGRAM</span>
+    <span>2026-05-09</span>
+  </div>
+</div>
+
+<!-- ============================ SUPPLY CHAIN ============================ -->
+<div class="page">
+  <div class="page-header">
+    <span class="eyebrow">§06 · SUPPLY CHAIN</span>
+    <span class="page-num">012 / 014</span>
+  </div>
+
+  <h2>Цепочка поставок</h2>
+  <p class="lede">Все компоненты — от подтверждённых поставщиков с готовыми RFQ-шаблонами. Топ-3 кандидата по каждой позиции, ценовой контроль через азиатскую альтернативу.</p>
+
+  <div class="grid-2" style="margin-top: 32px;">
+    <div class="card">
+      <span class="pill">PRIMARY</span>
+      <h3 style="margin-top: 12px;">Барьерный ламинат</h3>
+      <ul class="bullets">
+        <li><strong>NomexRus (СПб)</strong> · info@nomexrus.com · сервис ГОСТ 9.014, lead 5–6 нед</li>
+        <li><strong>Pack-Systems (РФ)</strong> · резервный кандидат</li>
+        <li><strong>Hangzhou Keneng (CN)</strong> · ценовой контроль</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="pill">SENSORS</span>
+      <h3 style="margin-top: 12px;">Оптические сенсоры</h3>
+      <ul class="bullets">
+        <li><strong>PreSens GmbH (DE)</strong> · info@presens.de · SP-PSt6-NAU + OXY-1 ST mini</li>
+        <li><strong>PyroScience (DE)</strong> · OXSP5 + FireSting-GO2 — альтернатива</li>
+        <li><strong>SST Sensing (UK)</strong> · LuminOx LOX-02-S — для уровня 3 (автономный)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="pill warn">CHEMICAL</span>
+      <h3 style="margin-top: 12px;">Кислород-абсорбер</h3>
+      <ul class="bullets">
+        <li><strong>Mitsubishi Gas Chemical (JP)</strong> · Ageless Z-2000 через дистрибьютора</li>
+        <li><strong>Multisorb StabilOx (US)</strong> · альтернатива</li>
+        <li><strong>«Биотестлаб» (РФ)</strong> · локальный аналог</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="pill">GAS</span>
+      <h3 style="margin-top: 12px;">Инертный газ N₂</h3>
+      <ul class="bullets">
+        <li><strong>Linde Gas Rus</strong> · стандартный поставщик, сертификат ГОСТ 9293-74</li>
+        <li><strong>НИИ «Криогенмаш»</strong> · резерв</li>
+        <li><strong>Региональные газовые заводы</strong> · по локации испытаний</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="pill">HARDWARE</span>
+      <h3 style="margin-top: 12px;">Молнии и фурнитура</h3>
+      <ul class="bullets">
+        <li><strong>YKK Aquaseal № 8 (мото) и № 5 (вело)</strong> · через дистрибьютора Yamato</li>
+        <li><strong>«Оракс» (РФ)</strong> · локальный аналог</li>
+        <li><strong>Schrader Pneumatic.ru</strong> · клапаны дозаправки</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="pill">PARTNERS</span>
+      <h3 style="margin-top: 12px;">Сборка прототипа</h3>
+      <ul class="bullets">
+        <li><strong>Ин-хаус</strong> · с термопрессом — наиболее быстро и контролируемо</li>
+        <li><strong>NDA Group / Promwad</strong> · опционально — на готовом производстве упаковки</li>
+        <li><strong>«Криогенмаш» лаб.</strong> · контрольные тесты герметичности</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v2 PREMIUM</span>
+    <span>SUPPLY CHAIN</span>
+    <span>2026-05-09</span>
+  </div>
+</div>
+
+<!-- ============================ FINAL · NEXT STEPS ============================ -->
+<div class="page">
+  <div class="page-header">
+    <span class="eyebrow">§07 · NEXT STEPS</span>
+    <span class="page-num">013 / 014</span>
+  </div>
+
+  <h2>Что делать дальше</h2>
+  <p class="lede">КД готова к передаче в производство. На стороне Аслана — 4 параллельных трека, которые можно запускать одновременно.</p>
+
+  <div class="grid-2" style="margin-top: 32px;">
+    <div class="card" style="border-color: var(--argon);">
+      <span class="pill">TRACK 01 · PRODUCTION</span>
+      <h3 style="margin-top: 12px;">RFQ → договор → производство</h3>
+      <ol class="numbered">
+        <li><strong>Передать этот альбом + 5 SVG</strong> NomexRus и Pack-Systems</li>
+        <li><strong>Получить 2-3 КП</strong> с ценой и сроком</li>
+        <li><strong>Подписать договор</strong> с одним поставщиком</li>
+        <li><strong>30% предоплата</strong>, lead 5–6 нед</li>
+      </ol>
+    </div>
+
+    <div class="card" style="border-color: var(--warn);">
+      <span class="pill warn">TRACK 02 · PATENT</span>
+      <h3 style="margin-top: 12px;">Заявка → Роспатент → ЕАПО</h3>
+      <ol class="numbered">
+        <li><strong>Найти патентного поверенного</strong> в РФ</li>
+        <li><strong>Передать драфт v2.1</strong> + результаты прототипа</li>
+        <li><strong>Подача в Роспатент</strong> — фиксация даты приоритета</li>
+        <li><strong>PCT-конвертация</strong> через 12 мес</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <span class="pill">TRACK 03 · COMPONENTS</span>
+      <h3 style="margin-top: 12px;">Закупка датчиков и абсорбера</h3>
+      <ol class="numbered">
+        <li><strong>RFQ PreSens / PyroScience</strong> — патчи + ридер</li>
+        <li><strong>RFQ Mitsubishi</strong> через дистрибьютора — Ageless Z</li>
+        <li><strong>Заказ молний YKK</strong> — № 8 + № 5</li>
+        <li><strong>Аренда 2 баллонов N₂</strong> в день старта продува</li>
+      </ol>
+    </div>
+
+    <div class="card" style="border-color: var(--success);">
+      <span class="pill success">TRACK 04 · INVESTMENT</span>
+      <h3 style="margin-top: 12px;">Pre-seed раунд $750k</h3>
+      <ol class="numbered">
+        <li><strong>Этот альбом</strong> прикрепить к рассылке инвесторам</li>
+        <li><strong>Шаблоны A/B/C/D</strong> — 30+ инвесторов</li>
+        <li><strong>NDA + data room</strong> — для подтверждённых интересантов</li>
+        <li><strong>Первые звонки</strong> — на этой и следующей неделе</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 40px;">Контакты</h3>
+  <div class="card-mono" style="font-size: 14px; color: var(--ink-secondary);">
+    <strong style="color: var(--ink);">Аслан КАА · Founder · INERTUM</strong><br>
+    Email · idriskaaa@gmail.com<br>
+    Сайт · aslankaa.com<br>
+    Портал · aslankaa.com/inertum (после деплоя)<br>
+    Data room · по одноразовому ключу под NDA
+  </div>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v2 PREMIUM</span>
+    <span>NEXT STEPS</span>
+    <span>2026-05-09</span>
+  </div>
+</div>
+
+<!-- ============================ BACK COVER ============================ -->
+<div class="page cover no-pad">
+  <div class="cover-content" style="height: 842px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+    <div class="lblbig">END OF DOCUMENT</div>
+    <h1 class="huge" style="font-size: 96px;">INERTUM</h1>
+    <p class="lede" style="text-align: center; max-width: 600px; font-size: 22px; margin-top: 32px;">
+      Long-term preservation systems<br>
+      in inert gas atmosphere<br>
+      <span style="color: var(--argon); font-family: var(--mono); font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-top: 24px;">PRE-SEED · PATENT PENDING · 2026</span>
+    </p>
+    <div class="cover-meta" style="margin-top: 80px; text-align: center; max-width: 540px;">
+      Документ передаётся под NDA · до даты приоритета патента не публиковать в открытых источниках · нарушение режима конфиденциальности уничтожает новизну заявки v2.1
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

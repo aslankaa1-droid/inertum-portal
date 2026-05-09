@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1190 842" font-family="Inter, Arial, sans-serif">
+  <!-- VELO blueprint render -->
+  <defs>
+    <pattern id="bp5" patternUnits="userSpaceOnUse" width="20" height="20">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#5BC0EB" stroke-width="0.3" opacity="0.15"/>
+    </pattern>
+    <pattern id="bpMajor5" patternUnits="userSpaceOnUse" width="100" height="100">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#5BC0EB" stroke-width="0.6" opacity="0.25"/>
+    </pattern>
+  </defs>
+
+  <rect width="1190" height="842" fill="#0a0b0d"/>
+  <rect width="1190" height="842" fill="url(#bp5)"/>
+  <rect width="1190" height="842" fill="url(#bpMajor5)"/>
+
+  <!-- Header -->
+  <text x="80" y="60" font-size="11" fill="#5BC0EB" letter-spacing="3" font-weight="500">§05 · VELO PROTOTYPE</text>
+  <text x="80" y="100" font-size="42" fill="#F2F4F7" font-weight="600" letter-spacing="-0.5">INERTUM-VELO-04</text>
+  <text x="80" y="130" font-size="14" fill="#8a93a6">Прототип №2 · 1800 × 600 × 1100 мм · 1.19 м³ · ₽60–120 тыс · 6–8 недель · делается ПЕРВЫМ</text>
+  <line x1="80" y1="155" x2="1110" y2="155" stroke="#2A2F3A" stroke-width="1"/>
+
+  <g transform="translate(220, 220)">
+    <rect width="700" height="500" fill="none" stroke="#5BC0EB" stroke-width="0.6" stroke-opacity="0.3"/>
+
+    <!-- Размерные обозначения по периметру (top) -->
+    <g font-family="JetBrains Mono" font-size="10" fill="#5BC0EB">
+      <text x="60" y="-15" text-anchor="middle">0</text>
+      <text x="220" y="-15" text-anchor="middle">450</text>
+      <text x="380" y="-15" text-anchor="middle">900</text>
+      <text x="540" y="-15" text-anchor="middle">1350</text>
+      <text x="640" y="-15" text-anchor="middle">1800 мм</text>
+    </g>
+
+    <!-- Капсула -->
+    <rect x="40" y="80" width="620" height="400" fill="rgba(91,192,235,0.05)" stroke="#5BC0EB" stroke-width="2"/>
+
+    <!-- Молния по верху -->
+    <line x1="60" y1="80" x2="640" y2="80" stroke="#E8A33D" stroke-width="2.5" stroke-dasharray="4,2"/>
+
+    <!-- Велосипед (BLUEPRINT) -->
+    <g transform="translate(110, 200)" stroke="#82d3f3" stroke-width="1.5" fill="none">
+      <!-- Заднее колесо -->
+      <circle cx="80" cy="220" r="75"/>
+      <circle cx="80" cy="220" r="18"/>
+      <!-- Спицы -->
+      <line x1="80" y1="145" x2="80" y2="295"/>
+      <line x1="5" y1="220" x2="155" y2="220"/>
+      <line x1="27" y1="167" x2="133" y2="273"/>
+      <line x1="133" y1="167" x2="27" y2="273"/>
+      <!-- Переднее колесо -->
+      <circle cx="430" cy="220" r="75"/>
+      <circle cx="430" cy="220" r="18"/>
+      <line x1="430" y1="145" x2="430" y2="295"/>
+      <line x1="355" y1="220" x2="505" y2="220"/>
+      <line x1="377" y1="167" x2="483" y2="273"/>
+      <line x1="483" y1="167" x2="377" y2="273"/>
+      <!-- Рама diamond -->
+      <line x1="80" y1="220" x2="220" y2="80"/>
+      <line x1="220" y1="80" x2="280" y2="220"/>
+      <line x1="80" y1="220" x2="280" y2="220"/>
+      <line x1="220" y1="80" x2="430" y2="220"/>
+      <line x1="280" y1="220" x2="430" y2="220"/>
+      <line x1="220" y1="80" x2="220" y2="40"/>
+      <line x1="200" y1="40" x2="240" y2="40"/>
+      <!-- Каретка/педаль -->
+      <circle cx="280" cy="220" r="10"/>
+      <line x1="280" y1="220" x2="245" y2="245"/>
+      <!-- Сиденье -->
+      <line x1="220" y1="80" x2="220" y2="55"/>
+      <ellipse cx="220" cy="50" rx="22" ry="6" fill="rgba(130,211,243,0.2)"/>
+      <!-- Руль -->
+      <line x1="430" y1="220" x2="430" y2="120"/>
+      <line x1="395" y1="120" x2="465" y2="120"/>
+    </g>
+
+    <!-- Узлы -->
+    <g transform="translate(640, 70)">
+      <line x1="0" y1="0" x2="30" y2="-30" stroke="#E8A33D" stroke-width="0.8"/>
+      <text x="34" y="-30" font-family="JetBrains Mono" font-size="10" fill="#E8A33D">YKK Aquaseal №5 · 2300 мм</text>
+    </g>
+
+    <!-- Порт -->
+    <circle cx="80" cy="450" r="6" fill="#E8A33D" stroke="#fff" stroke-width="1.5"/>
+    <line x1="80" y1="450" x2="50" y2="485" stroke="#E8A33D" stroke-width="0.6"/>
+    <text x="45" y="495" font-family="JetBrains Mono" font-size="10" fill="#E8A33D" text-anchor="end">SCHRADER · ⌀35</text>
+
+    <!-- Окно -->
+    <rect x="540" y="240" width="18" height="18" fill="rgba(178,235,242,0.5)" stroke="#82d3f3" stroke-width="1.5"/>
+    <line x1="558" y1="248" x2="615" y2="218" stroke="#82d3f3" stroke-width="0.6"/>
+    <text x="620" y="218" font-family="JetBrains Mono" font-size="10" fill="#82d3f3">OPTICAL WINDOW · ⌀30</text>
+
+    <!-- Размеры внизу -->
+    <line x1="40" y1="510" x2="660" y2="510" stroke="#5BC0EB" stroke-width="0.6"/>
+    <line x1="40" y1="500" x2="40" y2="520" stroke="#5BC0EB" stroke-width="0.6"/>
+    <line x1="660" y1="500" x2="660" y2="520" stroke="#5BC0EB" stroke-width="0.6"/>
+    <text x="350" y="500" font-family="JetBrains Mono" font-size="11" fill="#5BC0EB" text-anchor="middle">1800 мм</text>
+
+    <!-- Размеры по высоте -->
+    <line x1="-20" y1="80" x2="-20" y2="480" stroke="#5BC0EB" stroke-width="0.6"/>
+    <line x1="-30" y1="80" x2="-10" y2="80" stroke="#5BC0EB" stroke-width="0.6"/>
+    <line x1="-30" y1="480" x2="-10" y2="480" stroke="#5BC0EB" stroke-width="0.6"/>
+    <text x="-30" y="280" font-family="JetBrains Mono" font-size="11" fill="#5BC0EB" text-anchor="end">1100</text>
+  </g>
+
+  <!-- Метрики -->
+  <g transform="translate(0, 750)" font-family="JetBrains Mono">
+    <line x1="80" y1="0" x2="1110" y2="0" stroke="#2A2F3A" stroke-width="1"/>
+
+    <text x="160" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="middle">9.5 м²</text>
+    <text x="160" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="middle">РАСХОД ЛАМИНАТА</text>
+
+    <text x="395" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="middle">3.6 м³</text>
+    <text x="395" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="middle">ОБЪЁМ ПРОДУВА N₂</text>
+
+    <text x="630" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="middle">2 саше</text>
+    <text x="630" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="middle">AGELESS Z-2000</text>
+
+    <text x="865" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="middle">2 / 1</text>
+    <text x="865" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="middle">ПАТЧИ / РИДЕР</text>
+
+    <text x="1080" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="end">6 нед</text>
+    <text x="1080" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="end">LEAD-TIME</text>
+  </g>
+
+  <text x="80" y="820" font-family="JetBrains Mono" font-size="9" fill="#8a93a6">КД-INERTUM v2-PREMIUM · ЛИСТ 05 · VELO BLUEPRINT</text>
+  <text x="1110" y="820" font-family="JetBrains Mono" font-size="9" fill="#8a93a6" text-anchor="end">2026-05-09</text>
+</svg>

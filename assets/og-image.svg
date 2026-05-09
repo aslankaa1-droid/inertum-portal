@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="Inter, Arial, sans-serif">
+  <defs>
+    <radialGradient id="ogBg" cx="60%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#1a3447" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#0a0b0d"/>
+      <stop offset="100%" stop-color="#0a0b0d"/>
+    </radialGradient>
+    <linearGradient id="ogTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(91,192,235,0.55)"/>
+      <stop offset="100%" stop-color="rgba(91,192,235,0.20)"/>
+    </linearGradient>
+    <linearGradient id="ogFront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(91,192,235,0.35)"/>
+      <stop offset="100%" stop-color="rgba(91,192,235,0.05)"/>
+    </linearGradient>
+    <linearGradient id="ogSide" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(91,192,235,0.4)"/>
+      <stop offset="100%" stop-color="rgba(91,192,235,0.10)"/>
+    </linearGradient>
+    <radialGradient id="ogOrb" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#82d3f3"/>
+      <stop offset="40%" stop-color="#5BC0EB"/>
+      <stop offset="100%" stop-color="#1e4a64" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="ogGrid" patternUnits="userSpaceOnUse" width="40" height="40">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#5BC0EB" stroke-width="0.4" opacity="0.06"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0a0b0d"/>
+  <rect width="1200" height="630" fill="url(#ogGrid)"/>
+  <rect width="1200" height="630" fill="url(#ogBg)"/>
+
+  <!-- Top eyebrow -->
+  <text x="80" y="80" font-size="14" fill="#5BC0EB" letter-spacing="4" font-weight="500">PRE-SEED · PATENT PENDING · 2026</text>
+
+  <!-- Brand name -->
+  <text x="80" y="180" font-size="120" fill="#F2F4F7" font-weight="700" letter-spacing="-0.04em">
+    INERTUM
+  </text>
+
+  <!-- Tagline -->
+  <text x="80" y="240" font-size="34" fill="#C7CCD6" font-weight="500" letter-spacing="-0.01em">
+    50 лет защиты в инертной среде
+  </text>
+  <text x="80" y="280" font-size="22" fill="#8a93a6" letter-spacing="-0.005em">
+    Long-term inert-atmosphere preservation systems
+  </text>
+
+  <!-- Bottom metrics -->
+  <line x1="80" y1="500" x2="1120" y2="500" stroke="#2A2F3A" stroke-width="1"/>
+
+  <g font-family="JetBrains Mono, Consolas, monospace">
+    <text x="80" y="555" font-size="48" fill="#5BC0EB" font-weight="500">99.9999%</text>
+    <text x="80" y="585" font-size="13" fill="#8a93a6" letter-spacing="2">Ar PURITY</text>
+
+    <text x="320" y="555" font-size="48" fill="#5BC0EB" font-weight="500">≤0.5%</text>
+    <text x="320" y="585" font-size="13" fill="#8a93a6" letter-spacing="2">RESIDUAL O₂</text>
+
+    <text x="540" y="555" font-size="48" fill="#5BC0EB" font-weight="500">50 лет</text>
+    <text x="540" y="585" font-size="13" fill="#8a93a6" letter-spacing="2">PROTECTION</text>
+
+    <text x="800" y="555" font-size="48" fill="#5BC0EB" font-weight="500">21/0</text>
+    <text x="800" y="585" font-size="13" fill="#8a93a6" letter-spacing="2">ANALOG / BLOCKER</text>
+  </g>
+
+  <!-- Capsule isometry on the right -->
+  <g transform="translate(950, 280)">
+    <!-- Glow circle -->
+    <circle cx="0" cy="0" r="170" fill="#5BC0EB" opacity="0.04"/>
+    <circle cx="0" cy="0" r="120" fill="#5BC0EB" opacity="0.06"/>
+
+    <!-- Capsule isometric -->
+    <!-- Передняя грань -->
+    <polygon
+      points="-130,80 130,80 130,-80 -130,-80"
+      fill="url(#ogFront)" stroke="#5BC0EB" stroke-width="1.2" stroke-opacity="0.7"/>
+    <!-- Верхняя грань -->
+    <polygon
+      points="-130,-80 130,-80 175,-115 -85,-115"
+      fill="url(#ogTop)" stroke="#5BC0EB" stroke-width="1.2" stroke-opacity="0.6"/>
+    <!-- Боковая грань -->
+    <polygon
+      points="130,-80 175,-115 175,45 130,80"
+      fill="url(#ogSide)" stroke="#5BC0EB" stroke-width="1.2" stroke-opacity="0.6"/>
+
+    <!-- Молния -->
+    <line x1="-85" y1="-115" x2="175" y2="-115" stroke="#E8A33D" stroke-width="2" stroke-dasharray="3,2"/>
+
+    <!-- Световая сфера -->
+    <circle cx="0" cy="0" r="40" fill="url(#ogOrb)" opacity="0.7"/>
+
+    <!-- Частицы -->
+    <circle cx="-60" cy="-30" r="2" fill="#82d3f3"/>
+    <circle cx="50" cy="-20" r="2.5" fill="#5BC0EB"/>
+    <circle cx="-30" cy="30" r="2" fill="#82d3f3"/>
+    <circle cx="40" cy="40" r="1.8" fill="#82d3f3"/>
+    <circle cx="0" cy="-50" r="2" fill="#5BC0EB"/>
+    <circle cx="-80" cy="50" r="1.5" fill="#82d3f3"/>
+    <circle cx="80" cy="60" r="1.5" fill="#82d3f3"/>
+
+    <!-- Узлы -->
+    <circle cx="-115" cy="65" r="4" fill="#E8A33D" stroke="#fff" stroke-width="1"/>
+    <rect x="105" y="-15" width="14" height="14" fill="rgba(178,235,242,0.6)" stroke="#82d3f3" stroke-width="1"/>
+  </g>
+
+  <!-- Bottom URL -->
+  <text x="1120" y="80" font-family="JetBrains Mono, Consolas, monospace" font-size="13" fill="#5BC0EB" letter-spacing="2" text-anchor="end">aslankaa.com / inertum</text>
+</svg>

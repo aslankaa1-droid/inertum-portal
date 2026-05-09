@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Admin · Key Manager</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta http-equiv="X-Robots-Tag" content="noindex,nofollow,noarchive">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style-v2.css">
+<script src="../assets/topbar.js" defer></script>
+<style>
+  /* Admin-only overrides */
+  .admin-layout { max-width: 1200px; margin: 0 auto; padding: 32px 24px 96px; position: relative; z-index: 1; }
+  .admin-header { display:flex; justify-content:space-between; align-items:center; padding-bottom:24px; border-bottom: 1px solid var(--stroke); margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+  .admin-header h1 {
+    font: 600 26px/1.2 var(--sans); margin: 0;
+    background: none; -webkit-text-fill-color: var(--ink-primary); color: var(--ink-primary);
+  }
+  .panel {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: var(--radius-xl); padding: 32px; margin-bottom: 24px;
+  }
+  .panel h2 { font: 600 20px/1.3 var(--sans); margin: 0 0 8px; color: var(--ink-primary); }
+  .panel .panel-sub { font-size: 13px; color: var(--ink-muted); margin: 0 0 24px; line-height: 1.5; }
+
+  .keys-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+  .keys-table th, .keys-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--stroke); vertical-align: top; }
+  .keys-table th {
+    background: var(--bg-elev-2);
+    font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--ink-muted); font-weight: 500;
+  }
+  .keys-table td { color: var(--ink-secondary); }
+  .keys-table tbody tr:hover { background: rgba(91,192,235,0.04); }
+  .keys-table tr.revoked { opacity: 0.45; }
+  .keys-table .key-value {
+    font-family: var(--mono); font-size: 12px;
+    background: var(--bg-elev-2); border: 1px solid var(--stroke);
+    padding: 3px 8px; border-radius: 3px; color: var(--accent-argon);
+  }
+
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 100px;
+    font: 500 10px/1.4 var(--mono); text-transform: uppercase; letter-spacing: 0.08em;
+    border: 1px solid;
+  }
+  .badge-investor { color: var(--accent-argon); border-color: rgba(91,192,235,0.4); background: rgba(91,192,235,0.08); }
+  .badge-patent   { color: var(--accent-warn);  border-color: rgba(232,163,61,0.4); background: rgba(232,163,61,0.08); }
+  .badge-supplier { color: var(--success);      border-color: rgba(63,185,132,0.4); background: rgba(63,185,132,0.08); }
+  .badge-custom   { color: #c89df0;             border-color: rgba(200,157,240,0.4); background: rgba(200,157,240,0.08); }
+
+  .actions-mini { display: flex; gap: 6px; flex-wrap: wrap; }
+  .actions-mini button {
+    font: 500 11px/1 var(--mono); padding: 6px 10px; border-radius: 4px;
+    border: 1px solid var(--stroke); background: transparent; cursor: pointer;
+    color: var(--ink-secondary); transition: all .15s;
+  }
+  .actions-mini button:hover { border-color: var(--accent-argon); color: var(--accent-argon); }
+  .actions-mini button.danger { color: var(--accent-danger); border-color: rgba(229,104,90,0.4); }
+  .actions-mini button.danger:hover { background: var(--accent-danger); color: var(--bg-base); }
+
+  pre.export {
+    background: var(--bg-base); color: var(--ink-secondary); padding: 20px;
+    border-radius: var(--radius); border: 1px solid var(--stroke);
+    font: 12px/1.6 var(--mono); white-space: pre-wrap; word-break: break-all;
+    max-height: 280px; overflow-y: auto; cursor: pointer; transition: border-color .15s;
+  }
+  pre.export:hover { border-color: var(--accent-argon); }
+
+  .toast {
+    position: fixed; bottom: 32px; right: 32px;
+    background: var(--accent-argon); color: var(--bg-base);
+    padding: 14px 22px; border-radius: var(--radius);
+    font: 500 14px/1 var(--sans);
+    box-shadow: 0 0 24px rgba(91,192,235,0.4);
+    opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 200;
+  }
+  .toast.show { opacity: 1; }
+
+  .issued-card { border-color: var(--accent-argon); background: linear-gradient(135deg, rgba(91,192,235,0.08) 0%, rgba(91,192,235,0.02) 100%); }
+  .issued-card h2 { color: var(--accent-argon); }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTER GATE ============ -->
+<div class="auth-shell" id="gate">
+  <div class="auth-card">
+    <div class="logo" style="margin-bottom: 24px;"><span class="dot"></span>INERTUM</div>
+    <div class="eyebrow"><span class="dot"></span>ADMIN · MASTER ACCESS</div>
+    <h1>Key Manager</h1>
+    <p class="lede">Только для основателя. Введите мастер-ключ.</p>
+    <div class="auth-error hidden" id="gateError"></div>
+    <div class="field">
+      <label for="gatePass">Мастер-ключ</label>
+      <input type="password" id="gatePass" placeholder="ASLAN-INERTUM-MASTER-XXXX" autocomplete="off" spellcheck="false">
+    </div>
+    <button class="btn btn-primary" onclick="checkGate()" style="width:100%; justify-content:center;">
+      <svg width="14" height="14"><use href="../assets/icons.svg#key"/></svg>
+      Войти
+    </button>
+    <p class="muted mt-24" style="font-size: 11px;">
+      По умолчанию: <code class="mono argon">ASLAN-INERTUM-MASTER-2026</code><br>
+      Поменять — отредактировать <code class="mono">MASTER_HASH</code> в HTML.
+    </p>
+  </div>
+</div>
+
+<!-- ============ ADMIN UI ============ -->
+<div id="admin" class="hidden">
+<div class="admin-layout">
+
+  <header class="admin-header">
+    <div>
+      <div class="logo" style="margin-bottom: 6px;"><span class="dot"></span>INERTUM · ADMIN</div>
+      <h1>Key Manager</h1>
+      <div class="muted" style="font-size: 13px; margin-top: 4px;">
+        Личный кабинет основателя · ключи доступа в data room
+      </div>
+    </div>
+    <div class="flex gap-12" style="align-items: center;">
+      <span class="pill argon">
+        <svg width="10" height="10"><use href="../assets/icons.svg#check"/></svg>
+        MASTER ACCESS
+      </span>
+      <a href="crm.html" class="btn btn-ghost" style="font-size: 12px; padding: 8px 14px;">
+        <svg width="12" height="12"><use href="../assets/icons.svg#investors"/></svg>
+        CRM-трекер →
+      </a>
+      <button onclick="logout()" class="btn btn-ghost" style="font-size: 12px; padding: 8px 14px;">
+        <svg width="12" height="12"><use href="../assets/icons.svg#lock"/></svg>
+        Выйти
+      </button>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <div class="ticker" style="margin: 0 0 32px; border-radius: var(--radius-xl); border: 1px solid var(--stroke);">
+    <div class="ticker-grid" id="stats" style="padding: 0 24px;"></div>
+  </div>
+
+  <!-- Issue new key -->
+  <div class="panel">
+    <h2>Выдать новый ключ</h2>
+    <p class="panel-sub">Заполни форму, ключ сгенерируется автоматически или укажи свой. После выдачи появится готовое сообщение для клиента.</p>
+
+    <form id="issueForm" onsubmit="issueKey(event)">
+      <div class="field-row">
+        <div class="field">
+          <label>Имя клиента / компания *</label>
+          <input type="text" id="clientName" required placeholder="напр. Sber500 (Иван Иванов)">
+        </div>
+        <div class="field">
+          <label>Категория</label>
+          <select id="category">
+            <option value="investor">Investor</option>
+            <option value="patent">Patent attorney</option>
+            <option value="supplier">Supplier</option>
+            <option value="custom">Custom / другое</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Срок действия</label>
+          <select id="ttl">
+            <option value="0">Без ограничения</option>
+            <option value="7">7 дней</option>
+            <option value="30" selected>30 дней</option>
+            <option value="90">90 дней</option>
+            <option value="365">1 год</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Свой ключ (опционально)</label>
+          <input type="text" id="customKey" placeholder="Авто-генерация если пусто">
+        </div>
+      </div>
+      <div class="field">
+        <label>Заметка (опционально)</label>
+        <input type="text" id="note" placeholder="напр. После звонка 2026-05-09, 14:00 МСК">
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <svg width="14" height="14"><use href="../assets/icons.svg#key"/></svg>
+        Выдать ключ
+      </button>
+    </form>
+  </div>
+
+  <!-- Issued result -->
+  <div class="panel issued-card hidden" id="issuedPanel">
+    <h2><svg width="20" height="20" style="vertical-align: middle;"><use href="../assets/icons.svg#check"/></svg> Ключ выдан</h2>
+    <p class="panel-sub">Скопируй данные и отправь клиенту вместе с NDA. Ключ показывается только сейчас — позже хеш можно увидеть, сам ключ восстановить нельзя.</p>
+    <div class="field-row">
+      <div class="field">
+        <label>Клиент</label>
+        <input type="text" id="issuedClient" readonly>
+      </div>
+      <div class="field">
+        <label>Ключ</label>
+        <input type="text" id="issuedKey" readonly onclick="copyText(this.value, 'Ключ скопирован')" style="cursor: pointer;">
+      </div>
+    </div>
+    <div class="field">
+      <label>Готовое сообщение для клиента</label>
+      <textarea id="issuedMessage" rows="9" readonly onclick="copyText(this.value, 'Сообщение скопировано')" style="cursor: pointer;"></textarea>
+    </div>
+    <div class="cta-row">
+      <button class="btn btn-ghost" onclick="document.getElementById('issuedPanel').classList.add('hidden')">Закрыть</button>
+    </div>
+  </div>
+
+  <!-- Keys table -->
+  <div class="panel">
+    <h2>Выданные ключи (<span id="keyCount">0</span>)</h2>
+    <p class="panel-sub">
+      Хранится локально в браузере (localStorage). Чтобы ключи начали работать —
+      нажми <strong>«Экспорт keys.js»</strong> и положи скачанный файл
+      в <code class="mono argon">portal/private-7f3a9b2c8e/keys.js</code>.
+    </p>
+    <div style="overflow-x: auto;">
+      <table class="keys-table" id="keysTable"></table>
+    </div>
+    <div class="cta-row mt-24">
+      <button class="btn btn-primary" onclick="exportKeysJs()">
+        <svg width="14" height="14"><use href="../assets/icons.svg#download"/></svg>
+        Экспорт keys.js
+      </button>
+      <button class="btn btn-ghost" onclick="exportJson()">
+        <svg width="14" height="14"><use href="../assets/icons.svg#download"/></svg>
+        Backup в JSON
+      </button>
+      <button class="btn btn-ghost" onclick="importJson()">Импорт JSON</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)">
+    </div>
+  </div>
+
+  <!-- Embedded preview -->
+  <div class="panel">
+    <h2>Превью keys.js</h2>
+    <p class="panel-sub">
+      Скопируй весь блок в буфер и вставь в <code class="mono argon">portal/private-7f3a9b2c8e/keys.js</code>,
+      перезаписав файл целиком. Клик по блоку — копирование.
+    </p>
+    <pre class="export" id="keysPreview" onclick="copyPreview()"></pre>
+    <div class="muted mono mt-8" style="font-size: 11px;">Клик по блоку — скопировать в буфер.</div>
+  </div>
+
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const MASTER_HASH = 'bfed598991515c4126d7aea8b036480bfeb8c64f5941de75a0405069cf07aeab';
+  const STORAGE_KEY = 'inertum_admin_keys_v1';
+
+  async function sha256(text) {
+    const buf = new TextEncoder().encode(text);
+    const hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
+  async function checkGate() {
+    const inp = document.getElementById('gatePass').value.trim();
+    const hash = await sha256(inp);
+    const err = document.getElementById('gateError');
+    if (hash === MASTER_HASH || sessionStorage.getItem('inertum_admin_unlocked') === '1') {
+      sessionStorage.setItem('inertum_admin_unlocked', '1');
+      unlock();
+    } else {
+      err.textContent = 'Неверный мастер-ключ';
+      err.classList.remove('hidden');
+    }
+  }
+
+  function unlock() {
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('admin').classList.remove('hidden');
+    refreshUI();
+  }
+
+  function logout() {
+    sessionStorage.removeItem('inertum_admin_unlocked');
+    location.reload();
+  }
+
+  if (sessionStorage.getItem('inertum_admin_unlocked') === '1') unlock();
+  document.getElementById('gatePass').addEventListener('keypress', e => {
+    if (e.key === 'Enter') checkGate();
+  });
+
+  function loadKeys() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+    catch (e) { return []; }
+  }
+  function saveKeys(keys) { localStorage.setItem(STORAGE_KEY, JSON.stringify(keys)); }
+
+  function genKey(len = 14) {
+    const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    const arr = new Uint32Array(len);
+    crypto.getRandomValues(arr);
+    let out = 'INERTUM-';
+    for (let i = 0; i < len; i++) out += charset[arr[i] % charset.length];
+    return out;
+  }
+
+  async function issueKey(e) {
+    e.preventDefault();
+    const client = document.getElementById('clientName').value.trim();
+    const category = document.getElementById('category').value;
+    const ttl = parseInt(document.getElementById('ttl').value, 10);
+    const note = document.getElementById('note').value.trim();
+    const customKey = document.getElementById('customKey').value.trim();
+    if (!client) return;
+
+    const key = customKey || genKey(14);
+    const hash = await sha256(key);
+    const issued = new Date().toISOString();
+    const expires = ttl > 0 ? new Date(Date.now() + ttl * 86400000).toISOString() : null;
+
+    const keys = loadKeys();
+    keys.push({
+      id: 'k-' + Date.now(),
+      client, category, key, hash,
+      issued, expires, note,
+      revoked: false,
+    });
+    saveKeys(keys);
+
+    document.getElementById('issuedClient').value = client;
+    document.getElementById('issuedKey').value = key;
+    const portalUrl = location.href.replace(/admin-[^/]+\/.*$/, 'private-7f3a9b2c8e/');
+    const msg = `Здравствуйте, ${client}.
+
+В приложении — пакет материалов проекта INERTUM (Системы долговременного хранения).
+
+Доступ к полной документации:
+URL:    ${portalUrl}
+Ключ:   ${key}
+${expires ? 'Срок действия ключа: до ' + new Date(expires).toLocaleString('ru-RU') : 'Срок действия: без ограничения'}
+
+Перед открытием материалов прошу подписать прилагаемое NDA.
+
+С уважением,
+Аслан КАА
+idriskaaa@gmail.com
+aslankaa.com`;
+    document.getElementById('issuedMessage').value = msg;
+    document.getElementById('issuedPanel').classList.remove('hidden');
+    document.getElementById('issueForm').reset();
+    refreshUI();
+    document.getElementById('issuedPanel').scrollIntoView({behavior:'smooth'});
+  }
+
+  function revokeKey(id) {
+    if (!confirm('Отозвать ключ? Клиент потеряет доступ после обновления keys.js.')) return;
+    const keys = loadKeys();
+    const k = keys.find(x => x.id === id);
+    if (k) { k.revoked = true; saveKeys(keys); refreshUI(); }
+  }
+  function deleteKey(id) {
+    if (!confirm('Удалить запись окончательно?')) return;
+    saveKeys(loadKeys().filter(k => k.id !== id));
+    refreshUI();
+  }
+
+  function isExpired(k) { return k.expires && new Date(k.expires) < new Date(); }
+  function isActive(k) { return !k.revoked && !isExpired(k); }
+
+  function refreshUI() {
+    const keys = loadKeys().sort((a, b) => b.issued.localeCompare(a.issued));
+    document.getElementById('keyCount').textContent = keys.length;
+
+    const total = keys.length;
+    const active = keys.filter(isActive).length;
+    const revoked = keys.filter(k => k.revoked).length;
+    const expired = keys.filter(k => !k.revoked && isExpired(k)).length;
+    document.getElementById('stats').innerHTML = `
+      <div class="metric"><div class="num">${total}</div><div class="lbl">Всего ключей</div></div>
+      <div class="metric"><div class="num" style="color: var(--success);">${active}</div><div class="lbl">Активны</div></div>
+      <div class="metric"><div class="num" style="color: var(--accent-warn);">${expired}</div><div class="lbl">Истекли</div></div>
+      <div class="metric"><div class="num" style="color: var(--accent-danger);">${revoked}</div><div class="lbl">Отозваны</div></div>
+    `;
+
+    const t = document.getElementById('keysTable');
+    if (keys.length === 0) {
+      t.innerHTML = '<tr><td style="padding: 48px; text-align: center; color: var(--ink-muted);">Пока ни одного ключа не выдано. Заполни форму выше.</td></tr>';
+    } else {
+      t.innerHTML = `
+        <thead><tr>
+          <th>Клиент</th><th>Категория</th><th>Ключ</th><th>Выдан</th><th>Истекает</th><th>Статус</th><th>Действия</th>
+        </tr></thead>
+        <tbody>
+        ${keys.map(k => `
+          <tr class="${k.revoked ? 'revoked' : ''}">
+            <td><strong style="color: var(--ink-primary);">${escape(k.client)}</strong>${k.note ? '<br><span class="muted mono" style="font-size:10px;">' + escape(k.note) + '</span>' : ''}</td>
+            <td><span class="badge badge-${k.category}">${k.category}</span></td>
+            <td><span class="key-value">${escape(k.key)}</span></td>
+            <td class="mono" style="font-size:11px;">${new Date(k.issued).toLocaleString('ru-RU')}</td>
+            <td class="mono" style="font-size:11px;">${k.expires ? new Date(k.expires).toLocaleDateString('ru-RU') : '∞'}</td>
+            <td>${k.revoked ? '<span class="pill danger" style="font-size:10px;">отозван</span>' : (isExpired(k) ? '<span class="pill warn" style="font-size:10px;">истёк</span>' : '<span class="pill ok" style="font-size:10px;">активен</span>')}</td>
+            <td><div class="actions-mini">
+              <button onclick="copyText('${escape(k.key)}','Ключ скопирован')">Копировать</button>
+              ${!k.revoked ? '<button class="danger" onclick="revokeKey(\\'' + k.id + '\\')">Отозвать</button>' : ''}
+              <button onclick="deleteKey('${k.id}')">×</button>
+            </div></td>
+          </tr>
+        `).join('')}
+        </tbody>`;
+    }
+
+    const activeHashes = keys.filter(isActive).map(k => k.hash);
+    document.getElementById('keysPreview').textContent = generateKeysJs(activeHashes);
+  }
+
+  function escape(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function generateKeysJs(hashes) {
+    const lines = [
+      '/* INERTUM Data Room — список активных ключей доступа.',
+      ' *',
+      ' * Сгенерировано админкой ' + new Date().toISOString(),
+      ' * Заменяет содержимое portal/private-7f3a9b2c8e/keys.js полностью.',
+      ' */',
+      'window.INERTUM_KEYS = [',
+    ];
+    hashes.forEach((h, i) => lines.push('  "' + h + '"' + (i < hashes.length - 1 ? ',' : '')));
+    lines.push('];');
+    lines.push('window.INERTUM_KEYS_VERSION = "' + new Date().toISOString() + '";');
+    return lines.join('\n');
+  }
+
+  function exportKeysJs() {
+    const keys = loadKeys();
+    const activeHashes = keys.filter(isActive).map(k => k.hash);
+    const content = generateKeysJs(activeHashes);
+    const blob = new Blob([content], {type:'application/javascript'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'keys.js';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('keys.js скачан. Положи в portal/private-7f3a9b2c8e/keys.js');
+  }
+
+  function exportJson() {
+    const data = { exported: new Date().toISOString(), keys: loadKeys() };
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'inertum-keys-backup-' + Date.now() + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importJson() { document.getElementById('importFile').click(); }
+  function handleImport(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        if (Array.isArray(data.keys)) {
+          if (confirm('Импортировать ' + data.keys.length + ' ключей? Текущий список будет заменён.')) {
+            saveKeys(data.keys);
+            refreshUI();
+            toast('Импортировано ' + data.keys.length + ' ключей');
+          }
+        }
+      } catch (e) { alert('Ошибка чтения файла: ' + e.message); }
+    };
+    reader.readAsText(file);
+  }
+
+  function copyText(text, msg) {
+    navigator.clipboard.writeText(text).then(() => toast(msg || 'Скопировано'));
+  }
+  function copyPreview() {
+    copyText(document.getElementById('keysPreview').textContent, 'keys.js скопирован в буфер');
+  }
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+</script>
+</body>
+</html>

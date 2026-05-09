@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Data Room</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta http-equiv="X-Robots-Tag" content="noindex,nofollow,noarchive">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style-v2.css">
+<script src="../assets/topbar.js" defer></script>
+</head>
+<body>
+
+<!-- ============ AUTH GATE ============ -->
+<div class="auth-shell" id="gate">
+  <div class="auth-card">
+    <div class="logo" style="margin-bottom: 24px;"><span class="dot"></span>INERTUM</div>
+    <div class="eyebrow"><span class="dot"></span>DATA ROOM · NDA REQUIRED</div>
+    <h1>Закрытая часть проекта</h1>
+    <p class="lede">Введите ключ доступа, полученный от Аслана КАА.<br>Каждый ключ одноразовый и привязан к конкретному получателю.</p>
+    <div class="auth-error hidden" id="gateError"></div>
+    <div class="field">
+      <label for="gatePass">Ключ доступа</label>
+      <input type="password" id="gatePass" placeholder="INERTUM-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false">
+    </div>
+    <button class="btn btn-primary" onclick="checkGate()" style="width:100%; justify-content:center;">
+      <svg width="14" height="14" style="display:inline-block; vertical-align:middle;"><use href="../assets/icons.svg#lock"/></svg>
+      Войти
+    </button>
+    <p class="muted mt-24" style="font-size: 12px;">
+      Нет ключа? <a href="../index.html#contact">Запросить доступ →</a><br>
+      Перед запросом — <a href="../public/INERTUM-NDA.html" target="_blank">ознакомиться с NDA</a> (RU + EN)
+    </p>
+  </div>
+</div>
+
+<!-- ============ DATA ROOM ============ -->
+<div class="viewer-shell hidden" id="dataroom">
+
+  <aside class="viewer-sidebar">
+    <a href="../index.html" class="logo" style="display: flex; align-items: center; margin-bottom: 6px;">
+      <span class="dot"></span>INERTUM
+    </a>
+    <div class="muted mono" style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 24px;">
+      Data Room · Pre-Seed
+    </div>
+
+    <h5>Документы</h5>
+    <div id="docList"></div>
+
+    <h5>Готовые пакеты</h5>
+    <a href="downloads/INERTUM-investor-package.zip" download style="border: 1px solid var(--stroke); margin-bottom: 6px;">
+      <div style="display:flex; gap:8px; align-items:center;">
+        <svg width="14" height="14"><use href="../assets/icons.svg#download"/></svg>
+        <strong>Investor pack</strong>
+      </div>
+      <div class="muted mono" style="font-size: 10px; margin-top: 4px;">one-pager + питч + финмодель + NDA</div>
+    </a>
+    <a href="downloads/INERTUM-patent-package.zip" download style="border: 1px solid var(--stroke); margin-bottom: 6px;">
+      <div style="display:flex; gap:8px; align-items:center;">
+        <svg width="14" height="14"><use href="../assets/icons.svg#download"/></svg>
+        <strong>Patent pack</strong>
+      </div>
+      <div class="muted mono" style="font-size: 10px; margin-top: 4px;">драфт v2.1 + поиск + ТЗ прототипа</div>
+    </a>
+    <a href="downloads/INERTUM-supplier-package.zip" download style="border: 1px solid var(--stroke); margin-bottom: 6px;">
+      <div style="display:flex; gap:8px; align-items:center;">
+        <svg width="14" height="14"><use href="../assets/icons.svg#download"/></svg>
+        <strong>Supplier pack</strong>
+      </div>
+      <div class="muted mono" style="font-size: 10px; margin-top: 4px;">RFQ-шаблоны + ТЗ + BOM</div>
+    </a>
+    <a href="downloads/INERTUM-full-archive.zip" download style="border: 1px solid var(--accent-argon); background: rgba(91,192,235,0.05); margin-bottom: 6px;">
+      <div style="display:flex; gap:8px; align-items:center;">
+        <svg width="14" height="14"><use href="../assets/icons.svg#download"/></svg>
+        <strong class="argon">Full archive</strong>
+      </div>
+      <div class="muted mono" style="font-size: 10px; margin-top: 4px;">все документы во всех форматах</div>
+    </a>
+
+    <h5 style="margin-top: 32px;">Контакт</h5>
+    <div class="muted" style="font-size: 12px; line-height: 1.6; padding: 8px 12px;">
+      Заказчик:<br>
+      <strong style="color: var(--ink-primary);">Аслан КАА</strong><br>
+      <a href="mailto:idriskaaa@gmail.com">idriskaaa@gmail.com</a><br>
+      <a href="https://aslankaa.com">aslankaa.com</a>
+    </div>
+
+    <div style="margin-top: 24px; padding: 8px 12px;">
+      <button onclick="lockGate()" class="btn btn-ghost" style="width: 100%; justify-content: center; font-size: 12px; padding: 8px;">
+        <svg width="12" height="12"><use href="../assets/icons.svg#lock"/></svg>
+        Закрыть сессию
+      </button>
+    </div>
+  </aside>
+
+  <main class="viewer-content">
+    <div class="viewer-toolbar">
+      <div>
+        <div class="section-num">DATA ROOM · ВХОД</div>
+        <div style="font: 600 22px/1.2 var(--sans); margin-top: 4px;">Welcome to INERTUM</div>
+      </div>
+      <span class="pill argon">
+        <svg width="10" height="10"><use href="../assets/icons.svg#check"/></svg>
+        UNLOCKED
+      </span>
+    </div>
+
+    <article class="md-body" id="docBody">
+      <p>Это закрытая часть проекта. Здесь представлены все технические, финансовые и патентные материалы. Выберите документ из списка слева для просмотра онлайн или скачайте готовые пакеты под конкретную задачу.</p>
+
+      <h2>Что в data room</h2>
+      <ul>
+        <li><strong>Видение и анализ аналогов</strong> — стратегический обзор проекта.</li>
+        <li><strong>Техническая справка v1.0</strong> — материалы, газы, абсорберы, IoT, продуктовая сетка, стандарты.</li>
+        <li><strong>Патентная заявка v2.1</strong> — драфт для евразийского патента (готов для патентного поверенного).</li>
+        <li><strong>ТЗ на прототип №1</strong> — мотоциклетная капсула, BOM, программа испытаний.</li>
+        <li><strong>Поставщики и шаблоны RFQ</strong> — топ-3 кандидата по ламинату и датчикам, готовые письма.</li>
+        <li><strong>One-pager</strong> — для холодной рассылки.</li>
+        <li><strong>Питч-дек v1.0</strong> — 12 слайдов в стиле Y Combinator.</li>
+        <li><strong>Финансовая модель</strong> — P&amp;L 2026–2030, юнит-экономика по 5 моделям, sensitivity.</li>
+        <li><strong>Целевой список инвесторов</strong> — 30+ фондов и ангелов с контактами.</li>
+      </ul>
+
+      <h2>Готовые пакеты для рассылки</h2>
+      <p>Под каждую аудиторию собран отдельный ZIP-архив:</p>
+      <ul>
+        <li><strong>Инвестор</strong> — one-pager, питч, финмодель, NDA, FAQ.</li>
+        <li><strong>Патентный поверенный</strong> — драфт заявки, патентный поиск, ТЗ.</li>
+        <li><strong>Поставщик / производитель</strong> — RFQ-шаблоны, ТЗ, BOM.</li>
+      </ul>
+
+      <h2>Конфиденциальность</h2>
+      <p>Все материалы предоставлены под NDA. Не публиковать в открытых источниках до даты приоритета патента — это уничтожает новизну.</p>
+    </article>
+  </main>
+</div>
+
+<script>
+  async function sha256(text) {
+    const buf = new TextEncoder().encode(text);
+    const hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
+  async function checkGate() {
+    const inp = document.getElementById('gatePass').value.trim();
+    const err = document.getElementById('gateError');
+    const hash = await sha256(inp);
+    const allowed = (window.INERTUM_KEYS || []);
+    if (allowed.includes(hash) || sessionStorage.getItem('inertum_unlocked') === '1') {
+      sessionStorage.setItem('inertum_unlocked', '1');
+      sessionStorage.setItem('inertum_key_hash', hash);
+      unlock();
+    } else {
+      err.textContent = 'Неверный ключ доступа';
+      err.classList.remove('hidden');
+    }
+  }
+
+  function unlock() {
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('dataroom').classList.remove('hidden');
+    document.getElementById('dataroom').style.display = 'grid';
+    buildDocList();
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('doc')) location.href = 'viewer.html?doc=' + params.get('doc');
+  }
+
+  function lockGate() {
+    sessionStorage.removeItem('inertum_unlocked');
+    sessionStorage.removeItem('inertum_key_hash');
+    location.reload();
+  }
+
+  if (sessionStorage.getItem('inertum_unlocked') === '1') {
+    unlock();
+  }
+
+  document.getElementById('gatePass').addEventListener('keypress', e => {
+    if (e.key === 'Enter') checkGate();
+  });
+
+  function buildDocList() {
+    const list = document.getElementById('docList');
+    if (!list) return;
+    const DOCS = window.INERTUM_DOCS || [];
+    list.innerHTML = '';
+    DOCS.forEach((d, i) => {
+      const a = document.createElement('a');
+      a.href = 'viewer.html?doc=' + d.id;
+      a.dataset.id = d.id;
+      a.innerHTML = `
+        <div style="display:flex; gap:8px; align-items:flex-start;">
+          <span class="mono argon" style="font-size: 10px; padding-top: 2px; min-width: 18px;">${String(i+1).padStart(2,'0')}</span>
+          <span style="flex: 1;">${d.title}</span>
+        </div>`;
+      list.appendChild(a);
+    });
+  }
+</script>
+<script src="keys.js"></script>
+<script src="docs-manifest.js"></script>
+</body>
+</html>

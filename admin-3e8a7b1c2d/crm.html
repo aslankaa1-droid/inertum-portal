@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Admin · CRM-трекер инвесторов</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style-v2.css">
+<script src="../assets/topbar.js" defer></script>
+<style>
+  .crm-layout { max-width: 1400px; margin: 0 auto; padding: 32px 24px 96px; position: relative; z-index: 1; }
+  .crm-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--stroke); margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+  .crm-header h1 { font: 600 26px 'Inter'; margin: 0; color: var(--ink-primary); background: none; -webkit-text-fill-color: var(--ink-primary); }
+
+  .crm-stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 24px; }
+  .crm-stats .metric { background: var(--bg-elev); border: 1px solid var(--stroke); border-radius: var(--radius-lg); padding: 16px 20px; }
+  .crm-stats .metric .num { font: 500 28px var(--mono); color: var(--accent-argon); font-variant-numeric: tabular-nums; }
+  .crm-stats .metric .lbl { font: 400 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-top: 4px; }
+
+  .crm-controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+  .crm-search { flex: 1; min-width: 240px; background: var(--bg-elev-2); border: 1px solid var(--stroke); border-radius: 6px; padding: 10px 14px; color: var(--ink-primary); font: 14px 'Inter'; }
+  .crm-search:focus { outline: none; border-color: var(--accent-argon); }
+
+  .filter-pill {
+    padding: 6px 12px; border-radius: 100px;
+    font: 500 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--stroke); color: var(--ink-muted);
+    cursor: pointer; transition: all .15s; background: transparent;
+  }
+  .filter-pill.active { background: var(--accent-argon); color: var(--bg-base); border-color: var(--accent-argon); }
+  .filter-pill:hover:not(.active) { color: var(--ink-primary); border-color: var(--ink-muted); }
+
+  table.crm-table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--bg-elev); border: 1px solid var(--stroke); border-radius: var(--radius-lg); overflow: hidden; }
+  .crm-table th, .crm-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--stroke); vertical-align: middle; }
+  .crm-table th { font: 500 10px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); background: var(--bg-elev-2); }
+  .crm-table td { color: var(--ink-secondary); }
+  .crm-table tbody tr:hover { background: rgba(91,192,235,0.04); }
+
+  .status-select {
+    background: var(--bg-elev-2); border: 1px solid var(--stroke);
+    border-radius: 4px; padding: 4px 8px;
+    font: 500 11px var(--mono); color: var(--ink-primary); cursor: pointer;
+  }
+  .status-pill {
+    display: inline-block; padding: 3px 10px; border-radius: 100px;
+    font: 500 10px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1px solid currentColor;
+  }
+  .status-new { color: var(--ink-muted); }
+  .status-sent { color: var(--accent-argon); }
+  .status-replied { color: var(--accent-argon); background: rgba(91,192,235,0.1); }
+  .status-meeting { color: var(--accent-warn); background: rgba(232,163,61,0.1); }
+  .status-dataroom { color: var(--success); background: rgba(63,185,132,0.1); }
+  .status-passed { color: var(--accent-danger); }
+  .status-closed { color: var(--success); background: rgba(63,185,132,0.2); font-weight: 700; }
+
+  .notes-input {
+    background: var(--bg-elev-2); border: 1px solid var(--stroke);
+    border-radius: 4px; padding: 6px 10px;
+    font: 12px var(--mono); color: var(--ink-secondary); width: 100%;
+  }
+  .notes-input:focus { outline: none; border-color: var(--accent-argon); }
+
+  .actions { display: flex; gap: 4px; }
+  .actions button { background: transparent; border: 1px solid var(--stroke); color: var(--ink-muted); padding: 4px 8px; border-radius: 3px; font: 11px var(--mono); cursor: pointer; transition: all .15s; }
+  .actions button:hover { border-color: var(--accent-argon); color: var(--accent-argon); }
+  .actions button.danger:hover { border-color: var(--accent-danger); color: var(--accent-danger); }
+
+  .toolbar-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; padding: 16px; background: var(--bg-elev); border: 1px solid var(--stroke); border-radius: var(--radius-lg); align-items: center; }
+  .toolbar-row .label { font: 500 11px var(--mono); color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .add-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto; gap: 8px; margin-bottom: 16px; }
+  .add-row input, .add-row select { background: var(--bg-elev-2); border: 1px solid var(--stroke); border-radius: 4px; padding: 8px 10px; color: var(--ink-primary); font: 13px 'Inter'; }
+  .add-row input:focus, .add-row select:focus { outline: none; border-color: var(--accent-argon); }
+
+  .toast { position: fixed; bottom: 32px; right: 32px; background: var(--accent-argon); color: var(--bg-base); padding: 12px 20px; border-radius: 6px; font: 500 13px 'Inter'; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 200; }
+  .toast.show { opacity: 1; }
+
+  /* Master gate */
+  .auth-shell .auth-card h1 { font-size: 26px; }
+
+  @media (max-width: 1100px) {
+    .crm-stats { grid-template-columns: repeat(3, 1fr); }
+    .add-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTER GATE ============ -->
+<div class="auth-shell" id="gate">
+  <div class="auth-card">
+    <div class="logo" style="margin-bottom: 24px;"><span class="dot"></span>INERTUM</div>
+    <div class="eyebrow"><span class="dot"></span>ADMIN · MASTER ACCESS</div>
+    <h1>CRM-трекер инвесторов</h1>
+    <p class="lede">Только для основателя. Введите мастер-ключ.</p>
+    <div class="auth-error hidden" id="gateError"></div>
+    <div class="field">
+      <label for="gatePass">Мастер-ключ</label>
+      <input type="password" id="gatePass" placeholder="ASLAN-INERTUM-MASTER-XXXX" autocomplete="off" spellcheck="false">
+    </div>
+    <button class="btn btn-primary" onclick="checkGate()" style="width:100%; justify-content:center;">
+      <svg width="14" height="14"><use href="../assets/icons.svg#key"/></svg>
+      Войти
+    </button>
+    <p class="muted mt-24" style="font-size: 12px;">
+      Тот же ключ что для <a href="index.html">генератора ключей</a>.<br>
+      По умолчанию: <code class="mono argon">ASLAN-INERTUM-MASTER-2026</code>
+    </p>
+  </div>
+</div>
+
+<!-- ============ CRM ============ -->
+<div id="crm" class="hidden">
+<div class="crm-layout">
+
+  <header class="crm-header">
+    <div>
+      <div class="logo" style="margin-bottom: 6px;"><span class="dot"></span>INERTUM · ADMIN</div>
+      <h1>CRM-трекер инвесторов</h1>
+      <div class="muted" style="font-size: 13px; margin-top: 4px;">Личный CRM для рассылки и отслеживания статуса по 30+ контактам</div>
+    </div>
+    <div class="flex gap-12" style="align-items: center;">
+      <a href="index.html" class="btn btn-ghost" style="font-size: 12px; padding: 8px 14px;">← Генератор ключей</a>
+      <button onclick="logout()" class="btn btn-ghost" style="font-size: 12px; padding: 8px 14px;">
+        <svg width="12" height="12"><use href="../assets/icons.svg#lock"/></svg>
+        Выйти
+      </button>
+    </div>
+  </header>
+
+  <!-- STATS -->
+  <div class="crm-stats" id="stats"></div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar-row">
+    <span class="label">Импорт / экспорт:</span>
+    <button class="btn btn-ghost" onclick="seedFromList()" style="font-size: 12px; padding: 8px 12px;">⟲ Заполнить из целевого списка (30+ инвесторов)</button>
+    <button class="btn btn-ghost" onclick="exportCsv()" style="font-size: 12px; padding: 8px 12px;">↓ Экспорт CSV</button>
+    <button class="btn btn-ghost" onclick="importCsv()" style="font-size: 12px; padding: 8px 12px;">↑ Импорт CSV</button>
+    <input type="file" id="importFile" accept=".csv" style="display:none" onchange="handleImport(event)">
+    <button class="btn btn-ghost danger" onclick="clearAll()" style="font-size: 12px; padding: 8px 12px;">⌫ Очистить все</button>
+  </div>
+
+  <!-- ADD NEW -->
+  <h3 style="font: 600 16px 'Inter'; color: var(--ink-primary); margin: 24px 0 12px;">Добавить контакт</h3>
+  <div class="add-row">
+    <input type="text" id="add-name" placeholder="Имя / Фонд (напр. Wa'ed Ventures)">
+    <select id="add-region">
+      <option value="RU">RU</option>
+      <option value="KZ">KZ / Каз</option>
+      <option value="MENA">MENA / UAE / KSA</option>
+      <option value="HK">HK / CN / Asia</option>
+      <option value="EU">EU / US</option>
+    </select>
+    <select id="add-stage">
+      <option value="VC">VC</option>
+      <option value="Angel">Angel</option>
+      <option value="Strategic">Strategic</option>
+      <option value="Govt">Government</option>
+    </select>
+    <input type="text" id="add-email" placeholder="Email или канал">
+    <select id="add-status">
+      <option value="new">NEW</option>
+      <option value="sent">SENT</option>
+      <option value="replied">REPLIED</option>
+      <option value="meeting">MEETING</option>
+      <option value="dataroom">DATA ROOM</option>
+      <option value="passed">PASSED</option>
+      <option value="closed">CLOSED</option>
+    </select>
+    <button class="btn btn-primary" onclick="addContact()" style="font-size: 13px; padding: 8px 16px;">+ Добавить</button>
+  </div>
+
+  <!-- CONTROLS -->
+  <h3 style="font: 600 16px 'Inter'; color: var(--ink-primary); margin: 24px 0 12px;">Контакты <span id="contactCount" style="color: var(--ink-muted); font-weight: normal;">(0)</span></h3>
+  <div class="crm-controls">
+    <input type="text" id="search" class="crm-search" placeholder="Поиск по имени / региону / email / заметкам…">
+    <button class="filter-pill active" data-filter="all">Все</button>
+    <button class="filter-pill" data-filter="new">NEW</button>
+    <button class="filter-pill" data-filter="sent">SENT</button>
+    <button class="filter-pill" data-filter="replied">REPLIED</button>
+    <button class="filter-pill" data-filter="meeting">MEETING</button>
+    <button class="filter-pill" data-filter="dataroom">DATA ROOM</button>
+    <button class="filter-pill" data-filter="passed">PASSED</button>
+    <button class="filter-pill" data-filter="closed">CLOSED</button>
+  </div>
+
+  <!-- TABLE -->
+  <div style="overflow-x: auto;">
+    <table class="crm-table" id="crmTable">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Имя / Фонд</th>
+          <th style="width: 8%;">Регион</th>
+          <th style="width: 8%;">Тип</th>
+          <th style="width: 18%;">Email / канал</th>
+          <th style="width: 12%;">Статус</th>
+          <th style="width: 10%;">Last touch</th>
+          <th style="width: 16%;">Заметки</th>
+          <th style="width: 6%;">×</th>
+        </tr>
+      </thead>
+      <tbody id="crmBody"></tbody>
+    </table>
+  </div>
+  <div id="empty" style="text-align: center; padding: 64px 24px; color: var(--ink-muted); display: none;">Нет контактов. Нажми «Заполнить из целевого списка» чтобы загрузить 30+ инвесторов из таргетного файла.</div>
+
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const MASTER_HASH = 'bfed598991515c4126d7aea8b036480bfeb8c64f5941de75a0405069cf07aeab';
+  const STORAGE_KEY = 'inertum_crm_v1';
+
+  // Seed list from Целевой_список_инвесторов_v1_2026-05-08.md
+  const SEED = [
+    { name: 'ФРП (Фонд развития промышленности)', region: 'RU', stage: 'Govt', email: 'ask@frprf.ru, frp@frprf.ru, +7 495 789-47-30', notes: '3-5% годовых. Идеальный фит — материалы / упаковка / импортозамещение.' },
+    { name: 'Sber500 / SberUnity', region: 'RU', stage: 'VC', email: 'sberunity.ru + sberbank-500.ru/en (форма)', notes: 'Отдельный трек deeptech без выручки.' },
+    { name: 'Sk Capital (Skolkovo Ventures)', region: 'RU', stage: 'VC', email: 'sk.ru — резидентство Сколково + контакт-форма', notes: 'Грант + резидентство + сеть LP.' },
+    { name: 'Kama Flow', region: 'RU', stage: 'VC', email: 'kama-flow.ru, deals@kamaflow.com', notes: 'Один из 3 топ-deeptech в РФ. Новый ₽10 млрд фонд (апр 2025).' },
+    { name: 'Phystech Ventures', region: 'EU', stage: 'VC', email: 'phystech.vc форма + LinkedIn (Petr Lukyanov, Mikhail Lyubimov)', notes: 'London-based. Deeptech / materials / energy.' },
+    { name: 'Astana Hub Ventures', region: 'KZ', stage: 'VC', email: 'astanahub.vc форма + info@astanahub.com', notes: 'Seed/pre-A в Каз/ЦА, без санкционных проблем.' },
+    { name: 'QazTech Ventures', region: 'KZ', stage: 'Govt', email: 'qaztech.kz, info@qaztech.kz', notes: 'Гос-фонд Казахстана, deeptech-фокус.' },
+    { name: "Wa'ed Ventures (Aramco)", region: 'MENA', stage: 'Strategic', email: 'waed.net/en/contact-us форма', notes: '$500M фонд, IoT / energy / industrial — очень релевантно.' },
+    { name: 'Shorooq Partners (UAE)', region: 'MENA', stage: 'VC', email: 'shorooq.com/contact, info@shorooq.com', notes: 'Deeptech + advanced industries, чек $1-10M.' },
+    { name: 'Аркадий Морейнис', region: 'RU', stage: 'Angel', email: 'amoreynis@gmail.com (прямой), Telegram @temno', notes: 'Отвечает лично.' },
+    { name: 'Игорь Рябенький / AltaIR Capital', region: 'RU', stage: 'VC', email: 'altair.vc форма + LinkedIn', notes: '350+ сделок, 6 unicorns на seed.' },
+    { name: 'United Investors / синдикат Морейниса', region: 'RU', stage: 'Angel', email: 'unitedinvestors.ru', notes: 'Чек $50-250k идеально под наш pre-seed.' },
+    { name: 'StartTrack', region: 'RU', stage: 'VC', email: 'starttrack.ru форма', notes: 'Крауд-инвест платформа РФ.' },
+    { name: 'Cyberport Investors Network (HK)', region: 'HK', stage: 'VC', email: 'cyberport.hk → CIN application', notes: '220+ фондов, доступ к АСЕАН + китайскому капиталу.' },
+    { name: 'Ростех венчурные дочки', region: 'RU', stage: 'Strategic', email: 'rostec.ru приёмная инноваций', notes: 'Dual-use фит. ТОЛЬКО рублёвым контуром.' },
+    { name: 'Iskra Ventures', region: 'RU', stage: 'VC', email: 'iskra.vc форма', notes: 'Mobility, content, IoT.' },
+    { name: 'LETA Capital', region: 'RU', stage: 'VC', email: 'leta.vc форма', notes: '$0.5-5M (поздний seed). Cayman, русскоязычные.' },
+    { name: 'Da Vinci Capital', region: 'RU', stage: 'VC', email: 'dvcap.com форма', notes: 'Mid-market PE, СНГ growth.' },
+    { name: 'IIDF', region: 'RU', stage: 'VC', email: 'iidf.ru, global.iidf.ru', notes: 'Seed, широкий профиль.' },
+    { name: 'Mubadala (Capital Ventures)', region: 'MENA', stage: 'Strategic', email: 'mubadala.com форма', notes: 'Series A+. Для нас рано, но для seed-extension.' },
+    { name: 'Global Ventures', region: 'MENA', stage: 'VC', email: 'global.vc, info@global.vc', notes: 'Seed/A, emerging markets tech.' },
+    { name: 'Nuwa Capital', region: 'MENA', stage: 'VC', email: 'nuwacapital.com форма', notes: 'Early-stage MENA.' },
+    { name: '500 Global MENA', region: 'MENA', stage: 'VC', email: 'mena.500.co — accelerator app', notes: '$50-150k, broad tech.' },
+    { name: 'BECO Capital', region: 'MENA', stage: 'VC', email: 'beco.vc форма + LinkedIn (Dany Farha)', notes: 'Seed/A early tech MENA.' },
+    { name: 'Wamda Capital', region: 'MENA', stage: 'VC', email: 'info@wamdacapital.com', notes: 'Seed/A MENA tech. Прямой email.' },
+    { name: 'HongShan (ex-Sequoia China)', region: 'HK', stage: 'VC', email: 'hongshan.com — warm intro обязателен', notes: 'Чек $1M+, broad deeptech.' },
+    { name: 'Granite Asia (ex-GGV Asia)', region: 'HK', stage: 'VC', email: 'granite.asia, LinkedIn (Jenny Li)', notes: 'Seed-A APAC tech.' },
+    { name: 'Vertex Ventures SEA', region: 'HK', stage: 'VC', email: 'vertexventures.sg форма', notes: 'Seed-A SEA + India.' },
+    { name: 'SBI Ven Capital', region: 'HK', stage: 'VC', email: 'sbivencapital.com.sg форма', notes: 'Чек $1M+, финансы / tech.' },
+    { name: 'Wavemaker Partners', region: 'HK', stage: 'VC', email: 'wavemaker.vc форма', notes: '$250k-2M, deep / enterprise tech.' },
+    { name: 'Александр Чикунов', region: 'RU', stage: 'Angel', email: 'через LinkedIn (Roxy Energy / Senezh)', notes: 'Энергетика, индустрия.' },
+    { name: 'AddVenture', region: 'RU', stage: 'VC', email: 'addventure.to форма', notes: 'Seed РФ.' },
+    { name: 'VOX Angelis', region: 'RU', stage: 'Angel', email: 'voxangelis.org', notes: 'Конференция связанная с Рябеньким.' },
+  ];
+
+  async function sha256(text) {
+    const buf = new TextEncoder().encode(text);
+    const hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+  async function checkGate() {
+    const inp = document.getElementById('gatePass').value.trim();
+    const hash = await sha256(inp);
+    const err = document.getElementById('gateError');
+    if (hash === MASTER_HASH || sessionStorage.getItem('inertum_admin_unlocked') === '1') {
+      sessionStorage.setItem('inertum_admin_unlocked', '1');
+      unlock();
+    } else {
+      err.textContent = 'Неверный мастер-ключ';
+      err.classList.remove('hidden');
+    }
+  }
+  function unlock() {
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('crm').classList.remove('hidden');
+    refreshUI();
+  }
+  function logout() {
+    sessionStorage.removeItem('inertum_admin_unlocked');
+    location.reload();
+  }
+  if (sessionStorage.getItem('inertum_admin_unlocked') === '1') unlock();
+  document.getElementById('gatePass').addEventListener('keypress', e => { if (e.key === 'Enter') checkGate(); });
+
+  // ============ STORAGE ============
+  function loadAll() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch (e) { return []; } }
+  function saveAll(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+
+  // ============ ACTIONS ============
+  function seedFromList() {
+    const cur = loadAll();
+    if (cur.length > 0) {
+      if (!confirm('У тебя уже ' + cur.length + ' контактов. Заполнить дополнительно из целевого списка (дубликаты по имени пропустятся)?')) return;
+    }
+    const existing = new Set(cur.map(c => c.name.toLowerCase()));
+    let added = 0;
+    SEED.forEach(s => {
+      if (existing.has(s.name.toLowerCase())) return;
+      cur.push({
+        id: 'c-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+        name: s.name, region: s.region, stage: s.stage, email: s.email,
+        status: 'new', lastTouch: '', notes: s.notes,
+      });
+      added++;
+    });
+    saveAll(cur); refreshUI();
+    toast('Добавлено ' + added + ' контактов из целевого списка');
+  }
+
+  function addContact() {
+    const name = document.getElementById('add-name').value.trim();
+    if (!name) return toast('Имя обязательно');
+    const cur = loadAll();
+    cur.unshift({
+      id: 'c-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+      name,
+      region: document.getElementById('add-region').value,
+      stage: document.getElementById('add-stage').value,
+      email: document.getElementById('add-email').value.trim(),
+      status: document.getElementById('add-status').value,
+      lastTouch: new Date().toISOString().slice(0,10),
+      notes: '',
+    });
+    saveAll(cur);
+    document.getElementById('add-name').value = '';
+    document.getElementById('add-email').value = '';
+    refreshUI();
+    toast('Добавлен: ' + name);
+  }
+
+  function updateContact(id, field, value) {
+    const cur = loadAll();
+    const c = cur.find(x => x.id === id);
+    if (!c) return;
+    c[field] = value;
+    if (field === 'status') c.lastTouch = new Date().toISOString().slice(0,10);
+    saveAll(cur);
+    if (field === 'status') refreshStats();
+  }
+
+  function deleteContact(id) {
+    if (!confirm('Удалить контакт?')) return;
+    saveAll(loadAll().filter(c => c.id !== id));
+    refreshUI();
+  }
+
+  function clearAll() {
+    if (!confirm('Удалить ВСЕ контакты? Это нельзя отменить.')) return;
+    saveAll([]); refreshUI();
+    toast('Все контакты удалены');
+  }
+
+  // ============ EXPORT / IMPORT ============
+  function exportCsv() {
+    const cur = loadAll();
+    const header = ['name','region','stage','email','status','lastTouch','notes'];
+    const rows = [header.join(',')];
+    cur.forEach(c => {
+      rows.push(header.map(h => '"' + String(c[h]||'').replace(/"/g, '""') + '"').join(','));
+    });
+    const blob = new Blob([rows.join('\n')], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'inertum-crm-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click(); URL.revokeObjectURL(url);
+    toast('Скачан CSV: ' + cur.length + ' контактов');
+  }
+
+  function importCsv() { document.getElementById('importFile').click(); }
+  function handleImport(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        const lines = ev.target.result.split('\n').filter(l => l.trim());
+        if (lines.length < 2) return toast('Пустой файл');
+        const header = lines[0].split(',').map(h => h.replace(/"/g,'').trim());
+        const cur = loadAll();
+        let added = 0;
+        for (let i = 1; i < lines.length; i++) {
+          const fields = lines[i].match(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g);
+          if (!fields) continue;
+          const vals = fields.map(f => f.replace(/^,/, '').replace(/^"/, '').replace(/"$/, '').replace(/""/g, '"'));
+          const obj = {};
+          header.forEach((h, idx) => obj[h] = vals[idx] || '');
+          if (!obj.name) continue;
+          obj.id = 'c-' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
+          cur.unshift(obj);
+          added++;
+        }
+        saveAll(cur); refreshUI();
+        toast('Импортировано ' + added);
+      } catch (err) { toast('Ошибка: ' + err.message); }
+    };
+    reader.readAsText(file);
+  }
+
+  // ============ UI ============
+  let curFilter = 'all';
+  let curSearch = '';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.filter-pill').forEach(p => {
+      p.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(x => x.classList.remove('active'));
+        p.classList.add('active');
+        curFilter = p.dataset.filter;
+        refreshTable();
+      });
+    });
+    document.getElementById('search').addEventListener('input', e => {
+      curSearch = e.target.value.toLowerCase();
+      refreshTable();
+    });
+  });
+
+  function refreshUI() { refreshStats(); refreshTable(); }
+
+  function refreshStats() {
+    const cur = loadAll();
+    const total = cur.length;
+    const sent = cur.filter(c => ['sent','replied','meeting','dataroom','closed'].includes(c.status)).length;
+    const inProgress = cur.filter(c => ['replied','meeting','dataroom'].includes(c.status)).length;
+    const dataroom = cur.filter(c => c.status === 'dataroom').length;
+    const closed = cur.filter(c => c.status === 'closed').length;
+    const passed = cur.filter(c => c.status === 'passed').length;
+
+    document.getElementById('stats').innerHTML = `
+      <div class="metric"><div class="num">${total}</div><div class="lbl">Всего</div></div>
+      <div class="metric"><div class="num" style="color: var(--accent-argon);">${sent}</div><div class="lbl">Отправлено</div></div>
+      <div class="metric"><div class="num" style="color: var(--accent-warn);">${inProgress}</div><div class="lbl">В процессе</div></div>
+      <div class="metric"><div class="num" style="color: var(--success);">${dataroom}</div><div class="lbl">В data room</div></div>
+      <div class="metric"><div class="num" style="color: var(--success);">${closed}</div><div class="lbl">Закрыто</div></div>
+      <div class="metric"><div class="num" style="color: var(--accent-danger);">${passed}</div><div class="lbl">Отказали</div></div>
+    `;
+  }
+
+  function refreshTable() {
+    const cur = loadAll();
+    const filtered = cur.filter(c => {
+      if (curFilter !== 'all' && c.status !== curFilter) return false;
+      if (curSearch) {
+        const t = (c.name + ' ' + c.region + ' ' + c.email + ' ' + c.notes + ' ' + c.stage).toLowerCase();
+        if (!t.includes(curSearch)) return false;
+      }
+      return true;
+    });
+
+    document.getElementById('contactCount').textContent = '(' + filtered.length + ' из ' + cur.length + ')';
+
+    const tbody = document.getElementById('crmBody');
+    const empty = document.getElementById('empty');
+    if (filtered.length === 0) {
+      tbody.innerHTML = '';
+      empty.style.display = 'block';
+      empty.textContent = cur.length === 0
+        ? 'Нет контактов. Нажми «Заполнить из целевого списка» чтобы загрузить 30+ инвесторов.'
+        : 'Нет совпадений по фильтру / поиску.';
+      return;
+    }
+    empty.style.display = 'none';
+
+    tbody.innerHTML = filtered.map(c => `
+      <tr>
+        <td><strong style="color: var(--ink-primary);">${escape(c.name)}</strong></td>
+        <td><span class="status-pill" style="border-color: var(--stroke);">${escape(c.region || '—')}</span></td>
+        <td class="muted mono">${escape(c.stage || '—')}</td>
+        <td class="mono" style="font-size: 11px; color: var(--ink-muted);">${escape(c.email || '—')}</td>
+        <td>
+          <select class="status-select" onchange="updateContact('${c.id}', 'status', this.value)">
+            <option value="new" ${c.status==='new'?'selected':''}>NEW</option>
+            <option value="sent" ${c.status==='sent'?'selected':''}>SENT</option>
+            <option value="replied" ${c.status==='replied'?'selected':''}>REPLIED</option>
+            <option value="meeting" ${c.status==='meeting'?'selected':''}>MEETING</option>
+            <option value="dataroom" ${c.status==='dataroom'?'selected':''}>DATA ROOM</option>
+            <option value="passed" ${c.status==='passed'?'selected':''}>PASSED</option>
+            <option value="closed" ${c.status==='closed'?'selected':''}>CLOSED</option>
+          </select>
+        </td>
+        <td class="mono" style="font-size: 11px; color: var(--ink-muted);">${c.lastTouch || '—'}</td>
+        <td><input type="text" class="notes-input" value="${escape(c.notes || '')}" onchange="updateContact('${c.id}', 'notes', this.value)" placeholder="Заметки…"></td>
+        <td><div class="actions"><button class="danger" onclick="deleteContact('${c.id}')">×</button></div></td>
+      </tr>
+    `).join('');
+  }
+
+  function escape(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+</script>
+</body>
+</html>

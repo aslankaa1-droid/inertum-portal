@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Sales Scripts · Скрипты звонков и встреч</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="../assets/topbar.js" defer></script>
+<style>
+  :root[data-theme="dark"] {
+    --bg-base: #0A0B0D; --bg-elev: #13151A; --bg-elev-2: #1C1F26;
+    --ink: #F2F4F7; --ink-muted: #8A93A6; --ink-secondary: #C7CCD6;
+    --argon: #5BC0EB; --argon-bright: #82d3f3;
+    --warn: #E8A33D; --success: #3FB984; --danger: #E5685A;
+    --stroke: #2A2F3A;
+  }
+  :root[data-theme="light"] {
+    --bg-base: #FAFBFC; --bg-elev: #FFFFFF; --bg-elev-2: #F0F2F5;
+    --ink: #0A0B0D; --ink-muted: #5A6270; --ink-secondary: #2A2F3A;
+    --argon: #1565C0; --argon-bright: #1976D2;
+    --warn: #C77400; --success: #2E7D32; --danger: #C62828;
+    --stroke: #DDE2E8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg-base); color: var(--ink);
+    font: 16px/1.7 'Inter', sans-serif; -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(91,192,235,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,192,235,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+  }
+  .container { max-width: 980px; margin: 0 auto; padding: 32px 24px 96px; position: relative; z-index: 1; }
+  header.intro { border-bottom: 1px solid var(--stroke); padding-bottom: 24px; margin-bottom: 32px; }
+  .eyebrow { font: 500 11px 'JetBrains Mono'; color: var(--argon); letter-spacing: 3px; text-transform: uppercase; }
+  h1 {
+    font: 600 48px/1.05 'Inter'; letter-spacing: -0.02em; margin: 12px 0 16px;
+    color: var(--ink);
+  }
+  .lede { font-size: 16px; color: var(--ink-secondary); max-width: 800px; }
+  h2 {
+    font: 500 11px 'JetBrains Mono'; color: var(--argon);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--stroke);
+  }
+  h3 { font: 600 22px 'Inter'; color: var(--ink); margin: 24px 0 10px; }
+  h4 {
+    font: 500 11px 'JetBrains Mono'; color: var(--ink-muted);
+    letter-spacing: 0.12em; text-transform: uppercase; margin: 20px 0 8px;
+  }
+
+  .controls { margin: 24px 0; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .search { flex: 1; min-width: 240px; background: var(--bg-elev-2); border: 1px solid var(--stroke); border-radius: 6px; padding: 12px 16px; color: var(--ink); font: 14px 'Inter'; }
+  .search:focus { outline: none; border-color: var(--argon); }
+  .filter-pill {
+    padding: 8px 14px; border-radius: 100px;
+    font: 500 11px 'JetBrains Mono'; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--stroke); color: var(--ink-muted);
+    cursor: pointer; transition: all .15s; background: transparent;
+  }
+  .filter-pill:hover { color: var(--ink); border-color: var(--ink-muted); }
+  .filter-pill.active { background: var(--argon); color: var(--bg-base); border-color: var(--argon); }
+
+  .script {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: 10px; padding: 28px; margin-bottom: 18px;
+  }
+  .script-head { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .duration {
+    display: inline-block; padding: 4px 12px; border-radius: 100px;
+    font: 500 11px 'JetBrains Mono'; letter-spacing: 0.08em;
+    background: rgba(91,192,235,0.12); color: var(--argon);
+    border: 1px solid var(--argon);
+  }
+  .duration.warn { background: rgba(232,163,61,0.12); color: var(--warn); border-color: var(--warn); }
+  .duration.success { background: rgba(63,185,132,0.12); color: var(--success); border-color: var(--success); }
+
+  .dialog {
+    background: var(--bg-elev-2); border: 1px solid var(--stroke);
+    border-radius: 6px; padding: 20px;
+    font: 15px/1.7 'Inter', sans-serif; color: var(--ink-secondary);
+    margin: 12px 0 16px;
+  }
+  .dialog .you {
+    margin-bottom: 12px; padding-left: 16px; border-left: 3px solid var(--argon);
+  }
+  .dialog .them {
+    margin-bottom: 12px; padding-left: 16px; border-left: 3px solid var(--ink-muted);
+    color: var(--ink-muted); font-style: italic;
+  }
+  .dialog .you::before {
+    content: 'ВЫ · '; font: 500 10px 'JetBrains Mono'; color: var(--argon);
+    letter-spacing: 0.12em; display: block; margin-bottom: 4px;
+  }
+  .dialog .them::before {
+    content: 'ОНИ · '; font: 500 10px 'JetBrains Mono'; color: var(--ink-muted);
+    letter-spacing: 0.12em; display: block; margin-bottom: 4px;
+  }
+
+  .objections {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: 8px; margin: 8px 0;
+  }
+  .obj-q {
+    padding: 14px 18px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    font: 500 15px 'Inter'; color: var(--ink); line-height: 1.4;
+  }
+  .obj-q .toggle {
+    color: var(--ink-muted); font-size: 18px; flex-shrink: 0;
+    transition: transform .2s;
+  }
+  .objections.open .obj-q .toggle { transform: rotate(45deg); color: var(--argon); }
+  .obj-a {
+    padding: 0 18px 18px 18px;
+    display: none; color: var(--ink-secondary); font-size: 14px; line-height: 1.65;
+  }
+  .objections.open .obj-a { display: block; }
+  .obj-a strong { color: var(--ink); }
+
+  .checklist {
+    background: rgba(63,185,132,0.04); border: 1px solid rgba(63,185,132,0.3);
+    border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+    font-size: 14px;
+  }
+  .checklist h4 { color: var(--success); margin-top: 0; }
+  .checklist ul { padding-left: 20px; margin: 8px 0 0; }
+  .checklist li { margin-bottom: 4px; color: var(--ink-secondary); }
+
+  .warn-block {
+    background: rgba(232,163,61,0.04); border: 1px solid rgba(232,163,61,0.3);
+    border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+    font-size: 14px;
+  }
+  .warn-block h4 { color: var(--warn); margin-top: 0; }
+  .warn-block ul { padding-left: 20px; margin: 8px 0 0; }
+
+  .note { font-size: 13px; color: var(--ink-muted); font-style: italic; margin: 10px 0; }
+  strong { color: var(--ink); }
+  em { color: var(--argon); font-style: normal; }
+
+  footer {
+    margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--stroke);
+    font: 11px 'JetBrains Mono'; color: var(--ink-muted); letter-spacing: 0.1em;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  .empty {
+    text-align: center; padding: 64px; color: var(--ink-muted); display: none;
+  }
+  .empty.show { display: block; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header class="intro">
+  <div class="eyebrow"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--argon);box-shadow:0 0 8px var(--argon);margin-right:8px;"></span>SALES SCRIPTS · ДЛЯ АСЛАНА</div>
+  <h1>Скрипты звонков и встреч</h1>
+  <p class="lede">8 сценариев разговора + 12 типовых возражений с готовыми ответами. Используй когда звонишь по CRM-трекеру или встречаешься лично. Не зачитывай дословно — это структура и ключевые фразы.</p>
+</header>
+
+<div class="controls">
+  <input type="text" id="search" class="search" placeholder="Поиск по скриптам и возражениям…">
+  <button class="filter-pill active" data-cat="all">Все</button>
+  <button class="filter-pill" data-cat="investor">Инвестор</button>
+  <button class="filter-pill" data-cat="customer">Клиент</button>
+  <button class="filter-pill" data-cat="supplier">Поставщик</button>
+  <button class="filter-pill" data-cat="patent">Поверенный</button>
+  <button class="filter-pill" data-cat="objections">Возражения</button>
+</div>
+
+<div class="empty" id="empty">Ничего не найдено.</div>
+
+<div id="scripts">
+
+<!-- ============ ELEVATOR PITCH ============ -->
+<h2>§01 · Elevator Pitch — кратко о проекте</h2>
+
+<div class="script" data-cat="investor customer">
+  <div class="script-head">
+    <span class="duration">30 СЕКУНД</span>
+    <h3 style="margin: 0;">«Что ты делаешь?» — на лифте, в коридоре, на конференции</h3>
+  </div>
+  <div class="dialog">
+    <div class="you">«INERTUM делает капсулы из специальной плёнки с инертным газом, чтобы хранить дорогие вещи 50 лет — коллекционные машины, музейные артефакты, стратегические резервы лекарств. Без обслуживания, без электричества. Прямого аналога в мире нет, патент в подаче. Pre-seed раунд $750k.»</div>
+  </div>
+  <div class="note">Ключевые цифры: 50 лет / нет аналогов / $750k. Запоминается.</div>
+</div>
+
+<div class="script" data-cat="investor customer">
+  <div class="script-head">
+    <span class="duration warn">2 МИНУТЫ</span>
+    <h3 style="margin: 0;">«Расскажи подробнее» — на коротком звонке или встрече</h3>
+  </div>
+  <div class="dialog">
+    <div class="you"><strong>Проблема (15 сек):</strong> «Дорогие активы по всему миру теряют ценность из-за окисления. CarCapsule и Carcoon работают на воздухе — внутри 21% кислорода, изделие портится. Музейные витрины делают штучно за $50k+. Mil-spec упаковка — для деталей, не для целых изделий. Между ними слепая зона на $50 миллиардов.»</div>
+    <div class="you"><strong>Решение (30 сек):</strong> «Мы делаем гибкую герметичную капсулу из ламината PET / алюминиевой фольги / полиэтилена. Внутри — азот вместо воздуха. Плюс кислород-абсорбер от Mitsubishi. Плюс пассивный оптический сенсор, читается снаружи через прозрачное окно — без батарей, без радио. 5 слоёв защиты. 50 лет.»</div>
+    <div class="you"><strong>Рынок и продукт (30 сек):</strong> «5 моделей: гаражная капсула под коллекционные авто $5–15k, мото-версия $1.5–3k, премиум-витрина под часы и слитки $300–1200, музейная архивная $200–800, упаковка для Росрезерва $5–50 за единицу. Маржа 75–90%.»</div>
+    <div class="you"><strong>Защита и команда (30 сек):</strong> «Патент в подаче, проверены 21 ближайший аналог — блокеров нет. Я founder, опыт международных сделок в нефтегазе РФ-Китай-MENA. Pre-seed $750k за 8% equity на 18 месяцев. Series A через 18 мес целевая оценка $20–30M.»</div>
+    <div class="you"><strong>Вопрос (15 сек):</strong> «Хотел бы услышать твоё мнение — релевантно ли это для твоего фонда / интересно ли инвестировать?»</div>
+  </div>
+  <div class="checklist">
+    <h4>Чек-лист после звонка</h4>
+    <ul>
+      <li>Отметить статус в CRM-трекере (REPLIED / MEETING)</li>
+      <li>Отправить пакет: pitch deck v2 + FAQ ссылку, без NDA пока</li>
+      <li>Запланировать follow-up через 7 дней (шаблон E)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="script" data-cat="investor">
+  <div class="script-head">
+    <span class="duration success">10 МИНУТ</span>
+    <h3 style="margin: 0;">Полная демонстрация на Zoom-встрече</h3>
+  </div>
+
+  <h4>Структура встречи</h4>
+  <ol style="padding-left: 24px; line-height: 1.9; color: var(--ink-secondary);">
+    <li><strong>Knock-knock (1 мин):</strong> Спасибо за время. Меня зовут Аслан, основатель INERTUM. У вас была возможность посмотреть one-pager?</li>
+    <li><strong>Контекст (1 мин):</strong> Кратко: я в нефтегазе РФ-MENA-CN, в начале 2026 искал решение для хранения коллекционных активов и понял что ниши нет. Поэтому собрал команду экспертов и сделал технологию.</li>
+    <li><strong>Демо портала (3 мин):</strong> Открыть `aslankaa.com/inertum/` → 3D-капсула → секция Технология → анимация продува N₂ → 5 продуктовых ниш.</li>
+    <li><strong>Patent + traction (2 мин):</strong> 21 проверенный аналог, блокеров нет, заявка ЕАПО v2.1 в подаче. Готовы 2 прототипа на сборке (мото + вело), КД передана NomexRus с RFQ.</li>
+    <li><strong>Финансы (2 мин):</strong> Открыть `INERTUM-financials.html` → P&L 2026-2030 → break-even Q3 2027 → выход на $25M в 2030.</li>
+    <li><strong>Ask (1 мин):</strong> $750k за 8% equity, 18 мес runway, цель Series A $3-5M на $20-30M post-money через 18 мес. Минимальный чек $50k.</li>
+    <li><strong>Q&amp;A:</strong> Использовать FAQ для типовых вопросов, открыть нужный раздел на экране.</li>
+  </ol>
+  <div class="checklist">
+    <h4>Что подготовить заранее</h4>
+    <ul>
+      <li>Открыть в браузере 4 вкладки: portal (главная) · pitch v2 · FAQ · financials</li>
+      <li>Скачать NDA в PDF, готов отправить если попросят DD-материалы</li>
+      <li>Знать где какой раздел FAQ — поиск работает по странице</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ INVESTOR FOLLOW-UP ============ -->
+<h2>§02 · Follow-up инвестора через 7 дней без ответа</h2>
+
+<div class="script" data-cat="investor">
+  <div class="script-head">
+    <span class="duration">КОРОТКИЙ ЗВОНОК</span>
+    <h3 style="margin: 0;">Если не ответили на email</h3>
+  </div>
+  <div class="dialog">
+    <div class="you">«Здравствуйте, [Имя]. Меня зовут Аслан, неделю назад писал вам про проект INERTUM — капсулы для долговременного хранения. Просто хочу уточнить — попало ли письмо к вам или потерялось. Если тема не подходит — буквально две строки в ответ, и я уберу из рассылки. Если интересно — могу позвонить на 30 минут.»</div>
+    <div class="them">«Да, видел, посмотрю на этой неделе» / «Не наша тема» / «Перешлю коллеге»</div>
+  </div>
+  <div class="warn-block">
+    <h4>Что НЕ говорить</h4>
+    <ul>
+      <li>«Вы не ответили» — это пассивная агрессия</li>
+      <li>«Это срочно, есть и другие интересанты» — давление работает только если правда; пока неправда, не врать</li>
+      <li>«Это уникальный шанс» — клише, инвесторы пропускают</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ CUSTOMER B2C ============ -->
+<h2>§03 · Звонок коллекционеру / прямая B2C-продажа</h2>
+
+<div class="script" data-cat="customer">
+  <div class="script-head">
+    <span class="duration warn">5–7 МИНУТ</span>
+    <h3 style="margin: 0;">Холодный заход на владельца коллекционного авто</h3>
+  </div>
+  <div class="dialog">
+    <div class="you"><strong>Открытие:</strong> «Здравствуйте, [Имя]. Меня зовут Аслан. Я знаю, что у вас в коллекции [конкретная модель], впечатляющая машина. Хотел показать одну вещь, которая может быть полезна — занимает 30 секунд.»</div>
+    <div class="them">«Слушаю.»</div>
+    <div class="you"><strong>Боль:</strong> «Когда дорогая машина стоит в гараже зимой / на хранении, она теряет до 5–10% стоимости в год — резина, кожа, лак, металл — всё окисляется. Производители страховых калькуляторов это считают.»</div>
+    <div class="you"><strong>Решение:</strong> «Мы сделали гаражную капсулу с инертным газом — машина внутри в азоте, кислорода почти нет, окисление останавливается. На 50 лет. Это не наш фантастический проект — технология стоит на стандартах военной упаковки и музейных витрин, мы соединили их в продукт для коллекционеров.»</div>
+    <div class="you"><strong>Цена и применение:</strong> «Стоит $5–15 тыс в зависимости от размера машины. Это меньше 1% от стоимости [конкретной модели] — а защищает её 50 лет. Для сравнения, страховка от утери стоит дороже и не покрывает деградацию.»</div>
+    <div class="you"><strong>Закрытие:</strong> «Я могу прислать спецификацию и приехать показать прототип, как только он будет готов — конец Q4 2026. Хотите быть в списке первых клиентов?»</div>
+  </div>
+  <div class="checklist">
+    <h4>Допольнительные крючки</h4>
+    <ul>
+      <li>Узнать стоимость конкретной машины и сказать % от неё</li>
+      <li>Упомянуть конкретного коллекционера по знакомству («у Иванова из вашего клуба тоже спрашивает»)</li>
+      <li>Предложить early adopter скидку 20% для первых 10 клиентов</li>
+    </ul>
+  </div>
+</div>
+
+<div class="script" data-cat="customer">
+  <div class="script-head">
+    <span class="duration">3 МИНУТЫ</span>
+    <h3 style="margin: 0;">Музей или галерея</h3>
+  </div>
+  <div class="dialog">
+    <div class="you">«Здравствуйте. У вас в фонде есть артефакты которые вы не выставляете из-за деградации — коррозия металла, выцветание текстиля. Это типично для 15% музейных коллекций. Мы делаем серийные витрины с инертным газом: документы, иконы, монеты, оружие XIX века могут стоять в экспозиции и не разрушаться. Стоит $200–800 за витрину против $50 000 у Goppion. Хотите попробовать на одном экспонате?»</div>
+  </div>
+  <div class="note">Музей — небольшой бюджет, длинный цикл закупки. Главное — встать в pipeline.</div>
+</div>
+
+<!-- ============ SUPPLIER ============ -->
+<h2>§04 · Звонок поставщику ламината (NomexRus, Pack-Systems)</h2>
+
+<div class="script" data-cat="supplier">
+  <div class="script-head">
+    <span class="duration">10 МИНУТ</span>
+    <h3 style="margin: 0;">Первый разговор с производителем барьерного ламината</h3>
+  </div>
+  <div class="dialog">
+    <div class="you"><strong>Открытие:</strong> «Здравствуйте, я представляю проект INERTUM, мы делаем системы долговременного хранения. На прошлой неделе отправили вам RFQ на барьерный ламинат PET / Al-foil / LLDPE — хотел уточнить, что вопрос дошёл и обсудить детали.»</div>
+    <div class="them">«Получили, считаем.»</div>
+    <div class="you"><strong>Уточнения:</strong> «Несколько вопросов:<br>(1) Подтвердите OTR ≤ 0.05 см³/м²·сут·атм — это критично для продукта.<br>(2) Какой ширины максимально рулон? Нам нужно 2 м для мото-капсулы.<br>(3) Минимальная партия и lead-time для тестового заказа 14 квадратных метров?<br>(4) Сертификат соответствия ГОСТ 9.014 ВУ-5 или MIL-PRF-131K — есть?»</div>
+    <div class="them">«[Ответят на каждый]»</div>
+    <div class="you"><strong>Особое требование:</strong> «Один важный момент — нам нужна возможность сделать локальное прозрачное окно 30×30 мм без алюминиевой фольги в этой зоне для оптического считывания сенсора кислорода. Можете это в техкарту заложить?»</div>
+    <div class="you"><strong>Объём перспективы:</strong> «Тестовая партия — 14 квадратных метров. Если результат подходит — наш план потребления к 2028 году 5000–10000 квадратных метров в год. Хотим работать с одним надёжным поставщиком.»</div>
+    <div class="you"><strong>Закрытие:</strong> «Когда сможете прислать формальный КП с ценой и сроками? Я готов подписать NDA если требуется.»</div>
+  </div>
+  <div class="checklist">
+    <h4>Что иметь под рукой</h4>
+    <ul>
+      <li>КД-альбом v1 (печатный или PDF) — могут попросить чертежи в реальном времени</li>
+      <li>Спецификация ламината из ТЗ прототипа</li>
+      <li>NDA-шаблон для подписания</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ PATENT ATTORNEY ============ -->
+<h2>§05 · Звонок патентному поверенному</h2>
+
+<div class="script" data-cat="patent">
+  <div class="script-head">
+    <span class="duration warn">15 МИНУТ</span>
+    <h3 style="margin: 0;">Первая консультация с поверенным</h3>
+  </div>
+  <div class="dialog">
+    <div class="you"><strong>Контекст:</strong> «Здравствуйте, [Имя поверенного]. Меня зовут Аслан, founder проекта INERTUM. У нас драфт патентной заявки v2.1 для ЕАПО — система долговременного хранения промышленных и коллекционных изделий в инертной газовой среде. 3 независимых пункта, 20 зависимых.»</div>
+    <div class="you"><strong>Готовность:</strong> «Мы провели предварительный патентный поиск по 21 ближайшему аналогу — прямых блокеров не выявили. Драфт готов передать вам для официальной экспертизы и подачи.»</div>
+    <div class="you"><strong>Вопросы поверенному:</strong></div>
+    <div class="you" style="padding-left: 32px;">«1. Готовы ли вести наше дело? Опыт в области упаковочных материалов / инструментов измерения?<br>2. Сроки от получения драфта до подачи в Роспатент? Целевая дата приоритета — Q3 2026.<br>3. Вы делаете сами или через ассистента официальный поиск Роспатент / WIPO Madrid / EUIPO / USPTO? Бюджет на этот этап?<br>4. Стоимость базового пакета: подача в Роспатент → ЕАПО конвертация через 12 мес → PCT через 12 мес?<br>5. Нужно ли подавать одновременно заявку на товарный знак INERTUM в классы 17, 20, 22?<br>6. Есть ли у вас опыт работы с заявителями-нерезидентами на случай если SPV в Дубае?»</div>
+    <div class="you"><strong>NDA:</strong> «Перед передачей драфта прошу подписать стандартное NDA — наш или ваш шаблон, на ваш выбор. Это обязательное условие до фиксации даты приоритета.»</div>
+  </div>
+  <div class="warn-block">
+    <h4>Красные флаги — поверенный не подходит, если:</h4>
+    <ul>
+      <li>Не имеет опыта в нашей предметной области (упаковка / измерения / IoT)</li>
+      <li>Просит больше ₽250k за базовый пакет (это завышено, среднее ₽150–200k)</li>
+      <li>Обещает «гарантированно одобрят» — это невозможно, экспертиза независима</li>
+      <li>Не готов подписать NDA до получения драфта</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ OBJECTIONS ============ -->
+<h2>§06 · Возражения и ответы — топ 12</h2>
+
+<p style="color: var(--ink-secondary); margin-bottom: 16px;">Клик на возражение — раскроется ответ. Эти 12 закрывают ~80% типовых сомнений.</p>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«Это уже делают CarCapsule и подобные.»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>CarCapsule делает <strong>надувные чехлы на воздухе с фильтром</strong> — внутри 21% кислорода и активная циркуляция. Это не защита от окисления, это защита от пыли. Им нужно электричество 24/7.</p>
+    <p>Мы делаем <strong>герметичную капсулу с инертным газом</strong> вместо воздуха — окисления физически не происходит. Без электричества. На 50 лет.</p>
+    <p>Это <em>принципиально другой продукт</em> в премиум-сегменте, не конкурент CarCapsule, а параллельная категория.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«У вас нет выручки — почему оценка $9.4M post-money?»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Pre-seed deeptech без выручки — стандарт <strong>$5-12M post-money</strong> в РФ + СНГ + MENA. Median около $9M.</p>
+    <p>Наша оценка $9.4M основана на: <strong>(1)</strong> готовый патентный драфт с 21 проверенным аналогом — это IP-актив; <strong>(2)</strong> верифицированные поставщики и команда экспертов; <strong>(3)</strong> прямые каналы в РФ-MENA-CN через founder; <strong>(4)</strong> 60% маржа с быстрым cash-flow break-even Q3 2027.</p>
+    <p>Если эти 4 фактора недостаточны — обсудим SAFE с конверсией 20% дисконт на Series A.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«А что если патент не выдадут?»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Возможные причины отказа: предшествующее раскрытие (мы контролируем NDA), нет новизны (21 аналог проверен — нет), нет изобретательского уровня (5-признаковая комбинация неочевидна). В <strong>70%</strong> случаев экспертиза даёт промежуточное уведомление и заявка проходит после доработки.</p>
+    <p>Даже без патента остаётся <strong>статус ноу-хау</strong> на технологические параметры (T сварки, конкретные SKU, методики QC) — защищён ст. 1465 ГК РФ как коммерческая тайна.</p>
+    <p>В худшем сценарии: продаём на бренде + ноу-хау + сертификации ГОСТ Р + first-mover. Маржа просядет с 80% до 50%, бизнес остаётся.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«Founder без технического бэкграунда — кто будет вести продукт?»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Я sales-driven founder с 10+ лет опыта международных сделок. <strong>Это сила в:</strong> доступ к госзаказу (Росрезерв / Минздрав), доступ к коллекционерам premium через сеть нефтегаза, кросс-культурная работа RU/CN/KZ/MENA.</p>
+    <p>На R&D-сторону нанимаем <strong>CTO + Head of R&D после раунда</strong>. Профиль: Sensirion, NomexRus, Promwad, Sk Capital alumni. Бюджет на CTO заложен в OpEx ($50k/год для middle).</p>
+    <p>До найма — экспертиза покрыта консультантами: NomexRus (материалы), PreSens (сенсоры), патентный поверенный.</p>
+    <p>Аналог: Tesla 2003 — Маск тоже не был инженером по аккумуляторам.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«Слишком много сегментов — Auto, Moto, Vault, Archive, Strategic. Размытый фокус.»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Это <strong>одна архитектура</strong> с разными размерами. Лекалы общие, поставщики общие, сборка общая. Разница только в габаритах и цене.</p>
+    <p>Первый год — фокус на <strong>двух продуктах</strong>: Moto (быстрый прототип, дешёвый цикл продаж) и Vault (часы / слитки — самый большой средний чек среди премиум). Остальные — масштабирование.</p>
+    <p>Strategic (Росрезерв) — отдельный фокус через тендеры, B2G-цикл 12-18 мес, тенденции к контракту 2028. Это не размытие, это параллельный канал с другим тайм-фреймом.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«Санкции на материалы и оборудование — как обходите?»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Прямых санкционных запретов на наши компоненты <strong>нет</strong>: PreSens (Германия) — dual-use не классифицирован, Mitsubishi Ageless — японский commodity, YKK — японская молния, NomexRus — российский поставщик.</p>
+    <p>Поставка через дистрибьютора в РФ или закупка через Казахстан / Дубай-холдинг. Lead-time увеличивается на 1-2 нед, всё.</p>
+    <p>На случай усиления санкций — <strong>план B</strong>: переход на Hangzhou Keneng (CN) + китайские оптические сенсоры (Inhand IoT, Fibos). Тестирование и валидация — 3-6 мес.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«Кто конечный покупатель? Как будете продавать?»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Три канала параллельно:</p>
+    <ol style="padding-left: 20px;">
+      <li><strong>B2C через прямые каналы founder</strong>: коллекционные клубы (Ferrari Club, Porsche Club), private banking (Альфа-Банк, Sber Private), страховщики (Альфастрахование). Цикл 3-6 мес от знакомства до контракта.</li>
+      <li><strong>B2G тендеры</strong>: Росрезерв, Минздрав, Минобороны через сертификацию ГОСТ Р + ГОСТ В. Цикл 12-18 мес.</li>
+      <li><strong>B2B через музеи</strong>: Эрмитаж, Третьяковка, Казахстан National Museum. Цикл 6-12 мес.</li>
+    </ol>
+    <p>Также — лицензирование Mitsubishi или Sealed Air после 2-3 лет (роялти 3-5%).</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«Откуда $25M к 2030? Это слишком оптимистично.»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Разбивка $25M:</p>
+    <ul style="padding-left: 20px;">
+      <li>Auto: 200/квартал × 4 × $7k = <strong>$5.6M</strong></li>
+      <li>Moto: 400/квартал × 4 × $2k = <strong>$3.2M</strong></li>
+      <li>Vault: 1000/квартал × 4 × $700 = <strong>$2.8M</strong></li>
+      <li>Archive: 200/квартал × 4 × $500 = <strong>$0.4M</strong></li>
+      <li>Strategic тендер ~₽1B = <strong>$11M</strong></li>
+      <li>Лицензирование = <strong>$2M</strong></li>
+    </ul>
+    <p>Это <strong>базовый сценарий</strong>. Пессимистичный без госзаказа — $14M. Оптимистичный с двумя тендерами — $40M. Sensitivity-анализ в финмодели открыт.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«Долго ждать exit. Как и через сколько лет?»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Целевые сценарии exit через 5-7 лет:</p>
+    <ol style="padding-left: 20px;">
+      <li><strong>Strategic acquisition</strong> — Mitsubishi Gas Chemical / Sealed Air / Amcor / Constantia покупают за $80–150M (мультипликатор 3-6× выручки)</li>
+      <li><strong>IPO на МосБирже / DIFC</strong> — при выручке $50M+ и 3 годах прибыли</li>
+      <li><strong>Trade sale family office</strong> — UAE или KSA private wealth, $100M+</li>
+    </ol>
+    <p>Pre-seed → Series A через 18 мес → Series B через 36 мес → exit 2030–2031. Кратность для pre-seed-инвестора: 8–15× при базовом сценарии.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«Слишком сложная технология — комплексность ведёт к failure.»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Технология сложная по описанию, но <strong>каждый компонент существует и проверен 30+ лет</strong>:</p>
+    <ul style="padding-left: 20px;">
+      <li>Барьерный ламинат — Mitsubishi, Toppan, Amcor делают для пищевой упаковки 50 лет</li>
+      <li>Mitsubishi Ageless — на рынке 35 лет, миллиарды саше проданы</li>
+      <li>PreSens оптические патчи — стандартная технология в биотехе с 1990-х</li>
+      <li>Термосварка плёнок — стандарт упаковочной индустрии</li>
+    </ul>
+    <p>Наша инновация — <strong>комбинация и упаковка под премиум-нишу</strong>. Это не R&D-риск изобретать что-то новое, это интеграция и market-fit.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«А китайцы скопируют через год.»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Защита от копирования:</p>
+    <ol style="padding-left: 20px;">
+      <li><strong>Патент</strong> — заявки в Роспатент → ЕАПО → PCT США / ЕС / Китай / Япония / ОАЭ. Покрывает все ключевые рынки. Через PCT — действует в Китае.</li>
+      <li><strong>Сертификация ГОСТ Р + ГОСТ В</strong> — для российского рынка дополнительный барьер. Иностранцам нужно проходить 6-12 мес.</li>
+      <li><strong>Бренд + первый-входить</strong> — INERTUM как премиум-бренд, как Apple для гаджетов. Купят китайскую копию только в low-end сегменте.</li>
+      <li><strong>Эксклюзивные дистрибьюторские договоры с Mitsubishi и PreSens на ЕАЭС</strong> — китайцы не получат именно этих компонентов в наших объёмах.</li>
+    </ol>
+    <p>В худшем сценарии — китайская копия на low-end, мы на premium. Так Tesla сосуществует с BYD.</p>
+  </div>
+</div>
+
+<div class="objections" data-cat="objections">
+  <div class="obj-q"><span class="text">«У меня нет времени сейчас, может позже?»</span><span class="toggle">+</span></div>
+  <div class="obj-a">
+    <p>Лучший ответ: «Понимаю. У меня раунд закрывается ориентировочно в [дата + 6-8 нед]. Если приоритет инвестора возникнет позже — мы сможем обсудить расширение раунда или участие в Series A через 18 месяцев».</p>
+    <p>Что НЕ говорить: «В следующий раз будет дороже» (давление). Что говорить: «Хотите я просто пришлю обновление через месяц по ключевым событиям — патент подан / прототип собран?» (мягкий keep-in-touch).</p>
+    <p>Отметить в CRM: статус PASSED, добавить заметку «return Q4 2026 with prototype + patent priority».</p>
+  </div>
+</div>
+
+</div>
+
+<div class="empty" id="empty-bottom"></div>
+
+<footer>
+  <span>INERTUM Sales Scripts v1.0</span>
+  <span>2026-05-09 · Аслан КАА · idriskaaa@gmail.com</span>
+</footer>
+
+</div>
+
+<script>
+  // Toggle accordion
+  document.querySelectorAll('.objections').forEach(o => {
+    o.querySelector('.obj-q').addEventListener('click', () => o.classList.toggle('open'));
+  });
+
+  // Filter
+  const pills = document.querySelectorAll('.filter-pill');
+  const search = document.getElementById('search');
+  const empty = document.getElementById('empty');
+
+  pills.forEach(p => p.addEventListener('click', () => {
+    pills.forEach(x => x.classList.remove('active'));
+    p.classList.add('active');
+    refilter();
+  }));
+
+  search.addEventListener('input', refilter);
+
+  function refilter() {
+    const q = search.value.toLowerCase().trim();
+    const cat = document.querySelector('.filter-pill.active').dataset.cat;
+    let any = false;
+
+    document.querySelectorAll('.script, .objections').forEach(el => {
+      const cats = (el.dataset.cat || '').split(/\s+/);
+      const text = el.textContent.toLowerCase();
+      const matchCat = cat === 'all' || cats.includes(cat);
+      const matchSearch = q === '' || text.includes(q);
+      const visible = matchCat && matchSearch;
+      el.style.display = visible ? '' : 'none';
+      if (visible) any = true;
+      if (q && matchSearch && el.classList.contains('objections')) {
+        el.classList.add('open');
+      } else if (!q && el.classList.contains('objections')) {
+        el.classList.remove('open');
+      }
+    });
+
+    // Hide section headers if all children hidden
+    document.querySelectorAll('h2').forEach(h2 => {
+      let next = h2.nextElementSibling;
+      let hasVisible = false;
+      while (next && next.tagName !== 'H2') {
+        if (next.tagName === 'P' || next.style.display !== 'none') {
+          if (next.classList.contains('script') || next.classList.contains('objections')) {
+            if (next.style.display !== 'none') hasVisible = true;
+          }
+        }
+        next = next.nextElementSibling;
+      }
+      h2.style.display = hasVisible ? '' : 'none';
+    });
+
+    empty.classList.toggle('show', !any);
+  }
+</script>
+</body>
+</html>

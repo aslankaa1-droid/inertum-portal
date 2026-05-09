@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Inter, Arial, sans-serif">
+  <!-- Лист 04 · Велокапсула — общий вид и раскрой. Масштаб 1:25. -->
+  <defs>
+    <marker id="arrowEnd" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#000"/>
+    </marker>
+    <marker id="arrowStart" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M10,0 L0,5 L10,10 z" fill="#000"/>
+    </marker>
+  </defs>
+  <style>
+    .frame { fill: none; stroke: #000; stroke-width: 1.5; }
+    .body { fill: none; stroke: #000; stroke-width: 1.4; }
+    .gas { fill: #d8eeff; opacity: 0.6; }
+    .marg { fill: #fff8e1; stroke: #b07000; stroke-width: 0.5; stroke-dasharray: 3,2; }
+    .panel-fill { fill: #fafafa; stroke: #000; stroke-width: 1.2; }
+    .printable { fill: #f3e8ff; stroke: #6a1b9a; stroke-width: 0.6; }
+    .dim { fill: none; stroke: #000; stroke-width: 0.5; }
+    .ext { fill: none; stroke: #000; stroke-width: 0.4; }
+    .lbl { font-size: 11px; fill: #000; }
+    .lblb { font-size: 12px; fill: #000; font-weight: 600; }
+    .num { font-size: 10px; fill: #000; font-weight: 500; }
+    .title { font-size: 16px; font-weight: 600; fill: #000; }
+    .small { font-size: 9px; fill: #000; }
+    .zipper { stroke: #c00; stroke-width: 1.5; stroke-dasharray: 2,1; fill: none; }
+    .pin { fill: #f44; stroke: #000; stroke-width: 0.5; }
+    .glass { fill: #cfe; stroke: #08a; stroke-width: 0.6; }
+    .bike { fill: none; stroke: #444; stroke-width: 1; }
+  </style>
+
+  <rect class="frame" x="20" y="20" width="1160" height="860"/>
+  <rect class="frame" x="800" y="800" width="380" height="80"/>
+  <line class="frame" x1="800" y1="820" x2="1180" y2="820"/>
+  <line class="frame" x1="800" y1="850" x2="1180" y2="850"/>
+  <line class="frame" x1="950" y1="800" x2="950" y2="880"/>
+  <text class="lblb" x="810" y="813">Лист 04 · Велокапсула — общий вид и раскрой</text>
+  <text class="lbl" x="810" y="839">Чертёж: КД-INERTUM-VELO-04 · v1.0</text>
+  <text class="lbl" x="810" y="869">2026-05-09 · Аслан КАА · INERTUM</text>
+  <text class="lbl" x="960" y="819">Масштаб 1:25</text>
+  <text class="lbl" x="960" y="839">V<tspan baseline-shift="sub" font-size="9">внутр</tspan> = 1,19 м³</text>
+  <text class="lbl" x="960" y="859">S оболочки = 7,44 м²</text>
+  <text class="lbl" x="960" y="876">Бюджет прототипа: ≈ ₽120–180 тыс</text>
+
+  <text class="title" x="600" y="50" text-anchor="middle">INERTUM-VELO · Прототип №2 · Общий вид и раскрой</text>
+
+  <!-- ВИД СБОКУ -->
+  <text class="lblb" x="180" y="100" text-anchor="middle">Вид сбоку</text>
+  <g transform="translate(80, 130)">
+    <!-- Капсула 1800×1100 → масштаб 1:25 → 72×44 — слишком мал. Возьмём 1:10 для основного вида = 180×110 -->
+    <rect class="body" x="0" y="0" width="180" height="110" rx="4"/>
+    <rect class="gas" x="2" y="2" width="176" height="106" rx="3"/>
+    <!-- Молния по верху -->
+    <line class="zipper" x1="6" y1="0" x2="174" y2="0"/>
+    <text class="small" x="90" y="-6" text-anchor="middle" fill="#c00">Молния YKK Aquaseal #5 · L=2300 мм</text>
+    <!-- Велосипед внутри -->
+    <g class="bike" transform="translate(20, 20)">
+      <circle cx="22" cy="60" r="20"/>
+      <circle cx="115" cy="60" r="20"/>
+      <line x1="22" y1="60" x2="60" y2="20"/>
+      <line x1="60" y1="20" x2="115" y2="60"/>
+      <line x1="60" y1="20" x2="60" y2="0"/>
+      <line x1="55" y1="0" x2="68" y2="0"/>
+      <line x1="22" y1="60" x2="60" y2="20"/>
+      <line x1="60" y1="20" x2="80" y2="60"/>
+      <line x1="80" y1="60" x2="115" y2="60"/>
+      <circle cx="80" cy="60" r="3"/>
+    </g>
+    <text class="small" x="90" y="100" text-anchor="middle" fill="#444">велосипед (силуэт MTB / шоссейный)</text>
+    <!-- Узлы -->
+    <circle cx="20" cy="105" r="4" class="pin"/>
+    <text class="small" x="20" y="120" text-anchor="middle">порт</text>
+    <rect class="glass" x="135" y="40" width="12" height="12"/>
+    <text class="small" x="141" y="36" text-anchor="middle">окно</text>
+
+    <!-- Размеры -->
+    <line class="dim" x1="0" y1="135" x2="180" y2="135" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <line class="ext" x1="0" y1="110" x2="0" y2="140"/>
+    <line class="ext" x1="180" y1="110" x2="180" y2="140"/>
+    <text class="num" x="90" y="130" text-anchor="middle">1800</text>
+
+    <line class="dim" x1="-25" y1="0" x2="-25" y2="110" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <line class="ext" x1="0" y1="0" x2="-30" y2="0"/>
+    <line class="ext" x1="0" y1="110" x2="-30" y2="110"/>
+    <text class="num" x="-30" y="55" text-anchor="end">1100</text>
+  </g>
+
+  <!-- ВИД СВЕРХУ -->
+  <text class="lblb" x="430" y="100" text-anchor="middle">Вид сверху</text>
+  <g transform="translate(340, 130)">
+    <rect class="body" x="0" y="0" width="180" height="60" rx="3"/>
+    <rect class="gas" x="2" y="2" width="176" height="56" rx="2"/>
+    <line class="zipper" x1="6" y1="0" x2="174" y2="0"/>
+    <line stroke="#888" stroke-width="0.5" stroke-dasharray="3,2" x1="6" y1="30" x2="174" y2="30"/>
+    <circle cx="20" cy="55" r="3" class="pin"/>
+    <rect class="glass" x="135" y="20" width="12" height="12"/>
+    <text class="small" x="90" y="36" text-anchor="middle" fill="#888">центральная ось</text>
+
+    <line class="dim" x1="0" y1="80" x2="180" y2="80" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <line class="ext" x1="0" y1="60" x2="0" y2="85"/>
+    <line class="ext" x1="180" y1="60" x2="180" y2="85"/>
+    <text class="num" x="90" y="76" text-anchor="middle">1800</text>
+
+    <line class="dim" x1="-25" y1="0" x2="-25" y2="60" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <line class="ext" x1="0" y1="0" x2="-30" y2="0"/>
+    <line class="ext" x1="0" y1="60" x2="-30" y2="60"/>
+    <text class="num" x="-30" y="33" text-anchor="end">600</text>
+  </g>
+
+  <!-- ВИД СПЕРЕДИ -->
+  <text class="lblb" x="690" y="100" text-anchor="middle">Вид спереди</text>
+  <g transform="translate(640, 130)">
+    <rect class="body" x="0" y="0" width="60" height="110" rx="3"/>
+    <rect class="gas" x="2" y="2" width="56" height="106" rx="2"/>
+    <line class="zipper" x1="0" y1="0" x2="60" y2="0"/>
+
+    <line class="dim" x1="0" y1="135" x2="60" y2="135" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <line class="ext" x1="0" y1="110" x2="0" y2="140"/>
+    <line class="ext" x1="60" y1="110" x2="60" y2="140"/>
+    <text class="num" x="30" y="130" text-anchor="middle">600</text>
+
+    <line class="dim" x1="-25" y1="0" x2="-25" y2="110" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <line class="ext" x1="0" y1="0" x2="-30" y2="0"/>
+    <line class="ext" x1="0" y1="110" x2="-30" y2="110"/>
+    <text class="num" x="-30" y="55" text-anchor="end">1100</text>
+  </g>
+
+  <!-- ИЗОМЕТРИЯ -->
+  <text class="lblb" x="900" y="100" text-anchor="middle">Изометрия</text>
+  <g transform="translate(800, 140) scale(0.7)">
+    <polygon class="body" points="0,150 200,150 200,0 0,0" fill="#e8f4fb"/>
+    <polygon class="body" points="0,0 200,0 240,-30 40,-30" fill="#d8eeff"/>
+    <polygon class="body" points="200,0 240,-30 240,120 200,150" fill="#c8e6f9"/>
+    <line stroke="#c00" stroke-width="2" stroke-dasharray="2,1.5" x1="40" y1="-30" x2="240" y2="-30"/>
+    <circle cx="20" cy="135" r="6" class="pin"/>
+    <rect class="glass" x="160" y="50" width="22" height="22"/>
+  </g>
+
+  <!-- ====================== РАСКРОЙ 6 ПАНЕЛЕЙ ====================== -->
+  <text class="title" x="600" y="320" text-anchor="middle">Раскройная карта · 6 панелей · Масштаб 1:25</text>
+
+  <!-- Панель 1 — верх 1800×600 → 72×24 -->
+  <g transform="translate(80, 360)">
+    <text class="lblb" x="0" y="-8">№1 · Верх (с молнией)</text>
+    <rect class="marg" x="0" y="0" width="76" height="28"/>
+    <rect class="panel-fill" x="2" y="2" width="72" height="24"/>
+    <rect class="printable" x="2" y="2" width="72" height="6"/>
+    <text class="small" x="38" y="6" text-anchor="middle">KD-VELO-P1</text>
+    <line class="zipper" x1="10" y1="14" x2="66" y2="14"/>
+
+    <line class="dim" x1="2" y1="44" x2="74" y2="44" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <line class="ext" x1="2" y1="26" x2="2" y2="48"/>
+    <line class="ext" x1="74" y1="26" x2="74" y2="48"/>
+    <text class="num" x="38" y="40" text-anchor="middle">1800</text>
+    <line class="dim" x1="-22" y1="2" x2="-22" y2="26" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="-25" y="16" text-anchor="end">600</text>
+  </g>
+
+  <!-- Панель 2 — низ 1800×600 -->
+  <g transform="translate(310, 360)">
+    <text class="lblb" x="0" y="-8">№2 · Низ</text>
+    <rect class="marg" x="0" y="0" width="76" height="28"/>
+    <rect class="panel-fill" x="2" y="2" width="72" height="24"/>
+    <rect class="printable" x="2" y="2" width="72" height="6"/>
+    <text class="small" x="38" y="6" text-anchor="middle">KD-VELO-P2</text>
+    <circle cx="10" cy="22" r="3" class="pin"/>
+    <text class="small" x="36" y="22" text-anchor="middle">порт</text>
+
+    <line class="dim" x1="2" y1="44" x2="74" y2="44" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="38" y="40" text-anchor="middle">1800</text>
+    <line class="dim" x1="-22" y1="2" x2="-22" y2="26" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="-25" y="16" text-anchor="end">600</text>
+  </g>
+
+  <!-- Панель 3 — бок L 1800×1100 → 72×44 -->
+  <g transform="translate(540, 360)">
+    <text class="lblb" x="0" y="-8">№3 · Бок L</text>
+    <rect class="marg" x="0" y="0" width="76" height="48"/>
+    <rect class="panel-fill" x="2" y="2" width="72" height="44"/>
+    <rect class="printable" x="2" y="2" width="72" height="6"/>
+    <text class="small" x="38" y="6" text-anchor="middle">KD-VELO-P3</text>
+    <rect class="glass" x="56" y="22" width="10" height="10"/>
+    <text class="small" x="61" y="20" text-anchor="middle">окно</text>
+
+    <line class="dim" x1="2" y1="64" x2="74" y2="64" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="38" y="60" text-anchor="middle">1800</text>
+    <line class="dim" x1="-22" y1="2" x2="-22" y2="46" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="-25" y="26" text-anchor="end">1100</text>
+  </g>
+
+  <!-- Панель 4 — бок R -->
+  <g transform="translate(770, 360)">
+    <text class="lblb" x="0" y="-8">№4 · Бок R</text>
+    <rect class="marg" x="0" y="0" width="76" height="48"/>
+    <rect class="panel-fill" x="2" y="2" width="72" height="44"/>
+    <rect class="printable" x="2" y="2" width="72" height="6"/>
+    <text class="small" x="38" y="6" text-anchor="middle">KD-VELO-P4</text>
+
+    <line class="dim" x1="2" y1="64" x2="74" y2="64" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="38" y="60" text-anchor="middle">1800</text>
+    <line class="dim" x1="-22" y1="2" x2="-22" y2="46" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="-25" y="26" text-anchor="end">1100</text>
+  </g>
+
+  <!-- Панель 5 — торец F 600×1100 → 24×44 -->
+  <g transform="translate(80, 510)">
+    <text class="lblb" x="0" y="-8">№5 · Торец F (с гермовводом)</text>
+    <rect class="marg" x="0" y="0" width="28" height="48"/>
+    <rect class="panel-fill" x="2" y="2" width="24" height="44"/>
+    <rect class="printable" x="2" y="2" width="24" height="6"/>
+    <text class="small" x="14" y="6" text-anchor="middle">P5</text>
+    <circle cx="20" cy="14" r="2" fill="#000"/>
+    <text class="small" x="14" y="42" text-anchor="middle">гермоввод</text>
+
+    <line class="dim" x1="2" y1="64" x2="26" y2="64" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="14" y="60" text-anchor="middle">600</text>
+    <line class="dim" x1="-22" y1="2" x2="-22" y2="46" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="-25" y="26" text-anchor="end">1100</text>
+  </g>
+
+  <!-- Панель 6 — торец R -->
+  <g transform="translate(220, 510)">
+    <text class="lblb" x="0" y="-8">№6 · Торец R (глухой)</text>
+    <rect class="marg" x="0" y="0" width="28" height="48"/>
+    <rect class="panel-fill" x="2" y="2" width="24" height="44"/>
+    <rect class="printable" x="2" y="2" width="24" height="6"/>
+    <text class="small" x="14" y="6" text-anchor="middle">P6</text>
+
+    <line class="dim" x1="2" y1="64" x2="26" y2="64" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="14" y="60" text-anchor="middle">600</text>
+    <line class="dim" x1="-22" y1="2" x2="-22" y2="46" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="-25" y="26" text-anchor="end">1100</text>
+  </g>
+
+  <!-- Ведомость -->
+  <g transform="translate(370, 510)">
+    <text class="lblb" x="0" y="-8">Ведомость панелей · вело</text>
+    <rect x="0" y="0" width="500" height="120" fill="#fafafa" stroke="#000" stroke-width="0.6"/>
+    <line stroke="#000" stroke-width="0.4" x1="0" y1="20" x2="500" y2="20"/>
+    <line stroke="#000" stroke-width="0.4" x1="0" y1="40" x2="500" y2="40"/>
+    <line stroke="#000" stroke-width="0.4" x1="0" y1="60" x2="500" y2="60"/>
+    <line stroke="#000" stroke-width="0.4" x1="0" y1="80" x2="500" y2="80"/>
+    <line stroke="#000" stroke-width="0.4" x1="0" y1="100" x2="500" y2="100"/>
+    <line stroke="#000" stroke-width="0.4" x1="40" y1="0" x2="40" y2="120"/>
+    <line stroke="#000" stroke-width="0.4" x1="140" y1="0" x2="140" y2="120"/>
+    <line stroke="#000" stroke-width="0.4" x1="240" y1="0" x2="240" y2="120"/>
+    <line stroke="#000" stroke-width="0.4" x1="340" y1="0" x2="340" y2="120"/>
+
+    <text class="num" x="20" y="14" text-anchor="middle">№</text>
+    <text class="num" x="90" y="14" text-anchor="middle">Панель</text>
+    <text class="num" x="190" y="14" text-anchor="middle">L×W чист.</text>
+    <text class="num" x="290" y="14" text-anchor="middle">L×W раскр.</text>
+    <text class="num" x="420" y="14" text-anchor="middle">S, м² · особенности</text>
+
+    <text class="num" x="20" y="34" text-anchor="middle">1</text>
+    <text class="num" x="90" y="34" text-anchor="middle">Верх</text>
+    <text class="num" x="190" y="34" text-anchor="middle">1800×600</text>
+    <text class="num" x="290" y="34" text-anchor="middle">1860×660</text>
+    <text class="num" x="420" y="34" text-anchor="middle">1,23 · молния L=2300</text>
+
+    <text class="num" x="20" y="54" text-anchor="middle">2</text>
+    <text class="num" x="90" y="54" text-anchor="middle">Низ</text>
+    <text class="num" x="190" y="54" text-anchor="middle">1800×600</text>
+    <text class="num" x="290" y="54" text-anchor="middle">1860×660</text>
+    <text class="num" x="420" y="54" text-anchor="middle">1,23 · порт</text>
+
+    <text class="num" x="20" y="74" text-anchor="middle">3, 4</text>
+    <text class="num" x="90" y="74" text-anchor="middle">Бок L+R</text>
+    <text class="num" x="190" y="74" text-anchor="middle">1800×1100</text>
+    <text class="num" x="290" y="74" text-anchor="middle">1860×1160</text>
+    <text class="num" x="420" y="74" text-anchor="middle">2 × 2,16 · окно (P3)</text>
+
+    <text class="num" x="20" y="94" text-anchor="middle">5, 6</text>
+    <text class="num" x="90" y="94" text-anchor="middle">Торцы</text>
+    <text class="num" x="190" y="94" text-anchor="middle">600×1100</text>
+    <text class="num" x="290" y="94" text-anchor="middle">660×1160</text>
+    <text class="num" x="420" y="94" text-anchor="middle">2 × 0,77 · гермоввод (P5)</text>
+
+    <text class="lblb" x="20" y="115">Σ</text>
+    <text class="num" x="290" y="115" text-anchor="middle">с припусками</text>
+    <text class="num" x="420" y="115" text-anchor="middle">8,32 м² · ≈ 9,5 м² с отходами</text>
+  </g>
+
+  <!-- Раскладка на рулон 1м -->
+  <g transform="translate(80, 660)">
+    <text class="lblb" x="0" y="-8">Раскладка на рулон шириной 1200 мм (для вело-капсулы достаточно узкого рулона)</text>
+    <rect class="marg" x="0" y="0" width="800" height="80"/>
+
+    <!-- P1+P2 верх+низ 1860×660 → 60×22 -->
+    <rect x="6" y="3" width="60" height="22" fill="#bbdefb" stroke="#000" stroke-width="0.5"/>
+    <text x="36" y="18" text-anchor="middle" font-weight="600" font-size="11">P1</text>
+    <rect x="6" y="27" width="60" height="22" fill="#bbdefb" stroke="#000" stroke-width="0.5"/>
+    <text x="36" y="42" text-anchor="middle" font-weight="600" font-size="11">P2</text>
+
+    <!-- P3 бок 1860×1160 → 62×38 -->
+    <rect x="75" y="3" width="62" height="38" fill="#c8e6c9" stroke="#000" stroke-width="0.5"/>
+    <text x="106" y="22" text-anchor="middle" font-weight="600" font-size="11">P3</text>
+
+    <!-- P4 -->
+    <rect x="145" y="3" width="62" height="38" fill="#c8e6c9" stroke="#000" stroke-width="0.5"/>
+    <text x="176" y="22" text-anchor="middle" font-weight="600" font-size="11">P4</text>
+
+    <!-- P5+P6 торцы 660×1160 → 22×38 -->
+    <rect x="215" y="3" width="22" height="38" fill="#fff3e0" stroke="#000" stroke-width="0.5"/>
+    <text x="226" y="22" text-anchor="middle" font-weight="600" font-size="11">P5</text>
+    <rect x="240" y="3" width="22" height="38" fill="#fff3e0" stroke="#000" stroke-width="0.5"/>
+    <text x="251" y="22" text-anchor="middle" font-weight="600" font-size="11">P6</text>
+
+    <text class="small" x="350" y="32">Резерв на брак: ≈ 1,5 м² → перекладка узлов</text>
+    <text class="small" x="350" y="48">Расход ламината с учётом 15% отходов: ≈ 9,5 м²</text>
+
+    <line class="dim" x1="-25" y1="0" x2="-25" y2="80" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="-30" y="44" text-anchor="end">1200</text>
+    <line class="dim" x1="0" y1="-15" x2="800" y2="-15" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+    <text class="num" x="400" y="-20" text-anchor="middle">≈ 6 800 мм длина рулона на 1 капсулу</text>
+  </g>
+</svg>

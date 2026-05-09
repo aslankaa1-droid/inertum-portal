@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1190 842" font-family="Inter, Arial, sans-serif">
+  <!-- EXPLODED VIEW · разнесёнка компонентов капсулы -->
+  <defs>
+    <pattern id="grid2" patternUnits="userSpaceOnUse" width="40" height="40">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#5BC0EB" stroke-width="0.4" opacity="0.05"/>
+    </pattern>
+  </defs>
+
+  <rect width="1190" height="842" fill="#0a0b0d"/>
+  <rect width="1190" height="842" fill="url(#grid2)"/>
+
+  <!-- Header -->
+  <text x="80" y="60" font-size="11" fill="#5BC0EB" letter-spacing="3" font-weight="500">§02 · EXPLODED VIEW</text>
+  <text x="80" y="100" font-size="36" fill="#F2F4F7" font-weight="600" letter-spacing="-0.5">12 компонентов · одна капсула</text>
+  <text x="80" y="130" font-size="14" fill="#8a93a6">Разнесённый вид мото-капсулы. Слева направо · сверху вниз — порядок монтажа.</text>
+
+  <line x1="80" y1="155" x2="1110" y2="155" stroke="#2A2F3A" stroke-width="1"/>
+
+  <!-- ============= КОМПОНЕНТЫ — БЛОЧНАЯ СЕТКА ============= -->
+  <!-- Каждый компонент = отдельный mini-card с SVG-иконкой и подписью -->
+
+  <!-- Row 1 -->
+
+  <!-- 1 · Ламинат -->
+  <g transform="translate(80, 200)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">01 · BARRIER</text>
+    <!-- Слои -->
+    <g transform="translate(20, 40)">
+      <rect x="0" y="0" width="140" height="20" fill="#bbdefb" stroke="#1565c0" stroke-width="0.6"/>
+      <text x="70" y="14" font-size="9" fill="#0a0b0d" text-anchor="middle">PET 12 мкм</text>
+      <rect x="0" y="22" width="140" height="14" fill="#cfd8dc" stroke="#455a64" stroke-width="0.6"/>
+      <text x="70" y="33" font-size="9" fill="#0a0b0d" text-anchor="middle">Al-foil 9 мкм</text>
+      <rect x="0" y="38" width="140" height="40" fill="#fff3e0" stroke="#ef6c00" stroke-width="0.6"/>
+      <text x="70" y="62" font-size="9" fill="#0a0b0d" text-anchor="middle">LLDPE 70 мкм</text>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">Ламинат</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">PET/Al/LLDPE · 91 мкм</text>
+  </g>
+
+  <!-- 2 · Молния -->
+  <g transform="translate(280, 200)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">02 · ZIPPER</text>
+    <g transform="translate(40, 50)" stroke="#5BC0EB" stroke-width="1.4" fill="none">
+      <path d="M0,40 L100,40"/>
+      <g>
+        <rect x="0" y="35" width="6" height="10" fill="#cfd8dc"/>
+        <rect x="10" y="35" width="6" height="10" fill="#cfd8dc"/>
+        <rect x="20" y="35" width="6" height="10" fill="#cfd8dc"/>
+        <rect x="30" y="35" width="6" height="10" fill="#cfd8dc"/>
+        <rect x="40" y="35" width="6" height="10" fill="#cfd8dc"/>
+        <rect x="50" y="35" width="6" height="10" fill="#cfd8dc"/>
+        <rect x="60" y="35" width="6" height="10" fill="#cfd8dc"/>
+        <rect x="70" y="35" width="6" height="10" fill="#cfd8dc"/>
+        <rect x="80" y="35" width="6" height="10" fill="#cfd8dc"/>
+        <rect x="90" y="35" width="6" height="10" fill="#cfd8dc"/>
+      </g>
+      <rect x="42" y="25" width="22" height="30" fill="#E8A33D" stroke="#0a0b0d"/>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">Молния YKK Aquaseal</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">№ 8 · L = 3000 мм</text>
+  </g>
+
+  <!-- 3 · Порт -->
+  <g transform="translate(480, 200)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">03 · PORT</text>
+    <g transform="translate(60, 50)">
+      <rect x="0" y="20" width="60" height="10" fill="#cfd8dc"/>
+      <rect x="10" y="0" width="40" height="20" fill="#cfd8dc"/>
+      <rect x="22" y="-15" width="16" height="15" fill="#cfd8dc"/>
+      <rect x="0" y="55" width="60" height="10" fill="#cfd8dc"/>
+      <rect x="20" y="30" width="20" height="25" fill="#FFF3E0"/>
+      <line x1="0" y1="85" x2="60" y2="85" stroke="#bbdefb" stroke-width="6"/>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">Schrader клапан</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">⌀ 35 · обратный ход</text>
+  </g>
+
+  <!-- 4 · Сенсор патч -->
+  <g transform="translate(680, 200)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">04 · SENSOR</text>
+    <g transform="translate(60, 50)">
+      <circle cx="30" cy="40" r="28" fill="#5BC0EB" opacity="0.15"/>
+      <circle cx="30" cy="40" r="20" fill="#5BC0EB" opacity="0.3"/>
+      <circle cx="30" cy="40" r="10" fill="#82d3f3"/>
+      <circle cx="30" cy="40" r="3" fill="#fff"/>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">PreSens SP-PSt6</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">⌀ 5 · 5–7 лет · 0–5% O₂</text>
+  </g>
+
+  <!-- 5 · Окно -->
+  <g transform="translate(880, 200)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">05 · WINDOW</text>
+    <g transform="translate(40, 50)">
+      <rect x="0" y="20" width="100" height="60" fill="#bbdefb" opacity="0.3" stroke="#1565c0" stroke-width="1"/>
+      <circle cx="50" cy="50" r="20" fill="rgba(178,235,242,0.6)" stroke="#82d3f3" stroke-width="1.5"/>
+      <text x="50" y="54" font-size="9" fill="#0a0b0d" text-anchor="middle">⌀30</text>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">Оптическое окно</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">⌀ 30 · без Al-foil</text>
+  </g>
+
+  <!-- Row 2 -->
+
+  <!-- 6 · Абсорбер Mitsubishi Ageless -->
+  <g transform="translate(80, 410)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">06 · O₂ SCAVENGER</text>
+    <g transform="translate(35, 50)">
+      <rect x="0" y="0" width="40" height="60" fill="#fff" stroke="#0a0b0d" stroke-width="1" rx="4"/>
+      <text x="20" y="18" font-size="9" fill="#0a0b0d" text-anchor="middle" font-weight="600">Ageless</text>
+      <text x="20" y="32" font-size="9" fill="#0a0b0d" text-anchor="middle">Z-2000</text>
+      <line x1="0" y1="40" x2="40" y2="40" stroke="#0a0b0d"/>
+      <text x="20" y="54" font-size="8" fill="#0a0b0d" text-anchor="middle">2000 cc O₂</text>
+      <rect x="55" y="0" width="40" height="60" fill="#fff" stroke="#0a0b0d" stroke-width="1" rx="4"/>
+      <text x="75" y="18" font-size="9" fill="#0a0b0d" text-anchor="middle" font-weight="600">Ageless</text>
+      <text x="75" y="32" font-size="9" fill="#0a0b0d" text-anchor="middle">Z-2000</text>
+      <line x1="55" y1="40" x2="95" y2="40" stroke="#0a0b0d"/>
+      <text x="75" y="54" font-size="8" fill="#0a0b0d" text-anchor="middle">×6 шт</text>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">Кислород-абсорбер</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">Mitsubishi Ageless Z · ×6</text>
+  </g>
+
+  <!-- 7 · Силикагель -->
+  <g transform="translate(280, 410)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">07 · DESICCANT</text>
+    <g transform="translate(50, 50)">
+      <ellipse cx="40" cy="60" rx="35" ry="6" fill="#cfd8dc"/>
+      <path d="M5,60 L5,15 Q5,5 15,5 L65,5 Q75,5 75,15 L75,60" fill="#fff" stroke="#0a0b0d" stroke-width="1"/>
+      <circle cx="20" cy="30" r="2" fill="#82d3f3"/>
+      <circle cx="30" cy="40" r="2" fill="#82d3f3"/>
+      <circle cx="40" cy="25" r="2" fill="#82d3f3"/>
+      <circle cx="50" cy="38" r="2" fill="#82d3f3"/>
+      <circle cx="60" cy="30" r="2" fill="#82d3f3"/>
+      <text x="40" y="80" font-size="11" fill="#0a0b0d" text-anchor="middle" font-weight="600">200 г</text>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">Силикагель</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">резервный осушитель</text>
+  </g>
+
+  <!-- 8 · Гермоввод -->
+  <g transform="translate(480, 410)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">08 · CABLE GLAND</text>
+    <g transform="translate(60, 50)">
+      <rect x="20" y="0" width="20" height="80" fill="#cfd8dc"/>
+      <rect x="0" y="20" width="60" height="20" fill="#cfd8dc"/>
+      <rect x="0" y="40" width="60" height="20" fill="#cfd8dc"/>
+      <rect x="25" y="-10" width="10" height="10" fill="#0a0b0d"/>
+      <rect x="25" y="80" width="10" height="20" fill="#0a0b0d"/>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">Гермоввод</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">M6×0,75 · IP68 · опц.</text>
+  </g>
+
+  <!-- 9 · Внешний ридер -->
+  <g transform="translate(680, 410)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">09 · OPTICAL READER</text>
+    <g transform="translate(40, 50)">
+      <rect x="10" y="20" width="90" height="55" fill="#1a1a1a" stroke="#5BC0EB" stroke-width="1" rx="4"/>
+      <rect x="20" y="32" width="50" height="20" fill="#0a0b0d" stroke="#5BC0EB" stroke-width="0.5"/>
+      <text x="45" y="45" font-size="9" fill="#5BC0EB" text-anchor="middle" font-family="JetBrains Mono">0.32%</text>
+      <line x1="100" y1="50" x2="115" y2="80" stroke="#82d3f3" stroke-width="2"/>
+      <circle cx="115" cy="80" r="4" fill="#82d3f3"/>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">PreSens OXY-1 ST</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">внешний · 1 на 100 капсул</text>
+  </g>
+
+  <!-- 10 · Каркас ПВХ -->
+  <g transform="translate(880, 410)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">10 · FRAME (опц.)</text>
+    <g transform="translate(40, 60)" stroke="#cfd8dc" stroke-width="1.5" fill="none">
+      <path d="M0,60 L100,60 L120,40 L20,40 Z M0,60 L0,10 M100,60 L100,10 M120,40 L120,-10 M20,40 L20,-10 M0,10 L100,10 M100,10 L120,-10 M120,-10 L20,-10 M20,-10 L0,10"/>
+      <circle cx="0" cy="10" r="3" fill="#5BC0EB"/>
+      <circle cx="100" cy="10" r="3" fill="#5BC0EB"/>
+      <circle cx="120" cy="-10" r="3" fill="#5BC0EB"/>
+      <circle cx="20" cy="-10" r="3" fill="#5BC0EB"/>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">Каркас ПВХ-50</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">8 тройников · 12 труб</text>
+  </g>
+
+  <!-- Row 3 -->
+
+  <!-- 11 · VHB tape -->
+  <g transform="translate(180, 620)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">11 · SEAL TAPE</text>
+    <g transform="translate(50, 60)">
+      <ellipse cx="40" cy="35" rx="35" ry="35" fill="none" stroke="#cfd8dc" stroke-width="1"/>
+      <ellipse cx="40" cy="35" rx="20" ry="20" fill="#0a0b0d" stroke="#cfd8dc" stroke-width="1"/>
+      <text x="40" y="38" font-size="9" fill="#5BC0EB" text-anchor="middle" font-weight="600">3M</text>
+      <text x="40" y="48" font-size="7" fill="#cfd8dc" text-anchor="middle">VHB</text>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">3M VHB 4910</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">25 мм · дублирование</text>
+  </g>
+
+  <!-- 12 · Газ N₂ -->
+  <g transform="translate(380, 620)">
+    <rect width="180" height="180" fill="#13151a" stroke="#2A2F3A" stroke-width="1" rx="6"/>
+    <text x="14" y="24" font-size="9" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">12 · INERT GAS</text>
+    <g transform="translate(60, 50)">
+      <rect x="20" y="10" width="40" height="80" fill="#1565c0" rx="4"/>
+      <rect x="20" y="0" width="40" height="14" fill="#0a0b0d"/>
+      <rect x="32" y="-10" width="16" height="12" fill="#cfd8dc"/>
+      <text x="40" y="55" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">N₂</text>
+      <text x="40" y="75" font-size="9" fill="#fff" text-anchor="middle">99.99%</text>
+    </g>
+    <text x="14" y="148" font-size="14" fill="#F2F4F7" font-weight="600">Азот</text>
+    <text x="14" y="166" font-size="11" fill="#8a93a6" font-family="JetBrains Mono">ГОСТ 9293-74 · 6 м³ × 2</text>
+  </g>
+
+  <!-- Sourcing card -->
+  <g transform="translate(580, 620)">
+    <rect width="380" height="180" fill="#13151a" stroke="#5BC0EB" stroke-width="1" rx="6" stroke-opacity="0.5"/>
+    <text x="20" y="30" font-size="11" font-family="JetBrains Mono" fill="#5BC0EB" letter-spacing="2">SOURCING</text>
+    <text x="20" y="58" font-size="20" fill="#F2F4F7" font-weight="600">Цепочка поставок</text>
+
+    <g font-family="JetBrains Mono" font-size="11" fill="#8a93a6">
+      <text x="20" y="88">01—02</text>
+      <text x="120" y="88" fill="#F2F4F7">→ NomexRus (СПб) · Pack-Systems</text>
+      <text x="20" y="105">03</text>
+      <text x="120" y="105" fill="#F2F4F7">→ Pneumatic.ru, Worthington</text>
+      <text x="20" y="122">04—05</text>
+      <text x="120" y="122" fill="#F2F4F7">→ PreSens GmbH (DE) · PyroScience</text>
+      <text x="20" y="139">06</text>
+      <text x="120" y="139" fill="#F2F4F7">→ Mitsubishi Gas Chemical (JP)</text>
+      <text x="20" y="156">12</text>
+      <text x="120" y="156" fill="#F2F4F7">→ Linde Gas Rus · Криогенмаш</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="80" y="820" font-family="JetBrains Mono" font-size="9" fill="#8a93a6">КД-INERTUM v2-PREMIUM · ЛИСТ 02 · EXPLODED</text>
+  <text x="1110" y="820" font-family="JetBrains Mono" font-size="9" fill="#8a93a6" text-anchor="end">2026-05-09</text>
+</svg>

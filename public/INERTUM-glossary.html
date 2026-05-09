@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Glossary · Словарь терминов</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="../assets/topbar.js" defer></script>
+<style>
+  :root {
+    --bg-base: #0A0B0D; --bg-elev: #13151A; --bg-elev-2: #1C1F26;
+    --ink: #F2F4F7; --ink-muted: #8A93A6; --ink-secondary: #C7CCD6;
+    --argon: #5BC0EB; --warn: #E8A33D; --success: #3FB984; --danger: #E5685A;
+    --stroke: #2A2F3A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg-base); color: var(--ink);
+    font: 15px/1.6 'Inter', sans-serif; -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(91,192,235,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,192,235,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; position: relative; z-index: 1; }
+  header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--stroke); padding-bottom: 16px; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+  .eyebrow { font: 500 11px 'JetBrains Mono'; color: var(--argon); letter-spacing: 3px; text-transform: uppercase; }
+  h1 {
+    font: 600 48px/1.05 'Inter'; letter-spacing: -0.02em; margin: 8px 0 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #b8c0cc 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  h2 { font: 500 11px 'JetBrains Mono'; color: var(--argon); letter-spacing: 0.18em; text-transform: uppercase; margin: 32px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--stroke); }
+  .lede { font-size: 16px; color: var(--ink-secondary); max-width: 800px; }
+  .nav-back a { color: var(--argon); text-decoration: none; font-size: 14px; font-family: 'JetBrains Mono'; }
+  .nav-icons { display: flex; gap: 6px; align-items: center; }
+  .nav-icons a, .nav-icons button {
+    background: transparent; border: 1px solid var(--stroke); color: var(--ink-muted);
+    width: 34px; height: 34px; padding: 0; border-radius: 4px; cursor: pointer;
+    transition: all .15s; display: inline-flex; align-items: center; justify-content: center;
+    text-decoration: none;
+  }
+  .nav-icons a:hover, .nav-icons button:hover { border-color: var(--argon); color: var(--argon); }
+  .nav-icons svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+  .search { width: 100%; background: var(--bg-elev-2); border: 1px solid var(--stroke); border-radius: 6px; padding: 12px 16px; color: var(--ink); font: 14px 'Inter'; margin: 24px 0; }
+  .search:focus { outline: none; border-color: var(--argon); }
+
+  .term {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: 8px; padding: 18px 22px; margin-bottom: 12px;
+  }
+  .term-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+  .term-name { font: 600 18px 'Inter'; color: var(--ink); }
+  .term-orig { font: 500 13px 'JetBrains Mono'; color: var(--argon); letter-spacing: 0.05em; }
+  .term-tag {
+    display: inline-block; padding: 2px 8px; border-radius: 100px;
+    font: 500 9px 'JetBrains Mono'; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--stroke); color: var(--ink-muted);
+  }
+  .term p { color: var(--ink-secondary); font-size: 14px; line-height: 1.6; }
+  .term .source {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--stroke);
+    font: 400 11px 'JetBrains Mono'; color: var(--ink-muted);
+  }
+
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--stroke); font: 11px 'JetBrains Mono'; color: var(--ink-muted); letter-spacing: 0.1em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  .empty { text-align: center; padding: 48px; color: var(--ink-muted); display: none; }
+  .empty.show { display: block; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div>
+    <div class="eyebrow"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--argon);box-shadow:0 0 8px var(--argon);margin-right:8px;"></span>GLOSSARY · СЛОВАРЬ ТЕРМИНОВ</div>
+    <h1>30+ ключевых терминов</h1>
+    <p class="lede">Технические, патентные и бизнес-термины проекта INERTUM. Для нетехнических инвесторов, поверенных, журналистов, подрядчиков. RU + EN.</p>
+  </div>
+  <div class="nav-icons">
+    <a href="../hub.html" title="Hub"><svg><use href="../assets/icons.svg#home"/></svg></a>
+    <button onclick="history.back()" title="Назад"><svg><use href="../assets/icons.svg#arrow-left"/></svg></button>
+    <button onclick="history.forward()" title="Вперёд"><svg><use href="../assets/icons.svg#arrow-right"/></svg></button>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" title="В начало"><svg><use href="../assets/icons.svg#top"/></svg></button>
+  </div>
+</header>
+
+<input type="text" id="search" class="search" placeholder="Поиск термина (рус. или англ.)…">
+
+<div id="empty" class="empty">Не найдено. Попробуйте другой запрос.</div>
+<div id="terms">
+
+<h2>§01 · Материалы и физика</h2>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Барьерный ламинат</span><span class="term-orig">barrier laminate</span><span class="term-tag">Материалы</span></div>
+  <p>Многослойный полимерный материал с одним или несколькими барьерными слоями (Al-foil, SiOx, EVOH), резко снижающими проницаемость для газов и паров воды. Используется в нашей капсуле в составе PET 12 / Al-foil 9 / LLDPE 70 мкм.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">OTR</span><span class="term-orig">Oxygen Transmission Rate</span><span class="term-tag">Метрика</span></div>
+  <p>Скорость проникновения кислорода через мембрану. Единицы: см³/(м²·сутки·атм). Чем меньше — тем лучше барьер. Наша целевая метрика: <strong>OTR ≤ 0.05</strong> при 23 °C, 0% RH (это в 1000 раз лучше обычного полиэтилена).</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">WVTR</span><span class="term-orig">Water Vapour Transmission Rate</span><span class="term-tag">Метрика</span></div>
+  <p>Скорость проникновения паров воды через мембрану. Единицы: г/(м²·сутки). Целевая метрика: <strong>WVTR ≤ 0.1</strong> при 38 °C, 90% RH. Контролирует влажность внутри капсулы.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">PET / Al-foil / LLDPE</span><span class="term-orig">PET / Aluminium foil / LLDPE</span><span class="term-tag">Структура</span></div>
+  <p>Стандартная трёхслойная барьерная структура: полиэтилентерефталат (механическая прочность снаружи) + алюминиевая фольга (газовый барьер) + линейный полиэтилен низкой плотности (термосвариваемый внутренний слой). Толщины 12/9/70 мкм.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Точка росы</span><span class="term-orig">dew point</span><span class="term-tag">Газ</span></div>
+  <p>Температура, при которой пары воды в газе начинают конденсироваться. Чем ниже точка росы — тем суше газ. Целевая для INERTUM: <strong>≤ −45 °C</strong> (соответствует азоту чистоты 99.99%).</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Закон Фика</span><span class="term-orig">Fick's law</span><span class="term-tag">Физика</span></div>
+  <p>Уравнение, описывающее диффузию газа через мембрану. По нему рассчитывается, сколько кислорода проникнет внутрь капсулы за 50 лет хранения, и сколько абсорбера нужно для нейтрализации.</p>
+  <div class="source">Расчёт: 14 м² × 0.05 см³/(м²·сут·атм) × 365 дней = 256 см³/год O₂.</div>
+</div>
+
+<h2>§02 · Газы и абсорберы</h2>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Инертный газ</span><span class="term-orig">inert gas</span><span class="term-tag">Газ</span></div>
+  <p>Газ, не вступающий в химические реакции с большинством веществ. В нашем проекте — азот (N₂) для большинства моделей и аргон (Ar) для премиум (часы, ювелирка, фарма). Полностью вытесняет кислород.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Аргон 99.999%</span><span class="term-orig">argon, ultra-high purity</span><span class="term-tag">Газ</span></div>
+  <p>Благородный газ с минимальной химической активностью. Используется в премиум-капсулах под виски, часы, монеты, иконы. Дороже азота в ~10 раз, но даёт абсолютную инертность.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Mitsubishi Ageless Z</span><span class="term-orig">Mitsubishi Ageless Z (oxygen scavenger)</span><span class="term-tag">Абсорбер</span></div>
+  <p>Кислород-абсорбер на основе iron-oxide от Mitsubishi Gas Chemical. Поглощает O₂ из воздуха химической реакцией. Тип Z-2000 — 2000 см³ кислорода на саше. Не требует электричества, активируется при контакте с воздухом.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">RP System</span><span class="term-orig">RP System (Mitsubishi)</span><span class="term-tag">Абсорбер</span></div>
+  <p>Премиум-серия кислород-абсорберов Mitsubishi для аргоновой среды и музейных капсул. Тип K и AN. Совмещает абсорбцию O₂ и контроль RH.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">PSA-генератор</span><span class="term-orig">Pressure Swing Adsorption generator</span><span class="term-tag">Оборудование</span></div>
+  <p>Установка для получения чистого N₂ из обычного воздуха методом адсорбции. Альтернатива баллонам сжиженного газа. Дешевле в долгосрочной перспективе для серийного производства.</p>
+</div>
+
+<h2>§03 · Сенсоры и мониторинг</h2>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Оптический патч</span><span class="term-orig">optical sensor patch / spot</span><span class="term-tag">Сенсор</span></div>
+  <p>Тонкий ⌀5 мм наклеиваемый внутрь капсулы патч с люминесцентной меткой, чувствительной к O₂. Считывается оптически снаружи через прозрачное окно. Без батарей, без радиосигнала. Срок службы 5–7 лет.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">PreSens SP-PSt6-NAU</span><span class="term-orig">PreSens SP-PSt6-NAU</span><span class="term-tag">Сенсор</span></div>
+  <p>Конкретная модель оптического патча от PreSens GmbH (Германия). Диапазон 0–5% O₂, точность ±0.05%. Цена €30–50/шт.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">PreSens OXY-1 ST mini</span><span class="term-orig">PreSens OXY-1 ST mini reader</span><span class="term-tag">Оборудование</span></div>
+  <p>Внешний оптоволоконный ридер для считывания патчей через окно капсулы. Один ридер обслуживает 50–100 капсул. Цена €2 500–3 500 — амортизируется на партии.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Faraday cage</span><span class="term-orig">Faraday cage</span><span class="term-tag">Физика</span></div>
+  <p>Эффект экранирования радиосигналов металлической оболочкой. Алюминиевая фольга нашей капсулы гасит BLE 2.4 ГГц на 30–60 дБ — поэтому электронные сенсоры с радиоканалом внутри не работают, нужен оптический.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Самодиагностика</span><span class="term-orig">self-diagnostics algorithm</span><span class="term-tag">ПО</span></div>
+  <p>Алгоритм корреляции изменения давления (ΔP), концентрации O₂ (Δ[O₂]) и температуры (ΔT) для раннего обнаружения утечки в оболочке. Срабатывает за ≤ 7 суток до видимой деградации содержимого.</p>
+</div>
+
+<h2>§04 · Стандарты и сертификация</h2>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">MIL-STD-2073</span><span class="term-orig">MIL-STD-2073-1E w/CHG-4</span><span class="term-tag">Стандарт</span></div>
+  <p>Военный стандарт США на упаковку для долговременного хранения вооружения и оборудования. Описывает уровни защиты, материалы, методы консервации. Базовый референс для нашей технологии.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">MIL-PRF-131K</span><span class="term-orig">MIL-PRF-131K</span><span class="term-tag">Стандарт</span></div>
+  <p>Военный стандарт США на барьерные ламинаты с алюминиевой фольгой. Определяет OTR, WVTR, термосвариваемость. Наш ламинат соответствует MIL-PRF-131K class 1.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">ГОСТ 9.014</span><span class="term-orig">GOST 9.014 (RF)</span><span class="term-tag">Стандарт</span></div>
+  <p>Российский стандарт «Временная противокоррозионная защита изделий». Определяет варианты защиты ВЗ-1 ... ВЗ-16 для разных условий хранения. Наша капсула соответствует ВУ-5 (универсальная упаковка с инертным газом).</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">ГОСТ 9293-74</span><span class="term-orig">GOST 9293-74 (N2 gas)</span><span class="term-tag">Стандарт</span></div>
+  <p>Российский стандарт на азот газообразный. Определяет чистоту 99.5–99.999%, остаточный O₂, точку росы. Наш азот по этому стандарту, чистота 99.99%.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">DEF STAN 81-147</span><span class="term-orig">DEF STAN 81-147 (UK)</span><span class="term-tag">Стандарт</span></div>
+  <p>Британский военный стандарт на упаковочные материалы. Используется как альтернатива MIL-PRF-131K для рынков ОАЭ, Содружества.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">ГОСТ Р</span><span class="term-orig">GOST R certification (RF)</span><span class="term-tag">Сертификация</span></div>
+  <p>Российская система сертификации продукции. Обязательна для государственных тендеров (Росрезерв, Минздрав). Срок получения 3–6 мес, стоимость ₽300–700k.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">ГОСТ В</span><span class="term-orig">GOST V (military)</span><span class="term-tag">Сертификация</span></div>
+  <p>Российская военная сертификация. Дополнительно к ГОСТ Р для допуска к гособоронзаказу. Срок 6+ мес, стоимость ₽400–500k.</p>
+</div>
+
+<h2>§05 · Патентная терминология</h2>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Дата приоритета</span><span class="term-orig">priority date</span><span class="term-tag">Патент</span></div>
+  <p>Дата подачи первой заявки на изобретение. Фиксирует, когда мы заявили права. До даты приоритета публикация технических деталей в открытых источниках уничтожает новизну. Наша целевая дата — Q3 2026.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Формула изобретения</span><span class="term-orig">claims (independent / dependent)</span><span class="term-tag">Патент</span></div>
+  <p>Юридически защищаемая часть патента. Независимые пункты определяют объём защиты, зависимые уточняют. В нашем драфте v2.1 — <strong>3 независимых + 20 зависимых</strong>.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Роспатент</span><span class="term-orig">Rospatent (RF Patent Office)</span><span class="term-tag">Орган</span></div>
+  <p>Федеральная служба интеллектуальной собственности РФ. Регистрирует патенты и товарные знаки в Российской Федерации. Подача нашей заявки идёт через российского патентного поверенного.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">ЕАПО</span><span class="term-orig">EAPO (Eurasian Patent Office)</span><span class="term-tag">Орган</span></div>
+  <p>Евразийская патентная организация. Один патент действует в 8 странах ЕАЭС: РФ, Беларусь, Казахстан, Армения, Азербайджан, Кыргызстан, Таджикистан, Туркменистан. Наша заявка подаётся через ЕАПО для всех 8 стран.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">PCT</span><span class="term-orig">Patent Cooperation Treaty</span><span class="term-tag">Соглашение</span></div>
+  <p>Международная система подачи одной патентной заявки с возможностью расширения на 150+ стран. Окно подачи — 12 мес после приоритетной даты. Наш план: PCT Q3 2027 на США / ЕС / Китай / Японию / ОАЭ.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Ноу-хау</span><span class="term-orig">trade secret / know-how</span><span class="term-tag">Защита</span></div>
+  <p>Конфиденциальные технологические сведения, защищённые режимом коммерческой тайны (ст. 1465 ГК РФ). Используется для защиты процессных параметров (T сварки, конкретные SKU, методики QC) даже без патента.</p>
+</div>
+
+<h2>§06 · Бизнес-термины</h2>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">TAM / SAM / SOM</span><span class="term-orig">Total / Serviceable / Obtainable Addressable Market</span><span class="term-tag">Маркет</span></div>
+  <p>Общий / доступный / достижимый рынок. Для INERTUM: <strong>TAM $30B</strong> (мировой защитной упаковки), <strong>SAM $3-5B</strong> (премиум-ниши), <strong>SOM $50-80M</strong> (что можем взять за 5 лет в РФ + СНГ + MENA + HK).</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Pre-seed раунд</span><span class="term-orig">pre-seed round</span><span class="term-tag">Финансы</span></div>
+  <p>Самый ранний раунд венчурного финансирования, до выручки. Размер $100k–1M, ангелы и микро-фонды. Наш pre-seed — $750k за 8% equity, 18 мес runway.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Series A</span><span class="term-orig">Series A round</span><span class="term-tag">Финансы</span></div>
+  <p>Следующий раунд после pre-seed/seed, обычно при наличии product-market fit. Размер $1–5M. Наш план — Series A в Q3-Q4 2027 на $3–5M, post-money $20–30M.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">EBITDA</span><span class="term-orig">Earnings Before Interest, Taxes, D&A</span><span class="term-tag">Финансы</span></div>
+  <p>Прибыль до вычета процентов, налогов, амортизации. Главный показатель операционной рентабельности. Наша цель 2030 — <strong>$12M EBITDA, 48% маржа</strong>.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">SPV</span><span class="term-orig">Special Purpose Vehicle</span><span class="term-tag">Корпорат</span></div>
+  <p>Специальная юридическая компания для конкретной сделки или проекта. Для INERTUM — Дубай FZ-LLC или Алматы ТОО для приёма UAE/CN-капитала без санкционных рисков.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Anti-dilution</span><span class="term-orig">anti-dilution clause</span><span class="term-tag">Корпорат</span></div>
+  <p>Защита инвесторов от размытия доли при последующих раундах с понижением оценки. Стандартная формулировка — broad-based weighted average.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Liquidation preference</span><span class="term-orig">liquidation preference</span><span class="term-tag">Корпорат</span></div>
+  <p>Преимущественное право инвесторов получить свои деньги обратно при продаже компании. Наш terms — 1× non-participating preference (стандарт для pre-seed).</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">ESOP</span><span class="term-orig">Employee Stock Option Pool</span><span class="term-tag">Корпорат</span></div>
+  <p>Фонд опционов для сотрудников. Стандартный размер для pre-seed — 10% от capitalization. Размывается среди ключевых наймов с vesting 4 года, 1-year cliff.</p>
+</div>
+
+<div class="term">
+  <div class="term-head"><span class="term-name">Pro-rata rights</span><span class="term-orig">pro-rata participation rights</span><span class="term-tag">Корпорат</span></div>
+  <p>Право существующих инвесторов участвовать в следующих раундах пропорционально своей доле, чтобы избежать размытия. Стандартно для pre-seed-инвесторов на Series A.</p>
+</div>
+
+</div>
+
+<footer>
+  <span>INERTUM Glossary v1.0</span>
+  <span>2026-05-09 · Аслан КАА · idriskaaa@gmail.com</span>
+</footer>
+
+</div>
+
+<script>
+  const search = document.getElementById('search');
+  const empty = document.getElementById('empty');
+  search.addEventListener('input', () => {
+    const q = search.value.toLowerCase().trim();
+    let any = false;
+    document.querySelectorAll('.term').forEach(t => {
+      const text = t.textContent.toLowerCase();
+      const visible = q === '' || text.includes(q);
+      t.style.display = visible ? '' : 'none';
+      if (visible) any = true;
+    });
+    document.querySelectorAll('h2').forEach(h2 => {
+      let next = h2.nextElementSibling;
+      let hasVisible = false;
+      while (next && next.classList.contains('term')) {
+        if (next.style.display !== 'none') hasVisible = true;
+        next = next.nextElementSibling;
+      }
+      h2.style.display = hasVisible ? '' : 'none';
+    });
+    empty.classList.toggle('show', !any);
+  });
+</script>
+</body>
+</html>

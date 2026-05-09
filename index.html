@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Системы долговременного хранения в инертной среде</title>
+<meta name="description" content="Промышленные капсулы и музейные камеры с инертной газовой средой и пассивным оптическим контролем кислорода. 50 лет защиты без обслуживания. Pre-Seed · Patent Pending.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="INERTUM — 50 лет защиты в инертной среде">
+<meta property="og:description" content="Промышленные капсулы с инертным газом для долговременного хранения коллекционных авто, музейных артефактов, стратегических резервов и премиум-активов.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-image.svg">
+<meta property="og:url" content="https://aslankaa.com/inertum/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="INERTUM">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="INERTUM — 50 лет защиты в инертной среде">
+<meta name="twitter:description" content="Промышленные капсулы с инертным газом для долговременного хранения. Pre-Seed · Patent Pending · 2026.">
+<meta name="twitter:image" content="assets/og-image.svg">
+<link rel="canonical" href="https://aslankaa.com/inertum/">
+<link rel="alternate" hreflang="ru" href="https://aslankaa.com/inertum/">
+<link rel="alternate" hreflang="en" href="https://aslankaa.com/inertum/en/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style-v2.css">
+<script src="assets/topbar.js" defer></script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo"><span class="dot"></span>INERTUM</a>
+    <nav class="menu">
+      <a href="#tech">Технология</a>
+      <a href="#segments">Применения</a>
+      <a href="#status">Статус</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#team">Команда</a>
+      <a href="#contact">Контакт</a>
+    </nav>
+    <div class="lang"><strong style="color: var(--accent-argon);">RU</strong> · <a href="en/index.html" class="muted">EN</a></div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero no-border">
+  <div class="container">
+    <div class="grid-2">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>PRE-SEED · PATENT PENDING · РФ 2026</div>
+        <h1>50 лет защиты <em>того, что нельзя терять.</em></h1>
+        <p class="lede">Промышленные капсулы и музейные камеры с инертной газовой средой и пассивным оптическим контролем кислорода. Защищены полимерно-фольговым ламинатом и iron-based абсорбером. Без батарей, без обслуживания, без радиосигнала.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Запросить полный пакет под NDA <svg width="14" height="14" style="display:inline-block; vertical-align:middle;"><use href="assets/icons.svg#arrow-right"/></svg></a>
+          <a class="btn btn-ghost" href="public/INERTUM-pitch-v2.html" target="_blank"><svg width="14" height="14" style="display:inline-block; vertical-align:middle;"><use href="assets/icons.svg#document"/></svg> Pitch deck (14)</a>
+          <a class="btn btn-ghost" href="public/INERTUM-FAQ-investors.html" target="_blank"><svg width="14" height="14" style="display:inline-block; vertical-align:middle;"><use href="assets/icons.svg#document"/></svg> FAQ (32)</a>
+          <a class="btn btn-ghost" href="public/INERTUM-onepager.pdf"><svg width="14" height="14" style="display:inline-block; vertical-align:middle;"><use href="assets/icons.svg#download"/></svg> One-pager</a>
+        </div>
+      </div>
+      <div class="capsule-3d" id="capsule3d" aria-hidden="true">
+        <!-- Fallback CSS-orb если WebGL не доступен -->
+        <div class="capsule-orb fallback"></div>
+        <div class="capsule-rings fallback"></div>
+        <div class="capsule-particles fallback">
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker">
+    <div class="container ticker-grid">
+      <div class="metric"><div class="num">99.9999%</div><div class="lbl">чистота Ar</div></div>
+      <div class="metric"><div class="num">−45 °C</div><div class="lbl">точка росы</div></div>
+      <div class="metric"><div class="num">50 лет</div><div class="lbl">срок защиты</div></div>
+      <div class="metric"><div class="num">TRL 6</div><div class="lbl">уровень готовности</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section id="problem">
+  <div class="container">
+    <div class="section-header">
+      <div class="num">§01 · ПРОБЛЕМА</div>
+      <h2>Дорогие активы теряют ценность из-за окисления и коррозии</h2>
+      <p>Существующие решения работают 5–10 лет, не 50. Между ними — слепая зона на $50B+ премиум-активов в коллекционных авто, искусстве, фарме и стратегических резервах.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#capsule"/></svg></div>
+        <h3>Коллекционные авто</h3>
+        <p>Коррозия металла, окисление резины и кожи. До 5–10% потерь стоимости в год при сезонном хранении без подходящей упаковки.</p>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#archive"/></svg></div>
+        <h3>Музейные артефакты</h3>
+        <p>Окисление металлов, выцветание текстиля, биологическая деградация. До 15% коллекций недоступно публике из-за деградации.</p>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#shield"/></svg></div>
+        <h3>Фарма и резервы</h3>
+        <p>До 15% годной продукции списывается из-за нарушений хранения. Стратегические резервы лекарств — миллиарды потерь ежегодно.</p>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#molecule"/></svg></div>
+        <h3>Премиум-сегмент</h3>
+        <p>Виски, вино, часы, ювелирка — окисление активных компонентов и потеря товарного вида в воздушной среде.</p>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#leak"/></svg></div>
+        <h3>VCI-плёнки не работают</h3>
+        <p>Cortec, Zerust — летучие ингибиторы коррозии работают 5–10 лет, не подходят для электроники, фармы и долгого срока.</p>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#sensor"/></svg></div>
+        <h3>Mil-spec — для запчастей</h3>
+        <p>MIL-STD-2073, ГОСТ 9.014 — для отдельных агрегатов, не для целых изделий, без мониторинга герметичности.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUTION ============ -->
+<section id="tech">
+  <div class="container">
+    <div class="section-header">
+      <div class="num">§02 · ТЕХНОЛОГИЯ</div>
+      <h2>Пять слоёв защиты в одной капсуле</h2>
+      <p>Гибридная архитектура: барьерный ламинат, инертная среда, химический абсорбер, пассивный оптический контроль и алгоритм самодиагностики герметичности. Без батарей, без радиосигнала.</p>
+    </div>
+    <div class="stack">
+      <div class="stack-layer">
+        <div class="lbl">Layer 01 · Barrier</div>
+        <div class="text">PET / Al-foil / LLDPE · OTR ≤ 0.05 cm³/m²·day · MIL-PRF-131K · ГОСТ 9.014 · DEF STAN 81-147</div>
+      </div>
+      <div class="stack-layer">
+        <div class="lbl">Layer 02 · Inert atmosphere</div>
+        <div class="text">N₂ или Ar · O₂ ≤ 0.5% · точка росы ≤ −45 °C · продув по ГОСТ 9293-74</div>
+      </div>
+      <div class="stack-layer">
+        <div class="lbl">Layer 03 · O₂ scavenger</div>
+        <div class="text">Mitsubishi Ageless Z / RP System / Pharmakeep · iron-based и organic — дублируют газовый продув химически</div>
+      </div>
+      <div class="stack-layer">
+        <div class="lbl">Layer 04 · Passive sensing</div>
+        <div class="text">Optical spot · 5–7 лет автономно · contactless readout через прозрачное окно · zero battery</div>
+      </div>
+      <div class="stack-layer">
+        <div class="lbl">Layer 05 · Self-diagnostics</div>
+        <div class="text">Корреляция ΔP ↔ Δ[O₂] ↔ ΔT · auto-alert при утечке до видимой деградации</div>
+      </div>
+    </div>
+
+    <div class="ticker" style="margin-top: 64px; border-radius: var(--radius-xl); border: 1px solid var(--stroke); background: rgba(91, 192, 235, 0.02);">
+      <div class="container ticker-grid">
+        <div class="metric"><div class="num">50</div><div class="lbl">лет защиты</div></div>
+        <div class="metric"><div class="num">≤0.5%</div><div class="lbl">остаточный O₂</div></div>
+        <div class="metric"><div class="num">80%</div><div class="lbl">валовая маржа</div></div>
+        <div class="metric"><div class="num">21 / 0</div><div class="lbl">аналог / блокер</div></div>
+      </div>
+    </div>
+
+    <!-- ============ PURGE ANIMATION ============ -->
+    <div style="margin-top: 96px; padding: 32px; background: var(--bg-elev); border: 1px solid var(--stroke); border-radius: var(--radius-xl);">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <div class="section-num">PROCESS · INERT GAS PURGE</div>
+          <h3 style="margin: 6px 0 0; font-size: 24px;">Продув N₂ · 3 объёма · до O₂ ≤ 0.3 %</h3>
+        </div>
+        <div class="muted mono" style="font-size: 12px;">↻ цикл ~12 секунд · реальное время ~8 мин для мото</div>
+      </div>
+
+      <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block;">
+        <defs>
+          <linearGradient id="capStroke" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#5BC0EB" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#5BC0EB" stop-opacity="0.2"/>
+          </linearGradient>
+          <radialGradient id="cylGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1565c0"/>
+            <stop offset="100%" stop-color="#0d3666"/>
+          </radialGradient>
+          <pattern id="anim-grid" patternUnits="userSpaceOnUse" width="20" height="20">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#5BC0EB" stroke-width="0.3" opacity="0.08"/>
+          </pattern>
+        </defs>
+
+        <rect width="900" height="280" fill="#0a0b0d"/>
+        <rect width="900" height="280" fill="url(#anim-grid)"/>
+
+        <!-- БАЛЛОН N₂ -->
+        <g transform="translate(60, 60)">
+          <ellipse cx="35" cy="170" rx="28" ry="6" fill="#cfd8dc" opacity="0.3"/>
+          <rect x="10" y="20" width="50" height="150" rx="4" fill="url(#cylGrad)"/>
+          <rect x="10" y="14" width="50" height="6" fill="#0a0b0d"/>
+          <rect x="22" y="2" width="26" height="12" fill="#cfd8dc"/>
+          <rect x="28" y="-6" width="14" height="8" fill="#cfd8dc"/>
+          <text x="35" y="80" fill="#fff" font-family="Inter" font-weight="700" font-size="20" text-anchor="middle">N₂</text>
+          <text x="35" y="105" fill="#82d3f3" font-family="JetBrains Mono" font-size="9" text-anchor="middle">99.99%</text>
+          <text x="35" y="118" fill="#82d3f3" font-family="JetBrains Mono" font-size="9" text-anchor="middle">150 atm</text>
+          <text x="35" y="195" fill="#8a93a6" font-family="JetBrains Mono" font-size="10" text-anchor="middle" letter-spacing="2">CYLINDER</text>
+        </g>
+
+        <!-- РЕДУКТОР -->
+        <g transform="translate(155, 90)">
+          <rect x="0" y="20" width="40" height="30" fill="#cfd8dc" stroke="#0a0b0d" stroke-width="0.5"/>
+          <circle cx="20" cy="10" r="10" fill="#cfd8dc" stroke="#0a0b0d" stroke-width="0.5"/>
+          <circle cx="20" cy="10" r="6" fill="#0a0b0d"/>
+          <text x="20" y="13" fill="#82d3f3" font-family="JetBrains Mono" font-size="6" text-anchor="middle">0.5</text>
+          <text x="20" y="68" fill="#8a93a6" font-family="JetBrains Mono" font-size="9" text-anchor="middle" letter-spacing="2">REGULATOR</text>
+        </g>
+
+        <!-- ШЛАНГ -->
+        <path d="M 195 110 Q 280 100 320 130 T 460 145" stroke="#5BC0EB" stroke-width="3" fill="none" opacity="0.6">
+          <animate attributeName="stroke-dasharray" values="0,1000;1000,0" dur="3s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 195 110 Q 280 100 320 130 T 460 145" stroke="#82d3f3" stroke-width="6" fill="none" opacity="0.15"/>
+
+        <!-- Молекулы N₂ движутся по шлангу -->
+        <g>
+          <circle r="3" fill="#5BC0EB" opacity="0.9">
+            <animateMotion dur="2.5s" repeatCount="indefinite" path="M 195 110 Q 280 100 320 130 T 460 145"/>
+          </circle>
+          <circle r="2.5" fill="#82d3f3" opacity="0.85">
+            <animateMotion dur="2.5s" begin="0.5s" repeatCount="indefinite" path="M 195 110 Q 280 100 320 130 T 460 145"/>
+          </circle>
+          <circle r="3" fill="#5BC0EB" opacity="0.9">
+            <animateMotion dur="2.5s" begin="1s" repeatCount="indefinite" path="M 195 110 Q 280 100 320 130 T 460 145"/>
+          </circle>
+          <circle r="2.5" fill="#82d3f3" opacity="0.85">
+            <animateMotion dur="2.5s" begin="1.5s" repeatCount="indefinite" path="M 195 110 Q 280 100 320 130 T 460 145"/>
+          </circle>
+          <circle r="3" fill="#5BC0EB" opacity="0.9">
+            <animateMotion dur="2.5s" begin="2s" repeatCount="indefinite" path="M 195 110 Q 280 100 320 130 T 460 145"/>
+          </circle>
+        </g>
+
+        <!-- КАПСУЛА -->
+        <g transform="translate(460, 60)">
+          <!-- Контур капсулы -->
+          <rect x="0" y="20" width="320" height="180" rx="8" fill="rgba(91,192,235,0.05)" stroke="url(#capStroke)" stroke-width="2"/>
+          <!-- Молния -->
+          <line x1="20" y1="20" x2="300" y2="20" stroke="#E8A33D" stroke-width="2" stroke-dasharray="4,2"/>
+          <!-- Порт дозаправки -->
+          <circle cx="0" cy="85" r="5" fill="#E8A33D" stroke="#fff" stroke-width="1.5"/>
+          <!-- Окно -->
+          <rect x="280" y="100" width="14" height="14" fill="rgba(178,235,242,0.5)" stroke="#82d3f3" stroke-width="1"/>
+
+          <!-- Старые O₂ молекулы (выходят) — красные -->
+          <g>
+            <circle r="3" fill="#E5685A" opacity="0">
+              <animate attributeName="cx" values="160;200;240;310;320" dur="6s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="100;90;110;100;100" dur="6s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.9;0.9;0.9;0" dur="6s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="2.5" fill="#E5685A" opacity="0">
+              <animate attributeName="cx" values="100;180;240;300;320" dur="6s" begin="1s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="140;130;120;115;110" dur="6s" begin="1s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.9;0.9;0.9;0" dur="6s" begin="1s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="3" fill="#E5685A" opacity="0">
+              <animate attributeName="cx" values="120;200;260;310;320" dur="6s" begin="2s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="170;150;130;120;110" dur="6s" begin="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.9;0.9;0.9;0" dur="6s" begin="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="2.5" fill="#E5685A" opacity="0">
+              <animate attributeName="cx" values="80;170;240;300;320" dur="6s" begin="3s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="110;100;115;120;110" dur="6s" begin="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.9;0.9;0.9;0" dur="6s" begin="3s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <!-- Новые N₂ молекулы (заходят) — синие -->
+          <g>
+            <circle r="3" fill="#5BC0EB" opacity="0">
+              <animate attributeName="cx" values="0;30;80;130;160" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="85;90;100;110;120" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.9;0.85;0.7;0.4" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="2.5" fill="#82d3f3" opacity="0">
+              <animate attributeName="cx" values="0;40;90;150;180" dur="3s" begin="0.7s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="85;100;120;130;140" dur="3s" begin="0.7s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.9;0.85;0.7;0.4" dur="3s" begin="0.7s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="3" fill="#5BC0EB" opacity="0">
+              <animate attributeName="cx" values="0;30;70;120;150" dur="3s" begin="1.4s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="85;75;85;100;115" dur="3s" begin="1.4s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.9;0.85;0.7;0.4" dur="3s" begin="1.4s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="2.5" fill="#82d3f3" opacity="0">
+              <animate attributeName="cx" values="0;25;65;110;140" dur="3s" begin="2.1s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="85;110;130;150;170" dur="3s" begin="2.1s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.9;0.85;0.7;0.4" dur="3s" begin="2.1s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <text x="160" y="220" fill="#8a93a6" font-family="JetBrains Mono" font-size="9" text-anchor="middle" letter-spacing="2">CAPSULE · 3.75 m³</text>
+        </g>
+
+        <!-- Счётчик O₂ -->
+        <g transform="translate(820, 70)">
+          <text font-family="JetBrains Mono" font-size="9" fill="#8a93a6" letter-spacing="1.5">O₂ INSIDE</text>
+          <text y="32" font-family="JetBrains Mono" font-size="32" fill="#5BC0EB" font-weight="500">
+            <tspan>21.0%</tspan>
+            <animate attributeName="textContent" values="21.0%;15.5%;9.2%;4.1%;1.5%;0.5%;0.3%;0.3%;0.3%;0.3%;0.3%;0.3%" dur="12s" repeatCount="indefinite"/>
+          </text>
+          <text y="50" font-family="JetBrains Mono" font-size="9" fill="#8a93a6" letter-spacing="1.5">→ TARGET</text>
+          <text y="68" font-family="JetBrains Mono" font-size="14" fill="#3FB984" font-weight="500">≤ 0.3%</text>
+          <text y="90" font-family="JetBrains Mono" font-size="9" fill="#8a93a6">▲ measured by</text>
+          <text y="103" font-family="JetBrains Mono" font-size="9" fill="#82d3f3">PreSens spot</text>
+
+          <!-- Прогресс-бар -->
+          <rect x="0" y="120" width="50" height="4" fill="#2A2F3A"/>
+          <rect x="0" y="120" width="0" height="4" fill="#3FB984">
+            <animate attributeName="width" values="0;15;30;42;48;50;50;50;50;50;50;50" dur="12s" repeatCount="indefinite"/>
+          </rect>
+          <text y="138" font-family="JetBrains Mono" font-size="8" fill="#8a93a6" letter-spacing="1">PURGE PROGRESS</text>
+        </g>
+      </svg>
+
+      <div style="margin-top: 16px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; font-size: 12px;">
+        <span class="muted mono" style="display: flex; align-items: center; gap: 6px;">
+          <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #5BC0EB;"></span> N₂ молекулы
+        </span>
+        <span class="muted mono" style="display: flex; align-items: center; gap: 6px;">
+          <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #E5685A;"></span> O₂ вытесняется
+        </span>
+        <span class="muted mono" style="display: flex; align-items: center; gap: 6px;">
+          <span style="display: inline-block; width: 10px; height: 10px; background: #E8A33D;"></span> порт дозаправки
+        </span>
+        <span class="muted mono" style="margin-left: auto;">кратность 3V · ГОСТ 9293-74</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEGMENTS ============ -->
+<section id="segments">
+  <div class="container">
+    <div class="section-header">
+      <div class="num">§03 · ПРИМЕНЕНИЯ</div>
+      <h2>Пять продуктовых ниш</h2>
+      <p>Универсальная архитектура — пять моделей под разные сегменты, от стратегических резервов до премиум-капсул для частных коллекций. Шестая ниша — bespoke под уникальные ТЗ.</p>
+    </div>
+    <div class="seg-grid">
+      <div class="seg-card">
+        <div class="tag">Premium B2C</div>
+        <h4>INERTUM Auto</h4>
+        <p>Гаражная капсула под коллекционный автомобиль. Азот + кислород-абсорбер + оптический контроль + порт дозаправки.</p>
+        <div class="price">$5 000 — 15 000 розница</div>
+      </div>
+      <div class="seg-card">
+        <div class="tag">Premium B2C</div>
+        <h4>INERTUM Moto</h4>
+        <p>Под мотоцикл, оружейные коллекции, охотничьи принадлежности. Компактная версия Auto.</p>
+        <div class="price">$1 500 — 3 000 розница</div>
+      </div>
+      <div class="seg-card">
+        <div class="tag">Premium B2C</div>
+        <h4>INERTUM Vault</h4>
+        <p>Жёсткая капсула под коллекционные часы, ювелирку, слитки. Аргон + RP-System + smart-lock.</p>
+        <div class="price">$300 — 1 200 розница</div>
+      </div>
+      <div class="seg-card">
+        <div class="tag">Музеи и коллекции</div>
+        <h4>INERTUM Archive</h4>
+        <p>Под документы, иконы, монеты, произведения искусства. Аргон + прозрачная стенка для экспонирования.</p>
+        <div class="price">$200 — 800 розница</div>
+      </div>
+      <div class="seg-card">
+        <div class="tag">B2G тендеры</div>
+        <h4>INERTUM Strategic</h4>
+        <p>Промышленная упаковка для стратегических резервов лекарств, вакцин, реагентов. Тендеры на партии.</p>
+        <div class="price">$5 — 50 за упаковку</div>
+      </div>
+      <div class="seg-card special">
+        <div class="tag">Custom</div>
+        <h4>INERTUM Bespoke</h4>
+        <p>Индивидуальные капсулы под уникальные объекты по ТЗ заказчика. Электроника, прецизионные приборы, биообразцы.</p>
+        <div class="price">on request</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY NOW ============ -->
+<section id="why">
+  <div class="container-narrow">
+    <div class="section-header">
+      <div class="num">§04 · ПОЧЕМУ СЕЙЧАС</div>
+      <h2>Окно 18–24 месяца до появления первых конкурентов</h2>
+    </div>
+    <ul class="bullets">
+      <li><strong>Рост рынка коллекционных активов.</strong> Премиум-авто $20B+, часы $20B+, искусство $65B+. Владельцы готовы платить за гарантированную защиту, а не страховку.</li>
+      <li><strong>ESG / circular economy.</strong> Продление срока службы товаров — официальная ESG-история, под которую международные финансовые институты выделяют капитал.</li>
+      <li><strong>Дефицит стратегических резервов после 2022.</strong> Росрезерв и Минздрав модернизируют упаковку — открыты тендеры на гарантированный срок хранения.</li>
+      <li><strong>Удешевление IoT-сенсоров.</strong> Оптические патчи теперь стоят €30, бесконтактный ридер амортизируется на сотнях капсул.</li>
+      <li><strong>Каналы в Азии и на Ближнем Востоке.</strong> Прямой доступ к коллекционерам и фондам ОАЭ, КСА, КНР, Казахстана через сложившуюся сеть.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ STATUS ============ -->
+<section id="status">
+  <div class="container">
+    <div class="section-header">
+      <div class="num">§05 · СТАТУС НА МАЙ 2026</div>
+      <h2>Что готово к raise</h2>
+      <p>Полный пакет на ~120 страниц документации, портал с data room, BOM прототипа №1, целевой список 30+ инвесторов. Публикация — после даты приоритета по патенту.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#patent"/></svg></div>
+        <h3>Патентный поиск</h3>
+        <p>Углублённый анализ 21 ближайшего аналога. Прямых блокирующих патентов нет. Свободная зона — комбинация полимерно-фольговой капсулы + локального прозрачного окна + пассивного оптического spot.</p>
+        <code>21 PATENTS · 0 BLOCKERS</code>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#document"/></svg></div>
+        <h3>Заявка ЕАПО v2.1</h3>
+        <p>3 независимых пункта формулы, 20 зависимых, 8 стран ЕАЭС + готова PCT-конвертация. Драфт передаётся патентному поверенному в РФ.</p>
+        <code>3 INDEP · 20 DEP · 8 COUNTRIES</code>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#supplier"/></svg></div>
+        <h3>Поставщики</h3>
+        <p>Контакты топ-3 ламинатов (NomexRus, Pack-Systems, Hangzhou Keneng) и топ-3 датчиков (PreSens, PyroScience, SST Sensing). RFQ-шаблоны готовы.</p>
+        <code>6 SUPPLIERS · RFQ READY</code>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#prototype"/></svg></div>
+        <h3>Прототип №1</h3>
+        <p>ТЗ на мотоциклетную капсулу. Полная BOM, смета ₽250k, программа 6-месячных испытаний. Lead-time от заказа до сборки — 8 недель.</p>
+        <code>BOM READY · 8 WEEKS LEAD</code>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#finance"/></svg></div>
+        <h3>Финансовая модель</h3>
+        <p>P&amp;L 2026–2030, юнит-экономика по 5 моделям, sensitivity-анализ. Выход на $25M годовой выручки к 2030, валовая маржа 80%.</p>
+        <code>$25M REV BY 2030</code>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><svg><use href="assets/icons.svg#investors"/></svg></div>
+        <h3>Список инвесторов</h3>
+        <p>30+ фондов и ангелов с прямыми каналами входа: ФРП, Sber500, Phystech, Sk Capital, Wa'ed, Shorooq, Морейнис. SPV в Дубае или Алматы.</p>
+        <code>30+ TARGETS · WARM ROUTES</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-header">
+      <div class="num">§06 · ROADMAP 2026–2030</div>
+      <h2>5 лет · от R&amp;D до $25M выручки</h2>
+      <p>Параллельные треки: Patent · Production · Sales · Fundraise · Revenue. Контрольные точки по кварталам, exit-сценарий M&amp;A или IPO в 2030+.</p>
+    </div>
+    <div style="background: var(--bg-elev); border: 1px solid var(--stroke); border-radius: var(--radius-xl); padding: 24px; overflow: hidden;">
+      <object data="assets/roadmap.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block;" aria-label="INERTUM Roadmap 2026-2030"></object>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section id="team">
+  <div class="container">
+    <div class="section-header">
+      <div class="num">§07 · КОМАНДА</div>
+      <h2>Founder onboard, ключевые позиции открыты после раунда</h2>
+      <p>Основатель с подтверждёнными каналами в нефтегазовой отрасли РФ, КНР, Казахстане и на Ближнем Востоке. Hiring-план — после привлечения раунда $750k.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="role">Founder · CEO</div>
+        <h4>Аслан КАА</h4>
+        <p>Многопрофильный предприниматель с опытом международных сделок в нефтегазе и работы с государственными структурами. <a href="https://aslankaa.com">aslankaa.com</a></p>
+      </div>
+      <div class="team-card hiring">
+        <div class="role">Hiring · CTO</div>
+        <h4>Embedded · IoT</h4>
+        <p>Embedded engineer с опытом IoT и mil-spec упаковки. Целевой профиль: Sensirion, PreSens, NomexRus, Promwad.</p>
+      </div>
+      <div class="team-card hiring">
+        <div class="role">Hiring · Head of Sales</div>
+        <h4>Premium B2C</h4>
+        <p>Связи в премиум-сегменте: коллекционные авто, банки, страховщики, частные хранилища. Желателен опыт MENA.</p>
+      </div>
+      <div class="team-card hiring">
+        <div class="role">Hiring · Head of R&amp;D</div>
+        <h4>Materials · Packaging</h4>
+        <p>Материаловед или специалист по упаковке с опытом MIL-PRF-131 / ГОСТ 9.014. Желателен опыт с ОТУ.</p>
+      </div>
+    </div>
+    <p class="muted mono mt-32" style="font-size: 12px;">
+      Партнёры и поставщики: NomexRus (СПб) · Pack-Systems · Mitsubishi Gas Chemical · PreSens (Германия) · PyroScience (Германия) · SST Sensing (UK).
+    </p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="container">
+    <div class="cta-block">
+      <div class="num">§08 · КОНТАКТ</div>
+      <h2>Запросить полный пакет</h2>
+      <p>Полная техническая документация, патентная заявка v2.1, финансовая модель и спецификация прототипа предоставляются под NDA после подтверждённого запроса. Доступ к закрытому data room — по индивидуальному ключу.</p>
+      <div class="cta-row" style="justify-content: center;">
+        <a class="btn btn-primary" href="mailto:idriskaaa@gmail.com?subject=INERTUM%20-%20Request%20full%20package%20under%20NDA&amp;body=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%90%D1%81%D0%BB%D0%B0%D0%BD.%0A%0A%D0%9F%D1%80%D0%BE%D1%88%D1%83%20%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BB%D0%BD%D1%8B%D0%B9%20%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%20%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D0%BE%D0%B2%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%20INERTUM%20%D0%BF%D0%BE%D0%B4%20NDA.%0A%0A%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F%3A%20%0A%D0%94%D0%BE%D0%BB%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C%3A%20%0A%D0%A6%D0%B5%D0%BB%D1%8C%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0%3A%20"><svg width="14" height="14" style="display:inline-block; vertical-align:middle;"><use href="assets/icons.svg#email"/></svg> idriskaaa@gmail.com</a>
+        <a class="btn btn-ghost" href="public/INERTUM-NDA.html" target="_blank"><svg width="14" height="14" style="display:inline-block; vertical-align:middle;"><use href="assets/icons.svg#document"/></svg> Скачать NDA</a>
+        <a class="btn btn-ghost" href="https://aslankaa.com"><svg width="14" height="14" style="display:inline-block; vertical-align:middle;"><use href="assets/icons.svg#globe"/></svg> aslankaa.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<!-- ============ 3D HERO SCENE (Three.js) ============ -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+  const container = document.getElementById('capsule3d');
+  if (!container) { /* nothing */ }
+  else {
+    // Probe WebGL
+    const test = document.createElement('canvas').getContext('webgl');
+    if (!test) {
+      console.warn('WebGL not available — keeping CSS fallback');
+    } else {
+      // Hide CSS fallback
+      container.querySelectorAll('.fallback').forEach(el => el.style.display = 'none');
+
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(35, w / h, 0.1, 100);
+      camera.position.set(7, 4, 8);
+      camera.lookAt(0, 0, 0);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x000000, 0);
+      container.appendChild(renderer.domElement);
+      renderer.domElement.style.width = '100%';
+      renderer.domElement.style.height = '100%';
+
+      // Lighting
+      scene.add(new THREE.AmbientLight(0x5BC0EB, 0.4));
+      const keyLight = new THREE.DirectionalLight(0x82d3f3, 1.2);
+      keyLight.position.set(5, 8, 5);
+      scene.add(keyLight);
+      const rimLight = new THREE.PointLight(0x5BC0EB, 1.5, 20);
+      rimLight.position.set(-3, 3, -3);
+      scene.add(rimLight);
+
+      // Capsule (semi-transparent rounded box)
+      const capsuleGeom = new THREE.BoxGeometry(5, 3, 2);
+      const capsuleMat = new THREE.MeshPhysicalMaterial({
+        color: 0x5BC0EB,
+        metalness: 0.1,
+        roughness: 0.05,
+        transmission: 0.85,
+        transparent: true,
+        opacity: 0.25,
+        ior: 1.4,
+        thickness: 0.3,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+      });
+      const capsule = new THREE.Mesh(capsuleGeom, capsuleMat);
+      scene.add(capsule);
+
+      // Capsule wireframe overlay
+      const capsuleEdges = new THREE.EdgesGeometry(capsuleGeom);
+      const capsuleWire = new THREE.LineSegments(
+        capsuleEdges,
+        new THREE.LineBasicMaterial({ color: 0x82d3f3, transparent: true, opacity: 0.6 })
+      );
+      scene.add(capsuleWire);
+
+      // "Zipper" — orange line on top
+      const zipperGeom = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-2.3, 1.5, 0),
+        new THREE.Vector3(2.3, 1.5, 0),
+      ]);
+      const zipper = new THREE.Line(
+        zipperGeom,
+        new THREE.LineDashedMaterial({ color: 0xE8A33D, dashSize: 0.15, gapSize: 0.08, linewidth: 2 })
+      );
+      zipper.computeLineDistances();
+      scene.add(zipper);
+
+      // Motorcycle silhouette inside (simplified)
+      const motoGroup = new THREE.Group();
+
+      const wheelMat = new THREE.MeshStandardMaterial({ color: 0x5BC0EB, metalness: 0.6, roughness: 0.3, emissive: 0x1a3447, emissiveIntensity: 0.3 });
+      const wheelGeom = new THREE.TorusGeometry(0.55, 0.10, 16, 32);
+
+      const wheelBack = new THREE.Mesh(wheelGeom, wheelMat);
+      wheelBack.position.set(-1.4, -0.5, 0);
+      wheelBack.rotation.y = Math.PI / 2;
+      motoGroup.add(wheelBack);
+
+      const wheelFront = wheelBack.clone();
+      wheelFront.position.set(1.4, -0.5, 0);
+      motoGroup.add(wheelFront);
+
+      // Frame
+      const frameMat = new THREE.MeshStandardMaterial({ color: 0x82d3f3, metalness: 0.7, roughness: 0.2, emissive: 0x1a3447, emissiveIntensity: 0.4 });
+      const frameGeom = new THREE.BoxGeometry(2.4, 0.12, 0.12);
+      const frame = new THREE.Mesh(frameGeom, frameMat);
+      frame.position.set(0, 0.1, 0);
+      motoGroup.add(frame);
+
+      const tankGeom = new THREE.BoxGeometry(1.0, 0.4, 0.5);
+      const tank = new THREE.Mesh(tankGeom, frameMat);
+      tank.position.set(-0.2, 0.4, 0);
+      motoGroup.add(tank);
+
+      const seatGeom = new THREE.BoxGeometry(1.2, 0.18, 0.45);
+      const seat = new THREE.Mesh(seatGeom, frameMat);
+      seat.position.set(0.6, 0.55, 0);
+      motoGroup.add(seat);
+
+      const handlebarGeom = new THREE.CylinderGeometry(0.04, 0.04, 0.7, 12);
+      const handlebar = new THREE.Mesh(handlebarGeom, frameMat);
+      handlebar.position.set(1.4, 0.75, 0);
+      handlebar.rotation.z = Math.PI / 2;
+      motoGroup.add(handlebar);
+
+      const forkGeom = new THREE.CylinderGeometry(0.05, 0.05, 1.3, 8);
+      const fork = new THREE.Mesh(forkGeom, frameMat);
+      fork.position.set(1.4, 0.1, 0);
+      motoGroup.add(fork);
+
+      motoGroup.position.set(0, -0.2, 0);
+      motoGroup.scale.set(0.85, 0.85, 0.85);
+      scene.add(motoGroup);
+
+      // Gas particles
+      const particleCount = 80;
+      const particleGeom = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const velocities = [];
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3]     = (Math.random() - 0.5) * 4.6;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 2.6;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 1.6;
+        velocities.push({
+          x: (Math.random() - 0.5) * 0.005,
+          y: (Math.random() - 0.5) * 0.005,
+          z: (Math.random() - 0.5) * 0.005,
+        });
+      }
+      particleGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      const particleTex = (() => {
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = 32;
+        const ctx = canvas.getContext('2d');
+        const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        grad.addColorStop(0, 'rgba(130,211,243,1)');
+        grad.addColorStop(0.4, 'rgba(91,192,235,0.6)');
+        grad.addColorStop(1, 'rgba(91,192,235,0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 32, 32);
+        return new THREE.CanvasTexture(canvas);
+      })();
+
+      const particleMat = new THREE.PointsMaterial({
+        size: 0.18,
+        map: particleTex,
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        opacity: 0.85,
+      });
+      const particles = new THREE.Points(particleGeom, particleMat);
+      scene.add(particles);
+
+      // Optical window mark
+      const windowGeom = new THREE.PlaneGeometry(0.45, 0.45);
+      const windowMat = new THREE.MeshBasicMaterial({
+        color: 0x82d3f3, transparent: true, opacity: 0.6, side: THREE.DoubleSide
+      });
+      const opticalWindow = new THREE.Mesh(windowGeom, windowMat);
+      opticalWindow.position.set(2.0, 0.3, 1.01);
+      scene.add(opticalWindow);
+      const windowFrame = new THREE.LineLoop(
+        new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(-0.225, -0.225, 0),
+          new THREE.Vector3(0.225, -0.225, 0),
+          new THREE.Vector3(0.225, 0.225, 0),
+          new THREE.Vector3(-0.225, 0.225, 0),
+        ]),
+        new THREE.LineBasicMaterial({ color: 0x82d3f3 })
+      );
+      windowFrame.position.copy(opticalWindow.position);
+      scene.add(windowFrame);
+
+      // Port (orange dot)
+      const portGeom = new THREE.SphereGeometry(0.10, 16, 16);
+      const portMat = new THREE.MeshBasicMaterial({ color: 0xE8A33D });
+      const port = new THREE.Mesh(portGeom, portMat);
+      port.position.set(-2.3, -1.4, 0);
+      scene.add(port);
+
+      // Controls
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.06;
+      controls.enableZoom = false;
+      controls.enablePan = false;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.6;
+
+      // Resize
+      window.addEventListener('resize', () => {
+        const w2 = container.clientWidth;
+        const h2 = container.clientHeight;
+        camera.aspect = w2 / h2;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w2, h2);
+      });
+
+      // Animation loop
+      let t = 0;
+      function animate() {
+        requestAnimationFrame(animate);
+        t += 0.016;
+        controls.update();
+
+        // Float capsule slightly
+        capsule.position.y = Math.sin(t * 0.8) * 0.08;
+        capsuleWire.position.y = capsule.position.y;
+        zipper.position.y = capsule.position.y;
+        motoGroup.position.y = -0.2 + Math.sin(t * 0.8) * 0.08;
+        opticalWindow.position.y = 0.3 + Math.sin(t * 0.8) * 0.08;
+        windowFrame.position.y = opticalWindow.position.y;
+
+        // Move particles brownian
+        const pos = particleGeom.attributes.position.array;
+        for (let i = 0; i < particleCount; i++) {
+          pos[i * 3]     += velocities[i].x;
+          pos[i * 3 + 1] += velocities[i].y;
+          pos[i * 3 + 2] += velocities[i].z;
+          // bounce within capsule bounds
+          if (Math.abs(pos[i * 3])     > 2.3) velocities[i].x *= -1;
+          if (Math.abs(pos[i * 3 + 1]) > 1.3) velocities[i].y *= -1;
+          if (Math.abs(pos[i * 3 + 2]) > 0.8) velocities[i].z *= -1;
+        }
+        particleGeom.attributes.position.needsUpdate = true;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+  }
+</script>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:12px;"><span class="dot"></span>INERTUM</div>
+        <div class="muted" style="font-size: 13px; max-width: 320px;">
+          Системы долговременного хранения в инертной газовой среде.<br>
+          Pre-Seed · Patent Pending · 2026.
+        </div>
+      </div>
+      <div>
+        <h5>Технология</h5>
+        <a href="#tech">Архитектура</a>
+        <a href="#tech">Стандарты</a>
+        <a href="#status">Патент</a>
+      </div>
+      <div>
+        <h5>Применения</h5>
+        <a href="#segments">Auto / Moto</a>
+        <a href="#segments">Vault</a>
+        <a href="#segments">Archive</a>
+        <a href="#segments">Strategic</a>
+      </div>
+      <div>
+        <h5>Контакты</h5>
+        <a href="mailto:idriskaaa@gmail.com">idriskaaa@gmail.com</a>
+        <a href="https://aslankaa.com">aslankaa.com</a>
+        <a href="public/INERTUM-onepager.pdf">One-pager (PDF)</a>
+      </div>
+    </div>
+    <div class="copyright">
+      <div>© 2026 INERTUM · ALL RIGHTS RESERVED</div>
+      <div>v1.0 · 2026-05-09 · Direction A</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

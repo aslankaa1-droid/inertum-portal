@@ -1,0 +1,25 @@
+INERTUM · Sensitivity Analysis · 2030 outlook · v1.0 · 2026-05-09
+,,,,,
+Scenario,Avg price change,2030 Revenue $M,2030 EBITDA $M,EBITDA margin %,Series A valuation $M
+Base case,0%,25,12,48%,25
+Optimistic +20%,+20%,30,16,53%,32
+Pessimistic -20%,-20%,20,9,45%,18
+,,,,,
+Sensitivity to Patent Delay,,,,,
+Scenario,Patent delay,2027 Revenue $M,2030 Revenue $M,2030 EBITDA $M,
+Base (priority Q3 2026),0 mo,1.5,25,12,
+Mild delay,6 mo,1.0,22,10,
+Hard delay,12 mo,0.5,18,7,
+Failure (no patent),24 mo,0.3,14,3,
+,,,,,
+Sensitivity to Government Tender,,,,,
+Scenario,Tender outcome,2030 Revenue $M,2030 EBITDA $M,Notes,
+Won 1B RUB tender,Yes,25,12,Base case includes Strategic line,
+No government contract,No,14,5,Strategic line lost,
+Won + 2nd tender 2029,Double,40,21,Optimistic upside,
+,,,,,
+FX Sensitivity,,,,,
+Scenario,USD/RUB,COGS impact %,Margin change pp,2030 Revenue $M,
+Stable 90,90,0%,0,25,
+Strong USD 110,110,+8%,-3pp,23,
+Weak USD 70,70,-15%,+5pp,28,

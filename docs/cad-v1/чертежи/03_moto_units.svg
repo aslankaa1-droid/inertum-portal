@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Inter, Arial, sans-serif">
+  <!-- Лист 03 · Узлы и сечения. Масштаб 5:1 для узлов. -->
+  <defs>
+    <marker id="arrowEnd" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#000"/>
+    </marker>
+    <marker id="arrowStart" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M10,0 L0,5 L10,10 z" fill="#000"/>
+    </marker>
+    <pattern id="hatchA" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#666" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <style>
+    .frame { fill: none; stroke: #000; stroke-width: 1.5; }
+    .body { fill: none; stroke: #000; stroke-width: 1.4; }
+    .pet { fill: #bbdefb; stroke: #1565c0; stroke-width: 0.6; }
+    .alf { fill: #cfd8dc; stroke: #455a64; stroke-width: 0.6; }
+    .lld { fill: #fff3e0; stroke: #ef6c00; stroke-width: 0.6; }
+    .seam { fill: #d50000; opacity: 0.5; }
+    .dim { fill: none; stroke: #000; stroke-width: 0.5; }
+    .ext { fill: none; stroke: #000; stroke-width: 0.4; }
+    .glue { fill: #aed581; stroke: #558b2f; stroke-width: 0.5; }
+    .metal { fill: #cfd8dc; stroke: #000; stroke-width: 0.6; }
+    .silicone { fill: #ffccbc; stroke: #bf360c; stroke-width: 0.5; }
+    .glass { fill: #b2ebf2; stroke: #006064; stroke-width: 0.6; opacity: 0.7; }
+    .lbl { font-size: 11px; fill: #000; }
+    .lblb { font-size: 12px; fill: #000; font-weight: 600; }
+    .num { font-size: 10px; fill: #000; font-weight: 500; }
+    .title { font-size: 16px; font-weight: 600; fill: #000; }
+    .small { font-size: 9px; fill: #000; }
+    .arrow-cb { fill: #c00; stroke: #c00; stroke-width: 0.6; }
+  </style>
+
+  <rect class="frame" x="20" y="20" width="1160" height="860"/>
+  <rect class="frame" x="800" y="800" width="380" height="80"/>
+  <line class="frame" x1="800" y1="820" x2="1180" y2="820"/>
+  <line class="frame" x1="800" y1="850" x2="1180" y2="850"/>
+  <line class="frame" x1="950" y1="800" x2="950" y2="880"/>
+  <text class="lblb" x="810" y="813">Лист 03 · Мотокапсула — узлы и сечения</text>
+  <text class="lbl" x="810" y="839">Чертёж: КД-INERTUM-MOTO-03 · v1.0</text>
+  <text class="lbl" x="810" y="869">2026-05-09 · Аслан КАА · INERTUM</text>
+  <text class="lbl" x="960" y="819">Узлы — масштаб 5:1</text>
+  <text class="lbl" x="960" y="839">Размеры — мм / мкм</text>
+  <text class="lbl" x="960" y="876">Толщины слоёв — без масштаба</text>
+
+  <text class="title" x="600" y="50" text-anchor="middle">Узлы и сечения · детализация конструкции</text>
+
+  <!-- ====================== УЗЕЛ A · ШОВ ТЕРМОСВАРКИ ====================== -->
+  <g transform="translate(60, 90)">
+    <text class="lblb" x="0" y="0">Узел A · Шов термосварки LLDPE</text>
+    <text class="small" x="0" y="14">Принцип: внутренний слой LLDPE свариваемого ламината плавится при T = 130–150 °C</text>
+    <text class="small" x="0" y="26">и образует монолитное соединение. Двойной шов — на длинных гранях.</text>
+
+    <!-- Сечение шва. Два листа ламината накладываются и свариваются. -->
+    <g transform="translate(20, 70)">
+      <!-- Ламинат верхний -->
+      <rect class="pet" x="0" y="0" width="500" height="6"/>
+      <rect class="alf" x="0" y="6" width="500" height="4"/>
+      <rect class="lld" x="0" y="10" width="500" height="14"/>
+      <!-- Зона перекрытия и сварки -->
+      <rect class="lld" x="100" y="24" width="300" height="14"/>
+      <rect class="alf" x="100" y="38" width="300" height="4"/>
+      <rect class="pet" x="100" y="42" width="300" height="6"/>
+      <!-- Сварной шов 1 -->
+      <rect class="seam" x="120" y="20" width="40" height="22"/>
+      <rect class="seam" x="340" y="20" width="40" height="22"/>
+
+      <text class="small" x="60" y="36" text-anchor="middle">верхний ламинат</text>
+      <text class="small" x="450" y="36" text-anchor="middle">нижний ламинат</text>
+      <text class="num" x="140" y="55" text-anchor="middle" fill="#c00">шов 1</text>
+      <text class="num" x="360" y="55" text-anchor="middle" fill="#c00">шов 2</text>
+
+      <!-- Размеры -->
+      <line class="dim" x1="120" y1="-10" x2="160" y2="-10" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+      <text class="num" x="140" y="-15" text-anchor="middle">10 мм</text>
+      <line class="dim" x1="100" y1="-25" x2="400" y2="-25" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+      <text class="num" x="250" y="-30" text-anchor="middle">300 мм перекрытие</text>
+
+      <!-- Подписи слоёв -->
+      <text class="small" x="510" y="5">PET 12</text>
+      <text class="small" x="510" y="11">Al 9</text>
+      <text class="small" x="510" y="20">LLDPE 70</text>
+    </g>
+
+    <text class="small" x="20" y="160">Допуски: ширина шва 10 ± 1 мм; ширина перекрытия 300 ± 10 мм; T сварки 140 ± 5 °C; время выдержки 3 ± 0,3 с.</text>
+  </g>
+
+  <!-- ====================== УЗЕЛ B · МОЛНИЯ ====================== -->
+  <g transform="translate(620, 90)">
+    <text class="lblb" x="0" y="0">Узел B · Молния YKK Aquaseal № 8</text>
+    <text class="small" x="0" y="14">Молния втачивается в проём верхней панели. Дублирование клейкой</text>
+    <text class="small" x="0" y="26">лентой 3M VHB после закрытия для герметичности > 5 кПа.</text>
+
+    <!-- Сечение молнии в закрытом состоянии -->
+    <g transform="translate(40, 60)">
+      <!-- Левая половина ламината -->
+      <rect class="pet" x="0" y="0" width="180" height="5"/>
+      <rect class="alf" x="0" y="5" width="180" height="3"/>
+      <rect class="lld" x="0" y="8" width="180" height="11"/>
+      <!-- Молния — пластиковые зубцы -->
+      <path class="metal" d="M180,3 L200,3 L210,11 L200,19 L180,19 Z"/>
+      <path class="metal" d="M220,3 L240,3 L240,19 L220,19 L210,11 Z"/>
+      <!-- Правая половина -->
+      <rect class="pet" x="240" y="0" width="180" height="5"/>
+      <rect class="alf" x="240" y="5" width="180" height="3"/>
+      <rect class="lld" x="240" y="8" width="180" height="11"/>
+      <!-- Сшивка молнии с ламинатом -->
+      <rect class="seam" x="160" y="0" width="20" height="19"/>
+      <rect class="seam" x="240" y="0" width="20" height="19"/>
+      <!-- VHB tape поверх -->
+      <rect class="glue" x="120" y="-10" width="180" height="5"/>
+      <text class="small" x="210" y="-14" text-anchor="middle">3M VHB tape · L 180 мм поверх</text>
+
+      <text class="small" x="80" y="35" text-anchor="middle">ламинат L</text>
+      <text class="small" x="340" y="35" text-anchor="middle">ламинат R</text>
+      <text class="small" x="210" y="35" text-anchor="middle">молния</text>
+    </g>
+
+    <text class="small" x="20" y="120">Молния сшивается с ламинатом термошвом (LLDPE-tape). Цикл: открытие 1000+ раз без потери герметичности.</text>
+    <text class="small" x="20" y="135">Заглушка слайдера запирается стяжкой через люверс — дополнительная защита от случайного открытия.</text>
+  </g>
+
+  <!-- ====================== УЗЕЛ C · ПОРТ ДОЗАПРАВКИ ====================== -->
+  <g transform="translate(60, 290)">
+    <text class="lblb" x="0" y="0">Узел C · Порт дозаправки (Schrader)</text>
+    <text class="small" x="0" y="14">Schrader-клапан с обратным ходом (как на велокамере).</text>
+    <text class="small" x="0" y="26">Силиконовая септа + металлический ниппель + контргайка.</text>
+
+    <!-- Сечение порта в стенке -->
+    <g transform="translate(40, 70)">
+      <!-- Стенка ламината -->
+      <rect class="pet" x="0" y="80" width="500" height="5"/>
+      <rect class="alf" x="0" y="85" width="500" height="3"/>
+      <rect class="lld" x="0" y="88" width="500" height="11"/>
+      <!-- Отверстие в стенке -->
+      <rect fill="#fff" x="200" y="80" width="100" height="19"/>
+      <!-- Внешний фланец-шайба -->
+      <rect class="metal" x="180" y="60" width="140" height="20"/>
+      <!-- Внутренняя контргайка -->
+      <rect class="metal" x="180" y="99" width="140" height="20"/>
+      <!-- Силиконовое уплотнение -->
+      <rect class="silicone" x="200" y="78" width="100" height="6"/>
+      <rect class="silicone" x="200" y="95" width="100" height="6"/>
+      <!-- Schrader-ниппель -->
+      <rect class="metal" x="230" y="20" width="40" height="40"/>
+      <rect class="metal" x="240" y="0" width="20" height="20"/>
+      <!-- Внутренняя трубка (для подачи газа) -->
+      <rect class="metal" x="240" y="60" width="20" height="60"/>
+
+      <!-- Подписи -->
+      <text class="small" x="180" y="55" text-anchor="end">наружу ↑</text>
+      <text class="small" x="180" y="125" text-anchor="end">внутрь ↓</text>
+      <text class="small" x="340" y="40">шток клапана</text>
+      <line class="ext" x1="290" y1="40" x2="320" y2="40"/>
+      <text class="small" x="340" y="70">фланец</text>
+      <line class="ext" x1="290" y1="70" x2="320" y2="70"/>
+      <text class="small" x="340" y="92">мембрана</text>
+      <line class="ext" x1="290" y1="92" x2="320" y2="92"/>
+      <text class="small" x="340" y="110">контргайка</text>
+      <line class="ext" x1="290" y1="110" x2="320" y2="110"/>
+
+      <!-- Размеры -->
+      <line class="dim" x1="180" y1="135" x2="320" y2="135" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+      <line class="ext" x1="180" y1="119" x2="180" y2="140"/>
+      <line class="ext" x1="320" y1="119" x2="320" y2="140"/>
+      <text class="num" x="250" y="148" text-anchor="middle">⌀ 35 (фланец)</text>
+
+      <line class="dim" x1="200" y1="155" x2="300" y2="155" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+      <text class="num" x="250" y="168" text-anchor="middle">⌀ 12 (отверстие)</text>
+    </g>
+
+    <text class="small" x="20" y="200">Цикл подключения шланга → отжатие штока → подача N₂ под P = 1,5 атм → закрытие.</text>
+    <text class="small" x="20" y="215">Срок герметичности: 10+ лет, замена силиконовой мембраны через 5 лет (опционально).</text>
+  </g>
+
+  <!-- ====================== УЗЕЛ D · ОПТИЧЕСКОЕ ОКНО ====================== -->
+  <g transform="translate(620, 290)">
+    <text class="lblb" x="0" y="0">Узел D · Оптическое окно ⌀30 мм</text>
+    <text class="small" x="0" y="14">Локальная зона без алюминиевой фольги. Снаружи — заклейка</text>
+    <text class="small" x="0" y="26">прозрачной PET 50 мкм с термосваркой по периметру.</text>
+
+    <!-- Вид сверху (план) -->
+    <g transform="translate(40, 70)">
+      <!-- Большой квадрат ламината -->
+      <rect class="pet" x="0" y="0" width="200" height="120"/>
+      <!-- Окно: круглая зона без фольги -->
+      <circle cx="100" cy="60" r="40" fill="url(#hatchA)" stroke="#000" stroke-width="0.5"/>
+      <!-- Обведено внешним PET-патчем -->
+      <rect class="glass" x="50" y="20" width="100" height="80" fill="none" stroke="#006064" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <!-- Термошов по периметру патча -->
+      <rect class="seam" x="46" y="16" width="108" height="88" fill="none" stroke="#c00" stroke-width="2" stroke-dasharray="4,2"/>
+
+      <text class="small" x="100" y="63" text-anchor="middle">зона без Al-foil</text>
+      <text class="small" x="100" y="115" text-anchor="middle" fill="#006064">PET-патч 100×80 (заклейка)</text>
+      <text class="small" x="100" y="-6" text-anchor="middle" fill="#c00">термошов по периметру</text>
+    </g>
+
+    <!-- Сечение окна -->
+    <g transform="translate(40, 220)">
+      <!-- Базовый ламинат с дыркой в Al-foil -->
+      <rect class="pet" x="0" y="0" width="500" height="5"/>
+      <rect class="alf" x="0" y="5" width="200" height="3"/>
+      <rect class="alf" x="300" y="5" width="200" height="3"/>
+      <rect class="lld" x="0" y="8" width="500" height="11"/>
+      <!-- PET-патч сверху -->
+      <rect class="pet" x="160" y="-8" width="180" height="8" fill="#bbdefb" stroke="#1565c0" stroke-width="1"/>
+      <!-- Сварные швы патча -->
+      <rect class="seam" x="160" y="-8" width="20" height="13"/>
+      <rect class="seam" x="320" y="-8" width="20" height="13"/>
+
+      <!-- Подписи -->
+      <text class="small" x="100" y="35" text-anchor="middle">с Al-foil</text>
+      <text class="small" x="250" y="35" text-anchor="middle">без Al (зона окна)</text>
+      <text class="small" x="400" y="35" text-anchor="middle">с Al-foil</text>
+      <text class="small" x="250" y="-15" text-anchor="middle">внешний PET-патч 50 мкм</text>
+
+      <line class="dim" x1="200" y1="50" x2="300" y2="50" marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+      <text class="num" x="250" y="62" text-anchor="middle">⌀ 30 мм окно</text>
+    </g>
+  </g>
+
+  <!-- ====================== УЗЕЛ E · ГЕРМОВВОД ====================== -->
+  <g transform="translate(60, 530)">
+    <text class="lblb" x="0" y="0">Узел E · Гермоввод M6 (опционально)</text>
+    <text class="small" x="0" y="14">Для проводного датчика T/RH (DS18B20 шлейф 1-Wire). Не обязателен для прототипа №1 если используется только пассивный оптический патч.</text>
+
+    <g transform="translate(40, 50)">
+      <!-- Стенка -->
+      <rect class="pet" x="0" y="60" width="500" height="5"/>
+      <rect class="alf" x="0" y="65" width="500" height="3"/>
+      <rect class="lld" x="0" y="68" width="500" height="11"/>
+      <rect fill="#fff" x="220" y="60" width="60" height="19"/>
+      <!-- Внешняя гайка -->
+      <rect class="metal" x="200" y="40" width="100" height="20"/>
+      <!-- Внутренняя гайка -->
+      <rect class="metal" x="200" y="79" width="100" height="20"/>
+      <!-- Уплотнители -->
+      <rect class="silicone" x="220" y="58" width="60" height="4"/>
+      <rect class="silicone" x="220" y="77" width="60" height="4"/>
+      <!-- Корпус -->
+      <rect class="metal" x="230" y="20" width="40" height="20"/>
+      <!-- Кабель -->
+      <rect fill="#000" x="245" y="0" width="10" height="20"/>
+      <rect fill="#000" x="245" y="99" width="10" height="40"/>
+
+      <text class="small" x="180" y="55" text-anchor="end">наружу</text>
+      <text class="small" x="180" y="105" text-anchor="end">внутрь</text>
+      <text class="small" x="320" y="30">кабель ⌀5 (1-Wire)</text>
+      <text class="small" x="320" y="55">внеш. гайка M6×0,75</text>
+      <text class="small" x="320" y="92">внутр. гайка</text>
+    </g>
+
+    <text class="small" x="20" y="180">Уплотнение по принципу cable gland (ip68). Затяжка момент 1,2 Н·м.</text>
+  </g>
+
+  <!-- ====================== УЗЕЛ F · ЖЁСТКИЙ КАРКАС ====================== -->
+  <g transform="translate(620, 530)">
+    <text class="lblb" x="0" y="0">Узел F · Жёсткий каркас ПВХ-50 (опционально)</text>
+    <text class="small" x="0" y="14">Чтобы оболочка не схлопывалась под лёгким разрежением.</text>
+    <text class="small" x="0" y="26">Для авто-варианта обязателен; для мото — опционально.</text>
+
+    <!-- Изометрия каркаса -->
+    <g transform="translate(40, 70) scale(0.9)">
+      <!-- Базовый прямоугольник -->
+      <line stroke="#444" stroke-width="2" x1="0" y1="100" x2="200" y2="100"/>
+      <line stroke="#444" stroke-width="2" x1="200" y1="100" x2="280" y2="60"/>
+      <line stroke="#444" stroke-width="2" x1="280" y1="60" x2="80" y2="60"/>
+      <line stroke="#444" stroke-width="2" x1="80" y1="60" x2="0" y2="100"/>
+      <!-- Верх -->
+      <line stroke="#444" stroke-width="2" x1="0" y1="0" x2="200" y2="0"/>
+      <line stroke="#444" stroke-width="2" x1="200" y1="0" x2="280" y2="-40"/>
+      <line stroke="#444" stroke-width="2" x1="280" y1="-40" x2="80" y2="-40"/>
+      <line stroke="#444" stroke-width="2" x1="80" y1="-40" x2="0" y2="0"/>
+      <!-- Стойки -->
+      <line stroke="#444" stroke-width="2" x1="0" y1="100" x2="0" y2="0"/>
+      <line stroke="#444" stroke-width="2" x1="200" y1="100" x2="200" y2="0"/>
+      <line stroke="#444" stroke-width="2" x1="280" y1="60" x2="280" y2="-40"/>
+      <line stroke="#444" stroke-width="2" x1="80" y1="60" x2="80" y2="-40"/>
+      <!-- Узловые тройники -->
+      <circle cx="0" cy="0" r="4" fill="#888"/>
+      <circle cx="200" cy="0" r="4" fill="#888"/>
+      <circle cx="280" cy="-40" r="4" fill="#888"/>
+      <circle cx="80" cy="-40" r="4" fill="#888"/>
+      <circle cx="0" cy="100" r="4" fill="#888"/>
+      <circle cx="200" cy="100" r="4" fill="#888"/>
+      <circle cx="280" cy="60" r="4" fill="#888"/>
+      <circle cx="80" cy="60" r="4" fill="#888"/>
+    </g>
+
+    <text class="small" x="20" y="220">8 тройников ПВХ-50, 12 труб (4×2500, 4×1500, 4×1000), 8 заглушек.</text>
+    <text class="small" x="20" y="234">Сборка без клея — фрикционная посадка. Цена комплекта ≈ ₽3 500.</text>
+  </g>
+</svg>

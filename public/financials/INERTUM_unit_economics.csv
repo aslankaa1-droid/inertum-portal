@@ -1,0 +1,26 @@
+INERTUM · Unit Economics by Product Line · USD · v1.0 · 2026-05-09
+,,,,,
+Product,Dimensions / Format,Target Customer,Retail Price,COGS,Gross Margin %
+INERTUM Auto,5 x 2 x 1.5 m / N2 / laminated bag,Collector car owners / insurers,7000,1350,80.7%
+INERTUM Moto,2.5 x 1 x 1.5 m / N2 / laminated bag,Motorcycle / firearms collectors,2200,560,74.5%
+INERTUM Vault,Rigid box / Ar / glass-front,Watches / jewelry / bullion,600,130,78.3%
+INERTUM Archive,Rigid or flex / Ar / transparent wall,Documents / icons / coins / art,450,105,76.7%
+INERTUM Strategic,Medical-grade foil pack,Govt strategic reserves (pharma),8,1.55,80.6%
+INERTUM Bespoke,Custom / per spec,Unique high-value items,On request (>$15k typical),Custom,>85%
+,,,,,
+INERTUM Auto · COGS Breakdown,Item,Cost USD,,,
+,Laminate PET/Al-foil/LLDPE 30 sqm @ $15,450,,,
+,Rigid frame (profile + fittings),200,,,
+,YKK Aquaseal zipper 8m @ $20,160,,,
+,N2 gas (2 cylinders x 6 cubic m),100,,,
+,Mitsubishi Ageless Z-2000 x 6 sachets,30,,,
+,PreSens SP-PSt6-NAU patches x 3,120,,,
+,Refill port + installation,30,,,
+,Assembly (4 man-hours x $25),100,,,
+,Logistics + packaging,70,,,
+,Warranty reserve 5%,60,,,
+,Reader amortization (per 100 capsules),30,,,
+,COGS Total,1350,,,
+,Retail price (medium),7000,,,
+,Gross profit per unit,5650,,,
+,Gross margin,80.7%,,,

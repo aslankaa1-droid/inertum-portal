@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1190 842" font-family="Inter, Arial, sans-serif">
+  <!-- MOTO blueprint render -->
+  <defs>
+    <pattern id="bp" patternUnits="userSpaceOnUse" width="20" height="20">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#5BC0EB" stroke-width="0.3" opacity="0.15"/>
+    </pattern>
+    <pattern id="bpMajor" patternUnits="userSpaceOnUse" width="100" height="100">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#5BC0EB" stroke-width="0.6" opacity="0.25"/>
+    </pattern>
+  </defs>
+
+  <rect width="1190" height="842" fill="#0a0b0d"/>
+  <rect width="1190" height="842" fill="url(#bp)"/>
+  <rect width="1190" height="842" fill="url(#bpMajor)"/>
+
+  <!-- Header -->
+  <text x="80" y="60" font-size="11" fill="#5BC0EB" letter-spacing="3" font-weight="500">§04 · MOTO PROTOTYPE</text>
+  <text x="80" y="100" font-size="42" fill="#F2F4F7" font-weight="600" letter-spacing="-0.5">INERTUM-MOTO-01</text>
+  <text x="80" y="130" font-size="14" fill="#8a93a6">Прототип №1 · 2500 × 1000 × 1500 мм · 3.75 м³ · ₽122–252 тыс · 8–10 недель</text>
+  <line x1="80" y1="155" x2="1110" y2="155" stroke="#2A2F3A" stroke-width="1"/>
+
+  <!-- BLUEPRINT FRAME -->
+  <g transform="translate(140, 220)">
+    <rect width="900" height="500" fill="none" stroke="#5BC0EB" stroke-width="0.6" stroke-opacity="0.3"/>
+
+    <!-- Размерные обозначения по периметру (top) -->
+    <g font-family="JetBrains Mono" font-size="10" fill="#5BC0EB">
+      <text x="100" y="-15" text-anchor="middle">0</text>
+      <text x="280" y="-15" text-anchor="middle">500</text>
+      <text x="460" y="-15" text-anchor="middle">1000</text>
+      <text x="640" y="-15" text-anchor="middle">1500</text>
+      <text x="820" y="-15" text-anchor="middle">2000</text>
+      <text x="1000" y="-15" text-anchor="middle">2500 мм</text>
+    </g>
+
+    <!-- Капсула (контур) -->
+    <rect x="50" y="80" width="800" height="400" fill="rgba(91,192,235,0.05)" stroke="#5BC0EB" stroke-width="2"/>
+
+    <!-- Двойная линия молнии -->
+    <line x1="80" y1="80" x2="820" y2="80" stroke="#E8A33D" stroke-width="2.5" stroke-dasharray="4,2"/>
+    <line x1="80" y1="84" x2="820" y2="84" stroke="#E8A33D" stroke-width="0.5"/>
+
+    <!-- Мотоцикл (BLUEPRINT-style line art) -->
+    <g transform="translate(150, 200)" stroke="#82d3f3" stroke-width="1.5" fill="none">
+      <!-- Заднее колесо -->
+      <circle cx="80" cy="200" r="80"/>
+      <circle cx="80" cy="200" r="20"/>
+      <!-- Спицы заднее -->
+      <line x1="80" y1="120" x2="80" y2="280"/>
+      <line x1="0" y1="200" x2="160" y2="200"/>
+      <line x1="22" y1="143" x2="138" y2="257"/>
+      <line x1="138" y1="143" x2="22" y2="257"/>
+      <!-- Переднее колесо -->
+      <circle cx="500" cy="200" r="80"/>
+      <circle cx="500" cy="200" r="20"/>
+      <line x1="500" y1="120" x2="500" y2="280"/>
+      <line x1="420" y1="200" x2="580" y2="200"/>
+      <line x1="442" y1="143" x2="558" y2="257"/>
+      <line x1="558" y1="143" x2="442" y2="257"/>
+      <!-- Рама -->
+      <path d="M80,200 L200,80 L380,80 L500,200 M200,80 L200,30 M380,80 L380,30 M230,30 L350,30"/>
+      <path d="M120,200 L260,120 L420,200"/>
+      <!-- Мотор -->
+      <rect x="220" y="130" width="120" height="80" rx="6"/>
+      <!-- Сиденье -->
+      <path d="M260,80 L380,80 L380,90 L270,90 Z" fill="rgba(130,211,243,0.15)"/>
+      <!-- Бак -->
+      <rect x="220" y="50" width="80" height="35" rx="4" fill="rgba(130,211,243,0.1)"/>
+      <!-- Руль -->
+      <line x1="430" y1="100" x2="500" y2="100"/>
+      <line x1="500" y1="100" x2="500" y2="200"/>
+    </g>
+
+    <!-- Узлы -->
+    <!-- Молния pull -->
+    <g transform="translate(820, 70)">
+      <line x1="0" y1="0" x2="40" y2="-30" stroke="#E8A33D" stroke-width="0.8"/>
+      <text x="44" y="-30" font-family="JetBrains Mono" font-size="10" fill="#E8A33D">YKK Aquaseal №8 · 3000 мм</text>
+    </g>
+
+    <!-- Порт -->
+    <circle cx="100" cy="450" r="8" fill="#E8A33D" stroke="#fff" stroke-width="1.5"/>
+    <line x1="100" y1="450" x2="60" y2="490" stroke="#E8A33D" stroke-width="0.6"/>
+    <text x="55" y="500" font-family="JetBrains Mono" font-size="10" fill="#E8A33D" text-anchor="end">SCHRADER PORT · ⌀35</text>
+
+    <!-- Окно -->
+    <rect x="700" y="220" width="20" height="20" fill="rgba(178,235,242,0.5)" stroke="#82d3f3" stroke-width="1.5"/>
+    <line x1="720" y1="230" x2="780" y2="195" stroke="#82d3f3" stroke-width="0.6"/>
+    <text x="785" y="195" font-family="JetBrains Mono" font-size="10" fill="#82d3f3">OPTICAL WINDOW · ⌀30 · NO Al-FOIL</text>
+
+    <!-- Размеры внизу -->
+    <line x1="50" y1="510" x2="850" y2="510" stroke="#5BC0EB" stroke-width="0.6"/>
+    <line x1="50" y1="500" x2="50" y2="520" stroke="#5BC0EB" stroke-width="0.6"/>
+    <line x1="850" y1="500" x2="850" y2="520" stroke="#5BC0EB" stroke-width="0.6"/>
+    <text x="450" y="500" font-family="JetBrains Mono" font-size="11" fill="#5BC0EB" text-anchor="middle">2500 мм</text>
+
+    <!-- Размеры по высоте -->
+    <line x1="-20" y1="80" x2="-20" y2="480" stroke="#5BC0EB" stroke-width="0.6"/>
+    <line x1="-30" y1="80" x2="-10" y2="80" stroke="#5BC0EB" stroke-width="0.6"/>
+    <line x1="-30" y1="480" x2="-10" y2="480" stroke="#5BC0EB" stroke-width="0.6"/>
+    <text x="-30" y="280" font-family="JetBrains Mono" font-size="11" fill="#5BC0EB" text-anchor="end">1500</text>
+  </g>
+
+  <!-- Метрики снизу -->
+  <g transform="translate(0, 750)" font-family="JetBrains Mono">
+    <line x1="80" y1="0" x2="1110" y2="0" stroke="#2A2F3A" stroke-width="1"/>
+
+    <text x="160" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="middle">19.2 м²</text>
+    <text x="160" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="middle">РАСХОД ЛАМИНАТА</text>
+
+    <text x="395" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="middle">11.3 м³</text>
+    <text x="395" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="middle">ОБЪЁМ ПРОДУВА N₂</text>
+
+    <text x="630" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="middle">6 саше</text>
+    <text x="630" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="middle">AGELESS Z-2000</text>
+
+    <text x="865" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="middle">3 / 1</text>
+    <text x="865" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="middle">ПАТЧИ / РИДЕР</text>
+
+    <text x="1080" y="35" font-size="26" fill="#5BC0EB" font-weight="500" text-anchor="end">8 нед</text>
+    <text x="1080" y="55" font-size="9" fill="#8a93a6" letter-spacing="1.5" text-anchor="end">LEAD-TIME</text>
+  </g>
+
+  <text x="80" y="820" font-family="JetBrains Mono" font-size="9" fill="#8a93a6">КД-INERTUM v2-PREMIUM · ЛИСТ 04 · MOTO BLUEPRINT</text>
+  <text x="1110" y="820" font-family="JetBrains Mono" font-size="9" fill="#8a93a6" text-anchor="end">2026-05-09</text>
+</svg>

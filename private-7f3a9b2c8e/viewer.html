@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Document Viewer</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta http-equiv="X-Robots-Tag" content="noindex,nofollow,noarchive">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style-v2.css">
+<script src="../assets/topbar.js" defer></script>
+</head>
+<body>
+
+<!-- ============ AUTH GATE ============ -->
+<div class="auth-shell" id="gate">
+  <div class="auth-card">
+    <div class="logo" style="margin-bottom: 24px;"><span class="dot"></span>INERTUM</div>
+    <div class="eyebrow"><span class="dot"></span>DATA ROOM · NDA REQUIRED</div>
+    <h1>Document Viewer</h1>
+    <p class="lede">Введите ключ доступа.</p>
+    <div class="auth-error hidden" id="gateError"></div>
+    <div class="field">
+      <label for="gatePass">Ключ доступа</label>
+      <input type="password" id="gatePass" placeholder="INERTUM-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false">
+    </div>
+    <button class="btn btn-primary" onclick="checkGate()" style="width:100%; justify-content:center;">
+      <svg width="14" height="14"><use href="../assets/icons.svg#lock"/></svg>
+      Войти
+    </button>
+  </div>
+</div>
+
+<!-- ============ VIEWER ============ -->
+<div class="viewer-shell hidden" id="dataroom">
+
+  <aside class="viewer-sidebar">
+    <a href="index.html" class="logo" style="display: flex; align-items: center; margin-bottom: 6px;">
+      <svg width="14" height="14" style="margin-right: 4px;"><use href="../assets/icons.svg#arrow-right" style="transform: rotate(180deg); transform-origin: center;"/></svg>
+      <span class="dot"></span>INERTUM
+    </a>
+    <div class="muted mono" style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 24px;">
+      Data Room · Viewer
+    </div>
+
+    <h5>Документы</h5>
+    <div id="docList"></div>
+
+    <div id="toc"></div>
+
+    <div style="margin-top: 24px; padding: 8px 12px;">
+      <button onclick="lockGate()" class="btn btn-ghost" style="width: 100%; justify-content: center; font-size: 12px; padding: 8px;">
+        <svg width="12" height="12"><use href="../assets/icons.svg#lock"/></svg>
+        Закрыть сессию
+      </button>
+    </div>
+  </aside>
+
+  <main class="viewer-content">
+    <div class="viewer-toolbar">
+      <div>
+        <div class="section-num" id="docCategory">DATA ROOM</div>
+        <div style="font: 600 22px/1.2 var(--sans); margin-top: 4px;" id="docTitle">Загрузка…</div>
+      </div>
+      <div class="cta-row">
+        <button onclick="window.print()" class="btn btn-ghost" style="font-size:12px; padding: 8px 12px;">Печать</button>
+        <a id="dlPdf" class="btn btn-ghost" style="font-size:12px; padding: 8px 12px;" download>
+          <svg width="12" height="12"><use href="../assets/icons.svg#download"/></svg> PDF
+        </a>
+        <a id="dlDocx" class="btn btn-ghost" style="font-size:12px; padding: 8px 12px;" download>
+          <svg width="12" height="12"><use href="../assets/icons.svg#download"/></svg> DOCX
+        </a>
+        <a id="dlMd" class="btn btn-ghost" style="font-size:12px; padding: 8px 12px;" download>
+          <svg width="12" height="12"><use href="../assets/icons.svg#download"/></svg> MD
+        </a>
+      </div>
+    </div>
+
+    <article class="md-body" id="docBody">Загрузка документа…</article>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@13.0.0/marked.min.js"></script>
+<script>
+  async function sha256(text) {
+    const buf = new TextEncoder().encode(text);
+    const hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+  async function checkGate() {
+    const inp = document.getElementById('gatePass').value.trim();
+    const err = document.getElementById('gateError');
+    const hash = await sha256(inp);
+    const allowed = (window.INERTUM_KEYS || []);
+    if (allowed.includes(hash)) {
+      sessionStorage.setItem('inertum_unlocked', '1');
+      sessionStorage.setItem('inertum_key_hash', hash);
+      unlock();
+    } else {
+      err.textContent = 'Неверный ключ';
+      err.classList.remove('hidden');
+    }
+  }
+  function unlock() {
+    document.getElementById('gate').classList.add('hidden');
+    const dr = document.getElementById('dataroom');
+    dr.classList.remove('hidden');
+    dr.style.display = 'grid';
+    init();
+  }
+  function lockGate() {
+    sessionStorage.removeItem('inertum_unlocked');
+    sessionStorage.removeItem('inertum_key_hash');
+    location.href = 'index.html';
+  }
+  if (sessionStorage.getItem('inertum_unlocked') === '1') unlock();
+  document.getElementById('gatePass').addEventListener('keypress', e => {
+    if (e.key === 'Enter') checkGate();
+  });
+
+  let DOCS = [];
+
+  function slugify(s) {
+    return s.toLowerCase().replace(/[^\w\sа-яё-]/giu, '').trim().replace(/\s+/g, '-').slice(0, 80);
+  }
+
+  async function loadDoc(id) {
+    const d = DOCS.find(x => x.id === id);
+    if (!d) return;
+    document.title = `INERTUM · ${d.title}`;
+    document.getElementById('docTitle').textContent = d.title;
+    document.getElementById('docCategory').textContent = (d.subtitle || 'DATA ROOM').toUpperCase();
+    document.getElementById('dlPdf').href = `docs/${d.id}.pdf`;
+    document.getElementById('dlDocx').href = `docs/${d.id}.docx`;
+    document.getElementById('dlMd').href = `docs/${d.id}.md`;
+
+    let text = null;
+    if (window.INERTUM_CONTENT && window.INERTUM_CONTENT[id]) {
+      text = window.INERTUM_CONTENT[id];
+    } else {
+      try {
+        const res = await fetch(`docs/${d.id}.md`);
+        text = await res.text();
+      } catch (e) {
+        document.getElementById('docBody').innerHTML =
+          '<p>Не удалось загрузить документ. Скачайте PDF или DOCX по кнопкам выше.</p>';
+        return;
+      }
+    }
+    document.getElementById('docBody').innerHTML = marked.parse(text);
+    addAnchors();
+    buildToc();
+    updateActive(id);
+    window.scrollTo(0, 0);
+  }
+
+  function addAnchors() {
+    document.querySelectorAll('#docBody h1, #docBody h2, #docBody h3').forEach(h => {
+      h.id = slugify(h.textContent);
+    });
+  }
+  function buildToc() {
+    const toc = document.getElementById('toc');
+    toc.innerHTML = '';
+    const headings = document.querySelectorAll('#docBody h2, #docBody h3');
+    if (!headings.length) return;
+    const h5 = document.createElement('h5');
+    h5.textContent = 'Содержание';
+    toc.appendChild(h5);
+    headings.forEach(h => {
+      const a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      if (h.tagName === 'H3') {
+        a.style.paddingLeft = '24px';
+        a.style.fontSize = '12px';
+      }
+      a.onclick = e => { e.preventDefault(); document.getElementById(h.id).scrollIntoView({behavior:'smooth'}); };
+      toc.appendChild(a);
+    });
+  }
+
+  function buildNav() {
+    const list = document.getElementById('docList');
+    list.innerHTML = '';
+    DOCS.forEach((d, i) => {
+      const a = document.createElement('a');
+      a.dataset.id = d.id;
+      a.href = '?doc=' + d.id;
+      a.innerHTML = `
+        <div style="display:flex; gap:8px; align-items:flex-start;">
+          <span class="mono argon" style="font-size: 10px; padding-top: 2px; min-width: 18px;">${String(i+1).padStart(2,'0')}</span>
+          <span style="flex: 1;">${d.title}</span>
+        </div>`;
+      a.onclick = e => { e.preventDefault(); window.history.pushState({}, '', '?doc='+d.id); loadDoc(d.id); };
+      list.appendChild(a);
+    });
+  }
+
+  function updateActive(id) {
+    document.querySelectorAll('.viewer-sidebar a[data-id]').forEach(el => {
+      el.classList.toggle('active', el.dataset.id === id);
+    });
+  }
+
+  function init() {
+    DOCS = window.INERTUM_DOCS || [];
+    buildNav();
+    const params = new URLSearchParams(window.location.search);
+    const docId = params.get('doc') || (DOCS[0] && DOCS[0].id);
+    if (docId) loadDoc(docId);
+  }
+</script>
+<script src="keys.js"></script>
+<script src="docs-manifest.js"></script>
+</body>
+</html>

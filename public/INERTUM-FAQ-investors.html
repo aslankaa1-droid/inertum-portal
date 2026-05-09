@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · FAQ для инвесторов · 32 вопроса</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="../assets/topbar.js" defer></script>
+<style>
+  :root {
+    --bg-base: #0A0B0D; --bg-elev: #13151A; --bg-elev-2: #1C1F26;
+    --ink: #F2F4F7; --ink-muted: #8A93A6; --ink-secondary: #C7CCD6;
+    --argon: #5BC0EB; --argon-bright: #82d3f3;
+    --warn: #E8A33D; --success: #3FB984; --danger: #E5685A;
+    --stroke: #2A2F3A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg-base); color: var(--ink);
+    font: 16px/1.6 'Inter', sans-serif; -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(91,192,235,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,192,235,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; position: relative; z-index: 1; }
+
+  header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--stroke); padding-bottom: 16px; margin-bottom: 32px;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .eyebrow { font: 500 11px 'JetBrains Mono'; color: var(--argon); letter-spacing: 3px; text-transform: uppercase; }
+  h1 {
+    font: 600 56px/1.05 'Inter'; letter-spacing: -0.02em; margin: 8px 0 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #b8c0cc 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { font-size: 18px; color: var(--ink-secondary); max-width: 800px; }
+  h2 { font: 600 28px/1.2 'Inter'; margin: 40px 0 16px; color: var(--ink); }
+
+  .nav-back a { color: var(--argon); text-decoration: none; font-size: 14px; font-family: 'JetBrains Mono'; }
+  .nav-back a:hover { color: var(--ink); }
+  .nav-icons { display: flex; gap: 6px; align-items: center; }
+  .nav-icons a, .nav-icons button {
+    background: transparent; border: 1px solid var(--stroke); color: var(--ink-muted);
+    width: 34px; height: 34px; padding: 0; border-radius: 4px; cursor: pointer;
+    transition: all .15s; display: inline-flex; align-items: center; justify-content: center;
+    text-decoration: none;
+  }
+  .nav-icons a:hover, .nav-icons button:hover { border-color: var(--argon); color: var(--argon); }
+  .nav-icons svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+  .controls {
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+    margin: 32px 0;
+  }
+  .search {
+    flex: 1; min-width: 240px;
+    background: var(--bg-elev-2); border: 1px solid var(--stroke);
+    border-radius: 8px; padding: 12px 16px;
+    color: var(--ink); font: 14px 'Inter';
+    transition: border-color .15s;
+  }
+  .search:focus { outline: none; border-color: var(--argon); }
+
+  .filter-pill {
+    padding: 8px 14px; border-radius: 100px;
+    font: 500 11px 'JetBrains Mono'; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--stroke); color: var(--ink-muted);
+    cursor: pointer; transition: all .15s;
+    background: transparent;
+  }
+  .filter-pill:hover { color: var(--ink); border-color: var(--ink-muted); }
+  .filter-pill.active { background: var(--argon); color: var(--bg-base); border-color: var(--argon); }
+
+  .faq-section { margin-bottom: 32px; }
+  .section-title {
+    font: 500 11px 'JetBrains Mono'; color: var(--argon);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--stroke);
+  }
+  .section-title .count {
+    color: var(--ink-muted); margin-left: 8px;
+    font-weight: normal;
+  }
+
+  .faq-item {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: 8px; margin-bottom: 8px;
+    transition: border-color .15s;
+  }
+  .faq-item:hover { border-color: var(--ink-muted); }
+  .faq-item.open { border-color: var(--argon); }
+  .faq-q {
+    padding: 16px 20px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+    font: 500 16px 'Inter'; color: var(--ink); line-height: 1.4;
+  }
+  .faq-q .num {
+    color: var(--argon); font-family: 'JetBrains Mono'; font-size: 13px;
+    min-width: 32px; flex-shrink: 0;
+  }
+  .faq-q .toggle {
+    color: var(--ink-muted); font-size: 18px; flex-shrink: 0;
+    transition: transform .2s;
+  }
+  .faq-item.open .faq-q .toggle { transform: rotate(45deg); color: var(--argon); }
+  .faq-a {
+    padding: 0 20px 20px 56px;
+    display: none; color: var(--ink-secondary); font-size: 15px; line-height: 1.65;
+  }
+  .faq-item.open .faq-a { display: block; }
+  .faq-a strong { color: var(--ink); font-weight: 600; }
+  .faq-a code {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    background: var(--bg-elev-2); padding: 2px 6px; border-radius: 3px;
+    border: 1px solid var(--stroke); color: var(--argon);
+  }
+  .faq-a ul, .faq-a ol { padding-left: 22px; margin: 8px 0; }
+  .faq-a li { margin-bottom: 6px; }
+  .faq-a .source {
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid var(--stroke);
+    font: 400 12px 'JetBrains Mono'; color: var(--ink-muted);
+  }
+
+  .legend {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: 8px; padding: 16px 20px; margin: 32px 0;
+    font-size: 13px; color: var(--ink-secondary);
+  }
+  .legend strong { color: var(--ink); }
+
+  footer {
+    margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--stroke);
+    font: 11px 'JetBrains Mono'; color: var(--ink-muted); letter-spacing: 0.1em;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+
+  .empty {
+    text-align: center; padding: 64px 24px; color: var(--ink-muted);
+    font-size: 14px; display: none;
+  }
+  .empty.show { display: block; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 36px; }
+    .faq-a { padding: 0 20px 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div>
+    <div class="eyebrow"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--argon);box-shadow:0 0 8px var(--argon);margin-right:8px;"></span>FAQ · INVESTORS · NDA-AWARE</div>
+    <h1>32 типовых вопроса</h1>
+    <p class="lede">Готовые ответы на вопросы инвесторов, поверенных и партнёров. Снимает ~70% типовых развязок на 30-минутном звонке. Что не закрывается здесь — обсуждается под NDA в data room.</p>
+  </div>
+  <div class="nav-icons">
+    <a href="../hub.html" title="Hub"><svg><use href="../assets/icons.svg#home"/></svg></a>
+    <button onclick="history.back()" title="Назад"><svg><use href="../assets/icons.svg#arrow-left"/></svg></button>
+    <button onclick="history.forward()" title="Вперёд"><svg><use href="../assets/icons.svg#arrow-right"/></svg></button>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" title="В начало"><svg><use href="../assets/icons.svg#top"/></svg></button>
+  </div>
+</header>
+
+<div class="controls">
+  <input type="text" id="search" class="search" placeholder="Поиск по вопросам и ответам…">
+  <button class="filter-pill active" data-cat="all">Все</button>
+  <button class="filter-pill" data-cat="tech">Технология</button>
+  <button class="filter-pill" data-cat="patent">Патент</button>
+  <button class="filter-pill" data-cat="market">Рынок</button>
+  <button class="filter-pill" data-cat="team">Команда</button>
+  <button class="filter-pill" data-cat="finance">Финансы</button>
+  <button class="filter-pill" data-cat="round">Раунд</button>
+  <button class="filter-pill" data-cat="ops">Производство</button>
+  <button class="filter-pill" data-cat="risk">Регуляторика и риски</button>
+</div>
+
+<div class="empty" id="empty">Ничего не найдено. Попробуй другой запрос или сними фильтр.</div>
+
+<!-- ============ TECH ============ -->
+<div class="faq-section" data-cat="tech">
+  <div class="section-title">§01 · Технология <span class="count">5 вопросов</span></div>
+
+  <div class="faq-item" data-cat="tech">
+    <div class="faq-q"><span class="num">01</span><span class="text">Чем доказано, что капсула удержит O₂ ≤ 0.5% в течение 50 лет, а не 5?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Расчёт диффузии O₂ через ламинат PET/Al-foil/LLDPE 91 мкм по уравнению Фика: при OTR ≤ 0.05 см³/(м²·сут·атм) и площади оболочки 14 м² годовое поступление O₂ внутрь капсулы — около 256 см³. Mitsubishi Ageless Z-2000 (6 саше) поглощают 12 000 см³ — запас по абсорберу <strong>×46 на 50 лет</strong>.</p>
+      <p>Прямой 50-летний тест физически невозможен. <strong>Стандартный приём индустрии</strong> — ускоренное старение по ASTM D4332 / IEC 60068-2 (повышенная T и RH ускоряют диффузию в ×10–20). Прототипы №1–2 пройдут 6-месячный реальный тест + ускоренный. Этого хватает для extrapolation до 50 лет согласно методике Getty Conservation Institute.</p>
+      <div class="source">Источник: Maekawa S., "Oxygen-Free Museum Cases", Getty Conservation Institute, 1998</div>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="tech">
+    <div class="faq-q"><span class="num">02</span><span class="text">Почему оптический сенсор PreSens, а не электрохимический BLE?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>Три причины — все блокирующие для классической схемы:</strong></p>
+      <ol>
+        <li><strong>Электрохимия деградирует за 2–3 года.</strong> Не подходит для 5+ лет хранения. Оптический patch — 5–7 лет автономно, без батареи.</li>
+        <li><strong>Faraday cage.</strong> Алюминиевая фольга оболочки гасит BLE 2.4 ГГц на 30–60 дБ. Связи через стенку не будет.</li>
+        <li><strong>Батарея внутри</strong> — CR2032 (220 мА·ч) хватит на 5 лет только при duty-cycle &lt;0.01%. Реалистичные литиевые элементы Li-SOCl₂ имеют слишком крупный габарит.</li>
+      </ol>
+      <p>Решение: пассивный оптический spot внутри + ридер снаружи через прозрачное окно. <strong>Без электроники внутри капсулы.</strong></p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="tech">
+    <div class="faq-q"><span class="num">03</span><span class="text">Что если оболочка проколется при транспортировке?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Три уровня защиты:</p>
+      <ol>
+        <li><strong>Самодиагностика обнаружит утечку</strong> через корреляцию ΔP ↔ Δ[O₂] ↔ ΔT. Алерт за ≤ 7 суток до видимой деградации содержимого. Тест прокола 0.1 мм входит в программу испытаний.</li>
+        <li><strong>Дозаправка через порт без вскрытия.</strong> Schrader-клапан — продуть N₂ восстанавливает O₂ ≤ 0.5% за 30 минут.</li>
+        <li><strong>Кислород-абсорбер</strong> Ageless Z в течение нескольких часов поглотит проникшую порцию O₂, давая запас времени до дозаправки.</li>
+      </ol>
+      <p>Для критичных объектов (Strategic, Archive) — двойная оболочка с независимыми сенсорами в каждой.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="tech">
+    <div class="faq-q"><span class="num">04</span><span class="text">Что если порт дозаправки разгерметизируется через 30 лет — кто будет менять мембрану?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Schrader-клапан — стандартный авто-промышленный компонент с гарантированным сроком хранения 10+ лет. Силиконовая мембрана меняется через 5 лет в рамках сервиса (как замена фильтра в фильтре воды).</p>
+      <p><strong>Для премиум-сегмента</strong> предусмотрена услуга «Inertum Service» — раз в 5 лет: проверка показаний, замена мембраны порта, пополнение N₂, замена ageless. Стоимость сервиса ~₽30k для INERTUM Auto. Recurring revenue для нас.</p>
+      <p>Для долговременного режима без сервиса (Strategic, музейный) — конструкция без активных уплотнений: запаянная оболочка без порта, +1 год запаса абсорбера.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="tech">
+    <div class="faq-q"><span class="num">05</span><span class="text">Можно ли это делать дешевле, на полиэтилене с силикагелем?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Можно, но это решает <strong>другую задачу</strong>: краткосрочное хранение влажности 1–3 года. Полиэтилен (PE-HD 200 мкм) имеет OTR ≈ 50 см³/(м²·сут·атм) — это в <strong>1000 раз хуже</strong> чем PET/Al/LLDPE. Силикагель не нейтрализует O₂.</p>
+      <p>Для 50-летнего хранения нужен именно барьер с алюминиевой фольгой. Без этого внутрь поступает 50–200 м³ O₂ за 50 лет — никакой абсорбер столько не съест.</p>
+      <p><strong>Дешёвая альтернатива существует</strong> — но на 5–10 лет. Это не наш сегмент.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PATENT ============ -->
+<div class="faq-section" data-cat="patent">
+  <div class="section-title">§02 · Патент <span class="count">4 вопроса</span></div>
+
+  <div class="faq-item" data-cat="patent">
+    <div class="faq-q"><span class="num">06</span><span class="text">Что именно патентуется? Можно ли обойти патент?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Патентуется <strong>уникальная комбинация</strong> признаков:</p>
+      <ol>
+        <li>Полимерно-фольговая капсула с локальным прозрачным окном (без Al-foil в зоне окна)</li>
+        <li>Пассивный оптический spot-сенсор внутри (PreSens или аналог)</li>
+        <li>Контактное считывание ридером через окно снаружи</li>
+        <li>Самодиагностический алгоритм на корреляции ΔP/Δ[O₂]/ΔT</li>
+        <li>Порт дозаправки с обратным ходом без вскрытия</li>
+      </ol>
+      <p>Каждый отдельный признак <strong>не патентоспособен</strong> (PET/Al/LLDPE — известно, оптические сенсоры — известны, газовый продув — известен). <strong>Патентоспособна именно комбинация.</strong></p>
+      <p>Углублённый патентный поиск — 21 ближайший аналог, ни один не имеет всех 5 признаков. Свободная зона подтверждена.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="patent">
+    <div class="faq-q"><span class="num">07</span><span class="text">Какая стадия патентной заявки сейчас?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>Стадия:</strong> драфт v2.1 готов, передаётся патентному поверенному в РФ.</p>
+      <ol>
+        <li><strong>Шаг 1</strong> — подача в Роспатент через поверенного (≤30 дней). <strong>Дата приоритета фиксируется.</strong></li>
+        <li><strong>Шаг 2</strong> — 12-месячное окно для подачи в ЕАПО (8 стран ЕАЭС) с сохранением приоритета.</li>
+        <li><strong>Шаг 3</strong> — PCT-конвертация для расширения на США / ЕС / Китай / Японию / ОАЭ.</li>
+      </ol>
+      <p>Целевые сроки: подача в Роспатент — июль 2026. Получение патента — 18–24 мес после подачи.</p>
+      <p><strong>До даты приоритета</strong> публикация деталей в открытых источниках уничтожает новизну. Поэтому материалы передаются только под NDA.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="patent">
+    <div class="faq-q"><span class="num">08</span><span class="text">Что если экспертиза Роспатента откажет в выдаче патента?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Возможные причины отказа: предшествующее раскрытие (мы контролируем NDA), отсутствие новизны (21 аналог проверен — нет), отсутствие изобретательского уровня (5-признаковая комбинация не очевидна).</p>
+      <p>Если экспертиза дает <strong>уведомление о промежуточном отказе</strong>, поверенный готовит ответ-доводы и доработку формулы. <strong>В 70% случаев</strong> доработанная заявка проходит.</p>
+      <p>Даже без патента остаётся <strong>статус ноу-хау</strong> на технологические параметры (T сварки, конкретные SKU, методики QC) — это коммерческая тайна, защищается ст. 1465 ГК РФ.</p>
+      <p>В худшем сценарии (полный отказ) — продаём на основе бренда + ноу-хау + сертификации ГОСТ Р + первого-входа на рынок. Маржа просядет с 80% до ~50%, но бизнес остаётся.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="patent">
+    <div class="faq-q"><span class="num">09</span><span class="text">Можно ли запатентовать «способ хранения», а не только устройство?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Да. В заявке v2.1 — <strong>3 независимых пункта формулы</strong>:</p>
+      <ol>
+        <li>Устройство (капсула с признаками 1–5)</li>
+        <li>Способ изготовления (термосварка ламината, инсталляция сенсоров, продув)</li>
+        <li>Способ долговременного хранения (методология контроля и обслуживания)</li>
+      </ol>
+      <p>Это даёт три параллельных уровня защиты. Конкурент должен обходить ВСЕ ТРИ — практически невозможно без потери конкурентных преимуществ.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MARKET ============ -->
+<div class="faq-section" data-cat="market">
+  <div class="section-title">§03 · Рынок <span class="count">4 вопроса</span></div>
+
+  <div class="faq-item" data-cat="market">
+    <div class="faq-q"><span class="num">10</span><span class="text">Откуда взяты цифры TAM $30B / SAM $3-5B / SOM $50-80M?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>TAM $30B</strong> — суммарный мировой рынок:</p>
+      <ul>
+        <li>Premium food packaging — $15B (MarketsAndMarkets 2024)</li>
+        <li>Pharma protective packaging — $7B (Grand View Research)</li>
+        <li>Military preservation packaging — $3B (DoD reports)</li>
+        <li>Collector vehicles preservation — $2B (Hagerty)</li>
+        <li>Museum conservation cases — $1B (ICOM)</li>
+        <li>Private vault & safe storage — $2B (private surveys)</li>
+      </ul>
+      <p><strong>SAM $3-5B</strong> — премиум-ниши, где аргон/долгий срок оправданы экономически. Берём 10-15% от TAM (премиум-доля).</p>
+      <p><strong>SOM $50-80M</strong> — реалистичный объём для нашей географии за 5 лет: 1% коллекционных авто РФ (~50k машин × $5k капсула), 0.5% Росрезерв (~₽1B тендер), 5 музеев × $1M, 100 коллекционеров премиум-сегмента.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="market">
+    <div class="faq-q"><span class="num">11</span><span class="text">Кто реально первый клиент? Кому Аслан продаст первую капсулу?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>Целевые «первые 10»:</strong></p>
+      <ol>
+        <li>Частный коллекционер мото в Москве/СПб через сеть Аслана (1-3 контакта подтверждены)</li>
+        <li>Частный коллекционер премиум-авто (Ferrari, Porsche club Russia) — 5–10 контактов</li>
+        <li>Частный коллекционер часов / ювелирки — через каналы знакомых в нефтегазе</li>
+        <li>Музей в Казахстане (через Astana Hub) — 1 пилот</li>
+        <li>Тестовый контракт с Минздравом на партию 100 шт. Strategic (через ФРП-канал)</li>
+      </ol>
+      <p>Цикл от знакомства до контракта в премиум-B2C — 3–6 месяцев. Первая продажа после получения прототипа № 1 — Q4 2026.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="market">
+    <div class="faq-q"><span class="num">12</span><span class="text">Что если CarCapsule увидит ваш патент и быстро добавит инертный газ?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>Не смогут</strong> — у них надувная конструкция с активным воздуходувом, фильтрами и электричеством 24/7. Это совершенно другая архитектура, не позволяющая поддерживать инертную атмосферу (надувной чехол не герметичен).</p>
+      <p>Чтобы перейти на инертную среду, им нужно:</p>
+      <ul>
+        <li>Сменить материал оболочки (с дешёвого PVC на барьерный ламинат) — это удорожание ×3</li>
+        <li>Отказаться от воздуходувной системы — потерять USP «активная циркуляция»</li>
+        <li>Добавить мониторинг — наш патент закрывает</li>
+      </ul>
+      <p>Им проще оставаться в нише «временное хранение на воздухе $1–3k».</p>
+      <p>Реальная угроза — китайские OEM, которые сделают копию для своего рынка после того, как мы выйдем там. Защита — региональные патенты PCT и ГОСТ-сертификация для РФ-рынка.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="market">
+    <div class="faq-q"><span class="num">13</span><span class="text">Как масштабироваться на 5–10–100 капсул в день — не упрётесь ли в производство ламината?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>NomexRus (СПб) — мощность по ламинату ~50 000 м²/мес. 100 капсул/день модели Auto = ~3 000 м²/мес. Это <strong>6% мощности</strong> одного российского поставщика.</p>
+      <p>На случай выхода в международный сегмент — Hangzhou Keneng (Китай) даёт мощность ×10. Pack-Systems и SVK-Pack (РФ) — резервные.</p>
+      <p>Узкое горлышко не в ламинате, а в:</p>
+      <ul>
+        <li>Mitsubishi Ageless Z — японский поставщик, lead-time 8–12 нед, нужна стратегия запасов</li>
+        <li>PreSens патчах — Германия, аналогично</li>
+        <li>Сборке (термосварка) — наша in-house компетенция, лимит ~50 капсул/день одной бригадой</li>
+      </ul>
+      <p>Решение для масштабирования: 2-3 сборочные бригады в 2027 году, 5+ к 2029.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TEAM ============ -->
+<div class="faq-section" data-cat="team">
+  <div class="section-title">§04 · Команда <span class="count">3 вопроса</span></div>
+
+  <div class="faq-item" data-cat="team">
+    <div class="faq-q"><span class="num">14</span><span class="text">У founder нет технического бэкграунда в материалах и упаковке. Как он будет вести продукт?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Founder Аслан — <strong>опытный B2B-продавец</strong> с подтверждёнными сделками в нефтегазе РФ, КНР, Казахстане, на Ближнем Востоке. Это сила в:</p>
+      <ul>
+        <li>Доступ к госзаказу (Росрезерв, Минздрав, Минобороны)</li>
+        <li>Доступ к коллекционерам премиум-сегмента (через нефтегазовую сеть)</li>
+        <li>Опыт сложных сделок и переговоров</li>
+        <li>Кросс-культурная работа (RU/CN/KZ/MENA)</li>
+      </ul>
+      <p>На <strong>R&D-сторону</strong> нанимается профильный CTO + Head of R&D после раунда. Профиль кандидатов: Sensirion, NomexRus, Promwad, Sk Capital alumni.</p>
+      <p>До найма — техническая экспертиза покрывается через консультантов: материалы (NomexRus), сенсоры (PreSens прямо), сборка (NomexRus инжиниринг).</p>
+      <p>Сравните с Tesla 2003 года: Маск тоже не был инженером по аккумуляторам.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="team">
+    <div class="faq-q"><span class="num">15</span><span class="text">Сколько времени Аслан тратит на проект — это full-time?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Сейчас — ~80% времени, остальное на поддержание потока в Усть-Кут-Нефтегаз (источник дохода до раунда). После закрытия раунда — <strong>100% full-time на INERTUM</strong>, USK-актив переводится в управление младшего партнёра.</p>
+      <p>Зарплата CEO в OpEx-плане — ₽300k/мес ($3.5k) × 12 мес = $42k/год. Это <strong>ниже рыночной</strong> для founder-CEO, но достаточно для покрытия личных расходов на 18-месячном runway.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="team">
+    <div class="faq-q"><span class="num">16</span><span class="text">Как защищены ключевые технические сотрудники от ухода с ноу-хау?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Стандартный пакет:</p>
+      <ul>
+        <li>Трудовой договор с разделом «Коммерческая тайна» (ст. 1465–1472 ГК РФ)</li>
+        <li>NDA на конкретные технологии и параметры</li>
+        <li>Неконкуренция на 12 мес после увольнения (с компенсацией)</li>
+        <li>Опционная программа: vesting 4 года с 1-годовым cliff</li>
+      </ul>
+      <p>Главное — <strong>децентрализация ноу-хау:</strong> ни один сотрудник не имеет полной картины. CTO — патент и алгоритмы. Production lead — сборка и QC. Sales — клиентская база. Никто из них не может «уйти и сделать конкурента».</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FINANCE ============ -->
+<div class="faq-section" data-cat="finance">
+  <div class="section-title">§05 · Финансы <span class="count">4 вопроса</span></div>
+
+  <div class="faq-item" data-cat="finance">
+    <div class="faq-q"><span class="num">17</span><span class="text">Откуда взялась цифра $25M выручки в 2030? Это базовый или оптимистичный сценарий?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>Это базовый сценарий.</strong> Логика разбивки:</p>
+      <ul>
+        <li>INERTUM Auto: 200 капсул/квартал × 4 × $7k = <strong>$5.6M</strong></li>
+        <li>INERTUM Moto: 400 × 4 × $2k = <strong>$3.2M</strong></li>
+        <li>INERTUM Vault: 1000 × 4 × $700 = <strong>$2.8M</strong></li>
+        <li>INERTUM Archive: 200 × 4 × $500 = <strong>$0.4M</strong></li>
+        <li>INERTUM Strategic (госзаказ): 1 контракт ₽1B = <strong>~$11M</strong></li>
+        <li>Лицензирование (1-2 сделки): <strong>$2M</strong></li>
+      </ul>
+      <p>Итого ≈ $25M. Без учёта PCT-расширения на ЕС/США.</p>
+      <p><strong>Оптимистичный сценарий</strong> — $40M+ при двух Strategic-контрактах и быстром выходе на MENA. <strong>Пессимистичный</strong> — $12M при отсутствии госзаказа.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="finance">
+    <div class="faq-q"><span class="num">18</span><span class="text">Почему 80% gross margin? Это нереально высоко для упаковки.</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Это не упаковка — это <strong>премиум-продукт с патентом и сервисом</strong>. Сравните:</p>
+      <ul>
+        <li>Стандартная пищевая упаковка — 15–25% маржа (commodity)</li>
+        <li>Mil-spec упаковка по ГОСТ — 40–55%</li>
+        <li>Premium watch boxes (Patek/Rolex) — 70–85%</li>
+        <li>Audemars Piguet vault cases — 80%+</li>
+        <li>Bespoke museum cases (Goppion) — 85%+</li>
+      </ul>
+      <p>Наш сегмент ближе к watch boxes / museum cases, не к pack of milk. Себестоимость $1.4k, цена розница $7k для INERTUM Auto.</p>
+      <p><strong>Чувствительность:</strong> при −20% от средней цены маржа падает до 65%, выручка 2030 → $20M, EBITDA → $9M. Бизнес остаётся прибыльным.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="finance">
+    <div class="faq-q"><span class="num">19</span><span class="text">Когда break-even по cash-flow?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Break-even по operational EBITDA — <strong>середина 2027 года</strong> (~14-й месяц после раунда). Это при 45 капсул INERTUM Auto в квартал по средней цене $7k.</p>
+      <p>Cash break-even — <strong>конец 2027 года</strong>, когда возмещаются capex + setup.</p>
+      <p>До break-even у проекта есть 18-месячный runway за счёт pre-seed $750k. Если первые контракты задержатся на 3 мес, нужен будет bridge на $200k или короткая Series A на $1.5M.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="finance">
+    <div class="faq-q"><span class="num">20</span><span class="text">Как считаете оценку компании сейчас и по выходу?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>Pre-seed valuation</strong> $9.4M post-money ($750k @ 8% equity). Это <strong>median</strong> для deeptech pre-seed в РФ + СНГ + MENA с проверенным патентом и без выручки.</p>
+      <p><strong>Series A target</strong> через 18 мес — $20-30M post-money. Триггеры:</p>
+      <ul>
+        <li>Действующий патент в РФ + поданная PCT</li>
+        <li>3 рабочих прототипа с протоколами</li>
+        <li>$300-500k ARR от пилотных контрактов</li>
+        <li>Сертификация ГОСТ Р</li>
+      </ul>
+      <p><strong>Exit-сценарии (через 5-7 лет):</strong></p>
+      <ul>
+        <li>Strategic acquisition by Mitsubishi / Sealed Air / Amcor — $80-150M</li>
+        <li>IPO на МосБирже / DIFC — при выручке $50M+</li>
+        <li>Trade sale to family office / strategic investor — $100M+</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ROUND ============ -->
+<div class="faq-section" data-cat="round">
+  <div class="section-title">§06 · Раунд и условия <span class="count">4 вопроса</span></div>
+
+  <div class="faq-item" data-cat="round">
+    <div class="faq-q"><span class="num">21</span><span class="text">Какой минимальный чек принимаете в раунд?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>$50 000</strong> — минимальный индивидуальный чек ангела или синдиката.</p>
+      <p>$200 000 — оптимальный чек одного институционального участника. $750k раунд закрывается оптимально на 4–6 чеков.</p>
+      <p>Lead investor — приветствуется (получает выгодные условия и место в advisory board), но не обязателен. Если все участники equal-rights — без lead.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="round">
+    <div class="faq-q"><span class="num">22</span><span class="text">Какие условия раунда — preferred shares, anti-dilution, board seat?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Стандартный pre-seed term sheet (выдаётся под NDA):</p>
+      <ul>
+        <li><strong>Preferred shares</strong> — да, 1× non-participating preference</li>
+        <li><strong>Anti-dilution</strong> — broad-based weighted average</li>
+        <li><strong>Liquidation preference</strong> — 1× preference stack</li>
+        <li><strong>Board</strong> — без obligatory board seats до Series A; advisory board — да</li>
+        <li><strong>Information rights</strong> — quarterly P&L + KPI</li>
+        <li><strong>Pro-rata rights</strong> — да на Series A</li>
+        <li><strong>Founder vesting</strong> — 4 года, 1-year cliff (стандарт)</li>
+        <li><strong>ESOP</strong> — 10% после раунда</li>
+        <li><strong>Drag-along / tag-along</strong> — стандартные</li>
+      </ul>
+      <p>Финальные условия согласуются в term sheet с lead investor.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="round">
+    <div class="faq-q"><span class="num">23</span><span class="text">В какой юрисдикции SPV — РФ, Казахстан, Дубай?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Гибкая структура — выбирается под профиль инвестора:</p>
+      <ul>
+        <li><strong>РФ ИП / ООО</strong> — для российских инвесторов и тендеров. Простая, быстрая, рублёвая.</li>
+        <li><strong>Казахстан ТОО (Astana Hub)</strong> — для KZ / СНГ-инвесторов. Безсанкционный буфер.</li>
+        <li><strong>Дубай FZ-LLC</strong> — для UAE / KSA / MENA-инвесторов. Холдинг без санкционных рисков.</li>
+        <li><strong>Гонконг или Сингапур</strong> — для китайских и азиатских инвесторов (опционально).</li>
+      </ul>
+      <p>Выбираем после первого lead-investor. Скорее всего — гибрид: Дубай-холдинг + операционная компания в РФ.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="round">
+    <div class="faq-q"><span class="num">24</span><span class="text">Когда planируется Series A и какой размер?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>Series A — Q3-Q4 2027</strong> (через 18 мес после pre-seed).</p>
+      <p>Целевой размер — <strong>$3-5M</strong> на:</p>
+      <ul>
+        <li>Серийное производство 500 капсул/год</li>
+        <li>Найм Sales-команды и маркетинг</li>
+        <li>PCT-расширение на 5+ юрисдикций</li>
+        <li>2-й завод сборки (Казахстан или Дубай)</li>
+        <li>Сертификации EU CE + UL (для международных рынков)</li>
+      </ul>
+      <p>Целевая оценка — $20–30M post-money. Pre-seed-инвесторы получают pro-rata на повторное участие.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ OPS ============ -->
+<div class="faq-section" data-cat="ops">
+  <div class="section-title">§07 · Производство <span class="count">4 вопроса</span></div>
+
+  <div class="faq-item" data-cat="ops">
+    <div class="faq-q"><span class="num">25</span><span class="text">Где именно будет производиться? Свой завод или контрактник?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>Гибридная модель:</strong></p>
+      <ul>
+        <li><strong>Ламинат и молнии</strong> — у NomexRus (СПб) или Pack-Systems по нашему ТЗ. Они режут панели и термосваривают по нашим лекалам.</li>
+        <li><strong>Финальная сборка</strong> (вшивание оптического окна, установка порта, гермоввод, термосварка узлов) — <strong>in-house</strong> на нашем мини-цехе. Это ноу-хау-критичная операция.</li>
+        <li><strong>Закладка изделия + газовый продув</strong> — у клиента (выезд бригады) или на стационаре.</li>
+      </ul>
+      <p>Капитальные затраты на цех (термопресс, баллоны N₂, контрольное оборудование) — $40k. Это в плане раунда.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="ops">
+    <div class="faq-q"><span class="num">26</span><span class="text">Что если NomexRus не сможет поставить ламинат — есть план B?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Топ-3 поставщиков с готовыми RFQ:</p>
+      <ol>
+        <li><strong>NomexRus (СПб)</strong> — основной кандидат. Сервис ГОСТ 9.014, lead 5–6 нед, ₽1k–1.5k за м².</li>
+        <li><strong>Pack-Systems (РФ)</strong> — резервный. Альтернативная производственная линия, lead 6–8 нед.</li>
+        <li><strong>Hangzhou Keneng (Китай)</strong> — ценовой контрольный, lead 8–10 нед, ₽700–1k за м². Используется при больших партиях.</li>
+      </ol>
+      <p>Дополнительно — глобальные альтернативы: Toppan (Japan), Amcor (US), Constantia Flexibles (EU). Они дороже на 30%, но имеют сертификаты MIL-PRF-131K и могут поставлять без таможенных задержек.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="ops">
+    <div class="faq-q"><span class="num">27</span><span class="text">Сертификация ГОСТ Р — сколько времени и денег?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Стандартная сертификация ГОСТ Р для упаковочных материалов — <strong>3–6 месяцев</strong>, стоимость <strong>₽300–700k</strong>.</p>
+      <p>Партнёрская лаборатория: ВНИИЖТ, ВНИИКП, ВНИИГАЗ-промбезопасность. По выбору поверенного.</p>
+      <p>Дополнительно для гособоронзаказа — допуск ГОСТ В (военное направление). Это +6 месяцев и +₽400-500k.</p>
+      <p>Бюджет в раунде — $50k (₽4.5M по курсу), покрывает обе сертификации с резервом.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="ops">
+    <div class="faq-q"><span class="num">28</span><span class="text">Как обслуживать сотни и тысячи капсул в полях?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p><strong>Сервисная модель:</strong></p>
+      <ul>
+        <li><strong>Ридер у владельца</strong> или у обслуживающего инженера на районе.</li>
+        <li><strong>Замер O₂ через окно</strong> — раз в месяц / квартал / год по уровню критичности.</li>
+        <li><strong>Дистанционный мониторинг</strong> (опц., этап 2) — автономный LoRa-модуль снаружи капсулы передаёт показания на дашборд раз в сутки.</li>
+        <li><strong>Сервисный выезд</strong> — раз в 5 лет: проверка швов, замена мембраны порта, дозаправка N₂, замена ageless. Стоимость для клиента ~₽30k за визит.</li>
+      </ul>
+      <p>Целевой уровень обслуживания — 1 инженер на 200 капсул в радиусе 100 км. Recurring revenue ~₽6M/год от 200 капсул.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RISK ============ -->
+<div class="faq-section" data-cat="risk">
+  <div class="section-title">§08 · Регуляторика и риски <span class="count">4 вопроса</span></div>
+
+  <div class="faq-item" data-cat="risk">
+    <div class="faq-q"><span class="num">29</span><span class="text">Санкции на материалы и оборудование — как обойти?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Прямых санкционных запретов на наши компоненты <strong>нет</strong>:</p>
+      <ul>
+        <li>PreSens патчи — Германия, dual-use не классифицированы. Поставка через дистрибьютора в РФ или закупка через KZ.</li>
+        <li>Mitsubishi Ageless — японский commodity, не санкционен.</li>
+        <li>YKK Aquaseal — японская молния, без ограничений.</li>
+        <li>NomexRus — российский поставщик, без зависимости от импорта.</li>
+      </ul>
+      <p>Если санкции усилятся — <strong>переход на Hangzhou Keneng (CN)</strong> + китайские оптические сенсоры (Inhand IoT, Fibos). Тестирование и валидация — 3-6 мес.</p>
+      <p>Для UAE/KSA/CN-каналов — закупка через Дубай-холдинг, обход прямых санкций.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="risk">
+    <div class="faq-q"><span class="num">30</span><span class="text">Регуляторные риски при работе с госзаказом — Росрезерв, Минобороны?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Стандартные требования для гособоронзаказа:</p>
+      <ul>
+        <li><strong>Лицензия ФСБ</strong> на работу со сведениями, составляющими гостайну (если контракт включает таковые) — оформляется юр. лицо, время 6-12 мес</li>
+        <li><strong>Допуск Минпромторга</strong> для участия в тендерах ОПК — выдаётся после сертификации</li>
+        <li><strong>Сертификат ГОСТ В</strong> для военной упаковки — после ГОСТ Р</li>
+        <li><strong>Российский собственник</strong> — для допуска к секретным контрактам нужно >50% российский владелец. Структурируется через РФ-операционную компанию + Дубай-холдинг.</li>
+      </ul>
+      <p>Все эти шаги в плане проекта на 12-18 мес после получения патента.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="risk">
+    <div class="faq-q"><span class="num">31</span><span class="text">Что если налоговая или ФТС не одобрит ввоз PreSens / Mitsubishi?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>PreSens патчи и Mitsubishi Ageless классифицируются как <strong>обычная промышленная продукция</strong> без специальных импортных разрешений. Ввоз через стандартные таможенные процедуры (ОКТМО, декларация, НДС 20%).</p>
+      <p>Lead-time таможни в РФ — 5–10 дней. В Казахстане — 3–5 дней.</p>
+      <p>На случай заминки — стратегия запасов на 3 месяца производства (увеличивает working capital на ~$50k, в плане учтено).</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="risk">
+    <div class="faq-q"><span class="num">32</span><span class="text">Что если глобально откажется от металла в премиум-капсулах (например, переход на полностью полимерные)?</span><span class="toggle">+</span></div>
+    <div class="faq-a">
+      <p>Это <strong>тренд, который мы используем, а не которому противостоим</strong>. Барьерные ламинаты на основе SiOx, AlOx, EVOH — современная альтернатива Al-foil:</p>
+      <ul>
+        <li>SiOx coatings (PEN/SiOx/PE) — OTR ≤ 0.1 см³/(м²·сут·атм), <strong>прозрачны</strong>, не требуют локального окна</li>
+        <li>Эта технология подняла полностью прозрачные премиум-капсулы из штучного производства в серию</li>
+      </ul>
+      <p>В нашем патенте v2.1 — <strong>прямо предусмотрены альтернативные барьерные слои</strong> (зависимый пункт формулы). При переходе на SiOx архитектура «локальное окно» становится не нужна, но патент покрывает обе модификации.</p>
+      <p>Готовы перейти на SiOx-оболочки во 2-3-й итерации продукта (2027-2028).</p>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <strong>Не нашли вопрос?</strong> Напишите на <a href="mailto:idriskaaa@gmail.com" style="color: var(--argon);">idriskaaa@gmail.com</a> — отвечу лично или добавлю в FAQ.
+  Полные ответы с цифрами и моделями — в data room под NDA. <a href="../private-7f3a9b2c8e/" style="color: var(--argon);">Запросить доступ →</a>
+</div>
+
+<footer>
+  <span>INERTUM · FAQ for Investors · v1.0</span>
+  <span>2026-05-09 · Аслан КАА · idriskaaa@gmail.com · aslankaa.com</span>
+</footer>
+
+</div>
+
+<script>
+  // Toggle accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  // Filter by category
+  const pills = document.querySelectorAll('.filter-pill');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const cat = pill.dataset.cat;
+      filterAll();
+    });
+  });
+
+  // Search
+  const search = document.getElementById('search');
+  search.addEventListener('input', () => filterAll());
+
+  function filterAll() {
+    const q = search.value.toLowerCase().trim();
+    const activePill = document.querySelector('.filter-pill.active');
+    const cat = activePill ? activePill.dataset.cat : 'all';
+    let anyVisible = false;
+
+    document.querySelectorAll('.faq-section').forEach(section => {
+      const sectionCat = section.dataset.cat;
+      let sectionVisible = false;
+
+      section.querySelectorAll('.faq-item').forEach(item => {
+        const itemCat = item.dataset.cat;
+        const text = item.textContent.toLowerCase();
+        const matchesCat = (cat === 'all' || cat === itemCat);
+        const matchesSearch = (q === '' || text.includes(q));
+        const visible = matchesCat && matchesSearch;
+        item.style.display = visible ? '' : 'none';
+        if (visible) { sectionVisible = true; anyVisible = true; }
+        // Auto-open if search has match
+        if (q && matchesSearch && !item.classList.contains('open')) {
+          item.classList.add('open');
+        } else if (!q) {
+          item.classList.remove('open');
+        }
+      });
+
+      section.style.display = sectionVisible ? '' : 'none';
+    });
+
+    document.getElementById('empty').classList.toggle('show', !anyVisible);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>INERTUM · Конструкторская документация · Прототипы №1 (мото) и №2 (вело) · v1.0</title>
+<style>
+  @page { size: A3 landscape; margin: 12mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1a1a1a;
+    background: #f5f5f5;
+    margin: 0; padding: 0;
+    line-height: 1.55;
+  }
+  .page {
+    background: #fff;
+    padding: 40px 48px;
+    margin: 16px auto;
+    max-width: 1240px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    page-break-after: always;
+  }
+  .cover {
+    min-height: calc(100vh - 32px);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 80px 48px;
+    background: linear-gradient(135deg, #0a0b0d 0%, #13151a 100%);
+    color: #f2f4f7;
+  }
+  .cover h1 {
+    font-size: 48px; line-height: 1.1; margin: 0 0 24px;
+    background: linear-gradient(180deg, #ffffff 0%, #b8c0cc 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; letter-spacing: -0.02em;
+  }
+  .cover .subtitle { font-size: 22px; color: #c7ccd6; margin-bottom: 64px; }
+  .cover .meta {
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    font-size: 13px; color: #8a93a6; line-height: 1.8;
+    border-top: 1px solid #2a2f3a; padding-top: 24px;
+    width: 100%; max-width: 540px;
+  }
+  .cover .meta strong { color: #f2f4f7; }
+  .cover .accent {
+    color: #5BC0EB; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px;
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    margin-bottom: 24px;
+  }
+  h1, h2, h3, h4 { color: #0a0b0d; letter-spacing: -0.01em; margin-top: 0; }
+  h2 {
+    font-size: 26px; line-height: 1.2; margin: 0 0 18px;
+    border-bottom: 2px solid #5BC0EB; padding-bottom: 10px;
+  }
+  h3 { font-size: 18px; margin: 28px 0 10px; }
+  h4 { font-size: 15px; margin: 18px 0 6px; }
+  p { margin: 0 0 12px; font-size: 14px; }
+  ul, ol { margin: 0 0 12px; padding-left: 24px; font-size: 14px; }
+  li { margin-bottom: 4px; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 12px 0 20px;
+    font-size: 12.5px;
+  }
+  th, td {
+    padding: 8px 10px; text-align: left;
+    border: 1px solid #d0d0d0; vertical-align: top;
+  }
+  th {
+    background: #f0f4f7; font-weight: 600; color: #0a0b0d;
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  code {
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    font-size: 12px; background: #f0f4f7; border: 1px solid #d0d0d0;
+    padding: 1px 5px; border-radius: 3px; color: #1565c0;
+  }
+  pre {
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    background: #0a0b0d; color: #f2f4f7;
+    padding: 16px; border-radius: 6px; font-size: 11.5px;
+    overflow-x: auto; margin: 12px 0;
+  }
+  .drawing {
+    background: #fff; border: 1px solid #888;
+    margin: 16px auto;
+    page-break-inside: avoid;
+  }
+  .drawing svg { width: 100%; height: auto; display: block; }
+  .drawing-title {
+    font-size: 13px; font-weight: 600; text-align: center;
+    padding: 8px; background: #f0f4f7; border-bottom: 1px solid #d0d0d0;
+    color: #0a0b0d;
+  }
+  .toc { font-size: 14px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a { color: #1565c0; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .pill {
+    display: inline-block; padding: 2px 10px; border-radius: 100px;
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; border: 1px solid currentColor;
+  }
+  .pill.tech { color: #1565c0; }
+  .pill.proc { color: #ef6c00; }
+  .pill.qc { color: #2e7d32; }
+  .footer-mini {
+    border-top: 1px solid #d0d0d0;
+    margin-top: 32px; padding-top: 12px;
+    font-size: 11px; color: #888;
+    display: flex; justify-content: space-between;
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; max-width: 100%; }
+    .cover { min-height: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ COVER ============================ -->
+<div class="page cover">
+  <div class="accent">КД-INERTUM · v1.0 · 2026-05-09</div>
+  <h1>Конструкторская документация</h1>
+  <div class="subtitle">Прототипы №1 (мото) и №2 (вело) ·<br>Капсулы долговременного хранения в инертной среде</div>
+  <div class="meta">
+    <strong>Заказчик:</strong> Аслан КАА · <code>idriskaaa@gmail.com</code><br>
+    <strong>Изделие:</strong> INERTUM-MOTO-01 · INERTUM-VELO-04<br>
+    <strong>Версия:</strong> v1.0 от 2026-05-09<br>
+    <strong>Состав:</strong> 4 листа чертежей + пояснительная записка<br>
+    <strong>Назначение:</strong> производственный заказ опытной партии 2 капсул<br>
+    <strong>Конфиденциальность:</strong> NDA-required, до даты приоритета патента
+  </div>
+</div>
+
+<!-- ============================ TOC ============================ -->
+<div class="page">
+  <h2>Содержание</h2>
+  <ol class="toc">
+    <li><a href="#sec-overview">Сводная спецификация двух прототипов</a></li>
+    <li><a href="#sec-materials">Материалы (унифицированы)</a></li>
+    <li><a href="#draw-01">Чертёж 01 · Мотокапсула — общий вид</a></li>
+    <li><a href="#draw-02">Чертёж 02 · Мотокапсула — раскрой панелей</a></li>
+    <li><a href="#draw-03">Чертёж 03 · Узлы и сечения</a></li>
+    <li><a href="#draw-04">Чертёж 04 · Велокапсула — общий вид и раскрой</a></li>
+    <li><a href="#sec-process">Технологическая карта сборки</a></li>
+    <li><a href="#sec-qc">Чек-лист контроля качества</a></li>
+    <li><a href="#sec-gantt">Сетевой график (Gantt)</a></li>
+    <li><a href="#sec-tests">Программа испытаний</a></li>
+    <li><a href="#sec-spares">Запасные части и расходники</a></li>
+    <li><a href="#sec-package">Документы для производственного заказа</a></li>
+  </ol>
+
+  <h3 style="margin-top: 32px;">Краткое резюме</h3>
+  <p><strong>Что это:</strong> комплект конструкторских документов для изготовления двух опытных капсул INERTUM — под мотоцикл и под велосипед. Передаётся производителю ламинатных пакетов вместе с RFQ.</p>
+  <p><strong>Сроки и бюджет:</strong></p>
+  <ul>
+    <li><strong>Мото-капсула:</strong> 8–10 недель, ₽122 000–252 000</li>
+    <li><strong>Вело-капсула:</strong> 6–8 недель, ₽60 000–120 000</li>
+    <li><strong>Внешний ридер OXY-1 ST mini</strong> (на 50–100 капсул): ₽280 000 разово</li>
+  </ul>
+  <p><strong>Поставщики (приоритет):</strong> NomexRus (СПб) → Pack-Systems → Hangzhou Keneng. PreSens / PyroScience по сенсорам, YKK по молниям, Mitsubishi по абсорберам, Linde Gas Rus / Криогенмаш по азоту.</p>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0</span>
+    <span>стр. 2</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ §1 OVERVIEW ============================ -->
+<div class="page" id="sec-overview">
+  <h2>§1 · Сводная спецификация двух прототипов</h2>
+
+  <table>
+    <thead>
+      <tr><th style="width:30%">Параметр</th><th style="width:35%">Мото-капсула</th><th style="width:35%">Вело-капсула</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Чертёж</td><td>КД-INERTUM-MOTO-01 … 03</td><td>КД-INERTUM-VELO-04</td></tr>
+      <tr><td>Внутренние габариты, мм</td><td>2500 × 1000 × 1500</td><td>1800 × 600 × 1100</td></tr>
+      <tr><td>Внутренний объём</td><td>3,75 м³</td><td>1,19 м³</td></tr>
+      <tr><td>Площадь оболочки чист.</td><td>14,0 м²</td><td>7,44 м²</td></tr>
+      <tr><td>Площадь раскроя с припусками</td><td>16,71 м²</td><td>8,32 м²</td></tr>
+      <tr><td>Расход ламината с отходами 15 %</td><td>≈ 19,2 м²</td><td>≈ 9,5 м²</td></tr>
+      <tr><td>Длина молнии YKK Aquaseal</td><td>№ 8, L = 3000 мм</td><td>№ 5, L = 2300 мм</td></tr>
+      <tr><td>Газ для продува (3V)</td><td>11,3 м³ N₂ → 2 баллона</td><td>3,6 м³ N₂ → 1 баллон</td></tr>
+      <tr><td>Кислород-абсорбер Ageless Z-2000</td><td>6 саше</td><td>2 саше</td></tr>
+      <tr><td>Оптические патчи PreSens SP-PSt6-NAU</td><td>3 шт.</td><td>2 шт.</td></tr>
+      <tr><td>Бюджет прототипа, ₽</td><td>122 000 — 252 000</td><td>60 000 — 120 000</td></tr>
+      <tr><td>Срок изготовления</td><td>8–10 нед. (вкл. закупку)</td><td>6–8 нед.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · §1</span>
+    <span>стр. 3</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ §2 MATERIALS ============================ -->
+<div class="page" id="sec-materials">
+  <h2>§2 · Материалы (унифицированы)</h2>
+
+  <h3>2.1 · Ламинат — основной материал <span class="pill tech">PET/Al/LLDPE 91 мкм</span></h3>
+  <table>
+    <tr><td style="width:30%">Структура</td><td>PET 12 мкм / Al-foil 9 мкм / LLDPE 70 мкм</td></tr>
+    <tr><td>Суммарная толщина</td><td>91 мкм (допуск ±5 мкм)</td></tr>
+    <tr><td>OTR</td><td>≤ 0,05 см³/(м²·сут·атм) при 23 °C, 0% RH</td></tr>
+    <tr><td>WVTR</td><td>≤ 0,1 г/(м²·сут) при 38 °C, 90% RH</td></tr>
+    <tr><td>Стандарт</td><td>MIL-PRF-131K, MIL-STD-2073-1E или ГОСТ 9.014 ВУ-5</td></tr>
+    <tr><td>Термосвариваемость</td><td>Внутренний слой LLDPE при T = 130–150 °C</td></tr>
+    <tr><td>Цвет</td><td>Прозрачный или матово-серебристый</td></tr>
+    <tr><td>Ширина рулона</td><td>Мото — 2000 мм; Вело — 1200 мм (общий 2000 ОК)</td></tr>
+  </table>
+  <p><strong>Поставщики:</strong> NomexRus (СПб) → Pack-Systems → Hangzhou Keneng (ценовой).</p>
+
+  <h3>2.2 · Молния</h3>
+  <table>
+    <thead><tr><th>Параметр</th><th>Мото</th><th>Вело</th></tr></thead>
+    <tbody>
+      <tr><td>Производитель</td><td>YKK</td><td>YKK</td></tr>
+      <tr><td>Серия</td><td>Aquaseal № 8</td><td>Aquaseal № 5</td></tr>
+      <tr><td>Длина</td><td>3000 мм</td><td>2300 мм</td></tr>
+      <tr><td>Герметичность</td><td>до 5 кПа</td><td>до 5 кПа</td></tr>
+      <tr><td>Циклы</td><td>≥ 1000</td><td>≥ 1000</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.3 · Инертный газ <span class="pill tech">N₂ 99,99%</span></h3>
+  <ul>
+    <li><strong>Тип:</strong> Азот газообразный N₂, чистота ≥ 99,99 %, ГОСТ 9293-74</li>
+    <li><strong>Точка росы:</strong> ≤ −45 °C; <strong>содержание O₂:</strong> ≤ 0,005 % об.</li>
+    <li><strong>Источник:</strong> баллон 40 л при 150 атм = 6 м³ газа</li>
+    <li><strong>Поставщик:</strong> Линде Газ Рус, Криогенмаш, регионалы</li>
+  </ul>
+
+  <h3>2.4 · Кислород-абсорбер</h3>
+  <ul>
+    <li><strong>Mitsubishi Ageless Z-2000</strong> — ёмкость 2000 см³ O₂ на саше</li>
+    <li>Расчёт: при остаточном O₂ ≤ 0,5 % в 3,75 м³ → 18 750 см³ O₂; запас 6×</li>
+  </ul>
+
+  <h3>2.5 · Сенсоры</h3>
+  <h4>Уровень 1 — пассивные оптические патчи внутри</h4>
+  <ul>
+    <li><strong>PreSens SP-PSt6-NAU</strong>: 0–5 % O₂, ±0,05 %, ⌀5 мм, срок 5–7 лет</li>
+    <li>Цена: €30–50 / шт. Альтернатива — PyroScience OXSP5</li>
+  </ul>
+  <h4>Уровень 2 — внешний ридер</h4>
+  <ul>
+    <li><strong>PreSens OXY-1 ST mini</strong> или PyroScience FireSting-GO2</li>
+    <li>Считывание: оптоволокно прислоняется снаружи к окну</li>
+    <li>Цена: €2 500–3 500 — амортизируется на 50–100 капсул</li>
+  </ul>
+  <h4>Уровень 3 — автономный (опционально, этап 2)</h4>
+  <ul>
+    <li><strong>SST Sensing LuminOx LOX-02-S</strong> + Nordic nRF52840 + LoRa SX1262</li>
+    <li>Питание Li-SOCl₂ ER18505 (3,6 В · 3,6 А·ч), срок 7–10 лет</li>
+  </ul>
+
+  <h3>2.6 · Прочие компоненты</h3>
+  <ul>
+    <li><strong>Порт дозаправки:</strong> Schrader-клапан с обратным ходом, фланец ⌀35 мм</li>
+    <li><strong>Гермоввод:</strong> M6×0,75 cable gland IP68 (опц.)</li>
+    <li><strong>Силикагель резервный:</strong> 200 г для мото, 100 г для вело</li>
+    <li><strong>Жёсткий каркас:</strong> ПВХ-50 + тройники (опц., обяз. для авто)</li>
+    <li><strong>VHB tape:</strong> 3M VHB 4910 шириной 25 мм для дублирования молнии</li>
+  </ul>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · §2</span>
+    <span>стр. 4</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ DRAW 01 ============================ -->
+<div class="page" id="draw-01">
+  <h2>Чертёж 01 · Мотокапсула — общий вид</h2>
+  <div class="drawing">
+    <div class="drawing-title">КД-INERTUM-MOTO-01 · Масштаб 1:25 · 3 проекции + изометрия + сечение ламината</div>
+    <div id="svg-01"></div>
+  </div>
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · Лист 01</span>
+    <span>стр. 5</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ DRAW 02 ============================ -->
+<div class="page" id="draw-02">
+  <h2>Чертёж 02 · Мотокапсула — раскрой панелей</h2>
+  <div class="drawing">
+    <div class="drawing-title">КД-INERTUM-MOTO-02 · Масштаб 1:30 · 6 панелей · ведомость · раскладка на рулон</div>
+    <div id="svg-02"></div>
+  </div>
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · Лист 02</span>
+    <span>стр. 6</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ DRAW 03 ============================ -->
+<div class="page" id="draw-03">
+  <h2>Чертёж 03 · Узлы и сечения</h2>
+  <div class="drawing">
+    <div class="drawing-title">КД-INERTUM-MOTO-03 · Масштаб узлов 5:1 · шов · молния · порт · окно · гермоввод · каркас</div>
+    <div id="svg-03"></div>
+  </div>
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · Лист 03</span>
+    <span>стр. 7</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ DRAW 04 ============================ -->
+<div class="page" id="draw-04">
+  <h2>Чертёж 04 · Велокапсула — общий вид и раскрой</h2>
+  <div class="drawing">
+    <div class="drawing-title">КД-INERTUM-VELO-04 · Масштаб 1:25 · 3 проекции + раскрой 6 панелей + рулон</div>
+    <div id="svg-04"></div>
+  </div>
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · Лист 04</span>
+    <span>стр. 8</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ §3 PROCESS ============================ -->
+<div class="page" id="sec-process">
+  <h2>§3 · Технологическая карта сборки <span class="pill proc">9 шагов</span></h2>
+
+  <h3>Шаг 1 · Раскрой ламината</h3>
+  <p><strong>Оборудование:</strong> стол раскроя ≥ 3000 × 2200 мм; ножницы для полимерной плёнки, ролик-резак под линейку, угольник, маркер.</p>
+  <p><strong>Действия:</strong> развернуть рулон → разметить контуры с припуском 30 мм → маркировать артикулы (KD-MOTO-P1…P6 / KD-VELO-P1…P6) → раскрой ножницами по разметке.</p>
+  <p><strong>Допуск:</strong> размеры ± 5 мм. Кромки ровные, без зацепов.</p>
+
+  <h3>Шаг 2 · Подготовка узловых проёмов</h3>
+  <p>До сварки в каждой панели делаются предусмотренные проёмы:</p>
+  <table>
+    <thead><tr><th>Панель</th><th>Проём</th><th>Размер</th><th>Положение</th></tr></thead>
+    <tbody>
+      <tr><td>P1</td><td>под молнию</td><td>щель 5 × 3000 мм (мото) / 5 × 2300 мм (вело)</td><td>центр длинной оси</td></tr>
+      <tr><td>P2</td><td>под порт</td><td>⌀ 12 мм</td><td>угол, 100 мм от кромок</td></tr>
+      <tr><td>P3</td><td>оптическое окно</td><td>⌀ 30 мм + квадрат 100×80 без Al-foil</td><td>видимая зона</td></tr>
+      <tr><td>P5</td><td>гермоввод (опц.)</td><td>⌀ 7 мм</td><td>угол</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Удаление Al-foil из локальной зоны:</strong> аккуратно ножом снять верхний PET → пинцетом удалить Al-foil (9 мкм) → оставить LLDPE → приварить накладку из чистого PET 50 мкм размером 110×90 мм. Ответственная операция, лучше в фабричных условиях с термопрессом.</p>
+
+  <h3>Шаг 3 · Термосварка панелей</h3>
+  <p><strong>Оборудование:</strong> Bag Sealer FS-300 / FRD-2000W или промышленный пресс (T = 130–180 °C, давление 1–3 кгс/см²).</p>
+  <p><strong>Параметры:</strong> T = 140 ± 5 °C · t = 3 ± 0,3 с · P = 2 кгс/см² · ширина шва = 10 ± 1 мм · перекрытие = 300 ± 10 мм (двойной).</p>
+  <p><strong>Порядок (одинаков для мото и вело):</strong></p>
+  <ol>
+    <li>P3 + P5 (бок L + торец F)</li>
+    <li>P3 + P6 (бок L + торец R)</li>
+    <li>P4 + P5 + P6 (бок R + торцы)</li>
+    <li>P2 + P3 + P4 + P5 + P6 (низ + боковины)</li>
+    <li>P1 (верх) — сваривается только с торцами и одним боком; четвёртая сторона остаётся под молнию.</li>
+  </ol>
+  <p><strong>Все швы делаются изнутри наружу (LLDPE к LLDPE).</strong> Перед каждым швом — изопропанол + безворсовая салфетка. Контроль шва — 3M scotch tape тест.</p>
+
+  <h3>Шаг 4 · Установка молнии YKK</h3>
+  <ol>
+    <li>Разместить молнию вдоль предусмотренной щели верхней панели.</li>
+    <li>Сшить молнию с ламинатом термошвом через LLDPE-tape подложку (ширина 30 мм, длина = молния + 60 мм).</li>
+    <li>Проверить плавность хода — открыть/закрыть 5 раз.</li>
+    <li>После опрессовки (Шаг 6) дублировать молнию VHB 4910 шириной 25 мм по всей длине.</li>
+  </ol>
+
+  <h3>Шаг 5 · Установка порта дозаправки и гермоввода</h3>
+  <p><strong>Порт:</strong> в отверстии ⌀12 мм панели P2 — фланец-шайба ⌀35 мм + силиконовая мембрана; контргайка изнутри через вторую прокладку. Затяжка <strong>3 Н·м</strong>. Контроль герметичности — мыло при +5 кПа.</p>
+  <p><strong>Гермоввод (если нужен):</strong> в отверстии ⌀7 мм панели P5 — cable gland IP68 M6×0,75. Затяжка <strong>1,2 Н·м</strong>.</p>
+
+  <h3>Шаг 6 · Опрессовка пустой капсулы</h3>
+  <ol>
+    <li>Вставить надувной макет (надувной матрас 1500×800 для вело; 2500×1500 для мото).</li>
+    <li>Закрыть молнию + лента VHB.</li>
+    <li>Через порт нагнетать воздух до <strong>+5 кПа</strong> (ручной насос с манометром).</li>
+    <li>Выдержка <strong>30 минут</strong>.</li>
+    <li>Утечка ≤ 0,3 кПа за 30 мин. Все швы и узлы — мыло, не должно быть пузырей.</li>
+    <li>Если утечка > 0,3 кПа — найти место по пузырям, заклеить термошвом + VHB.</li>
+  </ol>
+
+  <h3>Шаг 7 · Закладка изделия и расходников</h3>
+  <ol>
+    <li>Открыть молнию.</li>
+    <li>Поместить мото / велосипед на штатной стойке. Не должен касаться стенок!</li>
+    <li>Заложить:
+      <ul>
+        <li>Ageless Z-2000 — 6 шт. (мото) или 2 шт. (вело) в перфокоробке у дна.</li>
+        <li>Силикагель — 200 г / 100 г в отдельной коробке.</li>
+        <li>Оптические патчи PreSens SP-PSt6-NAU на оптические окна изнутри.</li>
+      </ul>
+    </li>
+    <li>Закрыть молнию.</li>
+  </ol>
+
+  <h3>Шаг 8 · Газовый продув азотом</h3>
+  <ol>
+    <li>Подключить шланг от баллона N₂ к порту дозаправки.</li>
+    <li>Открыть кран баллона. Редуктор на 0,5 атм избыточного давления.</li>
+    <li>Продуть до 3-кратного объёма (мото — 12 м³ N₂; вело — 3,6 м³).</li>
+    <li>Контроль через ридер OXY-1 ST mini — должно быть ≤ 0,3 % O₂.</li>
+    <li>После достижения цели — закрыть порт.</li>
+  </ol>
+  <p><strong>Альтернатива:</strong> N₂ от PSA-генератора (≈99,5%) с двойной кратностью продува (6V) и проверкой контрольным газоанализатором.</p>
+
+  <h3>Шаг 9 · Активация мониторинга и старт испытаний</h3>
+  <ol>
+    <li>Записать T₀ — отметка времени начала.</li>
+    <li>Считать показания патчей через ридер.</li>
+    <li>Зафиксировать в журнале: O₂, T, RH, P-наружное.</li>
+    <li>Запустить программу испытаний по разделу 4 ТЗ прототипа №1.</li>
+  </ol>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · §3</span>
+    <span>стр. 9</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ §4 QC ============================ -->
+<div class="page" id="sec-qc">
+  <h2>§4 · Чек-лист контроля качества <span class="pill qc">CQC-INERTUM-001 · 24 пункта</span></h2>
+  <p>Проводится <strong>на каждом этапе</strong> мастером + независимая проверка Асланом / руководителем проекта.</p>
+  <table>
+    <thead><tr><th style="width:5%">#</th><th style="width:18%">Этап</th><th style="width:30%">Что проверяем</th><th style="width:18%">Допуск</th><th style="width:14%">Метод</th><th style="width:6%">✓</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Приёмка ламината</td><td>Толщина</td><td>91 ± 5 мкм</td><td>Микрометр</td><td>☐</td></tr>
+      <tr><td>2</td><td>Приёмка ламината</td><td>OTR-сертификат</td><td>≤ 0,05</td><td>Документ</td><td>☐</td></tr>
+      <tr><td>3</td><td>Приёмка ламината</td><td>Кромка рулона</td><td>цела</td><td>Осмотр</td><td>☐</td></tr>
+      <tr><td>4</td><td>Раскрой</td><td>Размер каждой панели</td><td>± 5 мм</td><td>Рулетка ×2</td><td>☐</td></tr>
+      <tr><td>5</td><td>Раскрой</td><td>Маркировка артикулов</td><td>по списку</td><td>Сверка</td><td>☐</td></tr>
+      <tr><td>6</td><td>Подгот. проёмов</td><td>Положение проёма под молнию</td><td>± 10 мм</td><td>Линейка</td><td>☐</td></tr>
+      <tr><td>7</td><td>Подгот. проёмов</td><td>⌀ окна</td><td>30 ± 1 мм</td><td>Штангенциркуль</td><td>☐</td></tr>
+      <tr><td>8</td><td>Подгот. окна</td><td>Зона без Al-foil</td><td>100×80 мм без следов</td><td>Просвет</td><td>☐</td></tr>
+      <tr><td>9</td><td>Сварка швов</td><td>T кромки</td><td>140 ± 5 °C</td><td>Термопара</td><td>☐</td></tr>
+      <tr><td>10</td><td>Сварка швов</td><td>Время выдержки</td><td>3 ± 0,3 с</td><td>Таймер</td><td>☐</td></tr>
+      <tr><td>11</td><td>Сварка швов</td><td>Ширина шва</td><td>10 ± 1 мм</td><td>Штангенциркуль</td><td>☐</td></tr>
+      <tr><td>12</td><td>Сварка швов</td><td>Тест отрыва скотчем 3M</td><td>без расслоения</td><td>Образец</td><td>☐</td></tr>
+      <tr><td>13</td><td>Молния</td><td>Циклы открытия</td><td>5 без заеданий</td><td>Ручной</td><td>☐</td></tr>
+      <tr><td>14</td><td>Молния</td><td>Сшивка с ламинатом</td><td>без зазоров</td><td>Визуально</td><td>☐</td></tr>
+      <tr><td>15</td><td>Порт</td><td>Затяжка контргайки</td><td>3 Н·м</td><td>Моментный ключ</td><td>☐</td></tr>
+      <tr><td>16</td><td>Порт</td><td>Герметичность фланца +5 кПа</td><td>без пузырей</td><td>Мыло</td><td>☐</td></tr>
+      <tr><td>17</td><td>Гермоввод (опц.)</td><td>Затяжка</td><td>1,2 Н·м</td><td>Моментный ключ</td><td>☐</td></tr>
+      <tr><td>18</td><td>Опрессовка пустой</td><td>Падение давления +5→? за 30 мин</td><td>≤ 0,3 кПа</td><td>Манометр</td><td>☐</td></tr>
+      <tr><td>19</td><td>Опрессовка</td><td>Все швы под мылом</td><td>без пузырей</td><td>Визуально</td><td>☐</td></tr>
+      <tr><td>20</td><td>Закладка абсорбера</td><td>Целость пакетов</td><td>без вскрытия</td><td>Визуально</td><td>☐</td></tr>
+      <tr><td>21</td><td>Закладка патчей</td><td>Все патчи на окнах</td><td>по карте</td><td>Визуально</td><td>☐</td></tr>
+      <tr><td>22</td><td>Продув N₂</td><td>Объём газа</td><td>≥ 3 V<sub>внутр</sub></td><td>Расходомер</td><td>☐</td></tr>
+      <tr><td>23</td><td>Продув N₂</td><td>O₂ внутри после продува</td><td>≤ 0,3 %</td><td>Опт. ридер</td><td>☐</td></tr>
+      <tr><td>24</td><td>Старт испытаний</td><td>T₀ задокументировано</td><td>дата + показания</td><td>Журнал</td><td>☐</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Капсула считается принятой к испытаниям при выполнении всех 24 пунктов.</strong> Любой невыполненный пункт — стоп-флаг до устранения.</p>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · §4</span>
+    <span>стр. 10</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ §5 GANTT + TESTS ============================ -->
+<div class="page" id="sec-gantt">
+  <h2>§5 · Сетевой график (Gantt)</h2>
+  <pre>Неделя:        1   2   3   4   5   6   7   8
+RFQ → договор: ▰▰▰
+Заказ ламин:        ▰▰▰▰▰▰▰▰▰   (доставка из СПб 5–6 нед)
+Заказ молнии:       ▰▰▰▰
+Заказ датчик:       ▰▰▰▰▰▰
+Заказ Ageless:      ▰▰▰▰
+Заказ N₂:                          ▰
+Раскрой:                           ▰
+Сварка:                            ▰▰
+Молния + узлы:                         ▰
+Опрессовка:                            ▰
+Продув + старт:                            ▰</pre>
+  <p>Параллельно делаются обе капсулы. <strong>Вело раньше</strong> — меньше площадь, дешевле, быстрее.</p>
+
+  <h2 id="sec-tests" style="margin-top: 36px;">§6 · Программа испытаний (после старта)</h2>
+  <table>
+    <thead><tr><th>Точка</th><th>Что замеряем</th><th>Критерий успеха</th></tr></thead>
+    <tbody>
+      <tr><td>0 ч (после продува)</td><td>O₂, RH, P, T внутри</td><td>O₂ ≤ 0,3 %</td></tr>
+      <tr><td>24 ч</td><td>+ контрольный газоанализатор</td><td>расхождение датчика ≤ 0,2 %</td></tr>
+      <tr><td>7 сут</td><td>то же</td><td>O₂ ≤ 0,5 %</td></tr>
+      <tr><td>30 сут</td><td>+ визуальный осмотр швов</td><td>O₂ ≤ 0,5 %; швы целы</td></tr>
+      <tr><td>90 сут</td><td>+ контрольный газоанализатор</td><td>расхождение ≤ 0,3 %; O₂ ≤ 0,7 %</td></tr>
+      <tr><td>180 сут</td><td>+ вскрытие, осмотр изделия</td><td>O₂ ≤ 1,0 %; без следов окисления</td></tr>
+    </tbody>
+  </table>
+  <h4>Дополнительные тесты</h4>
+  <ul>
+    <li><strong>Утечка через шов</strong> — намеренный прокол 0,1 мм → проверка алгоритма самодиагностики (алерт ≤ 7 сут).</li>
+    <li><strong>Дозаправка через порт</strong> — после прокола восстановить O₂ ≤ 0,5 % без вскрытия.</li>
+    <li><strong>Климатические циклы</strong> — −10 °C и +30 °C, проверка датчика и швов.</li>
+  </ul>
+
+  <h4>Критерии приёмки прототипа</h4>
+  <ol>
+    <li>O₂ ≤ 1,0 % после 180 сут.</li>
+    <li>Алгоритм самодиагностики обнаружил утечку 0,1 мм за ≤ 7 сут.</li>
+    <li>Передача данных без пропусков &gt; 5 % за 6 мес.</li>
+    <li>Швы и молния герметичны при +5 кПа после 6 мес.</li>
+    <li>Дозаправка через порт восстановила O₂ ≤ 0,5 %.</li>
+  </ol>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · §5–6</span>
+    <span>стр. 11</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<!-- ============================ §7 SPARES + §8 PACKAGE ============================ -->
+<div class="page" id="sec-spares">
+  <h2>§7 · Запасные части и расходники на год</h2>
+  <table>
+    <thead><tr><th>Позиция</th><th>Кол-во</th><th>Стоимость, ₽</th></tr></thead>
+    <tbody>
+      <tr><td>Ламинат запасной</td><td>5 м²</td><td>5 000 — 7 500</td></tr>
+      <tr><td>Молния YKK Aquaseal № 5 (3 м)</td><td>1 шт.</td><td>3 000</td></tr>
+      <tr><td>Mitsubishi Ageless Z-2000</td><td>8 шт.</td><td>4 000</td></tr>
+      <tr><td>Силикагель 1 кг</td><td>1 кг</td><td>500</td></tr>
+      <tr><td>Schrader-клапан запасной</td><td>2 шт.</td><td>2 000</td></tr>
+      <tr><td>3M VHB 4910 (рулон 25×33 м)</td><td>1 рул.</td><td>4 500</td></tr>
+      <tr><td>Силиконовая мембрана для порта</td><td>5 шт.</td><td>1 000</td></tr>
+      <tr><td>Изопропанол для очистки кромок</td><td>1 л</td><td>400</td></tr>
+      <tr><td>Безворсовые салфетки</td><td>1 уп.</td><td>500</td></tr>
+      <tr><td>Контрольный мыльный раствор</td><td>0,5 л</td><td>100</td></tr>
+      <tr><th>Итого</th><th></th><th>20 000 — 23 500</th></tr>
+    </tbody>
+  </table>
+
+  <h2 id="sec-package" style="margin-top: 36px;">§8 · Документы для производственного заказа</h2>
+  <ol>
+    <li><strong>Этот альбом</strong> (КД v1.0) в PDF + HTML</li>
+    <li>4 чертежа SVG (листы 01–04) в PDF-формате A2</li>
+    <li>Спецификация ламината с указанием стандартов</li>
+    <li>RFQ-шаблон на ламинат и молнии</li>
+    <li>NDA — стандартный шаблон INERTUM, 3 страницы</li>
+    <li>План оплаты — 30 % предоплата / 70 % после приёмки</li>
+  </ol>
+
+  <h3 style="margin-top: 32px;">Конфиденциальность</h3>
+  <p>Документация разработана в рамках патентной заявки v2.1. <strong>До даты приоритета</strong> (после подачи в Роспатент через поверенного) — материал является коммерческой тайной, передаётся только под NDA. После регистрации патента — публикация по решению правообладателя (Аслан КАА).</p>
+
+  <h3 style="margin-top: 32px;">История изменений</h3>
+  <table>
+    <thead><tr><th>Версия</th><th>Дата</th><th>Что изменилось</th></tr></thead>
+    <tbody>
+      <tr><td>v1.0</td><td>2026-05-09</td><td>Первая полная версия. 4 листа SVG + пояснительная записка.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer-mini">
+    <span>КД-INERTUM v1.0 · §7–8</span>
+    <span>стр. 12 · конец альбома</span>
+    <span>2026-05-09 · INERTUM</span>
+  </div>
+</div>
+
+<script>
+  // Подгрузка SVG-чертежей
+  const drawings = [
+    { id: 'svg-01', file: 'чертежи/01_moto_general.svg' },
+    { id: 'svg-02', file: 'чертежи/02_moto_panels.svg' },
+    { id: 'svg-03', file: 'чертежи/03_moto_units.svg' },
+    { id: 'svg-04', file: 'чертежи/04_velo_general_panels.svg' },
+  ];
+  drawings.forEach(d => {
+    fetch(d.file)
+      .then(r => r.text())
+      .then(svg => {
+        const el = document.getElementById(d.id);
+        if (el) el.innerHTML = svg;
+      })
+      .catch(e => {
+        const el = document.getElementById(d.id);
+        if (el) el.innerHTML = '<p style="padding: 32px; text-align: center; color: #888;">Не удалось загрузить чертёж: ' + d.file + ' (откройте этот HTML через локальный сервер).</p>';
+      });
+  });
+</script>
+</body>
+</html>
