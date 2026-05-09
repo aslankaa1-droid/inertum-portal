@@ -2,7 +2,7 @@
 
 ## v1.0 — по результатам отчётов экспертов 5 и 6
 
-**Заказчик:** Аслан КАА (idriskaaa@gmail.com · aslankaa.com)
+**Заказчик:** Аслан КАА (aslankaa@yandex.ru · aslankaa.com)
 **Дата:** 2026-05-08
 **Назначение:** список приоритетных контактов и готовые тексты писем для рассылки за один присест.
 
@@ -101,7 +101,7 @@
 
 С уважением,
 Аслан КАА
-idriskaaa@gmail.com
+aslankaa@yandex.ru
 +7 ___ ___ __ __
 ```
 
@@ -224,7 +224,7 @@ points handheld reader at the transparent window to check residual O₂.
 
 Best regards,
 Aslan KAA
-idriskaaa@gmail.com
+aslankaa@yandex.ru
 +7 ___ ___ __ __
 ```
 
@@ -296,4 +296,4 @@ idriskaaa@gmail.com
 
 **Документ подготовлен 2026-05-08 по результатам отчётов 6-го (датчики) и 7-го (ламинат) ИИ-экспертов.**
 
-Заказчик: Аслан КАА · idriskaaa@gmail.com · aslankaa.com
+Заказчик: Аслан КАА · aslankaa@yandex.ru · aslankaa.com

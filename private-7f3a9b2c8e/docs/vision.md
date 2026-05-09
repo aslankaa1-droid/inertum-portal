@@ -295,4 +295,4 @@
 ---
 
 **Контакты заказчика:**
-Аслан КАА · idriskaaa@gmail.com · сайт: aslankaa.com
+Аслан КАА · aslankaa@yandex.ru · сайт: aslankaa.com

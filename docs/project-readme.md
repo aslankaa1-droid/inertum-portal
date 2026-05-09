@@ -1,6 +1,6 @@
 # INERTUM · Системы инертного хранения
 
-**Заказчик:** Аслан КАА · idriskaaa@gmail.com · aslankaa.com
+**Заказчик:** Аслан КАА · aslankaa@yandex.ru · aslankaa.com
 **Старт проекта:** 2026-05-08
 **Текущая версия:** v2.0 PREMIUM · 2026-05-09
 **Статус:** документация полностью готова к pre-seed раунду $750k.
@@ -142,7 +142,7 @@ http://localhost:8765/
 ## Контакт
 
 **Аслан КАА** — Founder, INERTUM
-Email: idriskaaa@gmail.com
+Email: aslankaa@yandex.ru
 Сайт: aslankaa.com
 
 ---

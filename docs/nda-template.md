@@ -18,7 +18,7 @@
 
 **Сторона 1 (Раскрывающая сторона):**
 **Аслан КАА** (ИП, ОГРНИП [номер], ИНН [номер])
-Email: idriskaaa@gmail.com
+Email: aslankaa@yandex.ru
 Сайт: aslankaa.com
 Тел.: [номер Аслана]
 Адрес: [юридический адрес]
@@ -153,7 +153,7 @@ Email: ____________________________________
 |---|---|
 | Аслан КАА | _________________________ |
 | ИП | (наименование / ФИО) |
-| Email: idriskaaa@gmail.com | Email: ________________ |
+| Email: aslankaa@yandex.ru | Email: ________________ |
 | Подпись: _________________ | Подпись: _________________ |
 | Дата: 2026-__-__ | Дата: 2026-__-__ |
 
@@ -165,7 +165,7 @@ Email: ____________________________________
 
 **Disclosing Party:**
 **Aslan KAA** — Founder, INERTUM
-Email: idriskaaa@gmail.com
+Email: aslankaa@yandex.ru
 Website: aslankaa.com
 Phone: [phone]
 Legal address: [address]
@@ -303,7 +303,7 @@ d) Seek injunctive relief to **prohibit further breaching actions** by the Recei
 |---|---|
 | Aslan KAA | _________________________ |
 | Founder, INERTUM | (entity / name) |
-| Email: idriskaaa@gmail.com | Email: ________________ |
+| Email: aslankaa@yandex.ru | Email: ________________ |
 | Signature: _________________ | Signature: _________________ |
 | Date: 2026-__-__ | Date: 2026-__-__ |
 
@@ -357,4 +357,4 @@ d) Seek injunctive relief to **prohibit further breaching actions** by the Recei
 
 **Юридический disclaimer:** настоящий шаблон не заменяет консультацию юриста. Перед финальной отправкой контрагентам рекомендуется проверка юристом по интеллектуальной собственности (например, БОЛЬШОЕ ДЕЛО или Сотскова В.В. из шорт-листа Земельного Сервиса).
 
-Заказчик: Аслан КАА · idriskaaa@gmail.com · aslankaa.com
+Заказчик: Аслан КАА · aslankaa@yandex.ru · aslankaa.com

@@ -2,7 +2,7 @@
 
 ## Питч-дек для инвесторов · Pre-Seed · v1.0 · 2026-05-08
 
-**Заказчик:** Аслан КАА (idriskaaa@gmail.com · aslankaa.com)
+**Заказчик:** Аслан КАА (aslankaa@yandex.ru · aslankaa.com)
 **Назначение:** seed/pre-seed раунд $500k–$1M на финализацию патента, изготовление 3 прототипов и первые контракты.
 **Формат:** 12 слайдов в стиле Y Combinator. Из этого MD можно собрать PowerPoint / Canva / Keynote / PDF.
 **Рабочее имя:** **INERTUM** (от лат. *inertus* — инертный, неподвижный). Финальное имя — после проверки в Роспатенте на товарный знак.
@@ -19,7 +19,7 @@ INERTUM
 Inert gas preservation capsules · 50 years protection
 Pre-Seed round · 2026-05
 
-Аслан КАА · idriskaaa@gmail.com · aslankaa.com
+Аслан КАА · aslankaa@yandex.ru · aslankaa.com
 ```
 
 **Визуал:** силуэт коллекционного авто внутри прозрачной капсулы; индикатор «O₂: 0.4%» в углу.
@@ -250,7 +250,7 @@ SOM (Serviceable Obtainable Market) — что можем взять за 5 ле
 
 - **Аслан КАА — Founder, CEO**
   Многопрофильный предприниматель с подтверждёнными каналами в нефтегазе РФ (Усть-Кут-Нефтегаз), КНР, Казахстане, Ближнем Востоке.
-  Email: idriskaaa@gmail.com · сайт: aslankaa.com
+  Email: aslankaa@yandex.ru · сайт: aslankaa.com
   Опыт работы с китайскими инвесторами и государственными структурами РФ.
 
 - **Открытые роли (нанимаем после раунда):**
@@ -294,7 +294,7 @@ SOM (Serviceable Obtainable Market) — что можем взять за 5 ле
 ## Контакты
 
 **Аслан КАА**
-- Email: idriskaaa@gmail.com
+- Email: aslankaa@yandex.ru
 - Сайт: aslankaa.com
 - Канал в Telegram / WhatsApp — по запросу
 - Готов к Zoom-встрече в течение 48 часов
@@ -313,4 +313,4 @@ SOM (Serviceable Obtainable Market) — что можем взять за 5 ле
 
 *Перед рассылкой инвесторам — обязательно подписать NDA. Категорически запрещено публиковать материалы патентной заявки в открытых источниках до даты приоритета — это уничтожает новизну.*
 
-Заказчик: Аслан КАА · idriskaaa@gmail.com · aslankaa.com
+Заказчик: Аслан КАА · aslankaa@yandex.ru · aslankaa.com
