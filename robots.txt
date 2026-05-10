@@ -1,4 +1,4 @@
-# INERTUM portal · robots.txt · 2026-05-09
+# INERTUM portal · robots.txt · 2026-05-10
 
 User-agent: *
 Allow: /
@@ -15,9 +15,8 @@ Allow: /assets/
 # Закрытая часть — не индексировать
 Disallow: /private-7f3a9b2c8e/
 Disallow: /admin-3e8a7b1c2d/
-Disallow: /design-mockups/
 
 # Запрещаем индексацию CSV-данных
 Disallow: /public/financials/
 
-Sitemap: https://aslankaa.com/inertum/sitemap.xml
+Sitemap: https://inertum.aslankaa.com/sitemap.xml

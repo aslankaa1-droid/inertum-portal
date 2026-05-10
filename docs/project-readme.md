@@ -41,8 +41,8 @@ INERTUM — гибкие герметичные капсулы из ламина
 | `portal/public/INERTUM-FAQ-investors.html` | **FAQ для инвесторов** — 32 вопроса в 8 категориях, поиск + фильтры | Инвесторы |
 | `portal/public/INERTUM-NDA.html` | **NDA-шаблон** RU + EN, печать в PDF | Все контрагенты |
 | `portal/public/INERTUM-onepager.pdf` | **One-pager** PDF (1 страница) | Холодная рассылка |
-| `portal/private-7f3a9b2c8e/` | **Закрытый data room** под ключом `INERTUM-2026` | После NDA |
-| `portal/admin-3e8a7b1c2d/` | **Админка-генератор ключей** под мастер-ключом `ASLAN-INERTUM-MASTER-2026` | Только Аслан |
+| `portal/private-7f3a9b2c8e/` | **Закрытый data room** (ключ — в личном архиве) | После NDA |
+| `portal/admin-3e8a7b1c2d/` | **Админка-генератор ключей** (мастер-ключ — в личном архиве) | Только Аслан |
 
 ### 📐 Конструкторская документация
 

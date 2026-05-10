@@ -3,56 +3,98 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://aslankaa.com/inertum/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <loc>https://inertum.aslankaa.com/</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://aslankaa.com/inertum/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aslankaa.com/inertum/en/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://inertum.aslankaa.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://inertum.aslankaa.com/en/"/>
   </url>
 
   <url>
-    <loc>https://aslankaa.com/inertum/en/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <loc>https://inertum.aslankaa.com/en/</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://aslankaa.com/inertum/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aslankaa.com/inertum/en/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://inertum.aslankaa.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://inertum.aslankaa.com/en/"/>
   </url>
 
   <url>
-    <loc>https://aslankaa.com/inertum/hub.html</loc>
-    <lastmod>2026-05-09</lastmod>
+    <loc>https://inertum.aslankaa.com/hub.html</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://aslankaa.com/inertum/public/INERTUM-pitch-v2.html</loc>
-    <lastmod>2026-05-09</lastmod>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-pitch-v2.html</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://aslankaa.com/inertum/public/INERTUM-FAQ-investors.html</loc>
-    <lastmod>2026-05-09</lastmod>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-FAQ-investors.html</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://aslankaa.com/inertum/public/INERTUM-financials.html</loc>
-    <lastmod>2026-05-09</lastmod>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-financials.html</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://aslankaa.com/inertum/public/INERTUM-NDA.html</loc>
-    <lastmod>2026-05-09</lastmod>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-NDA.html</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-term-sheet.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-sales-scripts.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-collector-brochure.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-small-format-collectors.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-gov-tenders.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://inertum.aslankaa.com/public/INERTUM-glossary.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
 
 </urlset>
