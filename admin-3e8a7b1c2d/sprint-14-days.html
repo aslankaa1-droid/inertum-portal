@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INERTUM · Admin · 14-day Outreach Sprint</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style-v2.css">
+<script src="../assets/topbar.js" defer></script>
+<style>
+  .sprint-layout { max-width: 1280px; margin: 0 auto; padding: 32px 24px 96px; position: relative; z-index: 1; }
+  .sprint-header { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 24px; border-bottom: 1px solid var(--stroke); margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+  .sprint-header h1 { font: 600 28px 'Inter'; margin: 0 0 4px; color: var(--ink-primary); background: none; -webkit-text-fill-color: var(--ink-primary); }
+  .sprint-header .sub { font: 400 13px var(--mono); letter-spacing: 0.06em; color: var(--ink-muted); }
+  .sprint-controls { display: flex; gap: 10px; }
+
+  .sprint-stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 28px; }
+  .sprint-stats .metric { background: var(--bg-elev); border: 1px solid var(--stroke); border-radius: var(--radius-lg); padding: 14px 18px; }
+  .sprint-stats .metric .num { font: 500 26px var(--mono); color: var(--accent-argon); font-variant-numeric: tabular-nums; line-height: 1; }
+  .sprint-stats .metric .num.gold { color: #d4af37; }
+  .sprint-stats .metric .num.red { color: #c05656; }
+  .sprint-stats .metric .num.green { color: #6fb86f; }
+  .sprint-stats .metric .lbl { font: 400 10px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-top: 6px; }
+
+  .week-banner {
+    margin: 32px 0 16px; padding: 10px 18px;
+    background: linear-gradient(90deg, rgba(91,192,235,0.08) 0%, transparent 100%);
+    border-left: 3px solid var(--accent-argon);
+    font: 600 14px var(--mono); letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent-argon);
+  }
+
+  .day-card {
+    background: var(--bg-elev); border: 1px solid var(--stroke);
+    border-radius: var(--radius-lg); margin-bottom: 18px; overflow: hidden;
+  }
+  .day-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px; background: var(--bg-elev-2); border-bottom: 1px solid var(--stroke);
+    cursor: pointer; user-select: none;
+  }
+  .day-header:hover { background: rgba(91,192,235,0.04); }
+  .day-title { display: flex; align-items: center; gap: 16px; }
+  .day-title .dow { font: 500 11px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); width: 32px; }
+  .day-title .dnum { font: 600 18px 'Inter'; color: var(--ink-primary); }
+  .day-title .ddesc { font: 400 13px 'Inter'; color: var(--ink-secondary); }
+  .day-progress { font: 500 12px var(--mono); color: var(--ink-muted); }
+  .day-progress .done { color: var(--accent-argon); }
+
+  .day-body { padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .day-card.expanded .day-body { max-height: 5000px; padding: 8px 0 20px; }
+
+  .action-row {
+    display: grid; grid-template-columns: 32px 1fr auto; gap: 14px;
+    padding: 14px 20px; border-top: 1px solid rgba(255,255,255,0.04);
+    align-items: start;
+  }
+  .action-row:first-child { border-top: none; }
+  .action-check { padding-top: 4px; }
+  .action-check input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-argon); }
+
+  .action-main .who { font: 600 15px 'Inter'; color: var(--ink-primary); margin-bottom: 4px; }
+  .action-main .who.done { text-decoration: line-through; color: var(--ink-muted); }
+  .action-main .meta { font: 400 12px var(--mono); color: var(--ink-muted); letter-spacing: 0.05em; margin-bottom: 8px; }
+  .action-main .meta .pill {
+    display: inline-block; padding: 2px 8px; border-radius: 100px;
+    background: rgba(91,192,235,0.12); color: var(--accent-argon);
+    font: 500 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-right: 6px; border: 1px solid rgba(91,192,235,0.3);
+  }
+  .action-main .meta .pill.tpl-A { background: rgba(91,192,235,0.12); color: var(--accent-argon); border-color: rgba(91,192,235,0.3); }
+  .action-main .meta .pill.tpl-B { background: rgba(212,175,55,0.12); color: #d4af37; border-color: rgba(212,175,55,0.3); }
+  .action-main .meta .pill.tpl-C { background: rgba(111,184,111,0.12); color: #6fb86f; border-color: rgba(111,184,111,0.3); }
+  .action-main .meta .pill.tpl-D { background: rgba(192,86,210,0.12); color: #c056d2; border-color: rgba(192,86,210,0.3); }
+  .action-main .meta .pill.tpl-E { background: rgba(255,170,80,0.12); color: #ffaa50; border-color: rgba(255,170,80,0.3); }
+  .action-main .channel { font: 400 12px 'Inter'; color: var(--ink-secondary); margin-bottom: 10px; }
+  .action-main .channel a { color: var(--accent-argon); text-decoration: none; }
+  .action-main .channel a:hover { text-decoration: underline; }
+
+  .action-toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .btn-mini {
+    background: var(--bg-elev-2); border: 1px solid var(--stroke);
+    border-radius: 4px; padding: 6px 12px;
+    font: 500 11px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-primary); cursor: pointer; transition: all .15s; text-decoration: none;
+  }
+  .btn-mini:hover { border-color: var(--accent-argon); color: var(--accent-argon); }
+  .btn-mini.primary { background: var(--accent-argon); color: var(--bg-base); border-color: var(--accent-argon); }
+  .btn-mini.primary:hover { background: #7dd5f5; color: var(--bg-base); }
+
+  .action-status {
+    display: flex; flex-direction: column; gap: 6px; align-items: flex-end; min-width: 180px;
+  }
+  .status-select-mini {
+    background: var(--bg-elev-2); border: 1px solid var(--stroke);
+    border-radius: 4px; padding: 6px 8px;
+    font: 500 11px var(--mono); color: var(--ink-primary); cursor: pointer;
+  }
+  .status-select-mini.s-sent { border-color: var(--accent-argon); color: var(--accent-argon); }
+  .status-select-mini.s-replied { border-color: #d4af37; color: #d4af37; }
+  .status-select-mini.s-nda { border-color: #6fb86f; color: #6fb86f; }
+  .status-select-mini.s-no { border-color: #c05656; color: #c05656; }
+  .note-input {
+    background: var(--bg-elev-2); border: 1px solid var(--stroke);
+    border-radius: 4px; padding: 6px 8px; width: 180px;
+    font: 400 11px 'Inter'; color: var(--ink-primary);
+  }
+  .note-input:focus { outline: none; border-color: var(--accent-argon); }
+
+  .template-preview {
+    background: var(--bg-base); border: 1px solid var(--stroke);
+    border-radius: 6px; padding: 14px 16px; margin-top: 10px;
+    display: none;
+  }
+  .template-preview.show { display: block; }
+  .template-preview .label { font: 500 10px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px; }
+  .template-preview pre {
+    background: transparent; border: none; padding: 0; margin: 0;
+    font: 400 12px var(--mono); color: var(--ink-secondary);
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .template-preview .subject {
+    font: 600 13px 'Inter'; color: var(--ink-primary);
+    padding: 8px 12px; background: var(--bg-elev-2); border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  .copy-toast {
+    position: fixed; bottom: 28px; right: 28px;
+    background: var(--accent-argon); color: var(--bg-base);
+    padding: 12px 22px; border-radius: 6px;
+    font: 600 13px 'Inter'; letter-spacing: 0.02em;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    opacity: 0; transform: translateY(10px);
+    pointer-events: none; transition: all .25s;
+    z-index: 1000;
+  }
+  .copy-toast.show { opacity: 1; transform: translateY(0); }
+
+  .followup-section {
+    margin-top: 48px; padding: 28px; background: var(--bg-elev);
+    border: 1px solid var(--stroke); border-radius: var(--radius-lg);
+  }
+  .followup-section h2 { font: 600 18px 'Inter'; margin: 0 0 16px; color: var(--ink-primary); background: none; -webkit-text-fill-color: var(--ink-primary); }
+  .followup-section .rule { display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); align-items: center; }
+  .followup-section .rule:last-child { border-bottom: none; }
+  .followup-section .day-tag { font: 600 12px var(--mono); color: var(--accent-argon); min-width: 80px; letter-spacing: 0.1em; }
+  .followup-section .text { font: 400 13px 'Inter'; color: var(--ink-secondary); }
+
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 24px; padding: 14px 18px; background: var(--bg-elev); border: 1px dashed var(--stroke); border-radius: var(--radius-lg); }
+  .legend .item { display: flex; align-items: center; gap: 8px; font: 400 12px var(--mono); color: var(--ink-secondary); }
+  .legend .swatch { width: 14px; height: 14px; border-radius: 3px; }
+
+  @media (max-width: 900px) {
+    .sprint-stats { grid-template-columns: repeat(3, 1fr); }
+    .action-row { grid-template-columns: 24px 1fr; gap: 10px; }
+    .action-status { grid-column: 1 / -1; align-items: flex-start; }
+    .note-input { width: 100%; }
+  }
+  @media (max-width: 600px) {
+    .sprint-stats { grid-template-columns: repeat(2, 1fr); }
+    .sprint-layout { padding: 20px 14px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-noise"></div>
+<div class="bg-grid"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="../index.html" class="topbar-brand">
+      <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" fill="none" stroke="#5bc0eb" stroke-width="1.5"/><circle cx="11" cy="11" r="3" fill="#5bc0eb"/></svg>
+      <span>INERTUM</span>
+      <span class="topbar-section">Admin · Sprint</span>
+    </a>
+    <nav class="topbar-nav">
+      <a href="../hub.html">Hub</a>
+      <a href="index.html">Admin</a>
+      <a href="crm.html">CRM</a>
+    </nav>
+  </div>
+</header>
+
+<main class="sprint-layout">
+  <div class="sprint-header">
+    <div>
+      <h1>14-day Outreach Sprint</h1>
+      <div class="sub">Pre-seed раунд · $750k · план 30+ инвесторов на 2 недели</div>
+    </div>
+    <div class="sprint-controls">
+      <button class="btn-mini" id="expand-all">Раскрыть всё</button>
+      <button class="btn-mini" id="collapse-all">Свернуть всё</button>
+      <button class="btn-mini" id="reset-progress">Сброс прогресса</button>
+    </div>
+  </div>
+
+  <div class="sprint-stats">
+    <div class="metric"><div class="num" id="stat-total">0</div><div class="lbl">всего адресатов</div></div>
+    <div class="metric"><div class="num" id="stat-sent">0</div><div class="lbl">отправлено</div></div>
+    <div class="metric"><div class="num gold" id="stat-replied">0</div><div class="lbl">ответили</div></div>
+    <div class="metric"><div class="num green" id="stat-nda">0</div><div class="lbl">NDA / DD</div></div>
+    <div class="metric"><div class="num red" id="stat-no">0</div><div class="lbl">отказ</div></div>
+    <div class="metric"><div class="num" id="stat-pending">0</div><div class="lbl">ждут отправки</div></div>
+  </div>
+
+  <div class="legend">
+    <div class="item"><span class="swatch" style="background:#5bc0eb"></span>A · РФ VC / госфонды</div>
+    <div class="item"><span class="swatch" style="background:#d4af37"></span>B · Ангелы / синдикаты РФ</div>
+    <div class="item"><span class="swatch" style="background:#6fb86f"></span>C · MENA / Asia (EN)</div>
+    <div class="item"><span class="swatch" style="background:#c056d2"></span>D · Казахстан / ЦА</div>
+    <div class="item"><span class="swatch" style="background:#ffaa50"></span>E · Follow-up</div>
+  </div>
+
+  <div class="week-banner">Неделя 1 · Холодная волна</div>
+  <div id="week1"></div>
+
+  <div class="week-banner">Неделя 2 · Расширение + Follow-up</div>
+  <div id="week2"></div>
+
+  <div class="followup-section">
+    <h2>Правила follow-up</h2>
+    <div class="rule"><span class="day-tag">T+3 дня</span><span class="text">если письмо доставлено и не открыто (если есть аналитика) — лёгкая «прокладка»: один абзац с цифрой из FAQ (например, «3000+ часов реверса патентов, 21 проверенный аналог»)</span></div>
+    <div class="rule"><span class="day-tag">T+7 дней</span><span class="text">шаблон E · короткий honest «закрываю несколько разговоров, ваше мнение?» — встроен в Sprint Дни 6, 8, 10, 11, 12 как отдельные action-блоки</span></div>
+    <div class="rule"><span class="day-tag">T+14 дней</span><span class="text">если 2 раза нет ответа — статус «no» в CRM, не дёргать ещё минимум 90 дней. Освобождаешь себя и убираешь шум</span></div>
+    <div class="rule"><span class="day-tag">При «да»</span><span class="text">шаблон F + NDA из <code>portal/public/INERTUM-NDA.html</code> → после подписи генерируешь ключ доступа в data room через <code>admin-3e8a7b1c2d/</code></span></div>
+    <div class="rule"><span class="day-tag">При «нет»</span><span class="text">короткий ответ «спасибо, понял; если вернётесь к теме — на связи». Не спорить. Не пытаться переубедить. Освобождаешь mental bandwidth</span></div>
+  </div>
+</main>
+
+<div class="copy-toast" id="toast">Скопировано</div>
+
+<script>
+// =====================================================
+// 14-DAY SPRINT PLAN DATA
+// =====================================================
+const SPRINT_PLAN = [
+  // ============= WEEK 1 =============
+  {
+    day: 1, dow: 'Пн', desc: 'Топ-3 РФ VC / госфонды — старт', week: 1,
+    actions: [
+      { id: 'd1-frp', who: 'ФРП (Фонд развития промышленности)', tpl: 'A',
+        channel: 'Контакт: <a href="mailto:ask@frprf.ru">ask@frprf.ru</a> + дубль на <a href="mailto:frp@frprf.ru">frp@frprf.ru</a> · тел +7 495 789-47-30',
+        note: 'Импортозамещение, материалы. 3–5% годовых займ ₽5М–2 млрд' },
+      { id: 'd1-sber', who: 'Sber500 / SberUnity', tpl: 'A',
+        channel: 'Заявка через <a href="https://sberunity.ru/" target="_blank">sberunity.ru</a> · deeptech трек без выручки',
+        note: 'Sber под SDN — только рублёвый чек' },
+      { id: 'd1-sk', who: 'Sk Capital (Skolkovo Ventures)', tpl: 'A',
+        channel: 'Резидентство <a href="https://sk.ru/foundation" target="_blank">sk.ru/foundation</a> + контакт-форма',
+        note: 'Грант + резидентство + сеть LP. $250k–2M' },
+    ],
+  },
+  {
+    day: 2, dow: 'Вт', desc: 'Топ-3 Deeptech РФ VC', week: 1,
+    actions: [
+      { id: 'd2-kama', who: 'Kama Flow', tpl: 'A',
+        channel: '<a href="mailto:deals@kamaflow.com">deals@kamaflow.com</a> + форма <a href="https://kama-flow.ru/" target="_blank">kama-flow.ru</a>',
+        note: 'Топ-3 deeptech РФ, ₽10 млрд фонд (апр 2025)' },
+      { id: 'd2-phys', who: 'Phystech Ventures', tpl: 'A',
+        channel: 'Форма <a href="https://phystech.vc/" target="_blank">phystech.vc</a> + LinkedIn (Petr Lukyanov, Mikhail Lyubimov)',
+        note: 'London-based, осторожно с РФ — Аслан КАА = русский основатель, OK' },
+      { id: 'd2-leta', who: 'LETA Capital', tpl: 'A',
+        channel: 'Форма <a href="https://www.leta.vc/" target="_blank">leta.vc</a>',
+        note: '$0.5–5M (поздний seed). Cayman, русскоязычные основатели' },
+    ],
+  },
+  {
+    day: 3, dow: 'Ср', desc: 'Казахстан + ЦА — без санкционного шума', week: 1,
+    actions: [
+      { id: 'd3-astana', who: 'Astana Hub Ventures', tpl: 'D',
+        channel: 'Форма <a href="https://astanahub.vc/" target="_blank">astanahub.vc</a> + <a href="mailto:info@astanahub.com">info@astanahub.com</a>',
+        note: 'Алматы = SPV-юрисдикция. Без санкционных проблем' },
+      { id: 'd3-qaztech', who: 'QazTech Ventures', tpl: 'D',
+        channel: '<a href="mailto:info@qaztech.kz">info@qaztech.kz</a>',
+        note: 'Гос-фонд Казахстана, deeptech-фокус' },
+      { id: 'd3-iidf', who: 'IIDF (РФ — широкий чек)', tpl: 'A',
+        channel: 'Форма <a href="https://global.iidf.ru/" target="_blank">global.iidf.ru</a>',
+        note: 'Seed, широкий мандат. Низкая вероятность, но просто отправить' },
+    ],
+  },
+  {
+    day: 4, dow: 'Чт', desc: 'Топ-3 MENA — английский, без военного трека', week: 1,
+    actions: [
+      { id: 'd4-waed', who: 'Wa\'ed Ventures (Aramco)', tpl: 'C',
+        channel: 'Форма <a href="https://www.waed.net/en/contact-us" target="_blank">waed.net/en/contact-us</a>',
+        note: '$500M фонд, IoT / energy / industrial — релевантно' },
+      { id: 'd4-shorooq', who: 'Shorooq Partners (UAE)', tpl: 'C',
+        channel: '<a href="mailto:info@shorooq.com">info@shorooq.com</a> + LinkedIn (Mahmoud Adi)',
+        note: 'Deeptech + advanced industries, $1–10M' },
+      { id: 'd4-wamda', who: 'Wamda Capital (UAE)', tpl: 'C',
+        channel: '<a href="mailto:info@wamdacapital.com">info@wamdacapital.com</a>',
+        note: 'MENA tech, seed/A. Принимают прямой email' },
+    ],
+  },
+  {
+    day: 5, dow: 'Пт', desc: 'Топ-3 ангелы РФ — короткие письма', week: 1,
+    actions: [
+      { id: 'd5-mor', who: 'Аркадий Морейнис', tpl: 'B',
+        channel: '<a href="mailto:amoreynis@gmail.com">amoreynis@gmail.com</a> + Telegram @temno',
+        note: 'Отвечает лично. Прямой канал' },
+      { id: 'd5-alt', who: 'Игорь Рябенький / AltaIR Capital', tpl: 'B',
+        channel: 'Форма <a href="https://altair.vc/" target="_blank">altair.vc</a> + LinkedIn',
+        note: '350+ сделок, 6 unicorns на seed' },
+      { id: 'd5-ui', who: 'United Investors (синдикат Морейниса)', tpl: 'B',
+        channel: '<a href="https://unitedinvestors.ru/" target="_blank">unitedinvestors.ru</a>',
+        note: 'Чек $50–250k идеально под наш pre-seed' },
+    ],
+  },
+  // ============= WEEK 2 =============
+  {
+    day: 6, dow: 'Пн', desc: 'Follow-up День 1 + добор Asia', week: 2,
+    actions: [
+      { id: 'd6-fu-frp', who: 'ФРП — follow-up T+7', tpl: 'E',
+        channel: '<a href="mailto:ask@frprf.ru">ask@frprf.ru</a> · только если не было ответа',
+        note: 'Шаблон E, короткое «нужна ли доп.инфо»' },
+      { id: 'd6-fu-sber', who: 'Sber500 — follow-up T+7', tpl: 'E',
+        channel: 'Через ту же форму sberunity.ru, в комментарии «уточняющее»',
+        note: 'Альтернатива: LinkedIn-сообщение программному директору SberX' },
+      { id: 'd6-fu-sk', who: 'Sk Capital — follow-up T+7', tpl: 'E',
+        channel: 'Через sk.ru форму или email из автоответа',
+        note: 'При наличии резидентства Сколково — упомянуть' },
+      { id: 'd6-cyber', who: 'Cyberport CIN (HK)', tpl: 'C',
+        channel: 'Application <a href="https://cvcf.cyberport.hk/en/index" target="_blank">cvcf.cyberport.hk</a>',
+        note: '220+ фондов, доступ к АСЕАН + китайскому капиталу' },
+    ],
+  },
+  {
+    day: 7, dow: 'Вт', desc: 'Follow-up День 2 + добор Asia', week: 2,
+    actions: [
+      { id: 'd7-fu-kama', who: 'Kama Flow — follow-up T+7', tpl: 'E', channel: '<a href="mailto:deals@kamaflow.com">deals@kamaflow.com</a>', note: '' },
+      { id: 'd7-fu-phys', who: 'Phystech — follow-up T+7', tpl: 'E', channel: 'LinkedIn DM partner', note: '' },
+      { id: 'd7-fu-leta', who: 'LETA Capital — follow-up T+7', tpl: 'E', channel: 'leta.vc форма', note: '' },
+      { id: 'd7-wavemaker', who: 'Wavemaker Partners (SG)', tpl: 'C',
+        channel: 'Форма <a href="https://wavemaker.vc/" target="_blank">wavemaker.vc</a>',
+        note: '$250k–2M, deep / enterprise tech. Without warm intro — низкая вероятность, но shot' },
+      { id: 'd7-vertex', who: 'Vertex Ventures SEA', tpl: 'C',
+        channel: 'Форма <a href="https://www.vertexventures.sg/" target="_blank">vertexventures.sg</a>',
+        note: 'Seed-A. SG/SEA фокус' },
+    ],
+  },
+  {
+    day: 8, dow: 'Ср', desc: 'Follow-up KZ/ЦА + 500 MENA + Global Ventures', week: 2,
+    actions: [
+      { id: 'd8-fu-astana', who: 'Astana Hub — follow-up T+7', tpl: 'E', channel: '<a href="mailto:info@astanahub.com">info@astanahub.com</a>', note: '' },
+      { id: 'd8-fu-qaz', who: 'QazTech — follow-up T+7', tpl: 'E', channel: '<a href="mailto:info@qaztech.kz">info@qaztech.kz</a>', note: '' },
+      { id: 'd8-500', who: '500 Global MENA', tpl: 'C',
+        channel: 'Accelerator app <a href="https://mena.500.co/" target="_blank">mena.500.co</a>',
+        note: '$50–150k. Через акселератор' },
+      { id: 'd8-globalv', who: 'Global Ventures (UAE)', tpl: 'C',
+        channel: '<a href="mailto:info@global.vc">info@global.vc</a>',
+        note: 'Seed/A, emerging markets tech' },
+    ],
+  },
+  {
+    day: 9, dow: 'Чт', desc: 'Follow-up MENA + добор русских ангелов', week: 2,
+    actions: [
+      { id: 'd9-fu-waed', who: 'Wa\'ed — follow-up T+7', tpl: 'E', channel: 'waed.net/contact', note: '' },
+      { id: 'd9-fu-shor', who: 'Shorooq — follow-up T+7', tpl: 'E', channel: '<a href="mailto:info@shorooq.com">info@shorooq.com</a>', note: '' },
+      { id: 'd9-fu-wamda', who: 'Wamda — follow-up T+7', tpl: 'E', channel: '<a href="mailto:info@wamdacapital.com">info@wamdacapital.com</a>', note: '' },
+      { id: 'd9-chikunov', who: 'Александр Чикунов (Roxy / Senezh)', tpl: 'B',
+        channel: 'LinkedIn intro',
+        note: 'Через общие связи. Не холодное письмо' },
+      { id: 'd9-starttrack', who: 'StartTrack', tpl: 'B',
+        channel: 'Форма <a href="https://starttrack.ru/" target="_blank">starttrack.ru</a>',
+        note: 'Крауд-инвест РФ. Параллельный канал' },
+    ],
+  },
+  {
+    day: 10, dow: 'Пт', desc: 'Follow-up ангелов + добор Asia + ретро', week: 2,
+    actions: [
+      { id: 'd10-fu-mor', who: 'Морейнис — follow-up T+7', tpl: 'E', channel: 'amoreynis@gmail.com', note: 'Если он молчит — нет смысла дёргать ещё раз' },
+      { id: 'd10-fu-alt', who: 'AltaIR — follow-up T+7', tpl: 'E', channel: 'altair.vc форма', note: '' },
+      { id: 'd10-fu-ui', who: 'United Investors — follow-up T+7', tpl: 'E', channel: 'unitedinvestors.ru', note: '' },
+      { id: 'd10-iskra', who: 'Iskra Ventures', tpl: 'A',
+        channel: 'Форма <a href="https://iskra.vc/" target="_blank">iskra.vc</a>',
+        note: 'Seed, mobility/content/IoT. INERTUM-IoT линия (датчик O₂)' },
+      { id: 'd10-davinci', who: 'Da Vinci Capital', tpl: 'A',
+        channel: 'Форма <a href="https://www.dvcap.com/en" target="_blank">dvcap.com</a>',
+        note: 'СНГ growth. Скорее для Series A, но засеять' },
+      { id: 'd10-retro', who: 'РЕТРО сессии — 30 мин', tpl: 'B',
+        channel: 'Открой CRM-трекер и пересчитай: open rate, reply rate, NDA-конверсия. Запиши учиться.',
+        note: 'Это не письмо. Это рефлексия 2 недель работы' },
+    ],
+  },
+];
+
+// =====================================================
+// EMAIL TEMPLATES
+// =====================================================
+const TEMPLATES = {
+  A: {
+    name: 'Шаблон A · РФ VC / госфонды (формальный)',
+    subject: 'INERTUM — pre-seed pitch · долгосрочное хранение в инертной среде · 50 лет защиты',
+    body: `Здравствуйте, [Имя Отчество / коллеги из __ORG__],
+
+Меня зовут Аслан КАА, я основатель проекта INERTUM — системы долговременного
+хранения промышленных и коллекционных изделий в инертной газовой среде.
+
+КОРОТКО:
+— Гибкие герметичные капсулы (ламинат PET / Al-foil / LLDPE) с инертным газом
+  и пассивным оптическим контролем кислорода.
+— Срок защиты — 50 лет без обслуживания.
+— Прямого аналога с такой комбинацией признаков на мировом рынке нет
+  (проверено по 21 ближайшему патенту — блокирующих нет).
+— Драфт патентной заявки на ЕАПО v2.1 готов к подаче через поверенного.
+— Pre-seed раунд: $750 000 / 8 % equity / 18 мес runway.
+— Применения: коллекционные авто, музеи, фарма, стратегические резервы,
+  ювелирка / часы / слитки.
+
+ПОЧЕМУ ВАМ ЭТО ИНТЕРЕСНО:
+— Импортозамещающий продукт — внутри РФ нет серийного аналога.
+— Госзаказ-периметр (Росрезерв, Минздрав, музейные фонды).
+— Высокая валовая маржа — 78–80 % на готовом продукте.
+— Прямой выход на тендеры: 2027–2028, ₽1.2–3 млрд госзаказ потенциал.
+
+В приложении — one-pager (PDF, 1 страница).
+Pitch-дек, патентная заявка, финмодель и список всех материалов
+доступны в закрытом data room — ссылку и одноразовый ключ доступа отправлю
+после получения NDA от вас (или после согласия на стандартный ваш NDA).
+
+Готов созвониться или встретиться. Свободные слоты — на этой и следующей неделе.
+
+С уважением,
+Аслан КАА
+Основатель, INERTUM
++7 (969) 795-55-55 / +7 (925) 203-77-77
+aslankaa@yandex.ru
+aslankaa.com`,
+  },
+  B: {
+    name: 'Шаблон B · Ангел / синдикат (короткий)',
+    subject: 'INERTUM · 50 лет защиты в инертной среде · pre-seed $750k',
+    body: `Привет, [Имя],
+
+Аслан КАА. Запускаю INERTUM — капсулы с инертным газом для долговременного
+хранения дорогих активов: авто, артефакты, фарма, ювелирка.
+
+50 лет защиты, прямого аналога нет, патент в подготовке (21 проверенный аналог,
+блокеров нет). Pre-seed: $750k / 8 % / 18 мес runway.
+
+Что готово:
+• Тех. справка на реальных стандартах (MIL / ГОСТ / Getty)
+• Драфт патентной заявки v2.1 (8 стран ЕАЭС, готова PCT-конвертация)
+• ТЗ прототипа № 1 + смета ₽250k
+• Финмодель P&L 2026–2030, маржа 78–80 %
+
+В приложении — one-pager.
+Питч-дек, патент, финмодель — в закрытом data room под NDA.
+
+Готов к 30-минутному звонку на этой неделе.
+
+Аслан КАА
++7 (969) 795-55-55
+aslankaa@yandex.ru · aslankaa.com`,
+  },
+  C: {
+    name: 'Template C · MENA / KSA / UAE / HK (English)',
+    subject: 'INERTUM — pre-seed deck · 50-year inert-atmosphere storage for premium assets',
+    body: `Dear [Name / __ORG__ team],
+
+I'm Aslan KAA, founder of INERTUM — preservation systems based on inert-gas
+capsules for long-term storage of high-value industrial and collectible assets.
+
+THE PRODUCT IN ONE LINE:
+Polymer-foil laminate capsule + inert gas (Ar/N2) + passive optical O2 sensing
++ self-diagnostics. 50-year protection, zero electricity, zero maintenance,
+zero radio signal.
+
+PATENT POSITION:
+— 21 closest analogs reviewed in depth — no blocking patents.
+— Draft EAPO application v2.1 ready (3 independent + 20 dependent claims,
+  8 EAEU jurisdictions, PCT conversion possible).
+
+ROUND: pre-seed $750 000 · 8 % equity · 18 months runway · SPV in Dubai or Almaty
+to receive UAE/CN/KSA capital.
+
+USE CASES:
+— INERTUM Auto · garage capsule for collector cars · $5–15k retail
+— INERTUM Vault · watches, jewelry, bullion · $300–1 200 retail
+— INERTUM Archive · documents, icons, art · $200–800 retail
+— INERTUM Strategic · pharma & strategic reserves · B2G tenders
+— INERTUM Bespoke · custom large objects · on request
+
+Attached: INERTUM-onepager.pdf (1 page, public).
+
+Full pitch deck, patent draft, financial model and prior-art search are
+available in a closed data room — I'll share the URL and a one-time access
+key once we exchange NDA (yours or ours, your call).
+
+Happy to take a 30-minute call this week or next.
+
+Best regards,
+Aslan KAA
+Founder, INERTUM
++7 969 795-55-55 / +7 925 203-77-77
+aslankaa@yandex.ru
+aslankaa.com`,
+  },
+  D: {
+    name: 'Шаблон D · Казахстан / Astana Hub / QazTech (RU)',
+    subject: 'INERTUM — pre-seed · ЕАЭС-патент 8 стран, deeptech материалы / упаковка',
+    body: `Здравствуйте, [Имя / коллеги из __ORG__],
+
+Аслан КАА, основатель INERTUM. Это deeptech-проект на стыке материалов,
+IoT и долговременного хранения. Запускаемся с прицелом на ЕАЭС-периметр —
+именно поэтому пишу вам.
+
+КРАТКО:
+— Капсулы с инертным газом и пассивным оптическим контролем O2 для хранения
+  дорогих активов (авто, артефакты, фарма, ювелирка).
+— 50 лет защиты, без электричества, без обслуживания.
+— Драфт патентной заявки на ЕАПО v2.1 — все 8 стран ЕАЭС, включая Казахстан.
+— Pre-seed: $750 000 / 8 % / 18 мес runway. Юр. структура — SPV в Алматы
+  или Дубае.
+
+ПОЧЕМУ КАЗАХСТАН — НЕ ВТОРИЧНЫЙ РЫНОК:
+— Алматы — основная юрисдикция SPV (без санкционных рисков для UAE/CN-капитала).
+— Astana Hub — потенциальное резидентство для PCT-патентования.
+— Тендерный канал в Минздрав РК / Узбекистане / Кыргызстане — стратегические
+  резервы лекарств после COVID-периода.
+
+В приложении — one-pager (1 страница).
+Питч-дек, патент, финмодель — в закрытом data room под NDA.
+
+Готов к встрече онлайн или в Алматы (могу прилететь).
+
+С уважением,
+Аслан КАА
+Founder, INERTUM
++7 (969) 795-55-55
+aslankaa@yandex.ru
+aslankaa.com`,
+  },
+  E: {
+    name: 'Шаблон E · Follow-up (через 7 дней)',
+    subject: 'INERTUM · follow-up · 30 секунд на ответ?',
+    body: `Здравствуйте, [Имя],
+
+Аслан КАА. На прошлой неделе писал по проекту INERTUM (pre-seed капсулы
+для долговременного хранения, $750k раунд). Понимаю, что ящик переполнен —
+хочу уточнить, нужна ли доп. информация для предварительного решения.
+
+Уже на этой неделе закрываю несколько разговоров с фондами по pre-seed.
+Если для вас тема нерелевантна — буквально две строки ответа сэкономят
+обоим время и я уберу адрес из последующих рассылок.
+
+С уважением,
+Аслан КАА
++7 (969) 795-55-55
+aslankaa@yandex.ru · aslankaa.com`,
+  },
+};
+
+// =====================================================
+// STATE
+// =====================================================
+const STORAGE_KEY = 'inertum_sprint_v1';
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function getAction(id) { return state[id] || { status: 'pending', note: '' }; }
+function setAction(id, patch) { state[id] = { ...getAction(id), ...patch }; saveState(); updateStats(); }
+
+// =====================================================
+// RENDER
+// =====================================================
+function render() {
+  const week1 = document.getElementById('week1');
+  const week2 = document.getElementById('week2');
+  week1.innerHTML = '';
+  week2.innerHTML = '';
+
+  SPRINT_PLAN.forEach((day, idx) => {
+    const card = document.createElement('div');
+    card.className = 'day-card' + (idx === 0 ? ' expanded' : '');
+    card.dataset.day = day.day;
+
+    const done = day.actions.filter(a => ['sent','replied','nda','no'].includes(getAction(a.id).status)).length;
+
+    card.innerHTML = `
+      <div class="day-header" onclick="this.parentElement.classList.toggle('expanded')">
+        <div class="day-title">
+          <span class="dow">${day.dow}</span>
+          <span class="dnum">День ${day.day}</span>
+          <span class="ddesc">${day.desc}</span>
+        </div>
+        <div class="day-progress"><span class="done">${done}</span> / ${day.actions.length}</div>
+      </div>
+      <div class="day-body">
+        ${day.actions.map(a => renderAction(a)).join('')}
+      </div>
+    `;
+
+    if (day.week === 1) week1.appendChild(card);
+    else week2.appendChild(card);
+  });
+  updateStats();
+}
+
+function renderAction(a) {
+  const s = getAction(a.id);
+  const tpl = TEMPLATES[a.tpl];
+  const isDone = ['sent','replied','nda','no'].includes(s.status);
+  const tplPills = a.tpl === 'E' ? '<span class="pill tpl-E">Follow-up</span>' :
+                   `<span class="pill tpl-${a.tpl}">Шаблон ${a.tpl}</span>`;
+  return `
+    <div class="action-row" data-action="${a.id}">
+      <div class="action-check">
+        <input type="checkbox" ${isDone ? 'checked' : ''} onchange="toggleDone('${a.id}', this.checked)">
+      </div>
+      <div class="action-main">
+        <div class="who ${isDone ? 'done' : ''}">${a.who}</div>
+        <div class="meta">${tplPills}${a.note ? '· ' + a.note : ''}</div>
+        <div class="channel">${a.channel}</div>
+        <div class="action-toolbar">
+          <button class="btn-mini" onclick="togglePreview('${a.id}')">Показать письмо</button>
+          <button class="btn-mini primary" onclick="copySubject('${a.id}')">Скопировать subject</button>
+          <button class="btn-mini primary" onclick="copyBody('${a.id}')">Скопировать тело</button>
+        </div>
+        <div class="template-preview" id="preview-${a.id}">
+          <div class="label">${tpl.name}</div>
+          <div class="subject">${tpl.subject}</div>
+          <pre>${tpl.body.replace(/__ORG__/g, a.who.replace(/^[А-ЯЁA-Z]+[\s—] /, '').replace(/\s\(.+/,''))}</pre>
+        </div>
+      </div>
+      <div class="action-status">
+        <select class="status-select-mini s-${s.status}" onchange="setStatus('${a.id}', this.value)">
+          <option value="pending" ${s.status==='pending'?'selected':''}>Не отправлено</option>
+          <option value="sent" ${s.status==='sent'?'selected':''}>Отправлено</option>
+          <option value="replied" ${s.status==='replied'?'selected':''}>Ответили</option>
+          <option value="nda" ${s.status==='nda'?'selected':''}>NDA / DD</option>
+          <option value="no" ${s.status==='no'?'selected':''}>Отказ</option>
+        </select>
+        <input class="note-input" type="text" placeholder="заметка / дата"
+               value="${(s.note||'').replace(/"/g,'&quot;')}"
+               onchange="setNote('${a.id}', this.value)">
+      </div>
+    </div>
+  `;
+}
+
+// =====================================================
+// ACTIONS
+// =====================================================
+function toggleDone(id, checked) {
+  const s = getAction(id);
+  if (checked && s.status === 'pending') {
+    setAction(id, { status: 'sent', note: s.note || new Date().toISOString().slice(0,10) });
+  } else if (!checked) {
+    setAction(id, { status: 'pending' });
+  }
+  render();
+}
+function setStatus(id, v) {
+  const s = getAction(id);
+  const patch = { status: v };
+  if (v === 'sent' && !s.note) patch.note = new Date().toISOString().slice(0,10);
+  setAction(id, patch);
+  render();
+}
+function setNote(id, v) { setAction(id, { note: v }); }
+
+function togglePreview(id) {
+  document.getElementById('preview-' + id).classList.toggle('show');
+}
+
+function copySubject(id) {
+  const a = findAction(id);
+  navigator.clipboard.writeText(TEMPLATES[a.tpl].subject).then(() => toast('Subject скопирован'));
+}
+function copyBody(id) {
+  const a = findAction(id);
+  const org = a.who.replace(/^[А-ЯЁA-Z]+[\s—] /, '').replace(/\s\(.+/,'');
+  const body = TEMPLATES[a.tpl].body.replace(/__ORG__/g, org);
+  navigator.clipboard.writeText(body).then(() => toast('Тело письма скопировано'));
+}
+function findAction(id) {
+  for (const day of SPRINT_PLAN) {
+    for (const a of day.actions) if (a.id === id) return a;
+  }
+  return null;
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+function updateStats() {
+  const all = SPRINT_PLAN.flatMap(d => d.actions);
+  const counts = { pending: 0, sent: 0, replied: 0, nda: 0, no: 0 };
+  all.forEach(a => counts[getAction(a.id).status]++);
+  document.getElementById('stat-total').textContent = all.length;
+  document.getElementById('stat-sent').textContent = counts.sent + counts.replied + counts.nda;
+  document.getElementById('stat-replied').textContent = counts.replied + counts.nda;
+  document.getElementById('stat-nda').textContent = counts.nda;
+  document.getElementById('stat-no').textContent = counts.no;
+  document.getElementById('stat-pending').textContent = counts.pending;
+}
+
+// =====================================================
+// CONTROLS
+// =====================================================
+document.getElementById('expand-all').onclick = () => {
+  document.querySelectorAll('.day-card').forEach(c => c.classList.add('expanded'));
+};
+document.getElementById('collapse-all').onclick = () => {
+  document.querySelectorAll('.day-card').forEach(c => c.classList.remove('expanded'));
+};
+document.getElementById('reset-progress').onclick = () => {
+  if (confirm('Сбросить весь прогресс? Заметки тоже удалятся.')) {
+    state = {};
+    localStorage.removeItem(STORAGE_KEY);
+    render();
+  }
+};
+
+render();
+</script>
+</body>
+</html>
