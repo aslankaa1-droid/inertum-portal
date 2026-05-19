@@ -19,4 +19,4 @@ Disallow: /admin-3e8a7b1c2d/
 # Запрещаем индексацию CSV-данных
 Disallow: /public/financials/
 
-Sitemap: https://inertum.aslankaa.com/sitemap.xml
+Sitemap: https://inertum.tech/sitemap.xml
