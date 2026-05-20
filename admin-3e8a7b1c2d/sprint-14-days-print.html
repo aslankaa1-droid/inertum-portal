@@ -9,6 +9,152 @@
   html, body { margin: 0; padding: 0; font-family: 'Segoe UI', 'Inter', system-ui, sans-serif; color: #111; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body { font-size: 10pt; line-height: 1.45; }
 
+  /* =================== SCREEN MODE =================== */
+  @media screen {
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { font-size: 15px; line-height: 1.55; background: #f6f8fa; max-width: none; padding: 0; }
+
+    /* Sticky top nav */
+    .screen-topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: #0a1929; color: #fff; padding: 10px 20px;
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      height: 56px;
+    }
+    .screen-topbar .brand { font-weight: 700; font-size: 15px; letter-spacing: 0.04em; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .screen-topbar .brand .crest-mini { width: 26px; height: 26px; border: 2px solid #5bc0eb; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; color: #5bc0eb; }
+    .screen-topbar nav { display: flex; gap: 14px; flex-wrap: wrap; }
+    .screen-topbar nav a {
+      color: #cbd5e1; text-decoration: none; font-size: 13px;
+      padding: 6px 10px; border-radius: 4px; transition: all 0.15s;
+    }
+    .screen-topbar nav a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .screen-topbar nav a.active { background: #5bc0eb; color: #0a1929; font-weight: 600; }
+    .screen-topbar .spacer { flex: 1; }
+    .screen-topbar .btn-print {
+      background: #5bc0eb; color: #0a1929; border: none; cursor: pointer;
+      padding: 8px 14px; border-radius: 4px; font-weight: 600; font-size: 13px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .screen-topbar .btn-print:hover { background: #7dd5f5; }
+    .screen-topbar .btn-pdf {
+      background: transparent; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.2);
+      padding: 7px 12px; border-radius: 4px; font-size: 12.5px; text-decoration: none;
+    }
+    .screen-topbar .btn-pdf:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+    /* Reading progress */
+    .read-progress {
+      position: fixed; top: 56px; left: 0; height: 3px;
+      background: linear-gradient(90deg, #5bc0eb, #d4af37);
+      z-index: 101; width: 0%; transition: width 0.05s linear;
+    }
+
+    /* Content wrapper */
+    body { padding-top: 60px; }
+    .content-wrap { max-width: 920px; margin: 0 auto; padding: 24px 24px 80px; background: #fff; box-shadow: 0 0 24px rgba(0,0,0,0.04); min-height: 100vh; }
+
+    /* Compact cover for screen */
+    .cover { padding: 32px 0 24px !important; page-break-after: auto !important; text-align: center; border-bottom: 1px solid #e1e8ed; margin-bottom: 24px; }
+    .cover .crest { width: 60px !important; height: 60px !important; line-height: 56px !important; font-size: 18pt !important; margin-bottom: 12pt !important; }
+    .cover h1 { font-size: 28px !important; }
+    .cover .subtitle { font-size: 16px !important; margin: 6pt 0 16pt !important; }
+    .cover .meta { font-size: 13px !important; padding: 14px 22px !important; text-align: left; }
+
+    h1 { font-size: 26px; }
+    h2 { font-size: 19px; margin-top: 24px; }
+    h3 { font-size: 15px; }
+
+    /* Section banners as anchor points */
+    .section-banner { font-size: 13px; padding: 12px 16px; }
+    .day { padding: 14px 18px; margin-bottom: 14px; transition: box-shadow 0.2s; }
+    .day:target, .day:hover { box-shadow: 0 4px 12px rgba(10,25,41,0.08); border-color: #5bc0eb; }
+    .day-hdr .dnum { font-size: 17px; }
+    .day-hdr .ddesc { font-size: 14px; }
+    .action .who { font-size: 14px; }
+    .action .channel { font-size: 13.5px; line-height: 1.6; }
+    .action .note { font-size: 12.5px; }
+
+    /* Templates legible on screen */
+    .tpl-body { font-size: 13px; line-height: 1.65; padding: 14px 18px; }
+    .tpl-subject { font-size: 14px; padding: 10px 16px; }
+    .tpl-hdr { font-size: 14px; padding: 10px 16px; }
+    .tpl:target { border-color: #5bc0eb; box-shadow: 0 4px 12px rgba(10,25,41,0.08); }
+
+    .pill { font-size: 11px; padding: 2px 9px; }
+    .legend { grid-template-columns: repeat(5, 1fr); }
+    .legend .lg { padding: 7px 10px; font-size: 11.5px; }
+
+    .followup { padding: 14px 18px; }
+    .followup .tag { font-size: 12.5px; min-width: 80px; }
+    .followup .txt { font-size: 13px; }
+
+    /* Back-to-top button */
+    .back-top {
+      position: fixed; bottom: 24px; right: 24px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #0a1929; color: #fff; border: none;
+      cursor: pointer; font-size: 18px;
+      display: none; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18); z-index: 99;
+      transition: all 0.15s;
+    }
+    .back-top:hover { background: #1a4d8a; transform: translateY(-2px); }
+    .back-top.show { display: flex; }
+
+    /* Hotkey hint */
+    .hotkey-hint {
+      position: fixed; bottom: 24px; left: 24px;
+      background: rgba(10,25,41,0.92); color: #cbd5e1;
+      padding: 8px 14px; border-radius: 4px;
+      font-size: 11.5px; z-index: 99;
+      opacity: 0; transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .hotkey-hint.show { opacity: 1; }
+    .hotkey-hint kbd { background: #1a4d8a; color: #fff; padding: 1px 6px; border-radius: 3px; font-family: 'Consolas', monospace; font-size: 11px; margin: 0 2px; }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      body { padding-top: 110px; font-size: 14.5px; }
+      .screen-topbar { height: auto; flex-direction: column; align-items: stretch; padding: 8px 12px; gap: 8px; }
+      .screen-topbar .top-row { display: flex; align-items: center; gap: 12px; }
+      .screen-topbar nav { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+      .screen-topbar nav::-webkit-scrollbar { height: 3px; }
+      .screen-topbar nav a { white-space: nowrap; font-size: 12px; padding: 4px 8px; }
+      .read-progress { top: 100px; }
+      .content-wrap { padding: 16px 14px 60px; }
+      .cover { padding: 16px 0 !important; }
+      .cover h1 { font-size: 22px !important; }
+      .cover .subtitle { font-size: 13px !important; }
+      .cover .meta { font-size: 12px !important; padding: 12px 14px !important; }
+      .legend { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      .legend .lg { font-size: 11px; padding: 6px 8px; }
+      h2 { font-size: 17px; }
+      .day { padding: 12px 14px; }
+      .day-hdr { flex-wrap: wrap; gap: 4px; }
+      .day-hdr .left { flex-wrap: wrap; gap: 6px; }
+      .day-hdr .dnum { font-size: 15px; }
+      .day-hdr .ddesc { font-size: 13px; width: 100%; margin-top: 2px; }
+      .day-hdr .cnt { font-size: 11px; }
+      .tpl-body { font-size: 11.5px; padding: 10px 14px; word-break: break-word; }
+      .tpl-subject { font-size: 12.5px; padding: 8px 14px; }
+      .followup .rule { flex-direction: column; gap: 2px; }
+      .followup .tag { min-width: 0; }
+      .back-top { bottom: 16px; right: 16px; width: 40px; height: 40px; }
+      .hotkey-hint { display: none; }
+      .screen-topbar .btn-pdf, .screen-topbar .btn-print { font-size: 12px; padding: 6px 10px; }
+    }
+  }
+
+  /* Hide screen-only elements when printing */
+  @media print {
+    .screen-topbar, .read-progress, .back-top, .hotkey-hint { display: none !important; }
+    .content-wrap { max-width: none; padding: 0; box-shadow: none; }
+    body { padding-top: 0; }
+  }
+
   h1, h2, h3, h4 { margin: 0; font-weight: 600; color: #0a1929; }
   h1 { font-size: 26pt; letter-spacing: -0.02em; }
   h2 { font-size: 16pt; margin: 14pt 0 8pt; padding-bottom: 4pt; border-bottom: 2px solid #0a1929; }
@@ -72,6 +218,39 @@
 </head>
 <body>
 
+<!-- SCREEN-ONLY: Top navigation -->
+<header class="screen-topbar">
+  <div class="top-row" style="display:flex;align-items:center;gap:12px;">
+    <a href="#top" class="brand"><span class="crest-mini">I</span> INERTUM · Sprint 14 дней</a>
+  </div>
+  <nav>
+    <a href="#w1" data-anchor>Неделя 1</a>
+    <a href="#d1" data-anchor>Д1</a>
+    <a href="#d2" data-anchor>Д2</a>
+    <a href="#d3" data-anchor>Д3</a>
+    <a href="#d4" data-anchor>Д4</a>
+    <a href="#d5" data-anchor>Д5</a>
+    <a href="#w2" data-anchor>Неделя 2</a>
+    <a href="#d6" data-anchor>Д6</a>
+    <a href="#d7" data-anchor>Д7</a>
+    <a href="#d8" data-anchor>Д8</a>
+    <a href="#d9" data-anchor>Д9</a>
+    <a href="#d10" data-anchor>Д10</a>
+    <a href="#followup" data-anchor>Follow-up</a>
+    <a href="#templates" data-anchor>Шаблоны</a>
+  </nav>
+  <span class="spacer"></span>
+  <a href="../../../Sprint_рассылки_14_дней.pdf" class="btn-pdf" title="Готовый PDF в папке проекта">📄 PDF</a>
+  <button class="btn-print" onclick="window.print()">🖨 Печать</button>
+</header>
+<div class="read-progress" id="readProgress"></div>
+<button class="back-top" id="backTop" title="Наверх (хоткей: t)">↑</button>
+<div class="hotkey-hint" id="hotkeyHint">
+  <kbd>j</kbd>/<kbd>k</kbd> — день вперёд/назад · <kbd>t</kbd> — наверх · <kbd>p</kbd> — печать · <kbd>?</kbd> — справка
+</div>
+
+<div class="content-wrap" id="top">
+
 <!-- COVER -->
 <section class="cover">
   <div class="crest">I</div>
@@ -99,9 +278,9 @@
 </div>
 
 <!-- WEEK 1 -->
-<div class="section-banner">Неделя 1 · Холодная волна</div>
+<div class="section-banner" id="w1">Неделя 1 · Холодная волна</div>
 
-<div class="day">
+<div class="day" id="d1" data-day="1">
   <div class="day-hdr">
     <div class="left"><span class="dow">Пн</span><span class="dnum">День 1</span><span class="ddesc">Топ-3 РФ VC / госфонды — старт</span></div>
     <div class="cnt">3 действия</div>
@@ -123,7 +302,7 @@
   </div>
 </div>
 
-<div class="day">
+<div class="day" id="d2" data-day="2">
   <div class="day-hdr">
     <div class="left"><span class="dow">Вт</span><span class="dnum">День 2</span><span class="ddesc">Топ-3 Deeptech РФ VC</span></div>
     <div class="cnt">3 действия</div>
@@ -145,7 +324,7 @@
   </div>
 </div>
 
-<div class="day">
+<div class="day" id="d3" data-day="3">
   <div class="day-hdr">
     <div class="left"><span class="dow">Ср</span><span class="dnum">День 3</span><span class="ddesc">Казахстан + ЦА — без санкционного шума</span></div>
     <div class="cnt">3 действия</div>
@@ -167,7 +346,7 @@
   </div>
 </div>
 
-<div class="day">
+<div class="day" id="d4" data-day="4">
   <div class="day-hdr">
     <div class="left"><span class="dow">Чт</span><span class="dnum">День 4</span><span class="ddesc">Топ-3 MENA — английский, без военного трека</span></div>
     <div class="cnt">3 действия</div>
@@ -189,7 +368,7 @@
   </div>
 </div>
 
-<div class="day">
+<div class="day" id="d5" data-day="5">
   <div class="day-hdr">
     <div class="left"><span class="dow">Пт</span><span class="dnum">День 5</span><span class="ddesc">Топ-3 ангелы РФ — короткие письма</span></div>
     <div class="cnt">3 действия</div>
@@ -212,9 +391,9 @@
 </div>
 
 <!-- WEEK 2 -->
-<div class="section-banner">Неделя 2 · Расширение + Follow-up</div>
+<div class="section-banner" id="w2">Неделя 2 · Расширение + Follow-up</div>
 
-<div class="day">
+<div class="day" id="d6" data-day="6">
   <div class="day-hdr">
     <div class="left"><span class="dow">Пн</span><span class="dnum">День 6</span><span class="ddesc">Follow-up День 1 + добор Asia</span></div>
     <div class="cnt">4 действия</div>
@@ -241,7 +420,7 @@
   </div>
 </div>
 
-<div class="day">
+<div class="day" id="d7" data-day="7">
   <div class="day-hdr">
     <div class="left"><span class="dow">Вт</span><span class="dnum">День 7</span><span class="ddesc">Follow-up День 2 + добор Asia</span></div>
     <div class="cnt">5 действий</div>
@@ -261,7 +440,7 @@
   </div>
 </div>
 
-<div class="day">
+<div class="day" id="d8" data-day="8">
   <div class="day-hdr">
     <div class="left"><span class="dow">Ср</span><span class="dnum">День 8</span><span class="ddesc">Follow-up KZ/ЦА + 500 MENA + Global Ventures</span></div>
     <div class="cnt">4 действия</div>
@@ -280,7 +459,7 @@
   </div>
 </div>
 
-<div class="day">
+<div class="day" id="d9" data-day="9">
   <div class="day-hdr">
     <div class="left"><span class="dow">Чт</span><span class="dnum">День 9</span><span class="ddesc">Follow-up MENA + добор русских ангелов</span></div>
     <div class="cnt">5 действий</div>
@@ -300,7 +479,7 @@
   </div>
 </div>
 
-<div class="day">
+<div class="day" id="d10" data-day="10">
   <div class="day-hdr">
     <div class="left"><span class="dow">Пт</span><span class="dnum">День 10</span><span class="ddesc">Follow-up ангелов + добор Asia + ретро</span></div>
     <div class="cnt">6 действий</div>
@@ -326,7 +505,7 @@
 </div>
 
 <!-- FOLLOWUP RULES -->
-<div class="followup">
+<div class="followup" id="followup">
   <h3 style="margin-bottom: 8pt;">Правила follow-up</h3>
   <div class="rule"><span class="tag">T+3 дня</span><span class="txt">если письмо доставлено и не открыто (если есть аналитика) — лёгкая «прокладка»: один абзац с цифрой из FAQ (например, «3000+ часов реверса патентов, 21 проверенный аналог»)</span></div>
   <div class="rule"><span class="tag">T+7 дней</span><span class="txt">шаблон E · короткое «закрываю несколько разговоров, ваше мнение?» — встроен в Sprint Дни 6, 7, 8, 9, 10 как отдельные action-блоки</span></div>
@@ -337,9 +516,9 @@
 
 <!-- TEMPLATES -->
 <div style="page-break-before: always;"></div>
-<div class="section-banner">Тексты шаблонов писем</div>
+<div class="section-banner" id="templates">Тексты шаблонов писем</div>
 
-<div class="tpl">
+<div class="tpl" id="tpl-A">
   <div class="tpl-hdr"><span class="pill pill-A">A</span> РФ VC / госфонды (формальный)</div>
   <div class="tpl-subject"><span class="lbl">Subject</span>INERTUM — pre-seed pitch · долгосрочное хранение в инертной среде · 50 лет защиты</div>
   <div class="tpl-body">Здравствуйте, [Имя Отчество / коллеги из __ORG__],
@@ -378,7 +557,7 @@ Pitch-дек, патентная заявка, финмодель и списо�
 aslankaa@yandex.ru · https://inertum.tech/</div>
 </div>
 
-<div class="tpl">
+<div class="tpl" id="tpl-B">
   <div class="tpl-hdr"><span class="pill pill-B">B</span> Ангел / синдикат (короткий)</div>
   <div class="tpl-subject"><span class="lbl">Subject</span>INERTUM · 50 лет защиты в инертной среде · pre-seed $750k</div>
   <div class="tpl-body">Привет, [Имя],
@@ -405,7 +584,7 @@ aslankaa@yandex.ru · https://inertum.tech/</div>
 aslankaa@yandex.ru · https://inertum.tech/</div>
 </div>
 
-<div class="tpl">
+<div class="tpl" id="tpl-C">
   <div class="tpl-hdr"><span class="pill pill-C">C</span> MENA / KSA / UAE / HK (English)</div>
   <div class="tpl-subject"><span class="lbl">Subject</span>INERTUM — pre-seed deck · 50-year inert-atmosphere storage for premium assets</div>
   <div class="tpl-body">Dear [Name / __ORG__ team],
@@ -448,7 +627,7 @@ Founder, INERTUM
 aslankaa@yandex.ru · https://inertum.tech/</div>
 </div>
 
-<div class="tpl">
+<div class="tpl" id="tpl-D">
   <div class="tpl-hdr"><span class="pill pill-D">D</span> Казахстан / Astana Hub / QazTech (RU)</div>
   <div class="tpl-subject"><span class="lbl">Subject</span>INERTUM — pre-seed · ЕАЭС-патент 8 стран, deeptech материалы / упаковка</div>
   <div class="tpl-body">Здравствуйте, [Имя / коллеги из __ORG__],
@@ -483,7 +662,7 @@ Founder, INERTUM
 aslankaa@yandex.ru · https://inertum.tech/</div>
 </div>
 
-<div class="tpl">
+<div class="tpl" id="tpl-E">
   <div class="tpl-hdr"><span class="pill pill-E">E</span> Follow-up (через 7 дней)</div>
   <div class="tpl-subject"><span class="lbl">Subject</span>INERTUM · follow-up · 30 секунд на ответ?</div>
   <div class="tpl-body">Здравствуйте, [Имя],
@@ -506,6 +685,94 @@ aslankaa@yandex.ru · https://inertum.tech/</div>
   INERTUM Outreach Sprint · документ для Аслана КАА · 2026-05-20<br>
   Интерактивная версия: portal/admin-3e8a7b1c2d/sprint-14-days.html (под мастер-ключом)
 </div>
+
+</div><!-- /.content-wrap -->
+
+<script>
+// =========== Reading progress bar ===========
+const progress = document.getElementById('readProgress');
+const backTop = document.getElementById('backTop');
+const hotkeyHint = document.getElementById('hotkeyHint');
+
+function updateProgress() {
+  const h = document.documentElement;
+  const scrolled = h.scrollTop;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (scrolled / max) * 100 : 0;
+  if (progress) progress.style.width = pct + '%';
+  if (backTop) backTop.classList.toggle('show', scrolled > 400);
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+updateProgress();
+
+// =========== Active section highlight in nav ===========
+const navLinks = document.querySelectorAll('.screen-topbar nav a[data-anchor]');
+const sections = Array.from(navLinks).map(a => ({
+  link: a,
+  target: document.querySelector(a.getAttribute('href'))
+})).filter(s => s.target);
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-70px 0px -70% 0px', threshold: 0 });
+
+sections.forEach(s => io.observe(s.target));
+
+// =========== Back to top ===========
+if (backTop) backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// =========== Keyboard shortcuts ===========
+const dayCards = Array.from(document.querySelectorAll('[data-day]'));
+function currentDayIdx() {
+  const offset = window.scrollY + 100;
+  for (let i = dayCards.length - 1; i >= 0; i--) {
+    if (dayCards[i].offsetTop <= offset) return i;
+  }
+  return -1;
+}
+function gotoDay(idx) {
+  if (idx < 0 || idx >= dayCards.length) return;
+  dayCards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+let hintTimeout;
+function showHint() {
+  if (hotkeyHint) {
+    hotkeyHint.classList.add('show');
+    clearTimeout(hintTimeout);
+    hintTimeout = setTimeout(() => hotkeyHint.classList.remove('show'), 3500);
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+  const cur = currentDayIdx();
+  switch (e.key) {
+    case 'j': case 'ArrowDown':
+      if (e.key === 'ArrowDown' && e.shiftKey === false) return;
+      gotoDay(cur + 1); e.preventDefault(); break;
+    case 'k': case 'ArrowUp':
+      if (e.key === 'ArrowUp' && e.shiftKey === false) return;
+      gotoDay(cur < 0 ? 0 : cur - 1); e.preventDefault(); break;
+    case 't': case 'T':
+      window.scrollTo({ top: 0, behavior: 'smooth' }); e.preventDefault(); break;
+    case 'p': case 'P':
+      window.print(); e.preventDefault(); break;
+    case '?':
+      showHint(); e.preventDefault(); break;
+  }
+});
+
+// Show hint once on first load (4s)
+setTimeout(showHint, 800);
+</script>
 
 </body>
 </html>
